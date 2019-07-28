@@ -15,7 +15,7 @@ TEXINPUTS = .:docclass:
 #-------------------------------------------------------------------------------
 .SUFFIXES: .pdf
 
-%.pdf : mkdirs
+%.pdf :
 	export TEXINPUTS=$(TEXINPUTS); \
 	$(PDFLATEX) $(PDFLATEX_OPTIONS) $*.tex; \
 	#$(PDFLATEX) $(PDFLATEX_OPTIONS) $*.tex; \
@@ -41,11 +41,7 @@ clean:
 	rm -f **/**.snm; \
 	rm -f **/**.toc;
 
-
-mkdirs:
-	if [ ! -e $(OUTDIR) ]; then mkdir $(OUTDIR); fi
-
-all: clean mkdirs
+all: clean
 	export TEXINPUTS=$(TEXINPUTS); \
 	for INFILE in *.tex; do \
 	$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE; \
