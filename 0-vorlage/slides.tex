@@ -1,0 +1,155 @@
+\begin{frame}{Lernziele}
+    \begin{itemize}
+        \item Die generelle Struktur der Foliensätze kennen
+        \item Die wichtigsten \latex-Befehle anwenden könnnen
+        \item Beamer- und Handout-Dateien bauen können
+        \item Sich freuen \smiley
+    \end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\section{Beispiele zu \latex Beamer}
+%-------------------------------------------------------------------------------
+
+\begin{frame}{Nur Text}
+    Dies ist eine einfache Folie mit nur Text.
+\end{frame}
+
+\begin{frame}{Aufzählung}
+    \begin{itemize}
+        \item Punkt 1
+        \item Punkt 2
+        \item Punkt 3
+
+        \pause
+        \item Dieser Punkt kommt erst nach einer Pause.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Blöcke}
+    \begin{block}{Einfacher Block}
+       Dies ist eine wichtige Information.
+    \end{block}
+
+    \begin{alertblock}{Alert-Block}
+        Dies ist eine "Warnung" oder so etwas in der Art …
+    \end{alertblock}
+
+    \begin{exampleblock}{Beispiel-Block}
+        Dies ist ein Beispiel.
+    \end{exampleblock}
+
+    \begin{definition}{Definition}
+        Dies ist eine Definition.
+    \end{definition}
+\end{frame}
+
+\begin{frame}{Spalten}
+    \begin{columns}
+        \column{.5\textwidth}
+        \begin{center}
+            Spalte 1 mit \texttt{\\column}
+        \end{center}
+
+        \column{.5\textwidth}
+        \begin{center}
+            Spalte 2 mit \texttt{\\column}
+        \end{center}
+    \end{columns}
+
+    \bigskip
+
+    \begin{columns}
+        \begin{column}{.5\textwidth}
+            \begin{center}
+                Spalte 1 mit \texttt{\\begin\{column\}}
+            \end{center}
+        \end{column}
+        \begin{column}{.5\textwidth}
+            \begin{center}
+                Spalte 2 mit \texttt{\\begin\{column\}}
+            \end{center}
+        \end{column}
+
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Automatisch aufklappende Liste}
+    \begin{enumerate}[<+->]
+        \item Punkt 1
+        \item Punkt 2
+        \item Punkt 3
+        \item Punkt 4
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Overlay-Spezifikationen}
+    Das Aussehen einer Folie kann stufenweise verändert werden, um einzelne
+    Punkte stellenweise hervorzuheben bzw. ein- und auszublenden. Dies erfolgt
+    mit den sog. \textcolor<2->{MidnightBlue}{"Overlay Spezifikationen"}.
+
+    \bigskip
+
+    \uncover<3->{Spezifikationen werden als \texttt{<2-3>} an verschiedene
+    Makros angehängt. \texttt{<2-3>} bedeutet, dass der entsprechende Inhalt
+    nur in den Schritten 2 bis 3 ausgewertet wird.}
+
+    \bigskip
+
+    \uncover<4->{Der Von- oder Bis-Bereich ist optional, z.B. \texttt{<2->}}
+\end{frame}
+
+\begin{frame}{Overlay-Spezifikationen}
+    \textbf{Makros, die Spezifikationen unterstützen:}
+
+    \begin{itemize}[<+->]
+        \item \texttt{\Slash uncover<>\{\}}:
+        Einblenden mit zuvor reserviertem Platz
+
+        \item \texttt{\Slash only<>\{\}}:
+        Einblenden ohne zuvor reserviertem Platz
+
+        \item \texttt{\Slash item<>\{\}}:
+        Einblenden von Listenpunkten
+
+        \item \texttt{\Slash alt<>\{\}\{\}}:
+        Erstes Argument bei \texttt{true}, sonst zweites
+
+        \item \texttt{\Slash textbf<>\{\}}, \texttt{\Slash textit<>\{\}}, \ldots:
+        Fettdruck, Kursivschrift, \ldots
+
+        \item \texttt{\Slash textcolor<>\{farbe\}\{\}}:
+        Einfärbung eines Textabschnitts
+
+        \item \texttt{\Slash alert<>\{\}}:
+        Rote Hervorhebung
+
+        \item \texttt{\Slash begin\{\}}:
+        Die meisten Umgebungen
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Animierte Tabellen}
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+        \hline
+        \textbf{Eisoma} & \textbf{Standort} & \textbf{Anbindung} \\
+        \hline
+
+        \uncover<2->{Stammfiliale} & \uncover<2->{Grünwinkel} & \uncover<2->{Auto oder Fahrrad} \\
+        \hline
+
+        \uncover<3->{Forchheim} & \uncover<3->{Hauptstraße} & \uncover<3->{Zu Fuß} \\
+        \hline
+
+        \uncover<4->{Mörsch} & \uncover<4->{Rösselsbrünnle} & \uncover<4->{Zu Fuß} \\
+        \hline
+    \end{tabularx}
+\end{frame}
+
+\begin{frame}
+    \FullscreenImage{0-vorlage/screenshot.png}
+\end{frame}
+
+\begin{frame}{Java-Code}
+    \lstinputlisting[language=Java]{0-vorlage/gpio.java}
+\end{frame}

@@ -1,0 +1,93 @@
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+\setbeamertemplate{subsubsection in toc}[subsubsections numbered]
+\setbeamerfont{section in toc}{size=\bfseries}
+\setbeamerfont{subsection in toc}{size=\footnotesize}
+\setbeamerfont{subsubsection in toc}{size=\tiny}
+\usepackage{helvet}
+\hypersetup{pdfpagelayout={SinglePage},pdfpagetransition={Dissolve}}
+
+
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{MnSymbol,wasysym}
+\usepackage[ngerman]{babel} \usepackage{csquotes} \MakeOuterQuote{"}
+\usepackage{xspace} \newcommand{\latex}{\LaTeX\xspace} \newcommand{\tex}{\TeX\xspace}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{graphicx}
+\newcommand{\Href}[1]{\href{#1}{#1}}
+
+\title{Internet of Things – Technical Point of View}
+\institute{DHBW Karlsruhe, Wirtschaftsinformatik}
+
+% Hilfsmakro für den Backslash
+\newcommand\Slash{\char`\\}
+
+% Ein Bild über die gesamte Folie
+\newcommand{\FullscreenImage}[1]{
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[at=(current page.center)] {
+            \includegraphics[
+                %keepaspectratio,
+                width=\paperwidth,
+                height=\paperheight
+            ]{#1}
+        };
+    \end{tikzpicture}
+}
+
+% Syntax Highlighting
+% Vgl. https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+    basicstyle=\scriptsize\ttfamily,
+    belowcaptionskip=1\baselineskip,
+    breaklines=true,
+    tabsize=2,
+    captionpos=b,
+    extendedchars=true,
+    showstringspaces=true,
+    showtabs=false,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\color[RGB]{200,200,200},
+    keywordstyle=\color[RGB]{0,0,127},
+    commentstyle=\color{Gray},
+    identifierstyle=\color[RGB]{80,0,0},
+    stringstyle=\color{orange},
+    morekeywords={var},
+    literate=
+      {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+      {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+      {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+      {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+      {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+      {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+      {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+      {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+      {Ã}{{\~A}}1 {ã}{{\~a}}1 {Õ}{{\~O}}1 {õ}{{\~o}}1
+      {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+      {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+      {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+      {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+      {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+% Einzelne Folien aus der Kopfnavigation ausnehmen
+% Vgl. https://tex.stackexchange.com/a/317833
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry%
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
