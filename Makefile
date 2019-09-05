@@ -39,7 +39,8 @@ clean:
 	rm -f **/**.out; \
 	rm -f **/**.nav; \
 	rm -f **/**.snm; \
-	rm -f **/**.toc;
+	rm -f **/**.toc; \
+	rm -f **/**.vrb
 
 all: clean
 	export TEXINPUTS=$(TEXINPUTS); \
