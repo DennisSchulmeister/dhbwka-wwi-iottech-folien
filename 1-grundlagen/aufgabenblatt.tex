@@ -3,10 +3,255 @@
 %===============================================================================
 
 %-------------------------------------------------------------------------------
-\aufgabe{Lernkontrolle}
+\aufgabe{Eingebettete Systeme und IoT-Devices}
 %-------------------------------------------------------------------------------
-Fragen über Fragen …
+\teilaufgabe
+Welche der folgenden Kriterien treffen auf eingebettete Systeme zu und unterscheiden
+sie somit von konventionellen Computern?
 
+\newcommand{\DefinitionEmbedded}[1]{
+    {
+        \renewcommand{\arraystretch}{1.5}
+        \begin{longtable}{|p{0.71\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+            \hline
+            \textbf{Kriterium} & \textbf{Wahr} & \textbf{Falsch} \\
+            \endfirsthead
+
+            \hline
+            \textbf{Kriterium} & \textbf{Wahr} & \textbf{Falsch} \\
+            \endhead
+
+            \hline
+            \endlastfoot
+
+            \hline %1
+            Es muss sich um vollwertige Computersysteme mit klar erkennbaren
+            Ein- und Ausgabegeräten wie zum Beispiel einem Touchscreen
+            oder einer Sprachausgabe handeln.
+            &
+            & #1
+            \\
+
+            \hline %2
+            Es muss sich zumindest um einfache Systeme mit den Grundkomponenten
+            eines Computers handeln. Es müssen daher mindestens ein Mikroprozessor
+            oder ein Mikrocontroller, Speicher für den Programmcode, Hauptspeicher
+            für temporäre Variablen sowie irgend eine Form der Ein- und Ausgabe
+            vorhanden sein.
+            & #1
+            &
+            \\
+
+            \hline %3
+            Die Computerarchitektur sollte möglichst allgemeingültig ausgelegt
+            werden, um möglichst viele Anwendungsfälle abdecken zu können.
+            &
+            & #1
+            \\
+
+            \hline %4
+            Das Computersystem sollte als solches vom Benutzer nicht wahrnehmbar
+            sein, da es als Teil eines größeren Geräts verbaut wurde. Dies ist
+            jedoch kein Muss, so dass eingebettete Systeme auch als eigenständige
+            Geräte in Erscheinung treten können.
+            &
+            & #1
+            \\
+
+            \hline %5
+            Kosten, Platzbedarf und Energieverbrauch müssen in der Regel optimiert
+            werden, da die meisten eingebetteten Systeme in hoher Stückzahl produziert
+            werden und oft auch unter eingeschränkten Bedingungen zuverlässig
+            funktionieren müssen.
+            & #1
+            &
+            \\
+
+            \hline %6
+            Es sollte ein möglichst nicht-deterministisches Systemverhalten
+            angestrebt werden, um jegliche Unsicherheiten in der Reaktion auf
+            Umwelteinflüsse zu minimieren.
+            &
+            & #1
+            \\
+        \end{longtable}
+    }
+}
+\DefinitionEmbedded{}
+
+\teilaufgabe
+Welche der folgenden Kriterien muss ein eingebettetes System zusätzlich erfüllen,
+damit es als IoT-Device bezeichnet werden kann?
+
+\newcommand{\DefinitionIoT}[1]{
+    {
+        \renewcommand{\arraystretch}{1.5}
+        \begin{longtable}{|p{0.71\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+            \hline
+            \textbf{Kriterium} & \textbf{Wahr} & \textbf{Falsch} \\
+            \endfirsthead
+
+            \hline
+            \textbf{Kriterium} & \textbf{Wahr} & \textbf{Falsch} \\
+            \endhead
+
+            \hline
+            \endlastfoot
+
+            \hline %1
+            IoT-Devices müssen online oder offline beispielsweise über eine
+            serielle Verbindung oder ein externes Speichermedium mit anderen
+            Computern Daten austauschen.
+            &
+            & #1
+            \\
+
+            \hline %2
+            IoT-Devices müssen zumindest zeitweise über eine Verbindung mit
+            dem Internet besitzen, um mit anderen IoT-Devices und/oder einem
+            oder mehrerer Backendservices zu kommunizieren.
+            & #1
+            &
+            \\
+
+            \hline %3
+            IoT-Devices müssen nach heutiger Definition über ihre IP-Adresse
+            eindeutig identifiziert oder zumindest für andere Geräte über das
+            Internet erreichbar sein.
+            & #1
+            &
+            \\
+
+            \hline %4
+            IoT-Devices benötigen zwingend ein Backend zur Registrierung,
+            Überwachung und Verwaltung der Devices, da es sich sonst nur
+            um eingebettete Systeme mit Internetverbidung handeln würde.
+            &
+            & #1
+            \\
+
+            \hline %5
+            IoT-Devices treten meist in Form größerer Geräte in Erscheinung,
+            die sich entweder über das Internet steuern lassen oder im weitesten
+            Sinne mit Hilfe von Sensoren Informationen über ihre Umwelt sammeln
+            und über das Internet bereitstellen.
+            & #1
+            &
+            \\
+        \end{longtable}
+    }
+}
+\DefinitionIoT{}
+
+\teilaufgabe
+Welche besonderen Eigenschaften haben sogenannte \glqq Deeply Embedded Systems\grqq gegenüber
+anderen eingebetteten Systemen oder IoT-Devices?
+
+\begin{enumerate}
+    %1
+    \item Es handelt sich um kleinste Computersysteme mit in der Regel sehr
+    geringer Komplexität und minimaler Systemausstattung.
+
+    %2
+    \item Es handelt sich stets um vernetzte Systeme, die mit anderen eingebetteten
+    Systemen oder dem Internet kommunizieren.
+
+    %3
+    \item Es handelt sich um besonders unauffällig arbeitende Computersysteme,
+    deren Vorhandensein für den Benutzer oft nicht offensichtlich ist.
+
+    %4
+    \item Es handelt sich um an extreme Bedingungen angepasste Computersysteme,
+    die auch in besonderen Tiefen unter Wasser einsetzbar sind.
+\end{enumerate}
+
+\teilaufgabe
+Welche Themengebiete sind beim Entwurf einer IoT-Architektur bestehend aus einem
+oder mehrerer IoT-Devices, Backendservices und Benutzerschnittstelle zu beachten?
+Nennen Sie die neun wesentlichen Bereiche und arbeiten sie sich dabei von unten
+nach oben in Richtung Endbenutzer vor.
+
+\bigskip
+\teilaufgabe
+An die Software eines eingebetteten Computersystems werden häufig besondere
+Anforderungen gestellt. Um welche der folgenden Anforderungen handelt es sich
+dabei? Streichen Sie alle nicht zutreffenden Aussagen.
+
+\begin{longtable}{|p{0.45\textwidth} c p{0.45\textwidth}|}
+    \hline
+    Sparsame Ressourcennutzung
+    & \textit{vs.} &
+    Großzügige Zuteilung der Systemressourcen
+    \\
+
+    \hline
+    Unterstützung üblicher Consumer-Hardware
+    & \textit{vs.} &
+    Unterstützung sehr spezialisierter Hardware
+    \\
+
+    \hline
+    Geringe bis mittlere Nutzungsdauer am Tag
+    & \textit{vs.} &
+    Störungsfreier Betrieb über lange Zeit
+    \\
+
+    \hline
+    Softwareupdates während dem Betrieb
+    & \textit{vs.} &
+    Updates in der Fachwerkstatt des Herstellers
+    \\
+
+    \hline
+    Maximal flexible Systemarchitektur
+    & \textit{vs.} &
+    Vollständig deterministisches Systemverhalten
+    \\
+
+    \hline
+    Nahezu unbegrenztes Multi-Tasking
+    & \textit{vs.} &
+    Feste Anzahl gleichzeitig laufender Tasks
+    \\
+
+    \hline
+    Meist geringe Echtzeitanforderungen
+    & \textit{vs.} &
+    Erhöhte oder gar harte Echtzeitanforderungen
+    \\
+
+    \hline
+    Ausschalten durch Trennen vom Strom
+    & \textit{vs.} &
+    Geordnetes Herunterfahren des Systems
+    \\
+
+    \hline
+\end{longtable}
+
+%-------------------------------------------------------------------------------
+\aufgabe{Rechnerarchitekturen im Vergleich}
+%-------------------------------------------------------------------------------
+\teilaufgabe
+TODO: Verschiedene Prozessoren einordnen
+
+\teilaufgabe
+TODO: Fragen zu einer Hardwareskizze
+
+%-------------------------------------------------------------------------------
+\aufgabe{Grundlagen der Assemblerprogrammierung}
+%-------------------------------------------------------------------------------
+TODO
+
+%-------------------------------------------------------------------------------
+\aufgabe{Komplexe vs. reduzierte Befehlssätze}
+%-------------------------------------------------------------------------------
+TODO
+
+%-------------------------------------------------------------------------------
+\aufgabe{Typischer Systemaufbau eingebetteter Systeme}
+%-------------------------------------------------------------------------------
+TODO
 
 %===============================================================================
 \clearpage
@@ -14,6 +259,119 @@ Fragen über Fragen …
 %===============================================================================
 
 %-------------------------------------------------------------------------------
-\loesung{Lernkontrolle}
+\loesung{Eingebettete Systeme und IoT-Devices}
 %-------------------------------------------------------------------------------
-Antworten über Antworten
+\teilaufgabe
+Kriterien zur Definition von eingebetteter Systeme:
+\DefinitionEmbedded{X}
+
+\teilaufgabe
+Kriterien zur Definition von IoT-Devices:
+\DefinitionIoT{X}
+
+\teilaufgabe
+\glqq Deeply Embedded Systems\grqq im Vergleich zu anderen eingebetteten Systemen:
+
+\begin{enumerate}
+    \item Es handelt sich um kleinste Computersysteme mit in der Regel sehr
+    geringer Komplexität und minimaler Systemausstattung.
+
+    \setcounter{enumi}{2}   % Neuer Wert - 1
+    \item Es handelt sich um besonders unauffällig arbeitende Computersysteme,
+    deren Vorhandensein für den Benutzer oft nicht offensichtlich ist.
+\end{enumerate}
+
+\teilaufgabe
+Themengebiete beim Entwurf einer IoT-Architektur (von unten nach oben):
+
+\begin{enumerate}
+    \item Elektronik
+    \item Rechnerarchitektur
+    \item Hardwareschnittstellen
+    \item Hardwareplattformen
+    \item Betriebssysteme der Devices
+    \item Programmierung der Devices
+    \item Kommunikationsprotokolle
+    \item Backendkomponenten
+    \item Benutzerseitige Komponenten
+\end{enumerate}
+
+\bigskip
+\teilaufgabe
+Anforderungen an die Software eines eingebetteten Systems:
+
+\begin{longtable}{|p{0.45\textwidth} c p{0.45\textwidth}|}
+    \hline
+    Sparsame Ressourcennutzung
+    & \textit{vs.} &
+    \textcolor{gray}{\sout{Großzügige Zuteilung der Systemressourcen}}
+    \\
+
+    \hline
+    \textcolor{gray}{\sout{Unterstützung üblicher Consumer-Hardware}}
+    & \textit{vs.} &
+    Unterstützung sehr spezialisierter Hardware
+    \\
+
+    \hline
+    \textcolor{gray}{\sout{Geringe bis mittlere Nutzungsdauer am Tag}}
+    & \textit{vs.} &
+    Störungsfreier Betrieb über lange Zeit
+    \\
+
+    \hline
+    Softwareupdates während dem Betrieb
+    & \textit{vs.} &
+    \textcolor{gray}{\sout{Updates in der Fachwerkstatt des Herstellers}}
+    \\
+
+    \hline
+    \textcolor{gray}{\sout{Maximal flexible Systemarchitektur}}
+    & \textit{vs.} &
+    Vollständig deterministisches Systemverhalten
+    \\
+
+    \hline
+    \textcolor{gray}{\sout{Nahezu unbegrenztes Multi-Tasking}}
+    & \textit{vs.} &
+    Feste Anzahl gleichzeitig laufender Tasks
+    \\
+
+    \hline
+    \textcolor{gray}{\sout{Meist geringe Echtzeitanforderungen}}
+    & \textit{vs.} &
+    Erhöhte oder gar harte Echtzeitanforderungen
+    \\
+
+    \hline
+    Ausschalten durch Trennen vom Strom
+    & \textit{vs.} &
+    \textcolor{gray}{\sout{Geordnetes Herunterfahren des Systems}}
+    \\
+
+    \hline
+\end{longtable}
+
+%-------------------------------------------------------------------------------
+\loesung{Rechnerarchitekturen im Vergleich}
+%-------------------------------------------------------------------------------
+\teilaufgabe
+TODO: Verschiedene Prozessoren einordnen
+
+\teilaufgabe
+TODO: Fragen zu einer Hardwareskizze
+
+%-------------------------------------------------------------------------------
+\loesung{Grundlagen der Assemblerprogrammierung}
+%-------------------------------------------------------------------------------
+TODO
+
+%-------------------------------------------------------------------------------
+\loesung{Komplexe vs. reduzierte Befehlssätze}
+%-------------------------------------------------------------------------------
+TODO
+
+%-------------------------------------------------------------------------------
+\loesung{Typischer Systemaufbau eingebetteter Systeme}
+%-------------------------------------------------------------------------------
+TODO
