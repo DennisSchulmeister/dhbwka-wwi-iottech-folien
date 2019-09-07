@@ -1,0 +1,166 @@
+\documentclass[12pt,epsfig]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[ngerman]{babel} %\usepackage{csquotes} \MakeOuterQuote{"}
+\usepackage[a4paper]{geometry}
+\usepackage{fancyhdr}
+
+\usepackage{calc}
+\usepackage{xspace} \newcommand{\latex}{\LaTeX\xspace} \newcommand{\tex}{\TeX\xspace}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{verbatim}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{microtype}
+\usepackage{fancyvrb}
+\usepackage{totpages}
+\input{include/blatt-makros.tex}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{color}
+\definecolor{gray}{gray}{0.5}
+
+\topmargin-2.25cm
+\oddsidemargin-0.5cm
+\evensidemargin-0.5cm
+\headsep1cm
+\textheight24cm
+\textwidth17cm
+\setlength{\parskip}{0.75ex plus 0.25ex minus 0.25ex}
+\setlength{\parindent}{0.0cm}
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{0pt}
+\renewcommand{\rmdefault}{cmss}
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+% Kompatibilität zu den Titelmakros von Beamer
+\newcommand{\ubTitle}{}
+\renewcommand{\title}[1]{\renewcommand{\ubTitle}{#1}}
+
+\newcommand{\ubSubtitle}{}
+\newcommand{\subtitle}[1]{\renewcommand{\ubSubtitle}{#1}}
+
+\newcommand{\institute}[1]{}
+
+\newcommand{\ubInstitute}{???}
+\newcommand{\ubModule}{???}
+\newcommand{\ubType}{???}
+\newcommand{\seitenzahl}{\ref{TotPages}}
+\newcommand{\kreuz}{}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0em}
+\renewcommand{\footrulewidth}{0em}
+\setlength{\headheight}{5em}
+\fancyhead[L]{
+    \bf
+    \ubTitle
+    \\
+    \ubSubtitle
+}
+\fancyhead[R]{
+    \includegraphics[width=3.25cm]{include/dhbwLogo.pdf}
+    \hskip 0.5em
+    \begin{minipage}[b]{4.455cm}
+        \raggedright \bf
+        {\scriptsize \ubInstitute} \\[-0.85ex]
+        {\scriptsize \ubModule} \\[+1.2ex]
+        {\normalsize Seite \arabic{page} von \seitenzahl}
+    \end{minipage}
+}
+\fancyfoot[L,C,R]{}
+
+\newcommand{\rechts}{\,\begin{math}\Rightarrow\end{math}\,}
+\newcommand{\CodeTitel}[1]{\textbf{#1:}\vspace{-0.4cm}}
+
+\newcommand{\AufgabenHeader}{
+  \begin{center}
+    {\large --- \ubType: \ubSubtitle\, ---}\\[4ex]
+  \end{center}%
+}
+
+\newcommand{\LoesungHeader}{
+  \begin{center}
+    {\large --- Lösungen: \ubSubtitle\, ---}\\[4ex]
+  \end{center}%
+}
+
+\newcounter{Aufgabe}
+\setcounter{Aufgabe}{0}
+\newcommand{\aufgabe}[1]{%
+    \addtocounter{Aufgabe}{1}%
+    \setcounter{Teilaufgabe}{0}%
+    \subsection*{%
+        Aufgabe \theAufgabe\hfill\textmd{#1}%
+    }%
+    \vspace{-0.5ex}%
+}
+
+\newcommand{\projekt}[2]{%
+    \addtocounter{Aufgabe}{1}%
+    \setcounter{Teilaufgabe}{0}%
+    \subsection*{%
+        Aufgabe \theAufgabe:~\textmd{#1} \hfill {\normalsize\bf (#2)}%
+    }%
+    \vspace{-0.5ex}%
+}
+
+\newcounter{Loesung}
+\setcounter{Loesung}{0}
+\newcommand{\loesung}[1]{%
+    \addtocounter{Loesung}{1}%
+    \setcounter{Teilaufgabe}{0}%
+    \subsection*{%
+        Lösung zur Aufgabe \theLoesung\hfill\textmd{#1}%
+    }%
+    \vspace{-0.5ex}%
+}
+
+\newcounter{Teilaufgabe}
+\setcounter{Teilaufgabe}{0}
+\newcommand{\teilaufgabe}{%
+    \addtocounter{Teilaufgabe}{1}%
+    \alph{Teilaufgabe}) %
+}
+
+\newcommand{\abgesetzt}[1]{\begin{center}#1\end{center}}
+%%\newcommand{\texttt}[1]{{\tt #1}}
+\newcommand{\und}{\,\wedge\,}
+\newcommand{\oder}{\,\vee\,}
+
+\input{include/blatt-listing.tex}
+
+%-------------------------------------------------------------------------------
+% Karos zum Lösen der Aufgaben
+%-------------------------------------------------------------------------------
+\newcommand{\GridOverlay}{}
+\newlength{\MyRemainingHeight}
+\newlength{\MyShift}
+
+\newcommand{\DrawGrid}[1]{
+    % Variante mit Höhenangabe zur Platzierung mitten in der Seite
+    \begin{tikzpicture}
+        \draw[lightgray](0,0) grid [step=.5cm] (\linewidth,#1);
+        \GridOverlay
+    \end{tikzpicture}
+}
+
+\newcommand{\EmptyGridPage}{
+    % Variante für eine leere Seite
+    \begin{tikzpicture}
+        \draw[lightgray](0,0) grid [step=.5cm] (\linewidth,\textheight);
+        \GridOverlay
+    \end{tikzpicture}
+
+    \newpage
+}

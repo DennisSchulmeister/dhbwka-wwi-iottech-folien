@@ -1,0 +1,48 @@
+%=============================================================================
+%  This is a modified MATHSING.STY 1.1 !!!
+%  The following lines define a new environment 'directlisting'
+%
+%         \begin{directlisting}
+%               ...
+%         \end{directlisting}
+%
+%  that prints listings using \footnotesize and takes care to reset
+%  the \baselineskip. The macro definition is based on ALLTT.STY that
+%  allows various TEX commands to be given within the environment
+%  (e.g. '\input', '\index' or '\it'). '%' has been retained as a special
+%  character within 'listing', however, to avoid unwanted line breaks.
+%=============================================================================
+\def\docspecials{\do\ \do\$\do\&\do\\%
+  \do\#\do\^\do\^^K\do\_\do\^^A\do\~\do\{\do\}\do\"}
+
+\newdimen\oldbaselineskip
+\makeatletter
+\def\directlisting{%
+  \par\noindent\oldbaselineskip=\baselineskip%
+  \list{}{\leftmargin3mm\labelwidth0cm\listparindent0cm\itemindent0cm%
+  \parsep=0.125\parskip}
+%%%%  \def\baselinestretch{0.85}\footnotesize\tt%   <--  normalerweise
+  \def\baselinestretch{0.85}\tt%                    <--  für Übungsblätter
+  \item[]\if@minipage\else\vskip\parskip\fi%
+  \leftskip\@totalleftmargin\rightskip\z@%
+  \parindent\z@\parfillskip\@flushglue%
+%%\parskip\z@%
+  \@tempswafalse \def\par{\if@tempswa\hbox{}\fi\@tempswatrue\@@par}%
+  \obeylines \Tn \catcode``=13 \@noligs \let\do\@makeother \docspecials%
+  \frenchspacing\@vobeyspaces}
+\makeatother
+
+\def\enddirectlisting{\endlist\baselineskip=\oldbaselineskip}
+
+%=============================================================================
+% \directlisting is a command for directly typing program parts as short
+% examples of coding.
+%=============================================================================
+\newcommand{\listing}[1]{%
+  \begin{directlisting}\par\input{#1}\end{directlisting}}
+%=============================================================================
+
+\newcommand{\Tn}{}       % \tt for listings
+\newcommand{\Tb}{}       % bold \tt for listings
+\newcommand{\Ts}{}       % slanted \tt for listings
+

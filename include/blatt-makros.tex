@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Umlaute fr DOS und Windwos
+%
+\catcode`^^81=13 \def^^81{\"u}          %\catcode`^^81=12
+\catcode`^^84=13 \def^^84{\"a}          %\catcode`^^84=12
+\catcode`^^89=13 \def^^89{\"e}          %\catcode`^^89=12
+\catcode`^^8e=13 \def^^8e{\"A}          %\catcode`^^8e=12
+\catcode`^^94=13 \def^^94{\"o}          %\catcode`^^94=12
+\catcode`^^99=13 \def^^99{\"O}          %\catcode`^^99=12
+\catcode`^^9a=13 \def^^9a{\"U}          %\catcode`^^9a=12
+\catcode`^^e1=13 \def^^e1{\ss{}}        %\catcode`^^e1=12
+\catcode`^^fc=13 \def^^fc{\"u}          %\catcode`^^fc=12
+\catcode`^^e4=13 \def^^e4{\"a}          %\catcode`^^e4=12
+\catcode`^^89=13 \def^^89{\"e}          %\catcode`^^89=12
+\catcode`^^c4=13 \def^^c4{\"A}          %\catcode`^^c4=12
+\catcode`^^f6=13 \def^^f6{\"o}          %\catcode`^^f6=12
+\catcode`^^d6=13 \def^^d6{\"O}          %\catcode`^^d6=12
+\catcode`^^dc=13 \def^^dc{\"U}          %\catcode`^^dc=12
+\catcode`^^df=13 \def^^df{\ss{}}        %\catcode`^^df=12
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\qquad{\quad\quad}
+\def\qqquad{\quad\quad\quad}
+
+\def\define#1{\textbf{#1}}
+\def\wichtig#1{\emph{#1}}
+
+\newcommand{\bzw}{bzw.\xspace}
+\renewcommand{\dh}{d.h.\xspace}
+\newcommand{\Dh}{D.h.\xspace}
+\newcommand{\eg}{e.g.\xspace}
+\newcommand{\etc}{etc.\xspace}
+\newcommand{\ggf}{ggf.\xspace}
+\newcommand{\ie}{i.e.\xspace}
+\newcommand{\oBdA}{o.B.d.A.\xspace}
+\newcommand{\usw}{usw.\xspace}
+\newcommand{\vgl}{vgl.\xspace}
+\newcommand{\zB}{z.B.\xspace}
+\newcommand{\ua}{u.a.\xspace}
+\newcommand{\iA}{i.A.\xspace}
+\newcommand{\ia}{i.a.\xspace}
+
+\def\eps{\varepsilon}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\NullEins{\lbrack 0;1 \rbrack}
+\def\NullEinsrechtsoffen{\lbrack 0;1 \lbrack}
+\def\Q{\mathbb{Q}}
+\def\R{\mathbb{R}}
+\def\sig#1{\mathbb{#1}}
+\def\mar#1{\mathbb{#1}}
+\def\ld{\mathop{\hbox{\rm ld}}}
+\let\setminus=\smallsetminus
+\newcommand{\nfoldcomp}[2]{{#2}^{#1}} % das ist doch besser
+%\newcommand{\nfoldcomp}[2]{{\vphantom{#2}}^{#1}\!#2} % das sieht noch suboptimal aus; aber
+%                                   % amsmath's \sideset funktioniert nur f"ur
+%                                   % gro"se Operatoren
+\renewcommand{\O}{\mathrm{O}}
+\def\maps[#1->#2]{{#2}^{#1}}
+
+\def\za#1{{\tt\upshape\mdseries \uppercase{#1}}}
+\def\prblm#1{{\tt\upshape\mdseries \uppercase{#1}}}
+
+\def\computer#1{{\tt\upshape\mdseries #1}}
+%\def\zs#1{\hbox{\tt\upshape\mdseries #1}}
+\newcommand{\zs}[2][1.5em]{%
+  \def\abczustandbreite{#1}%
+  \if\abczustandbreite\relax
+    \hbox{\texttt{#2}}%
+  \else
+    \hbox to #1{\hss\texttt{#2}\hss}%
+  \fi
+}
+\newcommand{\sym}[1]{\ensuremath{\mathtt{#1}}}
+\def\nostate{\sym{\_}}
+\def\li{\hbox{\tt\upshape\mdseries L}}
+\def\re{\hbox{\tt\upshape\mdseries R}}
+\def\blank{\Box}
+\def\Blank{\square}
+\def\Black{\blacksquare}
+\def\Wahl{\hbox to 0pt{$\Blank$\hss}\raise 1.0pt\hbox{$\times$}}
+\def\jvn#1#2{\ensuremath{\mathbf{#1}_{#2}}}
+
+\def\dontcare{\hbox{$\times$}}
+\def\cod{\mathop{\hbox{\upshape\mdseries cod}}}
+\def\wertber{\mathop{\hbox{\upshape\mdseries im}}}
+\def\defber{\mathop{\hbox{\upshape\mdseries def}}}
+\let\Lra\Longrightarrow
+
+\def\0{\mathchoice
+  {\hbox{\tt\upshape\mdseries 0}}
+  {\hbox{\tt\upshape\mdseries 0}}
+  {\hbox{\scriptsize\tt\upshape\mdseries 0}}
+  {\hbox{\tiny\tt\upshape\mdseries 0}}}
+\def\1{\mathchoice
+  {\hbox{\tt\upshape\mdseries 1}}
+  {\hbox{\tt\upshape\mdseries 1}}
+  {\hbox{\scriptsize\tt\upshape\mdseries 1}}
+  {\hbox{\tiny\tt\upshape\mdseries 1}}}
+\def\2{\mathchoice
+  {\hbox{\tt\upshape\mdseries 2}}
+  {\hbox{\tt\upshape\mdseries 2}}
+  {\hbox{\scriptsize\tt\upshape\mdseries 2}}
+  {\hbox{\tiny\tt\upshape\mdseries 2}}}
+\let\hashorig\#
+\def\#{\mathchoice
+  {\hbox{\tt\upshape\mdseries \hashorig}}
+  {\hbox{\tt\upshape\mdseries \hashorig}}
+  {\hbox{\scriptsize\tt\upshape\mdseries \hashorig}}
+  {\hbox{\tiny\tt\upshape\mdseries \hashorig}}}
+\newcommand{\ruhe}{%
+  \hbox{%
+    \kern 0.15ex
+    \vrule height0.4ex width 0.15ex
+    \vrule width 1ex height 0.15ex
+    \vrule height0.4ex width 0.15ex
+    \kern 0.15ex
+}}
+
+% fuer hical Programm Teile
+\def\key#1{{\bf #1}}
+\def\var#1{{\it #1}}
+
+% fuer Zeilennummern in RZD
+\newcounter{hugo}
+\def\stephugo{\arabic{hugo}\addtocounter{hugo}{1}}
+
+% PCX-Grafiken einbinden
+%
+% Argumente: #1: Breite
+%            #2: Höhe
+%            #3: Dateiname ohne Extension
+%
+\newcommand{\pcxbild}[3]{%
+ \unitlength1cm% 
+ \begin{picture}(#1,#2)
+   \put(0,#2){\special{em:graph #3.pcx}}
+ \end{picture}}
+
+%-----------------------------------------------------------------------------
+% Definiere Befehl zur Erzeugung des Schluss-Spruches
+%
+\newcommand{\jokebox}[1]{%
+     \begin{center}%
+       \fbox{\fbox{~~\parbox{0.8\textwidth}{\parindent0em\sf{}
+                                            ~\newline
+                                            #1\newline
+                                            ~
+                                           }~~}}%
+     \end{center}}
+%
+%-----------------------------------------------------------------------------
+
+
