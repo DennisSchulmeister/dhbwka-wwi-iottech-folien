@@ -1,7 +1,7 @@
 \documentclass[12pt,epsfig]{article}
 
 \usepackage[utf8x]{inputenc}
-\usepackage[ngerman]{babel} %\usepackage{csquotes} \MakeOuterQuote{"}
+\usepackage[ngerman]{babel}
 \usepackage[a4paper]{geometry}
 \usepackage{fancyhdr}
 
@@ -11,8 +11,9 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{amsmath}
-\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{MnSymbol,wasysym}
 \usepackage{epsfig}
 \usepackage{verbatim}
 \usepackage{longtable}
@@ -21,6 +22,8 @@
 \usepackage{fancyvrb}
 \usepackage{totpages}
 \usepackage{ulem}
+\usepackage{rotating}
+\usepackage{xifthen}
 \input{include/blatt-makros.tex}
 
 \usepackage{tikz}
@@ -28,6 +31,9 @@
 \usepackage{color}
 \definecolor{gray}{gray}{0.5}
 
+%-------------------------------------------------------------------------------
+% Seitenformat und Abstände
+%-------------------------------------------------------------------------------
 \topmargin-2.25cm
 \oddsidemargin-0.5cm
 \evensidemargin-0.5cm
@@ -44,11 +50,16 @@
 \setlength{\LTpre}{1em}
 \setlength{\LTpost}{1em}
 \setlength{\textfloatsep}{1em}
+\setlength{\floatsep}{1em}
+\setlength{\intextsep}{1em}
 
 \clubpenalty = 10000
 \widowpenalty = 10000
 \displaywidowpenalty = 10000
 
+%-------------------------------------------------------------------------------
+% Kopf- und Fußzeile
+%-------------------------------------------------------------------------------
 % Kompatibilität zu den Titelmakros von Beamer
 \newcommand{\ubTitle}{}
 \renewcommand{\title}[1]{\renewcommand{\ubTitle}{#1}}
@@ -62,7 +73,7 @@
 \newcommand{\ubModule}{???}
 \newcommand{\ubType}{???}
 \newcommand{\seitenzahl}{\ref{TotPages}}
-\newcommand{\kreuz}{}
+%\newcommand{\kreuz}{}
 
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0em}
@@ -86,6 +97,9 @@
 }
 \fancyfoot[L,C,R]{}
 
+%-------------------------------------------------------------------------------
+% Häufig benötigte Makros
+%-------------------------------------------------------------------------------
 \newcommand{\rechts}{\,\begin{math}\Rightarrow\end{math}\,}
 \newcommand{\CodeTitel}[1]{\textbf{#1:}\vspace{-0.4cm}}
 
@@ -143,6 +157,15 @@
 %%\newcommand{\texttt}[1]{{\tt #1}}
 \newcommand{\und}{\,\wedge\,}
 \newcommand{\oder}{\,\vee\,}
+
+\newcommand{\loesungswert}[2]{
+    \ifthenelse{\isempty{#1}}{
+        % Wenn #1 == '': Nichts zeigen (in der Aufgabe)
+    }{
+        % Wenn #1 <> '': Lösung zeigen (in der Musterlösung)
+        #2
+    }
+}
 
 \input{include/blatt-listing.tex}
 
