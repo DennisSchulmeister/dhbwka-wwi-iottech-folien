@@ -415,7 +415,7 @@ ganze Stunde mit dieser Aufgabe zu verbringen. \smiley
 \teilaufgabe
 Die folgenden zwei Abbildungen zeigen das Blockdiagramm eines einfachen,
 eingebetteten Computersystems. Zum Einsatz kommt ein einfacher Mikroprozessor
-mit 16-bit Datenbreite, 8-bit Adressbus sowie 32 kB\,ROM für den Programmcode
+mit 8-bit Datenbreite, 16-bit Adressbus sowie 32 kB\,ROM für den Programmcode
 und 32\,kB Hauptspeicher. Darüber hinaus besitzt das System einen über eine
 serielle Schnittstelle angebundenen Temperatursensor, einen periodisch
 auslösenden Timer sowie eine kleine Leuchtdiode als Ein- und Ausgabegeräte.
@@ -552,12 +552,11 @@ Um das eben erstellte Programm nun in Assembler ausprogrammieren zu können,
 nehmen wir an, der Mikroprozessor wäre ein einfacher RISC-Prozessor mit einer
 Load-Store-Architektur und daher auch nur sehr wenigen Assemblerbefehlen. Jeder
 Wert, egal ob Speicheradresse oder symbolischer Wert zum Rechnen, muss daher
-immer erst in eines von 16 Registern geschrieben werden, bevor damit irgend
-etwas angefangen werden kann. Die Register sind hierfür einfach in Hex-Schreibweise
-durchnummeriert:
+immer erst in eines von acht Registern geschrieben werden, bevor damit irgend
+etwas angefangen werden kann. Die Register sind hierfür einfach durchnummeriert
+und speichern jeweils einen vorzeichenbehafteten 8-Bitwert:
 \texttt{r0}, \texttt{r1}, \texttt{r2}, \texttt{r3}, \texttt{r4}, \texttt{r5},
-\texttt{r6}, \texttt{r7}, \texttt{r8}, \texttt{r9}, \texttt{ra}, \texttt{rb},
-\texttt{rc}, \texttt{rd}, \texttt{re}, \texttt{rf}
+\texttt{r6}, \texttt{r7}
 
 Folgende Befehle stellt uns der Prozessor zur Verfügung, wobei jedes Register
 in den Beispielen durch jedes andere Register ausgetauscht werden kann. Ebenso
@@ -565,25 +564,30 @@ kann jeder Wert, der kein Befehl und kein Register ist, entweder dezimal (ohne
 führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstante
 (mit führendem Rautezeichen) geschrieben werden.
 
-\medskip
 {
     \small
 
     \begin{longtable}{|p{\textwidth}|}
         \hline
-        \verb|; Kommentar| \\
+        \verb|; Kommentar|
+        \hfill {\footnotesize Kommentar}
+        \\
         Beschreibt einen Kommentar, der nicht übersetzt wird.
         \\
 
         \hline
-        \verb|.const #name $cafe| \\
+        \verb|.const #name $cafe|
+        \hfill {\footnotesize Konstante}
+        \\
         Definiert eine Konstante mit dem Namen \verb|#name| und dem Wert \verb|$cafe|.
         Diese Anweisung erzeugt keinen Maschinencode, sondern dient dazu, häufig
         benötigte Werte oder Speicheradressen zu benennen.
         \\
 
         \hline
-        \verb|wichtige_stelle:| \\
+        \verb|wichtige_stelle:|
+        \hfill {\footnotesize Sprungziel}
+        \\
         Definiert eine Stelle im Quellcode, deren spätere ROM-Adresse mit
         \verb|#wichtige_stelle| ermittelt werden kann. Da es sich nur um eine
         Markierung im Quellcode handelt, erzeugt dies keinen Maschinencode.
@@ -597,34 +601,46 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
         %
 
         \hline
-        \verb|RGR r0, 32768| \\
-        Schreibt die Zahl 32768 in das Register \texttt{r0}.
+        \verb|LDR r0, 32768|
+        \hfill {\footnotesize load into register: value}
+        \\
+        Lädt die Zahl 32768 in das Register \texttt{r0}.
         \\
 
         \hline
-        \verb|RGR r0, (32768)| \\
-        Schreibt den Inhalt der Speicherzelle 32768 in das Register \texttt{r0}.
+        \verb|LDR r0, (32768)|
+        \hfill {\footnotesize load into register: memory address}
+        \\
+        Lädt den Inhalt der Speicherzelle 32768 in das Register \texttt{r0}.
         \\
 
         \hline
-        \verb|RGR r0, (r1)| \\
-        Schreibt den Inhalt der durch \texttt{r1} angesprochenen Speicherzelle
+        \verb|LDR r0, (r1)|
+        \hfill {\footnotesize load into register: memory address from register}
+        \\
+        Lädt den Inhalt der durch \texttt{r1} angesprochenen Speicherzelle
         in das Register \texttt{r0}.
         \\
 
         \hline
-        \verb|RGW r0, (32768)| \\
-        Schreibt den Inhalt des Registers \texttt{r0} in die Speicherzelle 32768.
+        \verb|STR r0, (32768)|
+        \hfill {\footnotesize store register to: memory address}
+        \\
+        Speichert den Inhalt des Registers \texttt{r0} in die Speicherzelle 32768.
         \\
 
         \hline
-        \verb|RGW r0, (r1)| \\
-        Schreibt den Inhalt des Registers \texttt{r0} in die durch \texttt{r1}
+        \verb|STR r0, (r1)|
+        \hfill {\footnotesize store register to: memory address from register}
+        \\
+        Speichert den Inhalt des Registers \texttt{r0} in die durch \texttt{r1}
         angesprochenen Speicherzelle
         \\
 
         \hline
-        \verb|MOV r0, r1| \\
+        \verb|MOV r0, r1|
+        \hfill {\footnotesize move into register other register}
+        \\
         Schreibt den Inhalt des Registers \texttt{r1} in das Register \texttt{r0}.
         \\
 
@@ -634,15 +650,19 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
         %
 
         \hline
-        \verb|IOR r0, r1| \\
-        List den Inhalt der in \texttt{r0} abgelegten I/O-Adresse in das Register
+        \verb|IOR r0, r1|
+        \hfill {\footnotesize read from i/o address in register to register}
+        \\
+        Liest den Inhalt der in \texttt{r0} abgelegten I/O-Adresse in das Register
         \texttt{r1}.
         \\
 
         \hline
-        \verb|IOW r0, r1| \\
-        Schreibt den im Register \texttt{r1} übergebenen Wert in die I/O-Adresse
-        in \texttt{r0}.
+        \verb|IOW r0, r1|
+        \hfill {\footnotesize write to i/o address in register from register}
+        \\
+        Schreibt an die in \texttt{r0} übergebene I/O-Adresse den Wert aus Register
+        \texttt{r1}.
         \\
 
         %
@@ -651,34 +671,46 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
         %
 
         \hline
-        \verb|NOT r0| \\
+        \verb|NOT r0|
+        \hfill {\footnotesize boolean not}
+        \\
         Kehrt den Inhalt des Register \texttt{r0} um, indem alle Bits negiert werden.
         \\
 
         \hline
-        \verb|ADD r0, r1, r2| \\
+        \verb|ADD r0, r1, r2|
+        \hfill {\footnotesize add}
+        \\
         Addiert \texttt{r1} mit \texttt{r2} und speichert das Ergebnis in \texttt{r0}.
         \\
 
         \hline
-        \verb|SUB r0, r1, r2| \\
+        \verb|SUB r0, r1, r2|
+        \hfill {\footnotesize subtract}
+        \\
         Subtrahiert \texttt{r2} von \texttt{r1} und speichert das Ergebnis in \texttt{r0}.
         \\
 
         \hline
-        \verb|AND r0, r1, r2| \\
+        \verb|AND r0, r1, r2|
+        \hfill {\footnotesize and combination}
+        \\
         Berechnet eine binäre Und-Verknüpfung zwischen \texttt{r1} und \texttt{r2}
         und legt das Ergebnis in \texttt{r0} ab.
         \\
 
         \hline
-        \verb|OR r0, r1, r2| \\
+        \verb|OR r0, r1, r2|
+        \hfill {\footnotesize or combination}
+        \\
         Berechnet eine binäre Oder-Verknüpfung zwischen \texttt{r1} und \texttt{r2}
         und legt das Ergebnis in \texttt{r0} ab.
         \\
 
         \hline
-        \verb|XOR r0, r1, r2| \\
+        \verb|XOR r0, r1, r2|
+        \hfill {\footnotesize xor combination}
+        \\
         Berechnet eine binäre Exklusiv-Oder-Verknüpfung zwischen \texttt{r1} und
         \texttt{r2} und legt das Ergebnis in \texttt{r0} ab.
         \\
@@ -689,43 +721,57 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
         %
 
         \hline
-        \verb|JMP (r0)| \\
+        \verb|JMP (r0)|
+        \hfill {\footnotesize jump in any case}
+        \\
         Führt das Programm an der in \texttt{r0} übergebenen Speicherstelle fort.
         \\
 
         \hline
-        \verb|JZR r0, (r1)| \\
+        \verb|JZR r0, (r1)|
+        \hfill {\footnotesize jump if register is zero}
+        \\
         Führt das Programm bei \texttt{r1} übergebenen Speicherstelle fort,
-        wenn der Wert in \texttt{r1} gleich Null ist.
+        wenn der Wert in \texttt{r0} gleich Null ist.
         \\
 
         \hline
-        \verb|JNZ r0, (r1)| \\
-        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r1}
+        \verb|JNZ r0, (r1)|
+        \hfill {\footnotesize jump if register is not zero}
+        \\
+        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r0}
         ungleich Null ist.
         \\
 
         \hline
-        \verb|JLT r0, (r1)| \\
-        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r1}
+        \verb|JLT r0, (r1)|
+        \hfill {\footnotesize jump if register is less than zero}
+        \\
+        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r0}
         kleiner Null ist.
         \\
 
         \hline
-        \verb|JLE r0, (r1)| \\
-        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r1}
+        \verb|JLE r0, (r1)|
+        \hfill {\footnotesize jump if register is less than or euqal zero}
+        \\
+        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r0}
         kleiner oder gleich Null ist.
         \\
 
         \hline
-        \verb|JGT r0, (r1)| \\
-        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r1}
+        \verb|JGT r0, (r1)|
+        \hfill {\footnotesize jump if register is greater than zero}
+        \\
+        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r0}
         größer Null ist.
         \\
 
         \hline
-        \verb|JGE r0, (r1)| \\
-        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r1}
+        \verb|JGE r0, (r1)|
+        \hfill {\footnotesize jump if register is greater than or equal zero}
+        \\
+        Führt das Programm bei \texttt{r1} fort, wenn der Wert in \texttt{r0}
         größer oder gleich Null ist.
         \\
 
@@ -735,7 +781,9 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
         %
 
         \hline
-        \verb|RTI| \\
+        \verb|RTI|
+        \hfill {\footnotesize return from interrupt}
+        \\
         Springt aus einer Interruptroutine wieder ins Hauptprogramm zurück.
         \\
 
@@ -762,31 +810,29 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
   .const      #serial_address1      $01           ; I/O-Adresse: Serial 1
   .const      #timer_address        $10           ; I/O-Adresse: Timer
   .const      #led_address          $11           ; I/O-Adresse: LED
-
-  .const      #blink_intervall      250           ; Blink-Intervall der LED
-  .const      #max_temperature      10            ; Temperatarugrenze
-
   .const      #read_temperature     $8000         ; Adresse der Variable #read_temperature
   .const      #current_temperature  $8001         ; Adresse der Variable #current_temperature
   .const      #blink_led            $8002         ; Adresse der Variable #blink_led
   .const      #led_status           $8003         ; Adresse der Variable #led_status
+  .const      #blink_intervall      250           ; Blink-Intervall der LED
+  .const      #max_temperature      10            ; Temperatarugrenze
 
   ; Variablen initialisieren
   init_vars:
-      RGR r0, 1                                   ; Den Wert 1 in die Variable
-      RGW r0, (#read_temperature)                 ; #read_temperature schreiben
+      LDR r0, 1                                   ; Den Wert 1 in die Variable
+      STR r0, (#read_temperature)                 ; #read_temperature schreiben
 
-      RGR r0, 150                                 ; Den Wert 150 in die Variable
-      RGW r0, (#current_temperature)              ; #current_temperature schreiben
+      LDR r0, 150                                 ; Den Wert 150 in die Variable
+      STR r0, (#current_temperature)              ; #current_temperature schreiben
 
-      RGR r0, 0                                   ; Den Wert 0 in die Variablen
-      RGW r0, (#blink_led)                        ; #blink_led und
-      RGW r0, (#led_status)                       ; #led_status schreiben
+      LDR r0, 0                                   ; Den Wert 0 in die Variablen
+      STR r0, (#blink_led)                        ; #blink_led und
+      STR r0, (#led_status)                       ; #led_status schreiben
 
   ; Timer initialisieren
   init_timer:
-      RGR r0, #timer_address                      ; An die I/O-Adresse #timer_address
-      RGR r1, #blink_intervall                    ; den Wert #blink_intervall
+      LDR r0, #timer_address                      ; An die I/O-Adresse #timer_address
+      LDR r1, #blink_intervall                    ; den Wert #blink_intervall
       IOW r0, r1                                  ; schreiben
 
   ; Endlosschleife des Hauptprogramms
@@ -813,6 +859,9 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
 ·                                                 ; Den Wert 1 in die Variable
 ·                                                 ; #blink_led schreiben
 
+·                                                 ; Direkt zur Stelle #main_repeat
+·                                                 ; springen
+
     main_temparature_is_high:
 ·                                                 ; Den Wert 0 in die Variable
 ·                                                 ; #blink_led schreiben
@@ -823,28 +872,28 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
 
   ; Interruptroutine für den Temperatursensor
   isr1:
-      RGR r0, #serial_address0                    ; Ersten vom Tempereratursensor
+      LDR r0, #serial_address0                    ; Ersten vom Tempereratursensor
       IOR r0, r1                                  ; empfangenen Wert in der Variable
-      RGW r1, (#current_temperature)              ; #current_temperature ablegen
+      STR r1, (#current_temperature)              ; #current_temperature ablegen
 
-      RGR r0, 1                                   ; Die Variable #read_temperature
-      RGW r0, (#read_temperature)                 ; mit dem Wert 1 füllen
+      LDR r0, 1                                   ; Die Variable #read_temperature
+      STR r0, (#read_temperature)                 ; mit dem Wert 1 füllen
 
       RTI                                         ; Zurück zum Hauptprogramm
 
   ; Interruptroutine für den Timer
   isr2:
-      RGR r1, 0                                   ; Neuer Wert der LED
+      LDR r1, 0                                   ; Neuer Wert der LED
 
-      RGR r2, (#blink_led)                        ; Nächste Befehle nur ausführen,
-      RGR r3, (#isr2_end)                         ; wenn die Variable #blink_led ungleich
+      LDR r2, (#blink_led)                        ; Nächste Befehle nur ausführen,
+      LDR r3, #isr2_end                           ; wenn die Variable #blink_led ungleich
       JZR r2, (r3)                                ; Null ist.
 
-      RGR r1, (#led_status)                       ; Aktuellen Wert der Variablen #led_status
+      LDR r1, (#led_status)                       ; Aktuellen Wert der Variablen #led_status
       NOT r1                                      ; umkehren
 
     isr2_end:
-      RGR r0, #led_address                        ; An die I/O-Adresse #led_address
+      LDR r0, #led_address                        ; An die I/O-Adresse #led_address
       IOW r0, r1                                  ; den neuen Wert der LED schreiben
 
       RTI                                         ; Zurück zum Hauptprogramm
@@ -958,6 +1007,8 @@ Anforderungen an die Software eines eingebetteten Systems:
 \teilaufgabe
 Verschiedene Mikroprozessoren und Mikrocontroller im Vergleich:
 \CPUVergleich{X}
+
+\clearpage
 
 \teilaufgabe
 Fragen zum Blockdiagramm eines einfachen, eingebetteten Systems:
@@ -1121,89 +1172,90 @@ Load-Store-Architektur:
 .const      #serial_address1      $01           ; I/O-Adresse: Serial 1
 .const      #timer_address        $10           ; I/O-Adresse: Timer
 .const      #led_address          $11           ; I/O-Adresse: LED
-
-.const      #blink_intervall      250           ; Blink-Intervall der LED
-.const      #max_temperature      10            ; Temperatarugrenze
-
 .const      #read_temperature     $8000         ; Adresse der Variable #read_temperature
 .const      #current_temperature  $8001         ; Adresse der Variable #current_temperature
 .const      #blink_led            $8002         ; Adresse der Variable #blink_led
 .const      #led_status           $8003         ; Adresse der Variable #led_status
+.const      #blink_intervall      250           ; Blink-Intervall der LED
+.const      #max_temperature      10            ; Temperatarugrenze
 
 ; Variablen initialisieren
 init_vars:
-    RGR r0, 1                                   ; Den Wert 1 in die Variable
-    RGW r0, (#read_temperature)                 ; #read_temperature schreiben
+    LDR r0, 1                                   ; Den Wert 1 in die Variable
+    STR r0, (#read_temperature)                 ; #read_temperature schreiben
 
-    RGR r0, 150                                 ; Den Wert 150 in die Variable
-    RGW r0, (#current_temperature)              ; #current_temperature schreiben
+    LDR r0, 150                                 ; Den Wert 150 in die Variable
+    STR r0, (#current_temperature)              ; #current_temperature schreiben
 
-    RGR r0, 0                                   ; Den Wert 0 in die Variablen
-    RGW r0, (#blink_led)                        ; #blink_led und
-    RGW r0, (#led_status)                       ; #led_status schreiben
+    LDR r0, 0                                   ; Den Wert 0 in die Variablen
+    STR r0, (#blink_led)                        ; #blink_led und
+    STR r0, (#led_status)                       ; #led_status schreiben
 
 ; Timer initialisieren
 init_timer:
-    RGR r0, #timer_address                      ; An die I/O-Adresse #timer_address
-    RGR r1, #blink_intervall                    ; den Wert #blink_intervall
+    LDR r0, #timer_address                      ; An die I/O-Adresse #timer_address
+    LDR r1, #blink_intervall                    ; den Wert #blink_intervall
     IOW r0, r1                                  ; schreiben
 
 ; Endlosschleife des Hauptprogramms
 main:
-    RGR r0, #read_temperature                   ; Nächste Befehle nur ausführen,
-    RGR r1, #main_check_temperature             ; wenn #read_temperature ungleich
+    LDR r0, (#read_temperature)                 ; Nächste Befehle nur ausführen,
+    LDR r1, #main_check_temperature             ; wenn #read_temperature ungleich
     JZR r0, (r1)                                ; Null ist.
 
-    RGR r0, #serial_address0                    ; An die I/O-Adresse #serial_address0
-    RGR r1, 52                                  ; das ASCII-Zeichen 'R' wie 'Read'
+    LDR r0, #serial_address0                    ; An die I/O-Adresse #serial_address0
+    LDR r1, 52                                  ; das ASCII-Zeichen 'R' wie 'Read'
     IOW r0, r1                                  ; schreiben
 
-    RGR r0, #serial_address1                    ; An die I/O-Adresse #serial_address1
-    RGR r1, 2                                   ; den Wert 2 mit der Anzahl erwarteter
+    LDR r0, #serial_address1                    ; An die I/O-Adresse #serial_address1
+    LDR r1, 2                                   ; den Wert 2 mit der Anzahl erwarteter
     IOW r0, r1                                  ; Bytes schreiben
 
   main_check_temperature:
-    RGR r1, (#current_temperature)              ; Nächste Befehle nur ausführen,
-    RGR r2, (#max_temperature)                  ; wenn der Wert der Variable
-    RGR r3, #main_temparature_is_high           ; #current_temperature kleiner als
+    LDR r1, (#current_temperature)              ; Nächste Befehle nur ausführen,
+    LDR r2, (#max_temperature)                  ; wenn der Wert der Variable
+    LDR r3, #main_temparature_is_high           ; #current_temperature kleiner als
     SUB r0, r1, r2                              ; der Wert der Variable #max_temperature
     JGE r0, (r3)                                ; ist
 
-    RGR r0, 1                                   ; Den Wert 1 in die Variable
-    RGW r0, (#blink_led)                        ; #blink_led schreiben
+    LDR r0, 1                                   ; Den Wert 1 in die Variable
+    STR r0, (#blink_led)                        ; #blink_led schreiben
+
+    LDR r0, #main_repeat                        ; Direkt zur Stelle #main_repeat
+    JMP (r0)                                    ; springen
 
   main_temparature_is_high:
-    RGR r0, 0                                   ; Den Wert 0 in die Variable
-    RGW r0, (#blink_led)                        ; #blink_led schreiben
+    LDR r0, 0                                   ; Den Wert 0 in die Variable
+    STR r0, (#blink_led)                        ; #blink_led schreiben
 
   main_repeat:
-    RGR r0, #main                               ; Zurück an den Anfang der
+    LDR r0, #main                               ; Zurück an den Anfang der
     JMP (r0)                                    ; Schleife springen
 
 ; Interruptroutine für den Temperatursensor
 isr1:
-    RGR r0, #serial_address0                    ; Ersten vom Tempereratursensor
+    LDR r0, #serial_address0                    ; Ersten vom Tempereratursensor
     IOR r0, r1                                  ; empfangenen Wert in der Variable
-    RGW r1, (#current_temperature)              ; #current_temperature ablegen
+    STR r1, (#current_temperature)              ; #current_temperature ablegen
 
-    RGR r0, 1                                   ; Die Variable #read_temperature
-    RGW r0, (#read_temperature)                 ; mit dem Wert 1 füllen
+    LDR r0, 1                                   ; Die Variable #read_temperature
+    STR r0, (#read_temperature)                 ; mit dem Wert 1 füllen
 
     RTI                                         ; Zurück zum Hauptprogramm
 
 ; Interruptroutine für den Timer
 isr2:
-    RGR r1, 0                                   ; Neuer Wert der LED
+    LDR r1, 0                                   ; Neuer Wert der LED
 
-    RGR r2, (#blink_led)                        ; Nächste Befehle nur ausführen,
-    RGR r3, (#isr2_end)                         ; wenn die Variable #blink_led ungleich
+    LDR r2, (#blink_led)                        ; Nächste Befehle nur ausführen,
+    LDR r3, #isr2_end                           ; wenn die Variable #blink_led ungleich
     JZR r2, (r3)                                ; Null ist.
 
-    RGR r1, (#led_status)                       ; Aktuellen Wert der Variablen #led_status
+    LDR r1, (#led_status)                       ; Aktuellen Wert der Variablen #led_status
     NOT r1                                      ; umkehren
 
   isr2_end:
-    RGR r0, #led_address                        ; An die I/O-Adresse #led_address
+    LDR r0, #led_address                        ; An die I/O-Adresse #led_address
     IOW r0, r1                                  ; den neuen Wert der LED schreiben
 
     RTI                                         ; Zurück zum Hauptprogramm
