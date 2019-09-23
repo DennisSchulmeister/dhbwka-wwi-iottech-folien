@@ -318,16 +318,16 @@
         -- & $10^0$ & 1 \\
         \hline
 
-        Milli & $10^{-3}$ & 0,01 \\
+        Milli & $10^{-3}$ & 0,001 \\
         \hline
 
-        Mikro & $10^{-6}$ & 0,00.001 \\
+        Mikro & $10^{-6}$ & 0,000.001 \\
         \hline
 
-        Nano & $10^{-9}$ & 0,00.000.001 \\
+        Nano & $10^{-9}$ & 0,000.000.001 \\
         \hline
 
-        Piko & $10^{-12}$ & 0,00.000.000.001 \\
+        Piko & $10^{-12}$ & 0,000.000.000.001 \\
         \hline
     \end{tabularx}
 
@@ -406,13 +406,12 @@
 \begin{frame}{In Reihe geschaltete Widerstände: Spannungsteiler}
     \begin{columns}
         \column{0.7\textwidth}
-        \includegraphics[width=\textwidth]{2-hardwaredesign/img/spannungsteiler}
+        \includegraphics[width=.85\textwidth]{2-hardwaredesign/img/spannungsteiler}
 
         \column{0.3\textwidth}
         In Reihe geschaltete Widerstände teilen die Spannung.
         Es kommt zum \textbf{Spannungsabfall}.
 
-        \bigskip
         \bigskip
 
         $R_{Gesamt} = R_1 + R_2$ \\
@@ -424,7 +423,6 @@
         $I_{Gesamt} = I_1 = I_2$ \\
 
         \bigskip
-        \bigskip
 
         \textbf{R}: Widerstand in Ohm \\
         \smallskip
@@ -432,6 +430,17 @@
         \smallskip
         \textbf{I}: Stromstärke in Ampere \\
     \end{columns}
+
+    \bigskip
+
+    \parbox{\linewidth}{
+        \footnotesize
+        Der hier gezeigte Spannungsteiler wird auch \textbf{unbelasteter Spannungsteiler}
+        genannt, da außer den zwei eingezeichneten Widerständen kein Verbraucher vorhanden
+        ist. In einer echten Schaltung gäbe es aber mindestens einen Verbraucher, der parallel
+        zu einem der beiden Widerstände geschaltet wäre. Wie sich die Werte dadurch verändern,
+        sehen wir auf den nächsten beiden Folien.
+    }
 \end{frame}
 }
 
@@ -442,13 +451,12 @@
 \begin{frame}{Parallel geschaltete Widerstände: Stromteiler}
     \begin{columns}
         \column{0.7\textwidth}
-        \includegraphics[width=\textwidth]{2-hardwaredesign/img/stromteiler}
+        \includegraphics[width=.9\textwidth]{2-hardwaredesign/img/stromteiler}
 
         \column{0.3\textwidth}
-        Parallel geschaltete Widerstände teilen die Stromstärke.
-        Es kommt zum \textbf{Stromabfall}.
+        An parallel geschalteten Widerständen teilt sich der Strom in
+        Teilströme gleicher Spannung auf.
 
-        \bigskip
         \bigskip
 
         $1/R_{Gesamt} = 1/R_1 + 1/R_2$ \\
@@ -460,7 +468,6 @@
         $I_{Gesamt} = I_1 + I_2$ \\
 
         \bigskip
-        \bigskip
 
         \textbf{R}: Widerstand in Ohm \\
         \smallskip
@@ -468,6 +475,111 @@
         \smallskip
         \textbf{I}: Stromstärke in Ampere \\
     \end{columns}
+
+    \bigskip
+
+    \parbox{\linewidth}{
+        \footnotesize
+        Mit reinen Stromteilern haben wir es in der Praxis selten zu tun, da in der
+        Digitaltechnik meistens Spannungsquellen mit variablem Ausgangsstrom (sog.
+        Festspannungsquellen) anstelle von Stromquellen mit variabler Ausgangsspannung
+        genutzt werden. Jedoch benötigen wir die hier gezeigten Formeln, um die Werte
+        für einen belasteten Spannungsteiler berechnen zu können.
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\small
+
+\begin{frame}{Sowohl als auch: Belasteter Spannungsteiler}
+    \begin{columns}
+        \column{0.7\textwidth}
+        \includegraphics[width=.9\textwidth]{2-hardwaredesign/img/spannungsteiler_belastet}
+
+        \column{0.3\textwidth}
+        \footnotesize
+        \parbox{\textwidth}{
+            Zunächst müssen die unteren beiden Widerstände gedanklich zu einem
+            zusammengefasst werden, um die Schaltung wieder zu einem einfachen
+            Spannungsteiler zu reduzieren:
+        }
+
+        \bigskip
+
+        $R_{2L} = 1 / (1/R_2 + 1/R_L)$ \\
+        \smallskip
+        $R_1 / R_{2L} = U_1 / U_2$ \\
+
+        \bigskip
+
+        \parbox{\textwidth}{
+            In einer Reihenschaltung fließt an allen Stellen derselbe Strom. An
+            den unteren Widerständen teilt sich diese jedoch auf:
+        }
+
+        \bigskip
+
+        $I_{Gesamt} = I_Q + I_L$ \\
+        \smallskip
+        $I_Q / I_L = R_2 / R_L$ \\
+    \end{columns}
+
+    \bigskip
+
+    \parbox{\linewidth}{
+        \footnotesize
+        \textbf{Hinweis:} Spannungsteiler kommen meistens dann zum Einsatz, wenn der
+        Lastwiderstand $R_L$ sehr viel Größer als die beiden anderen Widerstände und
+        ihr Wärmeverlust hinnehmbar ist. Denn in diesem Fall verändert sich die Spannung
+        durch die Last nur sehr gering.
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Fallbeispiel: Inkompatible Logiklevel anpassen}
+    \parbox{\textwidth}{
+        \textbf{Problemstellung:} Die Eingangspins des Raspberry Pi dürfen nur mit
+        3,3\,V beschaltet werden, viele Sensoren erzeugen jedoch 5\,V.
+    }
+
+    \smallskip
+
+    \parbox{\textwidth}{
+        a) Angenommen, wir haben gerade keinen 74HC4050-Baustein (der hierfür sehr
+        viel besser geeignet wäre) zur Hand. Wie müssen die beiden Widerstände
+        $R_1$ und $R_2$ dimensioniert werden, um die Spannung mit einem einfachen
+        Spannungsteiler anzupassen?
+    }
+
+    \smallskip
+
+    \parbox{\textwidth}{
+        b) Wie verändern sich die Spannungswerte, wenn der interne Pulldown-Widerstand von
+        50k\,\si{\ohm} des Pi aktiv ist?
+    }
+
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{2-hardwaredesign/img/spannungsteiler_beispiel}
+    \end{center}
+
+    %\smallskip
+
+    \uncover<2->{
+        \parbox{\textwidth}{
+            \tiny
+            \textbf{Anmerkung:} Es ist wirklich schwer, für uns relevante Beispiele für belastete
+            Spannungsteiler zu finden. Als Faustregel können wir uns daher einfach merken, dass es
+            genügt, wenn der (ggf. variable) Lastwiderstand $R_L$ mindestens drei bis zehnmal größer
+            als der Spannungsteiler ist. In diesem Fall kann mit einem Spannungsteiler relativ einfach
+            eine einigermaßen stabile Spannung hergestellt werden.
+        }
+    }
 \end{frame}
 }
 
@@ -610,10 +722,10 @@
     \bigskip
 
     \begin{columns}
-        \column{0.5\textwidth}
+        \column{0.6\textwidth}
         \includegraphics[width=\textwidth]{2-hardwaredesign/img/led_relais_schaltplan}
 
-        \column{0.5\textwidth}
+        \column{0.4\textwidth}
         \includegraphics[width=\textwidth]{2-hardwaredesign/img/led_relais_foto}
     \end{columns}
 \end{frame}
