@@ -13,8 +13,8 @@ sich zu jeder Kategorie zwei Vor- und Nachteile.
 
 \bigskip
 \teilaufgabe
-Das folgende Bild zeigt einen Raspberry Pi von oben. Beschrifte das Bild mit den
-für gängige IoT-Anwendungen relevanten Schnittstellentechnologien.
+Das folgende Bild zeigt einen Raspberry Pi von oben. Beschriften Sie das Bild mit
+den für gängige IoT-Anwendungen relevanten Schnittstellentechnologien.
 
 \begin{center}
     \includegraphics[width=.5\textwidth]{2-hardwaredesign/img/rasbperrypi_foto}
@@ -25,16 +25,16 @@ für gängige IoT-Anwendungen relevanten Schnittstellentechnologien.
 Welche Signalarten liegen am J8-Header des Raspberry Pi an? Zählen Sie alle sieben,
 in den Folien genannten Signalarten auf.
 
-
 %-------------------------------------------------------------------------------
 \aufgabe{Elektronik-Grundlagen}
 %-------------------------------------------------------------------------------
 \teilaufgabe
 Innerhalb eines elektrischen Generators entsteht Strom, indem sich ein Magnet um
 eine Drahtspule dreht. Das zugrunde liegende Prinzip nennt sich elektromagnetische
-Induktion. Erklären Sie anhand folgender Abbildung, wie es dabei zum Stromfluss
-kommt. Gehen Sie dabei auch kurz auf die Bestandteile des bohrschen Atommodells
-ein, indem Sie die Grafik entsprechend beschriften.
+Induktion. Erklären Sie anhand folgender Abbildung, wie durch das sich stets
+verändernde Magnetfeld ein Stromfluss erzeugt wird. Gehen Sie dabei auch kurz
+auf die Bestandteile des bohrschen Atommodells ein, indem Sie die Grafik
+entsprechend beschriften.
 
 \begin{center}
     \includegraphics[width=.75\textwidth]{2-hardwaredesign/img/atom_elektronenfluss}
@@ -76,9 +76,8 @@ Tabelle aus.
 \bigskip
 \teilaufgabe
 Die folgenden zwei Abbildungen zeigen, wie Spannung, Stromstärke, Widerstand
-und Leistung gemäß dem ohmschen Gesetz in Zusammenhang stehen. Welche Größen
-werden durch die jeweiligen Formelzeichen beschrieben und wie lauten die Formeln
-hinter den Abbildungen?
+und Leistung in Zusammenhang stehen. Welche Größen werden durch die jeweiligen
+Formelzeichen beschrieben und wie lauten die Formeln hinter den Abbildungen?
 
 \begin{center}
     \includegraphics[width=3cm]{2-hardwaredesign/img/formel_uri}
@@ -96,9 +95,9 @@ folgenden Anwendungsfällen:
     daran angeschlossene Leuchtdiode soll mit 2\,V und 5\,mA betrieben werden.
     Welcher Widerstand wird hierfür benötigt?
 
-    \item Eine Eingangsspannung von 3,3\,V wird durch einen 1k\,\si{\ohm} Widerstand
-    mit einem Eingangspin des Raspberry Pi verbunden. Welche Stromstärke fließt
-    dabei?
+    \item Ein Eingangspan des Raspberry Pi wird über einen 1k\,\si{\ohm} Widerstand
+    mit einer 3,3\,V Spannungsquelle verbunden. Welche Stromstärke liegt demnach
+    am Raspberry Pi an?
 
     \item Ein typisches Netzteil für den Raspberry Pi funktioniert als
     Festspannungsnetzteil und liefert maximal 2\,A Strom bei 5\,V Spannung.
@@ -110,48 +109,36 @@ folgenden Anwendungsfällen:
 %-------------------------------------------------------------------------------
 \teilaufgabe
 Gegeben sei eine einfache Schaltung mit drei in Reihe geschalteten Verbrauchern
-und einem Steckernetzteil als Spannungsquelle. Angenommen, das Netzteil liefert
-12\,V Spannung und die Verbraucher haben den Widerstand 910\,\si{\ohm}, 750\,\si{\ohm}
+und einem Steckernetzteil als Spannungsquelle. Angenommen das Netzteil liefert
+12\,V Spannung und die Verbraucher haben die Widerstände 910\,\si{\ohm}, 750\,\si{\ohm}
 und 3k\,\si{\ohm}.
 
-\begin{itemize}
+\begin{enumerate}
     \item Welche Teilspannungen fallen an den einzelnen Verbrauchern ab?
     \item Wie hoch ist der Strom, der durch die Schaltung fließt?
-    \item Wie viele Kilowattstunden fallen an, wenn die Schaltung 24 Stunden läuft?
-\end{itemize}
+    \item Wie viele Kilowattstunden fallen an, wenn die Schaltung ein Jahr lang läuft?
+\end{enumerate}
 
-\bigskip
+%\bigskip
 \teilaufgabe
 Angenommen, die oben genannten Verbraucher wären nicht in Reihe sondern parallel
 geschaltet.
 
-\begin{itemize}
-    \item Welche Teilströme stehen den Verbrauchern dann zur Verfügung?
-    \item Welcher Gesamtstrom fließt in diesem Fall durch die Schaltung?
+\begin{enumerate}
     \item Wie hoch ist der Gesamtwiderstand der Schaltung?
-\end{itemize}
-
-\bigskip
-\teilaufgabe
-Angenommen, nur die Verbraucher zwei und drei mit den Widerständen 750\,\si{\ohm}
-und 3k\,\si{\ohm} wären parallel geschaltet und der Verbraucher mit 910\,\si{\ohm}
-wäre als Reihenschaltung davor angeordnet.
-
-\begin{itemize}
-    \item Wie teilt sich die Spannung zwischen den einzelnen Verbrauchern auf?
-    \item Wie hoch ist der Gesamtwiderstand der Schaltung im Vergleich nun?
-    \item Welcher Gesamtstrom fließt in diesem Fall durch die Schaltung?
-\end{itemize}
+    \item Welcher Gesamtstrom fließt somit durch die Schaltung?
+    \item Wie teilt sich der Gesamtstrom an den Verbrauchern auf?
+\end{enumerate}
 
 %-------------------------------------------------------------------------------
 \aufgabe{Digitale Komponenten verbinden}
 %-------------------------------------------------------------------------------
-\teilaufgabe
-Im letzten Aufgabenblatt haben wir integrierte Schaltkreise mit \glqq{}Chip Enable\grqq{}
-genannten Eingängen gesehen. Die anderen Ein- und Ausgänge der Bausteine müssen
-daher so genannte \glqq{}Tri-States\grqq{} sein. Recherchieren Sie den Begriff
-Tri-State und erklären Sie mit wenigen Worten, was damit gemeint ist und warum die
-kennengelernte Schaltung ohne Tri-States nicht funktionieren würde.
+%\teilaufgabe
+%Im letzten Aufgabenblatt haben wir integrierte Schaltkreise mit \glqq{}Chip Enable\grqq{}
+%genannten Eingängen gesehen. Die anderen Ein- und Ausgänge der Bausteine müssen
+%daher so genannte \glqq{}Tri-States\grqq{} sein. Recherchieren Sie den Begriff
+%Tri-State und erklären Sie mit wenigen Worten, was damit gemeint ist und warum die
+%kennengelernte Schaltung ohne Tri-States nicht funktionieren würde.
 
 \bigskip
 \teilaufgabe
@@ -160,24 +147,26 @@ auf für den Raspberry Pi verträgliche 3,3\,V herunter geregelt. Für solche
 Aufgaben wird allerdings eher selten ein Spannungsteiler verwendet, da er ein
 paar entscheidende Nachteile besitzt:
 
-
 \begin{enumerate}
     \item Die Schaltung verbraucht vergleichsweise viel Strom, der als überschüssige
-    Energie durch die Widerstände in Wärme umgesetzt wird.
+    Energie in Wärme umgesetzt wird.
 
-    \item Das Eingangssignal wird durch die Schaltung zeitlich verwischt, so dass
+    \item Das Schaltsignal wird durch die Schaltung zeitlich verschmiert, so dass
     nur eine begrenzte Datenrate übertragen werden kann.
 \end{enumerate}
 
 Entwerfen Sie daher eine Schaltung, die anstelle eines Spannungsteilers einen
 Transistor nutzt, um den Eingangspin des Raspberry Pi mit 3,3\,V anzusteuern.
-Begrenzen Sie dabei die maximal an den Pi abgegebene Strommenge auf 0,2\,mA.
+Beachten Sie dabei, dass sich bei den hier betrachteten NPN-Transistoren die
+Stromstärke am Emitter (dem Ausgang des Transistors) aufsummiert. Bauen Sie
+deshalb an beiden Eingängen des Transistors entsprechende Vorwiderstände ein,
+um die Gesamtstromstärke auf 2\,mA zu begrenzen.
 
-\clearpage
+\bigskip
 \teilaufgabe
-Wozu werden in einer digitalen Schaltung Pullup- oder Pulldown-Widerstände
-genutzt. Erklären Sie kurz, wie die Widerstände verschaltet sind und welche
-Aufgabe sie erfüllen.
+Wozu werden in einer digitalen Schaltung Pull-Up- oder Pull-Down-Widerstände
+genutzt. Erklären Sie kurz und ohne auf Details zur Berechnung einzugehen, wie
+die Widerstände verschaltet sind und welche Aufgabe sie erfüllen.
 
 \bigskip
 \teilaufgabe
@@ -195,63 +184,64 @@ Pi konfiguriert werden, um diese Zeitintervalle zu erreichen?
 Die Kommunikation innerhalb eines eingebetteten Systems erfolgt oftmals über
 serielle Schnittstellen. Und wie nicht anders zu erwarten, haben unterschiedliche
 Hersteller unterschiedliche, zueinander inkompatible Standards hierfür geschaffen.
-Füllen Sie die nachfolgende Tabelle mit den Eigenschaften der wichtigsten vier
-Standards aus:
+Recherchieren Sie im Internet und füllen Sie die nachfolgende Tabelle mit den
+Eigenschaften der wichtigsten vier Standards aus:
 
 \newcommand{\SerialVergleich}[1]{
     {
         \renewcommand{\arraystretch}{1.8}
         \newcolumntype{Y}{>{\centering\arraybackslash}X}
         \newcolumntype{R}{>{\raggedleft\arraybackslash}p}
+        \newcolumntype{L}{>{\raggedright\arraybackslash}X}
         \vskip \LTpre
 
-        \begin{tabularx}{\textwidth}{|R{.33\textwidth}|X|X|X|X|}
+        \begin{tabularx}{\textwidth}{|R{.33\textwidth}|L|L|L|L|}
             \hline
             &
             \textbf{UART}    &
             \textbf{SPI}     &
             \textbf{I²C}     &
-            \textbf{1-wirte}
+            \textbf{1-wire}
             \\
 
             \hline
             \textbf{Synchron / Asynchron} &
-            \loesungswert{#1}{...} &        % URART
-            \loesungswert{#1}{...} &        % SPI
-            \loesungswert{#1}{...} &        % I²C
-            \loesungswert{#1}{...}          % 1-wire
+            \loesungswert{#1}{Asynchron} &                      % URART
+            \loesungswert{#1}{Synchron} &                       % SPI
+            \loesungswert{#1}{Synchron} &                       % I²C
+            \loesungswert{#1}{Asynchron}                        % 1-wire
             \\[2em]
 
             \hline
-            \textbf{Full-Duplex, Half-Duplex} &
-            \loesungswert{#1}{...} &        % URART
-            \loesungswert{#1}{...} &        % SPI
-            \loesungswert{#1}{...} &        % I²C
-            \loesungswert{#1}{...}          % 1-wirte
+            \textbf{Full-Duplex / Half-Duplex} &
+            \loesungswert{#1}{Full-Duplex} &                    % URART
+            \loesungswert{#1}{Full-Duplex} &                    % SPI
+            \loesungswert{#1}{Half-Duplex} &                    % I²C
+            \loesungswert{#1}{Half-Duplex}                      % 1-wire
             \\[2em]
 
             \hline
             \textbf{Mehrere Empfänger möglich} &
-            \loesungswert{#1}{...} &        % URART
-            \loesungswert{#1}{...} &        % SPI
-            \loesungswert{#1}{...} &        % I²C
-            \loesungswert{#1}{...}          % 1-wirte
+            \loesungswert{#1}{Nein} &                           % URART
+            \loesungswert{#1}{Ja} &                             % SPI
+            \loesungswert{#1}{Ja} &                             % I²C
+            \loesungswert{#1}{Ja}                               % 1-wire
             \\[2em]
 
             \hline
             \textbf{Mehrere Sender möglich} &
-            \loesungswert{#1}{...} &        % URART
-            \loesungswert{#1}{...} &        % SPI
-            \loesungswert{#1}{...} &        % I²C
-            \loesungswert{#1}{...}          % 1-wirte
+            \loesungswert{#1}{Nein} &                           % URART
+            \loesungswert{#1}{Ja} &                             % SPI
+            \loesungswert{#1}{Nein} &                           % I²C
+            \loesungswert{#1}{Ja}                               % 1-wire
             \\[2em]
 
             \hline
             \textbf{Adressierung der Empfänger} &
-            \loesungswert{#1}{...} &        % URART
-            \loesungswert{#1}{...} &        % SPI
-            \loesungswert{#1}{...} &        % I²C
-            \loesungswert{#1}{...}          % 1-wirte
+            \loesungswert{#1}{Keine} &                          % URART
+            \loesungswert{#1}{Slave-Select-Leitung} &           % SPI
+            \loesungswert{#1}{Adresse im Datenstrom} &          % I²C
+            \loesungswert{#1}{Adresse im Datenstrom}            % 1-wire
             \\[2em]
 
             \hline
@@ -262,6 +252,18 @@ Standards aus:
 }
 \SerialVergleich{}
 
+{
+    \small
+
+    \begin{longtable}{p{0.3\textwidth}p{0.7\textwidth}}
+        \textbf{Synchron / Asynchron:}          &  Gibt es ein Zeitsignal zur Synchronisation der Datenübertragung? \\
+        \textbf{Full-Duplex / Half-Duplex:}     &  Kann ein Bauteil gleichzeitig Daten senden und empfangen? \\
+        \textbf{Mehrere Empfänger möglich:}     &  Kann ein Sender gleichzeitig mehrere Empfänger ansprechen? \\
+        \textbf{Mehrere Sender möglich:}        &  Kann ein Bauteil von mehreren Sendern Daten empfangen? \\
+        \textbf{Adressierung der Empfänger:}    &  Wie wird ein Bauteil zum Empfang der Daten aufgefordert? \\
+    \end{longtable}
+}
+
 \bigskip
 \teilaufgabe
 Ein über SPI angebundener Temperatursensor sendet immer genau zwei Bytes für
@@ -270,13 +272,103 @@ Celsius ohne Nachkommastellen, das zweite Byte liefert die Zahl hinter dem Komma
 Zeichnen Sie ein Timingdiagramm, aus dem der zeitliche Ablauf aller Signale
 hervorgeht, wenn der Sensor den Wert 28.3 liefert.
 
-% Übungsstunde: Entwurf einer Alarmanlage
-%  » Bewegungssensor zur Aktivierung der Alarmanlage
-%  » LCD-Display zur Ausgabe einer Eingabeaufforderung
-%  » Knöpfe zur Eingabe des Deaktivierungscodes
-%  » Kamera zum Aufnehmen von Fotos
-%  » Vorgegebenes Node-RED-Programm zum Auslösen eines Alarams per E-Mail
+%-------------------------------------------------------------------------------
+\aufgabe{Praktische Übung}
+%-------------------------------------------------------------------------------
+\teilaufgabe
+Die folgenden Aufgaben können direkt auf dem Raspberry Pi unter der grafischen
+Desktopumgebung von Raspbian ausgeführt werden. Starten Sie daher den Rasperry
+Pi und stellen Sie zunächst eine Internetverbindung her. Anschließend laden
+Sie von Moodle die ZIP-Datei mit den Quellcodes dieses Kapitels herunter und
+legen diese im Home-Verzeichnis des Pi ab. Danach öffnen Sie eine Kommandozeile
+und führen folgenden Befehl zum Entpacken der Quellcodes aus:
 
+\newcommand*{\CommandPrompt}[1]{\textcolor{gray}{#1}}
+
+{
+    \medskip
+    \tt
+    \setstretch{1.0}
+    \CommandPrompt{\~{}\$} unzip Grundschaltungen.zip
+    \medskip
+}
+
+Mit folgenden Befehlen können Sie dann ein neues Python Environment einrichten
+und alle benötigten Zusatzbibliotheken installieren:
+
+{
+    \medskip
+    \tt
+    \setstretch{1.0}
+    \CommandPrompt{\~{}\$} cd Grundschaltungen \\
+    \CommandPrompt{\~{}/Grundschaltungen/\$} chmod +x install.sh \\
+    \CommandPrompt{\~{}/Grundschaltungen/\$} ./install.sh
+    \medskip
+}
+
+Zum Test können führen Sie das Beispiel \texttt{led\_blink} aus. Wenn alles gut
+geht, sollten folgende Zeilen auf dem Bildschirm erscheinen:
+
+{
+    \medskip
+    \tt
+    \setstretch{1.0}
+    \CommandPrompt{\~{}/Grundschaltungen/\$} . env/bin/activate \\
+    \CommandPrompt{(env) \~{}/Grundschaltungen/\$} ./src/led\_blink.py \\
+    LED ist an \\
+    LED ist aus \\
+    \\
+    LED ist an \\
+    LED ist aus \\
+    \^{}C
+    \medskip
+}
+
+Mit \texttt{Strg}+\texttt{C} können Sie das Programm beenden.
+
+\bigskip
+\teilaufgabe
+Bauen Sie nun folgende Schaltungen aus den Folien nach und testen Sie sie mit
+den entsprechenden Beispielprogrammen. Beachten Sie dabei, dass die Beispiele
+immer aus der Kommandozeile heraus gestartet werden müssen und dass hierfür
+wie oben gezeigt das dazugehörige Python-Environment aktiviert sein muss.
+
+\bigskip
+
+\begin{tabularx}{\textwidth}{|X|X|X|}
+    \hline
+    \textbf{Schaltung} & \textbf{Quellcodebeispiel} \\
+
+    \hline
+    LED über Widerstand direkt ansteuern &
+    \verb|./src/led_blink.py| \\
+
+    \hline
+    Große Lasten über Relais schalten &
+    \verb|./src/led_blink.py| \\
+
+    \hline
+    Gemittelte Leistung durch PWM regulieren &
+    \verb|./src/led_pwm.py| \\
+    &
+    \verb|./src/led_pwm_blink.py| \\
+    &
+    \verb|./src/led_pwm_fade.py| \\
+
+    \hline
+    Schließkontakt mit Pull-Down-Widerstand &
+    \verb|./src/button_pulldown_external.py| \\
+
+    \hline
+    Schließkontakt mit Pull-Up-Widerstand &
+    \verb|./src/button_pullup_external.py| \\
+
+    \hline
+    DHT11-Sensor über 1-wire &
+    \verb|./src/dht11.py| \\
+
+    \hline
+\end{tabularx}
 
 
 %===============================================================================
@@ -505,13 +597,13 @@ Wichtige Bezugsgrößen der Elektrotechnik:
 \teilaufgabe
 Formelzeichen für die wichtigsten Berechnungen:
 
-\textbf{U} = Spannung
+U = Spannung
 \hskip 2em
-\textbf{I} = Stromstärke
+I = Stromstärke
 \hskip 2em
-\textbf{R} = Widerstand
+R = Widerstand
 \hskip 2em
-\textbf{P} = Leistung
+P = Leistung
 
 Dazugehörige Formeln:
 
@@ -571,14 +663,132 @@ Berechnung von Widerstand, Stromstärke und Leistung:
 %-------------------------------------------------------------------------------
 \loesung{Spannungs- und Stromteiler}
 %-------------------------------------------------------------------------------
-Wird nachgereicht!
+\teilaufgabe
+Spannungsteiler mit den Widerständen 910\,\si{\ohm}, 750\,\si{\ohm} und 3k\,\si{\ohm}:
+
+\begin{enumerate}
+    %%
+    \item \textbf{Teilspannungen:}
+    Die Spannung teilt sich im Verhältnis der Widerstände zueinander auf.
+
+    $U_1 = \frac{12\,V * 910\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 2,34\,V$
+
+    $U_2 = \frac{12\,V * 750\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 1,93\,V$
+
+    $U_3 = \frac{12\,V * 3000\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 7,73\,V$
+
+    Die Summe der Teilspannungen ergibt daher (ohne Rundungsfehler) exakt 12\,V:
+
+    $2,34\,V + 1,93\,V + 7,73\,V = 12\,V$
+
+    %%
+    \item \textbf{Stromstärke:} Die Stromstärke teilt sich nicht auf, sondern ergibt sich
+    aus der Eingangsspannung und dem Gesamtwiderstand der Schaltung.
+
+    $I = \frac{12\,V}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 2,57\,mA$
+
+    %%
+    \item \textbf{Kilowattstunden nach einem Jahr}:
+    Hierfür muss die Leistung in Watt ausgerechnet, durch Tausend geteilt und mit
+    der Zeit multipliziert werden.
+
+    $0,00257 \,*\, 12 \,/\, 1000 \,*\, 24 \,*\, 356 \approx 0,26\,kWh$
+\end{enumerate}
+
+%\bigskip
+\teilaufgabe
+Stromteiler mit den Widerständen 910\,\si{\ohm}, 750\,\si{\ohm} und 3k\,\si{\ohm}:
+
+\begin{enumerate}
+    %%
+    \item \textbf{Gesamtwiderstand:} Der Kehrwert des Gesamtwiderstands entspricht
+    der Summe der Kehrwerte der Teilwiderstände. Nach dem Gesamtwiderstand aufgelöst
+    ergibt sich folgende Formel:
+
+    $R_{Gesamt} = \frac{1}{1/910\,\si{\ohm} \,+\, 1/750\,\si{\ohm} \,+\, 1/3000\,\si{\ohm}} \approx 361,59\,\si{\ohm}$
+
+    %%
+    \item \textbf{Gesamtstrom:} Zusammen mit der Spannung lässt sich nun der Gesamtstrom
+    ausrechnen.
+
+    $I_{Gesamt} = \frac{12\,V}{361,59\,\si{\ohm}} \approx 33,18\,mA$
+
+    %%
+    \item \textbf{Teilströme:} Der Strom teilt sich im Verhältnis der Widerstände
+    zueinander auf.
+
+    $I_1 = \frac{33,18\,mA * 910\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 6,48\,mA$
+
+    $I_2 = \frac{33,18\,mA * 750\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 5,34\,mA$
+
+    $I_3 = \frac{33,18\,mA * 3000\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 21,36\,mA$
+
+    Die Summe der Teilströme ergibt daher (ohne Rundungsfehler) 33,18\,mA:
+
+    $6,48\,mA + 5,34\,mA + 21,36\,mA = 33,18\,mA$
+\end{enumerate}
 
 %-------------------------------------------------------------------------------
 \loesung{Digitale Komponenten verbinden}
 %-------------------------------------------------------------------------------
-Wird nachgereicht!
+\teilaufgabe
+Entwurf einer einfachen Transistorschaltung zur Schaltung von 3,3\,V in
+Abhängigkeit von einem 5\,V Sensorausgang. Durch entsprechende Vorwiderstände
+wird der Gesamtstrom am Transistorausgang auf 2\,mA begrenzt. Die zusätzlich
+eingezeichneten Pull-Down-Widerstände verhindern ungewollte Schwankungen des
+GPIO-Eingangsignals, indem zufällig auftretende Einstreuungen gegen Masse
+abgeführt werden.
+
+\includegraphics[width=\textwidth]{2-hardwaredesign/img/transistor_sensor_schaltplan}
+
+\bigskip
+\teilaufgabe
+Pull-Up- und Pull-Down-Widerstände dienen dazu, zufällig auftretende Schwankungen
+eines Eingangssignals durch eingestreute Störströme zu verhindern. Hierzu wird
+der zu schützende Eingang über einen Widerstand entweder gegen Masse (Pull-Down)
+oder gegen Spannung (Pull-Up) verbunden.
+
+\bigskip
+\teilaufgabe
+Tastgrad (Duty Cycle) und Frequenz einer mit PWM zum Blinken gebrachten LED:
+
+\begin{itemize}
+    \item \textbf{1\,Sek an, 0,5\,Sek aus:}
+    Frequenz: 2/3 Hz, Tastgrad: 66\%
+
+    \item \textbf{0\,Sek an, 0,5\,Sek aus:}
+    Frequenz: 1 Hz, Tastgrad: 50\%
+\end{itemize}
+
+\clearpage
 
 %-------------------------------------------------------------------------------
 \loesung{Serielle Datenübertragung}
 %-------------------------------------------------------------------------------
-Wird nachgereicht!
+\teilaufgabe
+Vergleich der wichtigsten seriellen Übertragungsformate:
+
+\SerialVergleich{X}
+
+\bigskip
+\teilaufgabe
+Timingdiagramm zum Übertrag der Zahlen 28 und 3 via SPI:
+
+\includegraphics[width=\textwidth]{2-hardwaredesign/img/spi_timingdiagramm}
+
+{
+    \small
+    Der Microkontroller zieht die Slave-Select-Leitung auf Masse runter, um sie
+    zu aktivieren (active-low). Gleichzeitig sendet er auf der Clock-Leitung eine
+    stetige, sich abwechselnde Folge von High- und Low-Signalen zur Synchronisation.
+    Je ein High gefolgt von einem Low bildet dabei einen Takt, während dem der
+    Sensor ein Bit überträgt. Die erste Takthälfte dient dem Sensor dazu, die
+    Datenleitung entsprechend zu setzen, damit der Mikrocontroller den Wert in
+    der zweiten Takthälfte auslesen kann.
+}
+
+%-------------------------------------------------------------------------------
+\loesung{Praktische Übung}
+%-------------------------------------------------------------------------------
+Hierfür gibt es keine Musterlösung. Passen Sie nur auf, dass nichts in die
+Luft fliegt. \smiley
