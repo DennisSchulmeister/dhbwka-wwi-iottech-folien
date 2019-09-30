@@ -33,17 +33,20 @@ TEXINPUTS = .:docclass:
 .PHONY: mkdirs
 .PHONY: all
 
+#clean:
+#	shopt -s globstar; \
+#	rm -f **/**~; \
+#	rm -f **/**.aux; \
+#	rm -f **/**.dvi; \
+#	rm -f **/**.log; \
+#	rm -f **/**.out; \
+#	rm -f **/**.nav; \
+#	rm -f **/**.snm; \
+#	rm -f **/**.toc; \
+#	rm -f **/**.vrb
+
 clean:
-	shopt -s globstar; \
-	rm -f **/**~; \
-	rm -f **/**.aux; \
-	rm -f **/**.dvi; \
-	rm -f **/**.log; \
-	rm -f **/**.out; \
-	rm -f **/**.nav; \
-	rm -f **/**.snm; \
-	rm -f **/**.toc; \
-	rm -f **/**.vrb
+	rm -rf $(BUILDDIR)
 
 mkdirs:
 	if [ ! -e $(OUTDIR)                    ]; then mkdir $(OUTDIR);                    fi
