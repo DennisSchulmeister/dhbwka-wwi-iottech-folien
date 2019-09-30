@@ -20,8 +20,6 @@ TEXINPUTS = .:docclass:
 %.pdf : mkdirs
 	export TEXINPUTS=$(TEXINPUTS); \
 	$(PDFLATEX) $(PDFLATEX_OPTIONS) $*.tex; \
-	#$(PDFLATEX) $(PDFLATEX_OPTIONS) $*.tex; \
-	#$(PDFLATEX) $(PDFLATEX_OPTIONS) $*.tex; \
 	mv "$(BUILDDIR)/$@" $(OUTDIR)
 
 #-------------------------------------------------------------------------------
