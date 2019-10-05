@@ -12,8 +12,8 @@
     \begin{itemize}
         \item Kennenlernen von Python und  Einsatzmöglichkeiten
         \item Programmiercode strukturieren und Module verwenden
-        \item Grundlegender Umgang mit Visual Studio Code
         \item Messwerte auf dem Raspberry Pi auslesen
+        \item Grundlegender Umgang mit Visual Studio Code
         \item Umgang mit Problemstellungen beim Programmieren für IoT Devices
         \item Wichtige Programmierbausteine kennenlernen
     \end{itemize}
@@ -30,7 +30,7 @@
         \includegraphics[scale=0.25]{4-programmierung/img/240px-Python-logo-notext}
     \end{figure}
     \begin{itemize}
-        \item Plattformunabhängig -> interpretierte Sprache
+        \item Plattformunabhängig  $\rightarrow$ interpretierte Sprache
         \item Arm an Boiler-Plate Code
         \item Knapp gehaltene Syntax
         \item Open Source
@@ -48,7 +48,7 @@
     \begin{itemize}
         \item Rapid Prototyping
         \item Administratives Scripting
-        \item Wissenschaftliche Software
+        \item Wissenschaftliche Software/Data Science
         \item Machine Learning und Big Data
         \item ...
      \end{itemize}
@@ -211,18 +211,88 @@ Namespaces are one honking great idea -- let's do more of those!
 \end{frame}
 
 
-\begin{frame}[fragile]{Python Sourcecode Struktur}
+\begin{frame}[fragile]{Python Sourcecode Struktur: Hauptprogramm}
 \begin{lstlisting}[language=Python]
+""" Basiert auf:  https://gpiozero.readthedocs.io/en/stable/recipes.html """
+import sys # Systemfunktionen
+import logging # Ausgabe von Nachrichten
+from gpiozero import PWMLED #Bibliothek fuer LED Pulsweitenmodulation
+from time import sleep # Pausefunktion aus der Standardbibliothek
+logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
 
-import numpy
+led = PWMLED(17) #  LED Kontrolle für GPIO PIN 17 an Variable zuweisen
 
+def led_dim(value):
+    led.value = value # LED auf Wert setzen
+    sleep(1) # 1 ms warten
 
-
-
+try:
+       while True:  # Programm am Laufen halten
+             led_dim(0)  # LED aus
+             led_dim(0.5) # LED 50 % Helligkeit
+             led_dim(1) # LED 100 % Helligkeit
+except KeyboardInterrupt:  
+       logger.info('Ende wegen User Eingabe')
+except:  
+       logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0])
+finally:  
+       led.close() # PIN Konfiguration zurücksetzen
 
 \end{lstlisting}
 \end{frame}
 
+
+\begin{frame}[fragile]{Python Sourcecode Struktur: Modul}
+\begin{lstlisting}[language=Python]
+
+import sys # Systemfunktionen
+import logging # Ausgabe von Nachrichten
+from gpiozero import PWMLED #Bibliothek fuer LED Pulsweitenmodulation
+from time import sleep # Pausefunktion aus der Standardbibliothek
+
+class LedBlinker:
+	 
+   __led = PWMLED(17) #  LED Kontrolle für GPIO PIN 17 an private Variable zuweisen
+   
+   __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
+   
+   def led_dim(value):
+      __led.value = value # LED auf Wert setzen
+      sleep(1) # 1 ms warten
+   
+   def blink_led(self, value):
+      try:
+        for duration in [0, 0.5,1]:  # aus, 50%, 100%
+          led_dim(duration)  # LED     
+      except KeyboardInterrupt:  
+          __logger.info('Ende wegen User Eingabe')
+      except:  
+         __logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
+      finally:  
+         led.close() # PIN Konfiguration zurücksetzen
+
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Sourcecode Struktur: Modul einbinden}
+\begin{lstlisting}[language=Python]
+import logging # Ausgabe von Nachrichten
+logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
+
+from led import LedBlinker
+
+if __name__ == '__main__':
+    blinker = LedBlinker()
+    while True:  # Programm am Laufen halten
+       try:
+          for duration in [0, 0.5,1]:  # aus, 50%, 100%
+             blinker.blink_led(duration)  # LED 
+       except KeyboardInterrupt:  
+         logger.info('Ende wegen User Eingabe')
+
+\end{lstlisting}
+\end{frame}
 
 
 
