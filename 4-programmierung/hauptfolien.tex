@@ -1,16 +1,228 @@
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, const, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, let, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+}
+
+
 \begin{frame}{Lernziele}
     \begin{itemize}
-        \item Lernziel 1
-        \item Lernziel 2
-        \item Lernziel 3
-        \item Lernziel 4
+        \item Kennenlernen von Python und  Einsatzmöglichkeiten
+        \item Programmiercode strukturieren und Module verwenden
+        \item Grundlegender Umgang mit Visual Studio Code
+        \item Messwerte auf dem Raspberry Pi auslesen
+        \item Umgang mit Problemstellungen beim Programmieren für IoT Devices
+        \item Wichtige Programmierbausteine kennenlernen
     \end{itemize}
 \end{frame}
 
 %-------------------------------------------------------------------------------
-\section{Abschnitt}
+\section{Einführung Python}
+
+
 %-------------------------------------------------------------------------------
 
-\begin{frame}{Folie}
-    Inhalt der Folie
+\begin{frame}{Warum Python?}
+    \begin{figure}[!htb]
+        \includegraphics[scale=0.25]{4-programmierung/img/240px-Python-logo-notext}
+    \end{figure}
+    \begin{itemize}
+        \item Plattformunabhängig -> interpretierte Sprache
+        \item Arm an Boiler-Plate Code
+        \item Knapp gehaltene Syntax
+        \item Open Source
+        \item Unterstützt verschiedene Paradigmen
+        \item Viele Software-Bibliotheken vorhanden
+    \end{itemize}
 \end{frame}
+
+
+\begin{frame}{Wo wird Python eingesetzt?}
+ 
+ 
+ Laut Python Package Index (siehe \url{https://pypi.org}) :
+
+    \begin{itemize}
+        \item Rapid Prototyping
+        \item Administratives Scripting
+        \item Wissenschaftliche Software
+        \item Machine Learning und Big Data
+        \item ...
+     \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Python und Raspberry Pi}
+    \begin{itemize}
+        \item Historisch steht Pi  für Python Interpreter
+        \item Ursprünglich sollte in Python programmiert werden
+        \item Python Interpreter ist üblicherweise vorinstalliert in Raspbian
+     \end{itemize}
+\end{frame}
+
+\begin{frame}{Python 2 vs. Python 3}
+ 
+ 
+    \begin{itemize}
+        \item Viele Beispiele und Libraries verwenden noch Version 2
+        \item Version 2 wird ab 2020 nicht mehr offiziell von den Entwicklern unterstützt
+        \item Die größeren bekannten und wichtigsten Projekte setzen auf Python 3  
+        \item Siehe \url{https://python3statement.org}
+        \item Zum Aufrufen des Interpreters sollte man daher python3 nutzen
+     \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python vs. Java vs. JavaScript - Hello World}
+\begin{lstlisting}[language=Python]
+	# Hello World in Python
+ 	print('Hello World!') 
+\end{lstlisting}
+\begin{lstlisting}[language=JavaScript]
+       // Hello World in Java Script (Backend Version)
+       console.log("Hello World!") 
+\end{lstlisting}
+\begin{lstlisting}[language=Java]
+       /** Hello World in Java */
+       public class HelloWorld {
+      	    public static void main(String[] args){
+                System.out.println("Hello World");
+      	 }
+       }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python vs. Java vs. JavaScript - Funktionen}
+\begin{lstlisting}[language=Python]
+	# Funktion in Python
+ 	def my_function(parameter):  # keine Typeninformation
+	  a = 1
+	  return parameter * parameter + a
+	\end{lstlisting}
+\begin{lstlisting}[language=JavaScript]
+       // Funktion in Java Script
+ 	  function myFunction(parameter){ // keine Typeninformation
+	       let a = 1;
+	       return parameter * parameter + a;
+	  }
+\end{lstlisting}
+\begin{lstlisting}[language=Java]
+       /** Methode in Java */
+      	 public int myFunction (int parameter){  // Typeninformation
+	           int a = 1;
+	           return parameter * parameter + a;
+         }
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Duck Typing 1}
+Beispiel basierend auf \url{https://hackernoon.com/python-duck-typing-or-automatic-interfaces-73988ec9037f}
+\begin{lstlisting}[language=Python]
+ """ Intention: ein Vogel gibt Laut, Ergebnis: Ein Betrüger geht als Vogel durch, denn er kann ja quack machen und nimmt das Geld mit.
+ """
+class Ente:
+	  def quack(self):
+             print('Quack!')
+             
+class Gans:
+	  def quack(self):
+             print('Quaaaack')
+             
+
+class Quacksalber:
+      def quack(self):
+             print('Quack')
+             print('Ich nehme dann mal dein Geld!')
+
+
+list = [Ente(), Gans(), Quacksalber()]
+        
+for item in list:
+ item.quack()  
+
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Duck Typing 2}
+\begin{lstlisting}[language=Python]
+ """ Intention: Verschiedene Sensoren sollen über gemeinsame Schnittstelle die Distanz zurückliefern
+ """
+class UltraschallSensor:
+	  def get_distance(self):
+	     # ... über Bibliothek Auslesen, bspw. 200 cm
+	     return input() # zum Test: User Eingabe über Keyboard
+             
+class InfrarotSensor:
+	  def get_distance(self):
+	   return  input()
+
+def print_distance(sensor):
+  print(sensor.get_distance())
+
+print_distance(UltraschallSensor())
+
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Sauberes Programmieren: Coding Conventions}
+    \begin{itemize}
+        \item Python Enhancement Proposals enthalten u.a. Guidelines für lesbaren Code
+        \item Siehe: \url{https://pep8.org/#naming-conventions}
+        \item Autopep hilfreich für die Entwicklungsumgebung, siehe:  \url{https://pypi.org/project/autopep8/}
+     \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Sauberes Programmieren: Zen of Python}
+\url{https://www.python.org/dev/peps/pep-0020/#the-zen-of-python} 
+\begin{lstlisting}[language=Python]
+""" Zen: japanische Richtung des Buddhismus, die durch Meditation die Erfahrung der Einheit allen Seins und damit tätige Lebenskraft und größte Selbstbeherrschung zu erreichen sucht. """
+
+# Python Easter Egg:
+import this
+\end{lstlisting}
+\begin{lstlisting}	
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Sourcecode Struktur}
+\begin{lstlisting}[language=Python]
+
+import numpy
+
+
+
+
+
+\end{lstlisting}
+\end{frame}
+
+
+
+
