@@ -217,6 +217,70 @@ print_distance(UltraschallSensor())
 \end{frame}
 
 
+\begin{frame}[fragile]{Python Datenstrukuren 1}
+\begin{lstlisting}[language=Python]
+ """ Intention:  Liste mit vordefinierten und erweiterbaren Schluesseln, Format aehnlich zu Java Script Object Literals
+  """
+ # Meet the Dictionary
+ eingabe_schuessel = 15 # ist z.B. ein Sensorwert
+ 
+ switcher = {
+        15:   'Nah',     # Schluessel : Wert
+        30:   'Naeher',
+        70:   'Weit weg'
+ }
+ switcher[99] = 'Gerade noch messbar'
+ 
+ ergebnis = switcher.get(eingabe_schuessel, 'UNGUELTIG')
+ 
+  #das geht auch mit Funktionen als Werte https://jaxenter.com/implement-switch-case-statement-python-138315.html
+ 
+ # Analog in if-else:
+ if(eingabe_schuessel == 15):
+    # tue etwas
+ elif(eingabe_schuessel == 30):
+   # tue etwas anderes
+ else:
+   # z.B. ungueltig ausgeben
+ 
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Datenstrukuren 2}
+\begin{lstlisting}[language=Python]
+ """ Intention:  Liste mit Zahlen fuer Diodenhelligkeit
+  """
+ # Meet the List
+intensities = [0, 0.5, 1]
+
+print(intensities[2])
+
+for value in intensities:
+   print(value)
+   
+intensities.append(1.5)
+intensities.remove(0)
+intensities.pop(0)
+
+   
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Python Datenstrukuren 3}
+\begin{lstlisting}[language=Python]
+ """ Intention:  Zusammengehoerige Werte im Code zusammenhalten
+  """
+ # Meet the Tuple
+sensor_messung = (0.3, '2019-10-07-15:00:01.996')
+
+print('Der Messwert um', sensor_messung[1], ' war: ', sensor_messung[0])
+
+\end{lstlisting}
+\end{frame}
+
+
 \begin{frame}[fragile]{Sauberes Programmieren: Coding Conventions}
     \begin{itemize}
     \setlength{\itemindent}{.5in}
