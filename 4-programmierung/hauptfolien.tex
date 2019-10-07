@@ -1,5 +1,5 @@
 \lstdefinelanguage{JavaScript}{
-  keywords={break, case, catch, const, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, let, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  keywords={break, case, catch, class, const, constructor, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, let, new, return, super, switch, this, throw, try, typeof, var, void, while, with},
   morecomment=[l]{//},
   morecomment=[s]{/*}{*/},
   morestring=[b]',
@@ -41,10 +41,11 @@
 
 
 \begin{frame}{Wo wird Python eingesetzt?}
- 
- 
- Laut Python Package Index (siehe \url{https://pypi.org}) :
 
+    \begin{itemize}
+    \setlength{\itemindent}{3.0in}
+     \item [\textbf{ Laut Python Package Index (siehe \url{https://pypi.org})}]
+    \end{itemize}
     \begin{itemize}
         \item Rapid Prototyping
         \item Administratives Scripting
@@ -57,6 +58,10 @@
 
 \begin{frame}{Python und Raspberry Pi}
     \begin{itemize}
+    \setlength{\itemindent}{.3in}
+     \item [\textbf{ Fakten}]
+    \end{itemize}
+    \begin{itemize}
         \item Historisch steht Pi  für Python Interpreter
         \item Ursprünglich sollte in Python programmiert werden
         \item Python Interpreter ist üblicherweise vorinstalliert in Raspbian
@@ -65,14 +70,17 @@
 
 \begin{frame}{Python 2 vs. Python 3}
  
- 
+    \begin{itemize}
+    \setlength{\itemindent}{1.0in}
+     \item [\textbf{ Warum wichtig ?}]
+    \end{itemize}
     \begin{itemize}
         \item Viele Beispiele und Libraries verwenden noch Version 2
         \item Version 2 wird ab 2020 nicht mehr offiziell von den Entwicklern unterstützt
         \item Die größeren bekannten und wichtigsten Projekte setzen auf Python 3  
         \item Siehe \url{https://python3statement.org}
         \item Zum Aufrufen des Interpreters sollte man daher python3 nutzen
-        \item \url{https://devopedia.org/python-2-vs-3}
+        \item Vergleich und Tipps: \url{https://devopedia.org/python-2-vs-3}
      \end{itemize}
 \end{frame}
 
@@ -84,7 +92,7 @@
 \end{lstlisting}
 \begin{lstlisting}[language=JavaScript]
        // Hello World in Java Script (Backend Version)
-       console.log("Hello World!") 
+       console.log('Hello World!') 
 \end{lstlisting}
 \begin{lstlisting}[language=Java]
        /** Hello World in Java */
@@ -115,6 +123,45 @@
       	 public int myFunction (int parameter){  // Typeninformation
 	           int a = 1;
 	           return parameter * parameter + a;
+         }
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python vs. Java vs. JavaScript - Klassen}
+\begin{lstlisting}[language=Python]
+	# Klasse in Python
+ 	class MyClass(Superklasse): 
+	   __init__(self, value):
+	       super().__init__(value, value)
+	       self.value = value;
+	       
+	     def my_method():
+	        return self.value
+	  
+	\end{lstlisting}
+\begin{lstlisting}[language=JavaScript]
+       // Klasse in Java Script
+ 	  class MyClass extends Superklasse{
+	        constructor() {
+	           super(value);
+	           this.value = value; 
+	        }
+	       myMethod(){ return this.value;
+	       }
+	    }
+\end{lstlisting}
+\begin{lstlisting}[language=Java]
+       /** Klasse in Java */
+         public class MyClass extends Superklasse{
+ 
+              private int value;
+              
+              MyClass(int value){
+              	 super(value);
+                  this.value = value;
+              }
+      	     public int myMethod (){  return this.value;
+	     }
          }
 \end{lstlisting}
 \end{frame}
@@ -172,6 +219,10 @@ print_distance(UltraschallSensor())
 
 \begin{frame}[fragile]{Sauberes Programmieren: Coding Conventions}
     \begin{itemize}
+    \setlength{\itemindent}{.5in}
+     \item [\textbf{ Richtlinien}]
+    \end{itemize}
+    \begin{itemize}
         \item Python Enhancement Proposals enthalten u.a. Guidelines für lesbaren Code
         \item Siehe: \url{https://pep8.org/#naming-conventions}
         \item Autopep hilfreich für die Entwicklungsumgebung, siehe:  \url{https://pypi.org/project/autopep8/}
@@ -181,7 +232,7 @@ print_distance(UltraschallSensor())
 
 
 \begin{frame}[fragile]{Sauberes Programmieren: Zen of Python}
-\url{https://www.python.org/dev/peps/pep-0020/#the-zen-of-python} 
+\url{https://www.python.org/dev/peps/pep-0020/#the-zen-of-python}
 \begin{lstlisting}[language=Python]
 """ Zen: japanische Richtung des Buddhismus, die durch Meditation die Erfahrung der Einheit allen Seins und damit tätige Lebenskraft und größte Selbstbeherrschung zu erreichen sucht. """
 
@@ -286,19 +337,19 @@ class LedBlinker:
    __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
    
    def led_dim(value):
-      __led.value = value # LED auf Wert setzen
+      self.__led.value = value # LED auf Wert setzen
       sleep(1) # 1 ms warten
    
    def blink_led(self):
       try:
         for duration in [0, 0.5,1, 0.5]:  # aus, 50%, 100%, 50%
-          led_dim(duration)  # LED     
+          self.led_dim(duration)  # LED     
       except KeyboardInterrupt:  
           __logger.info('Ende wegen User Eingabe')
       except:  
          __logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
       finally:  
-         led.close() # PIN Konfiguration zurücksetzen
+         self.__led.close() # PIN Konfiguration zurücksetzen
 
 \end{lstlisting}
 \end{frame}
@@ -342,13 +393,13 @@ class Ultraschallsensor:
    def read_distance_ic_cm(self):
          distance = -1
       try:
-          distance =__sensor.distance * 100
+          distance = self.__sensor.distance * 100
       except KeyboardInterrupt:  
-          __logger.info('Ende wegen User Eingabe')
+          self.__logger.info('Ende wegen User Eingabe')
       except:  
-         __logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
+         self.__logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
       finally:  
-         __sensor .close() # PIN Konfiguration zurücksetzen
+         self.__sensor .close() # PIN Konfiguration zurücksetzen
          
       return distance
 
