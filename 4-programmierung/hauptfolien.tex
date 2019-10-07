@@ -527,7 +527,7 @@ if __name__ == '__main__':
             distance_in_cm = ultraschall_sensor.read_distance_in_cm()
 
             if(distance >= 15):
-                blinker.blink_led(duration)  # LED
+                blinker.blink_led()  # LED
             else:
                 logger.info('Nichts ungewoehnliches entdeckt')
     except KeyboardInterrupt:
