@@ -239,7 +239,7 @@ print_distance(UltraschallSensor())
 \begin{frame}[fragile]{Python Datenstrukuren 1}
 \begin{lstlisting}[language=Python]
  """ Intention:  Liste mit vordefinierten und erweiterbaren Schluesseln, Format aehnlich zu Java Script Object Literals
-  """
+ """
  # Meet the Dictionary
  eingabe_schuessel = 15 # ist z.B. ein Sensorwert
 
@@ -252,17 +252,19 @@ print_distance(UltraschallSensor())
 
  ergebnis = switcher.get(eingabe_schuessel, 'UNGUELTIG')
 
-  #das geht auch mit Funktionen als Werte https://jaxenter.com/implement-switch-case-statement-python-138315.html
+ # Das geht auch mit Funktionen als Werte
+ # https://jaxenter.com/implement-switch-case-statement-python-138315.html
 
  # Analog in if-else:
  if(eingabe_schuessel == 15):
-    # tue etwas
+   # tue etwas
+   pass
  elif(eingabe_schuessel == 30):
    # tue etwas anderes
+   pass
  else:
    # z.B. ungueltig ausgeben
-
-
+   pass
 \end{lstlisting}
 \end{frame}
 
@@ -294,7 +296,7 @@ intensities.pop(0)
  # Meet the Tuple
 sensor_messung = (0.3, '2019-10-07-15:00:01.996')
 
-print('Der Messwert um', sensor_messung[1], ' war: ', sensor_messung[0])
+print('Der Messwert um ', sensor_messung[1], ' war: ', sensor_messung[0])
 
 \end{lstlisting}
 \end{frame}
@@ -369,7 +371,7 @@ Namespaces are one honking great idea -- let's do more of those!
         \item  Python verwendet Bibliotheken, die man als Module einbindet
         \item  GPIO bzw. GPIOZero
         \item  Die Module werden installiert über:  pip3 install -r requirements.txt
-        \item  requirements.txt: Auflistung der Libraries, aehnlich zu packlage.json in nodeJS oder build.gradle oder pom.xml in Java
+        \item  requirements.txt: Auflistung der Libraries, aehnlich zu package.json in nodeJS oder build.gradle oder pom.xml in Java
      \end{itemize}
 \end{frame}
 
@@ -411,17 +413,16 @@ def led_dim(value):
     sleep(1) # 1 ms warten
 
 try:
-       while True:  # Programm am Laufen halten
-             led_dim(0)  # LED aus
-             led_dim(0.5) # LED 50 % Helligkeit
-             led_dim(1) # LED 100 % Helligkeit
+    while True:  # Programm am Laufen halten
+        led_dim(0)  # LED aus
+        led_dim(0.5) # LED 50 % Helligkeit
+        led_dim(1) # LED 100 % Helligkeit
 except KeyboardInterrupt:
-       logger.info('Ende wegen User Eingabe')
+    logger.info('Ende wegen User Eingabe')
 except:
-       logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0])
+    logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0])
 finally:
-       led.close() # PIN Konfiguration zurücksetzen
-
+    led.close() # PIN Konfiguration zurücksetzen
 \end{lstlisting}
 \end{frame}
 
@@ -436,25 +437,24 @@ from time import sleep # Pausefunktion aus der Standardbibliothek
 
 class LedBlinker:
 
-   __led = PWMLED(17) #  LED Kontrolle für GPIO PIN 17 an private Variable zuweisen
+    __led = PWMLED(17) #  LED Kontrolle für GPIO PIN 17 an private Variable zuweisen
 
-   __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
+    __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
 
-   def led_dim(value):
-      self.__led.value = value # LED auf Wert setzen
-      sleep(1) # 1 ms warten
+    def led_dim(self, value):
+        self.__led.value = value # LED auf Wert setzen
+        sleep(1) # 1 ms warten
 
-   def blink_led(self):
-      try:
-        for duration in [0, 0.5,1, 0.5]:  # aus, 50%, 100%, 50%
-          self.led_dim(duration)  # LED
-      except KeyboardInterrupt:
-          __logger.info('Ende wegen User Eingabe')
-      except:
-         __logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
-      finally:
-         self.__led.close() # PIN Konfiguration zurücksetzen
-
+    def blink_led(self):
+        try:
+            for duration in [0, 0.5,1, 0.5]:  # aus, 50%, 100%, 50%
+                self.led_dim(duration)  # LED
+        except KeyboardInterrupt:
+            __logger.info('Ende wegen User Eingabe')
+        except:
+            __logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
+        finally:
+            self.__led.close() # PIN Konfiguration zurücksetzen
 \end{lstlisting}
 \end{frame}
 
@@ -468,12 +468,12 @@ from led_util import LedBlinker
 
 if __name__ == '__main__':
     blinker = LedBlinker()
-    while True:  # Programm am Laufen halten
-       try:
-         blinker.blink_led()  # LED
-       except KeyboardInterrupt:
-         logger.info('Ende wegen User Eingabe')
 
+    try:
+        while True:  # Programm am Laufen halten
+            blinker.blink_led()  # LED
+    except KeyboardInterrupt:
+        logger.info('Ende wegen User Eingabe')
 \end{lstlisting}
 \end{frame}
 
@@ -487,26 +487,26 @@ from gpiozero import DistanceSensor #Bibliothek fuer Ultraschallsensor
 
 class Ultraschallsensor:
 
-   __sensor = DistanceSensor(echo=18, trigger=17, threshold_distance = 0.1, max_distance=1) #  Sensor Kontrolle für GPIO PIN  Input 17 und Output 18 an private Variable zuweisen
+    __sensor = DistanceSensor(echo=18, trigger=17, threshold_distance = 0.1, max_distance=1) #  Sensor Kontrolle für GPIO PIN  Input 17 und Output 18 an private Variable zuweisen
 
-   __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
+    __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
 
-   def __init__(self):  # __sensor.when_out_of_range = handle_out_of_range # Funktion, die z.B. loggt
+    def __init__(self):  # __sensor.when_out_of_range = handle_out_of_range # Funktion, die z.B. loggt
         pass
 
-   def read_distance_ic_cm(self):
-         distance = -1
-      try:
-          distance = self.__sensor.distance * 100
-      except KeyboardInterrupt:
-          self.__logger.info('Ende wegen User Eingabe')
-      except:
-         self.__logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
-      finally:
-         self.__sensor .close() # PIN Konfiguration zurücksetzen
+    def read_distance_ic_cm(self):
+        distance = -1
+
+        try:
+            distance = self.__sensor.distance * 100
+        except KeyboardInterrupt:
+            self.__logger.info('Ende wegen User Eingabe')
+        except:
+            self.__logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
+        finally:
+            self.__sensor .close() # PIN Konfiguration zurücksetzen
 
       return distance
-
 \end{lstlisting}
 \end{frame}
 
@@ -521,16 +521,17 @@ from distance_util import Ultraschallsensor
 if __name__ == '__main__':
     blinker = LedBlinker()
     ultraschall_sensor =  Ultraschallsensor()
-    while True:  # Programm am Laufen halten
-       try:
-         distance_in_cm = ultraschall_sensor.read_distance_in_cm()
-         if(distance >= 15):
-            blinker.blink_led(duration)  # LED
-         else:
-            logger.info('Nichts ungewoehnliches entdeckt')
-       except KeyboardInterrupt:
-         logger.info('Ende wegen User Eingabe')
 
+    try:
+        while True:  # Programm am Laufen halten
+            distance_in_cm = ultraschall_sensor.read_distance_in_cm()
+
+            if(distance >= 15):
+                blinker.blink_led(duration)  # LED
+            else:
+                logger.info('Nichts ungewoehnliches entdeckt')
+    except KeyboardInterrupt:
+        logger.info('Ende wegen User Eingabe')
 \end{lstlisting}
 \end{frame}
 
