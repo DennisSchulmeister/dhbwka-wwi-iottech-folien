@@ -69,7 +69,7 @@
 \end{frame}
 
 \begin{frame}{Python 2 vs. Python 3}
- 
+
     \begin{itemize}
     \setlength{\itemindent}{1.0in}
      \item [\textbf{ Warum wichtig ?}]
@@ -77,7 +77,7 @@
     \begin{itemize}
         \item Viele Beispiele und Libraries verwenden noch Version 2
         \item Version 2 wird ab 2020 nicht mehr offiziell von den Entwicklern unterstützt
-        \item Die größeren bekannten und wichtigsten Projekte setzen auf Python 3  
+        \item Die größeren bekannten und wichtigsten Projekte setzen auf Python 3
         \item Siehe \url{https://python3statement.org}
         \item Zum Aufrufen des Interpreters sollte man daher python3 nutzen
         \item Vergleich und Tipps: \url{https://devopedia.org/python-2-vs-3}
@@ -86,7 +86,7 @@
 
 
 \begin{frame}{Entwicklung}
- 
+
     \begin{itemize}
     \setlength{\itemindent}{2.1in}
      \item [\textbf{ Entwicklung mit Visual Studio Code }]
@@ -94,7 +94,7 @@
     \begin{itemize}
         \item Leichtgewichtiger Editor mit vielen Plugins
         \item Python Plugin für Interpreter
-        \item Installation auf dem Pi möglich,  siehe: \url{https://developer-blog.net/visual-studio-code-auf-dem-raspberry-pi/} 
+        \item Installation auf dem Pi möglich,  siehe: \url{https://developer-blog.net/visual-studio-code-auf-dem-raspberry-pi/}
         \item Auf eigenen Notebook möglich:, Versionen für Windows/Linux/Mac, siehe: \url{https://code.visualstudio.com/Download}
         \item Remote arbeiten vom eigenen Notebook auf dem Pi möglich, siehe: \url{https://www.hanselman.com/blog/VisualStudioCodeRemoteDevelopmentOverSSHToARaspberryPiIsButter.aspx}
 
@@ -107,11 +107,11 @@
 \begin{frame}[fragile]{Python vs. Java vs. JavaScript - Hello World}
 \begin{lstlisting}[language=Python]
 	# Hello World in Python
- 	print('Hello World!') 
+ 	print('Hello World!')
 \end{lstlisting}
 \begin{lstlisting}[language=JavaScript]
        // Hello World in Java Script (Backend Version)
-       console.log('Hello World!') 
+       console.log('Hello World!')
 \end{lstlisting}
 \begin{lstlisting}[language=Java]
        /** Hello World in Java */
@@ -149,21 +149,21 @@
 \begin{frame}[fragile]{Python vs. Java vs. JavaScript - Klassen}
 \begin{lstlisting}[language=Python]
 	# Klasse in Python
- 	class MyClass(Superklasse): 
+ 	class MyClass(Superklasse):
 	   __init__(self, value):
 	       super().__init__(value, value)
 	       self.value = value;
-	       
-	     def my_method():
+
+	     def my_method(self):
 	        return self.value
-	  
+
 	\end{lstlisting}
 \begin{lstlisting}[language=JavaScript]
        // Klasse in Java Script
  	  class MyClass extends Superklasse{
 	        constructor() {
 	           super(value);
-	           this.value = value; 
+	           this.value = value;
 	        }
 	       myMethod(){ return this.value;
 	       }
@@ -172,9 +172,9 @@
 \begin{lstlisting}[language=Java]
        /** Klasse in Java */
          public class MyClass extends Superklasse{
- 
+
               private int value;
-              
+
               MyClass(int value){
               	 super(value);
                   this.value = value;
@@ -194,11 +194,11 @@ Beispiel basierend auf \url{https://hackernoon.com/python-duck-typing-or-automat
 class Ente:
 	  def quack(self):
              print('Quack!')
-             
+
 class Gans:
 	  def quack(self):
              print('Quaaaack')
-             
+
 
 class Quacksalber:
       def quack(self):
@@ -207,9 +207,9 @@ class Quacksalber:
 
 
 list = [Ente(), Gans(), Quacksalber()]
-        
+
 for item in list:
- item.quack()  
+ item.quack()
 
 	\end{lstlisting}
 \end{frame}
@@ -222,7 +222,7 @@ class UltraschallSensor:
 	  def get_distance(self):
 	     # ... über Bibliothek Auslesen, bspw. 200 cm
 	     return input() # zum Test: User Eingabe über Keyboard
-             
+
 class InfrarotSensor:
 	  def get_distance(self):
 	   return  input()
@@ -242,18 +242,18 @@ print_distance(UltraschallSensor())
   """
  # Meet the Dictionary
  eingabe_schuessel = 15 # ist z.B. ein Sensorwert
- 
+
  switcher = {
         15:   'Nah',     # Schluessel : Wert
         30:   'Naeher',
         70:   'Weit weg'
  }
  switcher[99] = 'Gerade noch messbar'
- 
+
  ergebnis = switcher.get(eingabe_schuessel, 'UNGUELTIG')
- 
+
   #das geht auch mit Funktionen als Werte https://jaxenter.com/implement-switch-case-statement-python-138315.html
- 
+
  # Analog in if-else:
  if(eingabe_schuessel == 15):
     # tue etwas
@@ -261,7 +261,7 @@ print_distance(UltraschallSensor())
    # tue etwas anderes
  else:
    # z.B. ungueltig ausgeben
- 
+
 
 \end{lstlisting}
 \end{frame}
@@ -277,12 +277,12 @@ print(intensities[2])
 
 for value in intensities:
    print(value)
-   
+
 intensities.append(1.5)
 intensities.remove(0)
 intensities.pop(0)
 
-   
+
 \end{lstlisting}
 \end{frame}
 
@@ -322,7 +322,7 @@ print('Der Messwert um', sensor_messung[1], ' war: ', sensor_messung[0])
 # Python Easter Egg:
 import this
 \end{lstlisting}
-\begin{lstlisting}	
+\begin{lstlisting}
 Beautiful is better than ugly.
 Explicit is better than implicit.
 Simple is better than complex.
@@ -356,7 +356,7 @@ Namespaces are one honking great idea -- let's do more of those!
         \item  Abstandsmessung einbinden
         \item  Abstandsmessung und LED verbinden
         \item  Code modular aufbauen
-        \item  Module zusammensetzen 
+        \item  Module zusammensetzen
      \end{itemize}
 \end{frame}
 
@@ -390,7 +390,7 @@ Namespaces are one honking great idea -- let's do more of those!
 
     \begin{itemize}
         \item  Datenblatt der Sensoren: \url{https://produktinfo.conrad.com/datenblaetter/1400000-1499999/001413759-an-01-de-SENSORKIT_X40_FUER_EINPLATINEN_COMPUTER.pdf}
-        \item  API zu GPIOZero: \url{https://gpiozero.readthedocs.io/en/stable/} 
+        \item  API zu GPIOZero: \url{https://gpiozero.readthedocs.io/en/stable/}
      \end{itemize}
 \end{frame}
 
@@ -415,11 +415,11 @@ try:
              led_dim(0)  # LED aus
              led_dim(0.5) # LED 50 % Helligkeit
              led_dim(1) # LED 100 % Helligkeit
-except KeyboardInterrupt:  
+except KeyboardInterrupt:
        logger.info('Ende wegen User Eingabe')
-except:  
+except:
        logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0])
-finally:  
+finally:
        led.close() # PIN Konfiguration zurücksetzen
 
 \end{lstlisting}
@@ -435,24 +435,24 @@ from gpiozero import PWMLED #Bibliothek fuer LED Pulsweitenmodulation
 from time import sleep # Pausefunktion aus der Standardbibliothek
 
 class LedBlinker:
-	 
+
    __led = PWMLED(17) #  LED Kontrolle für GPIO PIN 17 an private Variable zuweisen
-   
+
    __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
-   
+
    def led_dim(value):
       self.__led.value = value # LED auf Wert setzen
       sleep(1) # 1 ms warten
-   
+
    def blink_led(self):
       try:
         for duration in [0, 0.5,1, 0.5]:  # aus, 50%, 100%, 50%
-          self.led_dim(duration)  # LED     
-      except KeyboardInterrupt:  
+          self.led_dim(duration)  # LED
+      except KeyboardInterrupt:
           __logger.info('Ende wegen User Eingabe')
-      except:  
+      except:
          __logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
-      finally:  
+      finally:
          self.__led.close() # PIN Konfiguration zurücksetzen
 
 \end{lstlisting}
@@ -470,8 +470,8 @@ if __name__ == '__main__':
     blinker = LedBlinker()
     while True:  # Programm am Laufen halten
        try:
-         blinker.blink_led()  # LED 
-       except KeyboardInterrupt:  
+         blinker.blink_led()  # LED
+       except KeyboardInterrupt:
          logger.info('Ende wegen User Eingabe')
 
 \end{lstlisting}
@@ -486,25 +486,25 @@ import logging # Ausgabe von Nachrichten
 from gpiozero import DistanceSensor #Bibliothek fuer Ultraschallsensor
 
 class Ultraschallsensor:
-	 
+
    __sensor = DistanceSensor(echo=18, trigger=17, threshold_distance = 0.1, max_distance=1) #  Sensor Kontrolle für GPIO PIN  Input 17 und Output 18 an private Variable zuweisen
-   
+
    __logger = logging.getLogger(__name__) # Managing der Ausgabe anstatt print() Funktion
-   
+
    def __init__(self):  # __sensor.when_out_of_range = handle_out_of_range # Funktion, die z.B. loggt
         pass
-   
+
    def read_distance_ic_cm(self):
          distance = -1
       try:
           distance = self.__sensor.distance * 100
-      except KeyboardInterrupt:  
+      except KeyboardInterrupt:
           self.__logger.info('Ende wegen User Eingabe')
-      except:  
+      except:
          self.__logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0]) # siehe https://docs.python.org/3/tutorial/errors.html
-      finally:  
+      finally:
          self.__sensor .close() # PIN Konfiguration zurücksetzen
-         
+
       return distance
 
 \end{lstlisting}
@@ -527,8 +527,8 @@ if __name__ == '__main__':
          if(distance >= 15):
             blinker.blink_led(duration)  # LED
          else:
-            logger.info('Nichts ungewoehnliches entdeckt') 
-       except KeyboardInterrupt:  
+            logger.info('Nichts ungewoehnliches entdeckt')
+       except KeyboardInterrupt:
          logger.info('Ende wegen User Eingabe')
 
 \end{lstlisting}
