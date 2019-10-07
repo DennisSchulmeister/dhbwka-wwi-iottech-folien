@@ -85,6 +85,25 @@
 \end{frame}
 
 
+\begin{frame}{Entwicklung}
+ 
+    \begin{itemize}
+    \setlength{\itemindent}{2.1in}
+     \item [\textbf{ Entwicklung mit Visual Studio Code }]
+    \end{itemize}
+    \begin{itemize}
+        \item Leichtgewichtiger Editor mit vielen Plugins
+        \item Python Plugin für Interpreter
+        \item Installation auf dem Pi möglich,  siehe: \url{https://developer-blog.net/visual-studio-code-auf-dem-raspberry-pi/} 
+        \item Auf eigenen Notebook möglich:, Versionen für Windows/Linux/Mac, siehe: \url{https://code.visualstudio.com/Download}
+        \item Remote arbeiten vom eigenen Notebook auf dem Pi möglich, siehe: \url{https://www.hanselman.com/blog/VisualStudioCodeRemoteDevelopmentOverSSHToARaspberryPiIsButter.aspx}
+
+     \end{itemize}
+\end{frame}
+
+
+
+
 \begin{frame}[fragile]{Python vs. Java vs. JavaScript - Hello World}
 \begin{lstlisting}[language=Python]
 	# Hello World in Python
@@ -327,7 +346,7 @@ Namespaces are one honking great idea -- let's do more of those!
 \end{frame}
 
 
-\begin{frame}{Beispiel: Sensoren auslesen mit GPIO}
+\begin{frame}{Beispiel: Sensoren auslesen mit GPIO 1}
     \begin{itemize}
     \setlength{\itemindent}{.4in}
      \item [\textbf{ Ziele}]
@@ -341,8 +360,29 @@ Namespaces are one honking great idea -- let's do more of those!
      \end{itemize}
 \end{frame}
 
+\begin{frame}{Beispiel: Sensoren auslesen mit GPIO 2}
+    \begin{itemize}
+    \setlength{\itemindent}{1in}
+     \item [\textbf{ Wo anfangen?}]
+    \end{itemize}
+    \begin{itemize}
+        \item  Python verwendet Bibliotheken, die man als Module einbindet
+        \item  GPIO bzw. GPIOZero
+        \item  Die Module werden installiert über:  pip3 install -r requirements.txt
+        \item  requirements.txt: Auflistung der Libraries, aehnlich zu packlage.json in nodeJS oder build.gradle oder pom.xml in Java
+     \end{itemize}
+\end{frame}
 
-\begin{frame}{Beispiel: Sensoren auslesen mit GPIO}
+\begin{frame}[fragile]{Beispiel: Sensoren auslesen mit GPIO 3}
+     \begin{lstlisting}[language=Python]
+     #Inhalt: requirements.txt
+       numpy==1.17.2
+       schedule==0.6.0
+       pypubsub==4.0.3
+     \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Beispiel: Sensoren auslesen mit GPIO 4}
     \begin{itemize}
     \setlength{\itemindent}{1.0in}
      \item [\textbf{ Dokumentation}]
