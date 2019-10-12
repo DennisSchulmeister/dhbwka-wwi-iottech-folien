@@ -54,8 +54,8 @@ mkdirs:
 	if [ ! -e $(BUILDDIR)/0-vorlage        ]; then mkdir $(BUILDDIR)/0-vorlage;        fi
 	if [ ! -e $(BUILDDIR)/1-grundlagen     ]; then mkdir $(BUILDDIR)/1-grundlagen;     fi
 	if [ ! -e $(BUILDDIR)/2-hardwaredesign ]; then mkdir $(BUILDDIR)/2-hardwaredesign; fi
-	if [ ! -e $(BUILDDIR)/3-nodered        ]; then mkdir $(BUILDDIR)/3-nodered;        fi
-	if [ ! -e $(BUILDDIR)/4-programmierung ]; then mkdir $(BUILDDIR)/4-programmierung; fi
+	if [ ! -e $(BUILDDIR)/3-python1        ]; then mkdir $(BUILDDIR)/3-python1;        fi
+	if [ ! -e $(BUILDDIR)/4-python2        ]; then mkdir $(BUILDDIR)/4-python2;        fi
 
 all: clean mkdirs
 	export TEXINPUTS=$(TEXINPUTS); \
