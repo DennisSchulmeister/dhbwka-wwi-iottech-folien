@@ -437,6 +437,7 @@
         """ Basiert auf:  https://gpiozero.readthedocs.io/en/stable/recipes.html """
         import sys                                    # Systemfunktionen
         import logging                                # Ausgabe von Nachrichten
+
         from gpiozero import PWMLED                   # Bibliothek für PWM-Ansteuerung
         from time import sleep                        # Funktion zum Pausieren
 
@@ -466,11 +467,11 @@
     \begin{lstlisting}[language=Python, gobble=8]
         import sys                                    # Systemfunktionen
         import logging                                # Ausgabe von Nachrichten
+
         from gpiozero import PWMLED                   # Bibliothek für PWM-Ansteuerung
         from time import sleep                        # Funktion zum Pausieren
 
         class LedBlinker:
-
             __led = PWMLED(17)                        # LED Kontrolle für GPIO PIN 17
             __logger = logging.getLogger(__name__)    # Log-Ausgabe nicht mit print()
 
@@ -496,7 +497,7 @@
 \begin{frame}[fragile]{Python Sourcecode Struktur: Modul 1 einbinden}
     \begin{lstlisting}[language=Python, gobble=8]
         import logging                                # Ausgabe von Nachrichten
-        from led_util import LedBlinker
+        from led_util import LedBlinker               # Klasse LedBlinker
 
         logger = logging.getLogger(__name__)          # Log-Ausgabe nicht mit print()
 
@@ -515,7 +516,7 @@
 \begin{frame}[fragile]{Python Sourcecode Struktur: Modul 2}
     \begin{lstlisting}[language=Python, gobble=8]
         import sys                                    # Systemfunktionen
-        import logging                                # Ausgabe von Nachrichten
+        import logging                                # Ausgabe von Nachrichten+
         from gpiozero import DistanceSensor           # Bibliothek für Ultraschallsensor
 
         class Ultraschallsensor:
@@ -550,6 +551,7 @@
 \begin{frame}[fragile]{Python Sourcecode Struktur: Modul 1  und 2 einbinden}
     \begin{lstlisting}[language=Python, gobble=8]
         import logging                                # Ausgabe von Nachrichten
+
         from led_util import LedBlinker               # LedBlinker-Klasse
         from distance_util import Ultraschallsensor   # Ultraschallsensor-Klasse
 
