@@ -336,13 +336,13 @@ und auszuschalten (ohne die drei spitzen Klammern am Anfang):
     import time
     from gpiozero import LED
 
-    # GPIO-Pin 26 entspricht der BCM-Nummer 7
-    led26 = LED(7)
+    led = LED(27)
 
     for x in range(10):
-        led26.on()
+        led.on()
         time.sleep(0.5)
-        led26.off()
+        led.off()
+        time.sleep(0.5)
 \end{Verbatim}
 
 \bigskip
@@ -355,8 +355,8 @@ nach der Eingabe direkt ausgeführt wird.
     import time
     from gpiozero import LED, Button
 
-    led = LED(7)                            # GPIO-Pin 27
-    button = Button(9, pull_down=True)      # GPIO-Pin 21
+    led = LED(27)
+    button = Button(21, pull_down=True)
     count = 0
 
     try:
@@ -368,6 +368,7 @@ nach der Eingabe direkt ausgeführt wird.
                 led.on()
                 time.sleep(0.5)
                 led.off()
+                time.sleep(0.5)
     except KeyboardInterrupt:
         pass
 
@@ -729,30 +730,29 @@ Klassen definieren und instantiieren:
 \loesung{Fehler korrigieren}
 %-------------------------------------------------------------------------------
 \teilaufgabe
-Bereinigung sämtlicher Syntaxfehler (26 Stück, je nachdem wie man zählt):
+Bereinigung sämtlicher Syntaxfehler (30 Stück, je nachdem wie man zählt):
 
 \begin{Verbatim}[gobble=4]
     import os, sys, time
     from sensors import DHT11Sensor
 
-    classs UserInterface(Application):
-        def ___init___(self, w, h):
+    class UserInterface(Application):
+        def __init__(self, w, h):
             super().__init__()
-            self.window = new MainWindow(w, h)
+            self.window = MainWindow(w, h)
             self.window.set_title("IoT-Anwendung")
 
         def show(self):
             self.window.show()
-            self.window.set_close_db(this.close_cb)
+            self.window.set_close_db(self.close_cb)
             return 0
 
         def close_cb(self, window):
           self.window.close()
 
-    if ____name____ === "__main__":
+    if __name__ == "__main__":
          ui = UserInterface()
          sys.exit(ui.show())
-         return 7
 \end{Verbatim}
 
 \teilaufgabe
