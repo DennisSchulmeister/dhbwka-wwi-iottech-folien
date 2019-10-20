@@ -184,3 +184,65 @@
         \end{lstlisting}
 
 \end{frame}
+
+
+\section{Abspeichern von Sensordaten}
+
+%%% Folie
+\begin{frame}{Persistenz für Messwerte 1}
+    \begin{itemize}
+        \setlength{\itemindent}{1.9in}
+        \item [\textbf{Warum Messwerte speichern? }]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Es gibt viele Szenarios, in denen Messwerte auch (lange) nach der Erfassung nützlich sind
+        \item Messwerte als Historie/ Zeitfolge abspeichern, z.B. für Aggregation von Temperaturwerten
+        \item Messwerte in die Cloud versenden und dazu Puffern (Ringspeicher, der bei Erreichen seiner Kapazität, z.B. 4 GB, zurückgesetzt wird)
+        \item Messwerte mathematisch anpassen, z.B. mittels Machine Learning Modellen
+        \item Ereignisse auslösen, wenn eine bestimmte Anzahl Messwerte erreicht wird (z.B. Dauer der Unterbrechung einer IR-Lichtschranke)
+     \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Persistenz für Messwerte 2}
+    \begin{itemize}
+        \setlength{\itemindent}{1.9in}
+        \item [\textbf{Welcher Möglichkeiten gibt es? }]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Beliebt und einfach ist das Abspeichern der Messwerte im CSV Format (Comma Separated Values)
+        \item Vorteile: Schnell aufgesetzt, Ausgabedatei ist universell verwendbar, z.B. mit Excel
+        \item Nachteile: Handling der Relation von Messdaten ist weniger komfortabel, z.B:  Anzahl, Höchstwert, Sortierung
+        \item Deswegen bieten sogenannte Embedded Databases eine gute Alternative
+        \item Hierzu ist SQLite3 eine häufig verwendete Software (siehe \url{https://www.sqlite.org/about.html}
+        \item Vorteile: Daten Handling
+        \item Nachteile: Daten nicht ohne Editor einsehbar, Overhead beim Aufsetzen (Tabellen, IO)
+     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Persistenz für Messwerte 3}
+    \begin{itemize}
+        \setlength{\itemindent}{2.4in}
+        \item [\textbf{Beispiel zu CSV}]
+    \end{itemize}
+       \begin{lstlisting}[language=Python, gobble=8]
+         # Beispiel zum Schreiben von 3 Messwerten in eine CSV Datei
+         from time import sleep
+         from datetime import datetime,timezone
+         import csv
+
+         def current_timestamp(): # Funktion für den aktuellen Zeitstempel inklusive 1 Sekunde Pause
+          sleep(1)
+          return datetime.now(timezone.utc).isoformat(timespec='milliseconds')
+    
+         # Messung als Tupel aus Zeitstempel und Messwert
+         measurements = [(current_timestamp(), 0.65),(current_timestamp(), 0.7),(current_timestamp(), 0.98) ]
+
+         with open('messdaten.csv', 'a', newline='') as f:  # Öffne die messdaten.csv Datei und schreibe ans Ende
+           writer = csv.writer(f)
+           writer.writerows(measurements)
+        \end{lstlisting}
+
+\end{frame}
