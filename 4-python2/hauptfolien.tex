@@ -1,155 +1,179 @@
+%%% Folie
 \begin{frame}{Lernziele}
     \begin{itemize}
-        \item Die generelle Struktur der Foliensätze kennen
-        \item Die wichtigsten \latex-Befehle anwenden könnnen
-        \item Beamer- und Handout-Dateien bauen können
-        \item Sich freuen \smiley
+       \item  Bedeutung von Zeitstempeln
+        \item Möglichkeiten zum Abspeichern von Sensorwerten kennenlernen       
+        \item Interrupts als alternative Methode nutzen können, um Sensorwerte auszulesen
     \end{itemize}
 \end{frame}
-
+ 
+ 
+ %-------------------------------------------------------------------------------
+\section{Zeitstempel}
 %-------------------------------------------------------------------------------
-\section{Beispiele zu \latex Beamer}
-%-------------------------------------------------------------------------------
 
-\begin{frame}{Nur Text}
-    Dies ist eine einfache Folie mit nur Text.
-\end{frame}
-
-\begin{frame}{Aufzählung}
+%%% Folie
+\begin{frame}{Wozu werden Zeitstempel benötigt?}
     \begin{itemize}
-        \item Punkt 1
-        \item Punkt 2
-        \item Punkt 3
+        \setlength{\itemindent}{1.9in}
+        \item [\textbf{Wesentliche Funktionen im IoT}]
+    \end{itemize}
 
-        \pause
-        \item Dieser Punkt kommt erst nach einer Pause.
+    \begin{itemize}
+        \item Protokollierung von Ereignissen
+        \item Tracing von Nachrichten
+        \item Speichern von Sensorwerten als Historie
+        \item Programmierung von Ablauflogiken
+        \item ...
+     \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Zeitstempel - Logging 1}
+    \begin{itemize}
+        \setlength{\itemindent}{1.9in}
+        \item [\textbf{Protokollierung von Ereignissen}]
+    \end{itemize}
+
+    \begin{itemize}
+              \item Log Files enthalten Informationen über den zeitlichen Ablauf des Programmes
+               \item Fehler können in einen zeitlichen Zusammenhang gebracht werden
+     \end{itemize}
+     
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Logging Konfigurieren mittels JSON Datei
+           import os
+           import json
+           import logging.config
+           def setup_logging(default_path='config/logging.json', default_level=logging.INFO, env_key='LOG_CFG'):
+              path = default_pat
+              dirname = os.path.dirname(__file__)
+              filename = os.path.join(dirname, path)
+              value = os.getenv(env_key, None)
+              if value:
+                path = value
+              if os.path.exists(filename):
+                 with open(filename, 'rt') as f:
+                   config = json.load(f)
+                   logging.config.dictConfig(config)
+              else:
+                   logging.basicConfig(level=default_level)    
+        \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Zeitstempel - Logging 2}
+    \begin{itemize}
+        \setlength{\itemindent}{1.4in}
+        \item [\textbf{Konfiguration der Logger}]
+    \end{itemize}
+
+    \begin{itemize}
+         \item Verschiedene Handler für Ausgaben möglich (Files, Console, Monitoring Server im Netz etc.)
+         \item Zeitstempel lassen sich über Formatter konfigurieren
+     \end{itemize}
+     
+    \begin{lstlisting}[language=Java, gobble=8]
+         // Logging Konfiguration aus der Datei: config/logging.json
+           {   "version": 1,
+               "disable_existing_loggers": false,
+               "formatters": {
+                    "simple": {
+                       "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+                    }
+                },
+               "handlers": {
+                    "info_file_handler": {
+                        "class": "logging.handlers.RotatingFileHandler",
+                        "level": "INFO",
+                        "formatter": "simple",
+                        "filename": "my_app.log",
+                        "maxBytes": 10485760,
+                        "backupCount": 5,
+                        "encoding": "utf8"
+                  }
+               "root": {
+                    "level": "INFO",
+                    "handlers": ["info_file_handler"]
+               }
+          }
+        \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Zeitstempel - Tracing}
+    \begin{itemize}
+        \setlength{\itemindent}{1.4in}
+        \item [\textbf{Tracing von Nachrichten}]
+    \end{itemize}
+
+    \begin{itemize}
+              \item Idee: Daten auf einem Gerät A zum Zeitpunkt x erfassen und als Nachricht versenden
+               \item Gerät B (z.B. ein weiterer Raspberry Pi oder ein Server) soll die Nachricht erhalten
+               \item Zeitstempel wird auf Gerät A an eine zu übertragende Nachricht angehängt
+               \item Wenn Gerät B die Nachricht erhält, kann dort ermittelt werden, von wann die Nachricht ist (z.B. im Log von Gerät B nachschauen)
+     \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Zeitstempel - Format 1}
+    \begin{itemize}
+        \setlength{\itemindent}{2.4in}
+        \item [\textbf{Wie sollten Zeitstempel formatiert sein?}]
+    \end{itemize}
+
+    \begin{itemize}
+              \item Aktuell 38 verwendete Zeitzonen weltweit (siehe \url{https://www.timeanddate.com/time/current-number-time-zones.html})
+               \item ISO 8601 als Standard für Formatierung menschenlesbarer Zeitstempel
+               \item Beispiel: 2019-10-31T16:56:34.297+02:00 $\rightarrow$ Uhrzeit inkl. Millisekunden vom 31 Oktober, 2 Stunden "Offset" auf die UTC Weltzeit addiert 
+               \item Gewöhnlich werden die Daten zu UTC formatiert, also hier 2019-10-31T14:56:34.297+00:00 oder auch Zulu-Zeit: 2019-10-31T14:56:34.297Z
+               \item Mit UTC/Zulu kann überall eine lokale Uhrzeit ermittelt werden, wir müssen also für die Deutsche Sommerzeit +2 Stunden auf den UTC Zeitstempel addieren 
+     \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Zeitstempel - Format 2}
+    \begin{itemize}
+        \setlength{\itemindent}{2.4in}
+        \item [\textbf{Aber woher bekommen wir den Offset?}]
+    \end{itemize}
+
+    \begin{itemize}
+              \item  Den Offset könnte man fest einstellen, wenn man weiß, wo das Gerät voraussichtlich aufgestellt sein wird
+               \item Besser: Offset berechnen lassen über Remote Server
+               \item Hier kommt das NTP Protokoll zum Einsatz
+               \item Der Raspberry kann systemseitig mit NTP synchronisieren
+               \item Auch möglich: NTP Client via pip install ntplib
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Blöcke}
-    \begin{block}{Einfacher Block}
-       Dies ist eine wichtige Information.
-    \end{block}
-
-    \begin{alertblock}{Alert-Block}
-        Dies ist eine "Warnung" oder so etwas in der Art …
-    \end{alertblock}
-
-    \begin{exampleblock}{Beispiel-Block}
-        Dies ist ein Beispiel.
-    \end{exampleblock}
-
-    \begin{definition}{Definition}
-        Dies ist eine Definition.
-    \end{definition}
-\end{frame}
-
-\begin{frame}{Spalten}
-    \begin{columns}
-        \column{.5\textwidth}
-        \begin{center}
-            Spalte 1 mit \texttt{\\column}
-        \end{center}
-
-        \column{.5\textwidth}
-        \begin{center}
-            Spalte 2 mit \texttt{\\column}
-        \end{center}
-    \end{columns}
-
-    \bigskip
-
-    \begin{columns}
-        \begin{column}{.5\textwidth}
-            \begin{center}
-                Spalte 1 mit \texttt{\\begin\{column\}}
-            \end{center}
-        \end{column}
-        \begin{column}{.5\textwidth}
-            \begin{center}
-                Spalte 2 mit \texttt{\\begin\{column\}}
-            \end{center}
-        \end{column}
-
-    \end{columns}
-\end{frame}
-
-\begin{frame}{Automatisch aufklappende Liste}
-    \begin{enumerate}[<+->]
-        \item Punkt 1
-        \item Punkt 2
-        \item Punkt 3
-        \item Punkt 4
-    \end{enumerate}
-\end{frame}
-
-\begin{frame}{Overlay-Spezifikationen}
-    Das Aussehen einer Folie kann stufenweise verändert werden, um einzelne
-    Punkte stellenweise hervorzuheben bzw. ein- und auszublenden. Dies erfolgt
-    mit den sog. \textcolor<2->{MidnightBlue}{"Overlay Spezifikationen"}.
-
-    \bigskip
-
-    \uncover<3->{Spezifikationen werden als \texttt{<2-3>} an verschiedene
-    Makros angehängt. \texttt{<2-3>} bedeutet, dass der entsprechende Inhalt
-    nur in den Schritten 2 bis 3 ausgewertet wird.}
-
-    \bigskip
-
-    \uncover<4->{Der Von- oder Bis-Bereich ist optional, z.B. \texttt{<2->}}
-\end{frame}
-
-\begin{frame}{Overlay-Spezifikationen}
-    \textbf{Makros, die Spezifikationen unterstützen:}
-
-    \begin{itemize}[<+->]
-        \item \texttt{\Slash uncover<>\{\}}:
-        Einblenden mit zuvor reserviertem Platz
-
-        \item \texttt{\Slash only<>\{\}}:
-        Einblenden ohne zuvor reserviertem Platz
-
-        \item \texttt{\Slash item<>\{\}}:
-        Einblenden von Listenpunkten
-
-        \item \texttt{\Slash alt<>\{\}\{\}}:
-        Erstes Argument bei \texttt{true}, sonst zweites
-
-        \item \texttt{\Slash textbf<>\{\}}, \texttt{\Slash textit<>\{\}}, \ldots:
-        Fettdruck, Kursivschrift, \ldots
-
-        \item \texttt{\Slash textcolor<>\{farbe\}\{\}}:
-        Einfärbung eines Textabschnitts
-
-        \item \texttt{\Slash alert<>\{\}}:
-        Rote Hervorhebung
-
-        \item \texttt{\Slash begin\{\}}:
-        Die meisten Umgebungen
+\begin{frame}[fragile]{Zeitstempel - Format 3}
+    \begin{itemize}
+        \setlength{\itemindent}{2.4in}
+        \item [\textbf{Aber woher bekommen wir den Offset?}]
     \end{itemize}
-\end{frame}
 
-\begin{frame}{Animierte Tabellen}
-    \begin{tabularx}{\textwidth}{|X|X|X|}
-        \hline
-        \textbf{Eisoma} & \textbf{Standort} & \textbf{Anbindung} \\
-        \hline
+  \begin{lstlisting}[language=Python, gobble=8]
+        # Beispiel Zeitstempel via NTP Client abrufen und formatieren           
+           import ntplib
+           import pytz
+           from time import ctime
+           from datetime import datetime,timezone
 
-        \uncover<2->{Stammfiliale} & \uncover<2->{Grünwinkel} & \uncover<2->{Auto oder Fahrrad} \\
-        \hline
+           client = ntplib.NTPClient()
+           response = client.request('ptbtime1.ptb.de') # Request an die Physikalisch Technische Bundesanstalt (PTB) in Braunschweig 
+           response_timestamp = response.tx_time # Zeitstempel unformatiert als float
 
-        \uncover<3->{Forchheim} & \uncover<3->{Hauptstraße} & \uncover<3->{Zu Fuß} \\
-        \hline
+           timestamp_utc_from_ntp = datetime.fromtimestamp(response_timestamp, timezone.utc).isoformat(timespec='milliseconds') # UTC
+           timestamp_zulu = timestamp_utc_from_ntp[:-6] + 'Z' # ZULU
+           timestamp_local = datetime.fromtimestamp(response_timestamp, pytz.timezone('Europe/Berlin')).isoformat(timespec='milliseconds') # +2 Stunden Offset
 
-        \uncover<4->{Mörsch} & \uncover<4->{Rösselsbrünnle} & \uncover<4->{Zu Fuß} \\
-        \hline
-    \end{tabularx}
-\end{frame}
+           print('UTC:',timestamp_utc_from_ntp, '\n', 'Zulu:',timestamp_zulu, '\n', 'Local:',timestamp_local)
+           
+           """ Ausgabe bspw: UTC: 2019-10-20T18:42:16.634+00:00 
+                                         Zulu: 2019-10-20T18:42:16.634Z 
+                                         Local: 2019-10-20T20:42:16.634+02:00 
+           """
+        \end{lstlisting}
 
-\begin{frame}
-    \FullscreenImage{0-vorlage/img/screenshot.png}
-\end{frame}
-
-\begin{frame}{Java-Code}
-    \lstinputlisting[language=Java]{0-vorlage/code/gpio.java}
 \end{frame}
