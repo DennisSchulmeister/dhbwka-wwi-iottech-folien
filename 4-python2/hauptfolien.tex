@@ -129,6 +129,13 @@
                \item Gewöhnlich werden die Daten zu UTC formatiert, also hier 2019-10-31T14:56:34.297+00:00 oder auch Zulu-Zeit: 2019-10-31T14:56:34.297Z
                \item Mit UTC/Zulu kann überall eine lokale Uhrzeit ermittelt werden, wir müssen also für die Deutsche Sommerzeit +2 Stunden auf den UTC Zeitstempel addieren 
      \end{itemize}
+       \begin{lstlisting}[language=Python, gobble=8]
+        # Beispiel: aktuellen Zeitstempel nehmen und ausgeben          
+           from datetime import datetime,timezone
+
+           current_timestamp = print(datetime.now(timezone.utc).isoformat(timespec='milliseconds')) # aktueller Zeitstempel
+           #  Ausgabe bspw: 2019-10-31T10:42:16.634+00:00 
+        \end{lstlisting}
 
 \end{frame}
 
@@ -140,8 +147,8 @@
 
     \begin{itemize}
               \item  Den Offset könnte man fest einstellen, wenn man weiß, wo das Gerät voraussichtlich aufgestellt sein wird
-               \item Besser: Offset berechnen lassen über Remote Server
-               \item Hier kommt das NTP Protokoll zum Einsatz
+               \item Besser: UTC Zeitstempel holen von einem Remote Server
+               \item Hier kommt das NTP Protokoll zum Einsatz (siehe \url{https://tools.ietf.org/html/rfc5905})
                \item Der Raspberry kann systemseitig mit NTP synchronisieren
                \item Auch möglich: NTP Client via pip install ntplib
     \end{itemize}
@@ -150,11 +157,11 @@
 \begin{frame}[fragile]{Zeitstempel - Format 3}
     \begin{itemize}
         \setlength{\itemindent}{2.4in}
-        \item [\textbf{Aber woher bekommen wir den Offset?}]
+        \item [\textbf{}]
     \end{itemize}
 
   \begin{lstlisting}[language=Python, gobble=8]
-        # Beispiel Zeitstempel via NTP Client abrufen und formatieren           
+        # Beispiel: Zeitstempel via NTP Client abrufen und formatieren           
            import ntplib
            import pytz
            from time import ctime
