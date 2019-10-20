@@ -246,3 +246,143 @@
         \end{lstlisting}
 
 \end{frame}
+
+
+
+
+\begin{frame}[fragile]{Persistenz für Messwerte 4}
+    \begin{itemize}
+        \setlength{\itemindent}{2.4in}
+        \item [\textbf{Beispiel zu SQLite DB}]
+    \end{itemize}
+       \begin{lstlisting}[language=Python, gobble=8]
+              # Basierend auf  https://pynative.com/python-sqlite
+              # Beispiel zum Schreiben von 3 Messwerten in eine SQLite DB Datei, Modul db.db_helper.py
+              import sqlite3
+              from sqlite3 import Error
+ 
+              database = r"sensors.db"
+            
+	            def create_connection(db_file): # Verbindung herstellen
+                connection = None
+                try:
+                   connection = sqlite3.connect(db_file)
+                   return connection
+                except Error as error:
+                   print(error)
+                return connection
+                
+              def create_table(connection, create_table_sql): # Tabelle erstellen
+               try:
+                  cursor = connection.cursor()
+                  cursor.execute(create_table_sql)
+               except Error as error:
+                  print(error)
+ 
+
+        \end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Persistenz für Messwerte 5}
+       \begin{lstlisting}[language=Python, gobble=8]
+              # Basierend auf  https://pynative.com/python-sqlite
+              # Fortsetzung: Modul db.db_helper.py - DB erstellen
+                 def create_db():
+                    sql_create_measurements_table = """ CREATE TABLE IF NOT EXISTS measurements (
+                                        id integer PRIMARY KEY,
+                                        timestamp DATETIME,
+                                        sensor_value INTEGER); """
+ 
+                    connection = create_connection(database)
+ 
+                    if connection is not None:
+                       create_table(connection, sql_create_measurements_table)
+                    else:
+                       print("Fehler! Verbindungsaufbau gescheitert.")
+
+        \end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Persistenz für Messwerte 6}
+       \begin{lstlisting}[language=Python, gobble=8]
+              # Basierend auf  https://pynative.com/python-sqlite
+              # Fortsetzung: Modul db.db_helper.py - Messwerte speichern
+                 def save_measurement(measurement): # measurement ist Tupel (Zeitstempel, Messwert)
+                    try:
+                       connection = create_connection(database)
+                       cursor = connection.cursor()
+                       print("Verbindung offen.")
+
+                       sqlite_insert_query = """INSERT INTO `measurements`
+                            ('id', 'timestamp', 'sensor_value') 
+                            VALUES (NULL, ?, ?);""" # Null für Autoincrement
+
+                       cursor.execute(sqlite_insert_query, measurement)
+                       connection.commit()
+                       print("Einfügen erfolgreich für %s Datensätze: ", cursor.rowcount)
+                       cursor.close()
+                    except sqlite3.Error as error:
+                       print("Fehler beim Einfügen", error)
+                    finally:
+                       if (connection):
+                          connection.close()
+                          print("Verbindung geschlossen")
+       \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Persistenz für Messwerte 6}
+       \begin{lstlisting}[language=Python, gobble=8]
+              # Basierend auf  https://pynative.com/python-sqlite
+              # Fortsetzung: Modul db.db_helper.py - Messwerte lesen
+                 def read_measurements():
+                    results = []
+                    try:
+                       connection = create_connection(database)
+                       cursor = connection.cursor()
+                       sqlite_select_query = """SELECT * from measurements"""
+                       cursor.execute(sqlite_select_query)
+                       records = cursor.fetchall()
+                       print("%s Messwerte gefunden", len(records))
+                       for row in records:
+                          results.append((row[1], row[2]))# row ist 3-Tupel (ID, Zeitstempel, Messwert)
+                       cursor.close()
+                       return results
+                    except sqlite3.Error as error:
+                       print("Fehler beim Lesen aus Tabelle", error)
+                    finally:
+                       if (connection):
+                          connection.close()
+       \end{lstlisting}
+
+\end{frame}
+
+\begin{frame}[fragile]{Persistenz für Messwerte 7}
+       \begin{lstlisting}[language=Python, gobble=8]
+              # Fortsetzung: Verwenden des Moduls db.db_helper.py
+                 from time import sleep
+                 from datetime import datetime,timezone
+                 from db import db_helper
+
+                 def current_timestamp(): # Funktion für Zeitstempel aus CSV Beispiel
+                    sleep(1)
+                    return datetime.now(timezone.utc).isoformat(timespec='milliseconds')
+
+                 measurements = [(current_timestamp(), 0.65),(current_timestamp(), 0.7),(current_timestamp(), 0.98) ] # Messungen als Tupel
+                 
+                 db.create_db() # DB anlegen
+
+                 for  measurement in measurements:  
+                    db.save_measurement((m)). # Alle Messwerte abspeichern
+
+                 measurement_list = db_helper.read_measurements() # Alle Messwerte laden
+
+                 for measurement in measurement_list:  # Alle Messwerte ausgeben
+                    print(measurement)
+       \end{lstlisting}
+
+\end{frame}
