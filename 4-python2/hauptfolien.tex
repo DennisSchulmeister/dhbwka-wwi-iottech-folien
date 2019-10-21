@@ -2,12 +2,12 @@
 \begin{frame}{Lernziele}
     \begin{itemize}
        \item  Bedeutung von Zeitstempeln
-        \item Möglichkeiten zum Abspeichern von Sensorwerten kennenlernen       
+        \item Möglichkeiten zum Abspeichern von Sensorwerten kennenlernen
         \item Interrupts als alternative Methode nutzen können, um Sensorwerte auszulesen
     \end{itemize}
 \end{frame}
- 
- 
+
+
  %-------------------------------------------------------------------------------
 \section{Zeitstempel}
 %-------------------------------------------------------------------------------
@@ -39,7 +39,7 @@
               \item Log Files enthalten Informationen über den zeitlichen Ablauf des Programmes
                \item Fehler können in einen zeitlichen Zusammenhang gebracht werden
      \end{itemize}
-     
+
     \begin{lstlisting}[language=Python, gobble=8]
         # Logging Konfigurieren mittels JSON Datei
            import os
@@ -57,7 +57,7 @@
                    config = json.load(f)
                    logging.config.dictConfig(config)
               else:
-                   logging.basicConfig(level=default_level)    
+                   logging.basicConfig(level=default_level)
         \end{lstlisting}
 \end{frame}
 
@@ -71,7 +71,7 @@
          \item Verschiedene Handler für Ausgaben möglich (Files, Console, Monitoring Server im Netz etc.)
          \item Zeitstempel lassen sich über Formatter konfigurieren
      \end{itemize}
-     
+
     \begin{lstlisting}[language=Java, gobble=8]
          // Logging Konfiguration aus der Datei: config/logging.json
            {   "version": 1,
@@ -125,16 +125,16 @@
     \begin{itemize}
               \item Aktuell 38 verwendete Zeitzonen weltweit (siehe \url{https://www.timeanddate.com/time/current-number-time-zones.html})
                \item ISO 8601 als Standard für Formatierung menschenlesbarer Zeitstempel
-               \item Beispiel: 2019-10-31T16:56:34.297+02:00 $\rightarrow$ Uhrzeit inkl. Millisekunden vom 31 Oktober, 2 Stunden "Offset" auf die UTC Weltzeit addiert 
+               \item Beispiel: 2019-10-31T16:56:34.297+02:00 $\rightarrow$ Uhrzeit inkl. Millisekunden vom 31 Oktober, 2 Stunden "Offset" auf die UTC Weltzeit addiert
                \item Gewöhnlich werden die Daten zu UTC formatiert, also hier 2019-10-31T14:56:34.297+00:00 oder auch Zulu-Zeit: 2019-10-31T14:56:34.297Z
-               \item Mit UTC/Zulu kann überall eine lokale Uhrzeit ermittelt werden, wir müssen also für die Deutsche Sommerzeit +2 Stunden auf den UTC Zeitstempel addieren 
+               \item Mit UTC/Zulu kann überall eine lokale Uhrzeit ermittelt werden, wir müssen also für die Deutsche Sommerzeit +2 Stunden auf den UTC Zeitstempel addieren
      \end{itemize}
        \begin{lstlisting}[language=Python, gobble=8]
-        # Beispiel: aktuellen Zeitstempel nehmen und ausgeben          
+        # Beispiel: aktuellen Zeitstempel nehmen und ausgeben
            from datetime import datetime,timezone
 
            current_timestamp = print(datetime.now(timezone.utc).isoformat(timespec='milliseconds')) # aktueller Zeitstempel
-           #  Ausgabe bspw: 2019-10-31T10:42:16.634+00:00 
+           #  Ausgabe bspw: 2019-10-31T10:42:16.634+00:00
         \end{lstlisting}
 
 \end{frame}
@@ -161,14 +161,14 @@
     \end{itemize}
 
   \begin{lstlisting}[language=Python, gobble=8]
-        # Beispiel: Zeitstempel via NTP Client abrufen und formatieren           
+        # Beispiel: Zeitstempel via NTP Client abrufen und formatieren
            import ntplib
            import pytz
            from time import ctime
            from datetime import datetime,timezone
 
            client = ntplib.NTPClient()
-           response = client.request('ptbtime1.ptb.de') # Request an die Physikalisch Technische Bundesanstalt (PTB) in Braunschweig 
+           response = client.request('ptbtime1.ptb.de') # Request an die Physikalisch Technische Bundesanstalt (PTB) in Braunschweig
            response_timestamp = response.tx_time # Zeitstempel unformatiert als float
 
            timestamp_utc_from_ntp = datetime.fromtimestamp(response_timestamp, timezone.utc).isoformat(timespec='milliseconds') # UTC
@@ -176,10 +176,10 @@
            timestamp_local = datetime.fromtimestamp(response_timestamp, pytz.timezone('Europe/Berlin')).isoformat(timespec='milliseconds') # +2 Stunden Offset
 
            print('UTC:',timestamp_utc_from_ntp, '\n', 'Zulu:',timestamp_zulu, '\n', 'Local:',timestamp_local)
-           
-           """ Ausgabe bspw: UTC: 2019-10-20T18:42:16.634+00:00 
-                                         Zulu: 2019-10-20T18:42:16.634Z 
-                                         Local: 2019-10-20T20:42:16.634+02:00 
+
+           """ Ausgabe bspw: UTC: 2019-10-20T18:42:16.634+00:00
+                                         Zulu: 2019-10-20T18:42:16.634Z
+                                         Local: 2019-10-20T20:42:16.634+02:00
            """
         \end{lstlisting}
 
@@ -208,7 +208,7 @@
 \begin{frame}{Persistenz für Messwerte 2}
     \begin{itemize}
         \setlength{\itemindent}{1.9in}
-        \item [\textbf{Welcher Möglichkeiten gibt es? }]
+        \item [\textbf{Welche Möglichkeiten gibt es? }]
     \end{itemize}
 
     \begin{itemize}
@@ -236,7 +236,7 @@
          def current_timestamp(): # Funktion für den aktuellen Zeitstempel inklusive 1 Sekunde Pause
           sleep(1)
           return datetime.now(timezone.utc).isoformat(timespec='milliseconds')
-    
+
          # Messung als Tupel aus Zeitstempel und Messwert
          measurements = [(current_timestamp(), 0.65),(current_timestamp(), 0.7),(current_timestamp(), 0.98) ]
 
@@ -260,9 +260,9 @@
               # Beispiel zum Schreiben von 3 Messwerten in eine SQLite DB Datei, Modul db.db_helper.py
               import sqlite3
               from sqlite3 import Error
- 
+
               database = r"sensors.db"
-            
+
 	            def create_connection(db_file): # Verbindung herstellen
                 connection = None
                 try:
@@ -271,14 +271,14 @@
                 except Error as error:
                    print(error)
                 return connection
-                
+
               def create_table(connection, create_table_sql): # Tabelle erstellen
                try:
                   cursor = connection.cursor()
                   cursor.execute(create_table_sql)
                except Error as error:
                   print(error)
- 
+
 
         \end{lstlisting}
 
@@ -294,9 +294,9 @@
                                         id integer PRIMARY KEY,
                                         timestamp DATETIME,
                                         sensor_value INTEGER); """
- 
+
                     connection = create_connection(database)
- 
+
                     if connection is not None:
                        create_table(connection, sql_create_measurements_table)
                     else:
@@ -318,7 +318,7 @@
                        print("Verbindung offen.")
 
                        sqlite_insert_query = """INSERT INTO `measurements`
-                            ('id', 'timestamp', 'sensor_value') 
+                            ('id', 'timestamp', 'sensor_value')
                             VALUES (NULL, ?, ?);""" # Null für Autoincrement
 
                        cursor.execute(sqlite_insert_query, measurement)
@@ -373,10 +373,10 @@
                     return datetime.now(timezone.utc).isoformat(timespec='milliseconds')
 
                  measurements = [(current_timestamp(), 0.65),(current_timestamp(), 0.7),(current_timestamp(), 0.98) ] # Messungen als Tupel
-                 
+
                  db.create_db() # DB anlegen
 
-                 for  measurement in measurements:  
+                 for  measurement in measurements:
                     db.save_measurement((m)). # Alle Messwerte abspeichern
 
                  measurement_list = db_helper.read_measurements() # Alle Messwerte laden
