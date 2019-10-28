@@ -485,10 +485,10 @@
 
                  measurements = [(current_timestamp(), 0.65),(current_timestamp(), 0.7),(current_timestamp(), 0.98) ] # Messungen als Tupel
 
-                 db.create_db() # DB anlegen
+                 db_helper.create_db() # DB anlegen
 
                  for  measurement in measurements:
-                    db.save_measurement((m)). # Alle Messwerte abspeichern
+                    db_helper.save_measurement((m)). # Alle Messwerte abspeichern
 
                  measurement_list = db_helper.read_measurements() # Alle Messwerte laden
 
