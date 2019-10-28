@@ -1,11 +1,57 @@
 %%% Folie
 \begin{frame}{Lernziele}
     \begin{itemize}
+       \item Interrupts als alternative Methode nutzen können, um Sensorwerte auszulesen
        \item  Bedeutung von Zeitstempeln
         \item Möglichkeiten zum Abspeichern von Sensorwerten kennenlernen
-        \item Interrupts als alternative Methode nutzen können, um Sensorwerte auszulesen
     \end{itemize}
 \end{frame}
+
+
+ %-------------------------------------------------------------------------------
+\section{Interruptbasierte Programmierung}
+%-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}{Was ist ein Interrupt?}
+    \begin{itemize}
+        \setlength{\itemindent}{1.2in}
+        \item [\textbf{Definition Interrupt}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Allgemein: Signal zur CPU, das den aktuellen Prozess unterbricht mittels eines  \textcolor{blue}{\textbf{Interrupt Requests}}
+        \item Signal kann durch Software generiert werden oder hardwareseitig via I/O Device
+        \item Zur Behandlung wird eine sogenannte \textcolor{blue}{\textbf{Interrupt Service Routine (ISR)}} aufgerufen, ähnlich wie eine Callback Funktion
+     \end{itemize}
+\end{frame}
+
+\begin{frame}{Signalzustände 1}
+    \begin{itemize}
+        \setlength{\itemindent}{2.5in}
+        \item [\textbf{Signalzustände als Auslöser}]
+    \end{itemize}
+    \begin{figure}[!htb]
+        \includegraphics[scale=0.5]{4-python2/img/DigSig2}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Signalzustände 2}
+    \begin{itemize}
+        \setlength{\itemindent}{1.6in}
+        \item [\textbf{Signalzustände und GPIO}]
+    \end{itemize}
+   \begin{itemize}
+        \item GPIO Pins dienen als Auslöser (Interrupt Sources)
+        \item Im Rahmen einer simplen Synchronisation basiert das Sampling standardmäßig auf einem 3er-Zyklus (z.B. 1 $\rightarrow$ 0 $\rightarrow$ 0 oder 0 $\rightarrow$ 1 $\rightarrow$ 1)
+        \item Jeder PIN kann konfiguriert werden für: Level-sensitive (High/Low), Steigende/fallende Flanke, Asynchron  (steigende/fallende Flanke)
+     \end{itemize}
+
+\end{frame}
+
+
 
 
  %-------------------------------------------------------------------------------
