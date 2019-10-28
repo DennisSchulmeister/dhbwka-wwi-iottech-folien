@@ -41,17 +41,82 @@
 \begin{frame}{Signalzustände 2}
     \begin{itemize}
         \setlength{\itemindent}{1.6in}
-        \item [\textbf{Signalzustände und GPIO}]
+        \item [\textbf{Signalzustände und GPIO }]
     \end{itemize}
    \begin{itemize}
         \item GPIO Pins dienen als Auslöser (Interrupt Sources)
-        \item Im Rahmen einer simplen Synchronisation basiert das Sampling standardmäßig auf einem 3er-Zyklus (z.B. 1 $\rightarrow$ 0 $\rightarrow$ 0 oder 0 $\rightarrow$ 1 $\rightarrow$ 1)
+        \item Im Rahmen einer simplen Synchronisation basiert das Sampling standardmäßig auf einem 3er-Zyklus (z.B. 1 $\rightarrow$ 0 $\rightarrow$ 0 oder 0 $\rightarrow$ 1 $\rightarrow$ 1) \cite{RaspberryPI.org}
         \item Jeder PIN kann konfiguriert werden für: Level-sensitive (High/Low), Steigende/fallende Flanke, Asynchron  (steigende/fallende Flanke)
      \end{itemize}
 
 \end{frame}
 
 
+\begin{frame}{Signalzustände 3}
+    \begin{itemize}
+        \setlength{\itemindent}{2.5in}
+        \item [\textbf{Switch Bouncing}]
+    \end{itemize}
+    \begin{figure}[!htb]
+        \includegraphics[scale=0.5]{4-python2/img/debounce.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{GPIO Interrupt Beispiel - Button und Counter}
+  \begin{lstlisting}[language=Python, gobble=8]
+        # Beispiel basierend auf https://www.kampis-elektroecke.de/raspberry-pi/raspberry-pi-gpio/interrupts/
+          import RPi.GPIO as GPIO
+          import time
+          import sys
+          counter = 0  # Counter definieren
+          GPIO.setmode(GPIO.BCM)   # SoC als Pinreferenz
+          GPIO.setup(24, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)    # Interrupt Source ist PIN 24 und  Pulldown Widerstand ist ausgewählt
+          
+          def myInterruptServiceRoutine(channel):            # Interrupt Service Routine
+             global counter    # counter im Scope zugreifbar machen
+             counter = counter + 1
+             print(counter)
+          
+          GPIO.add_event_detect(24, GPIO.RISING, callback = myInterruptServiceRoutine, bouncetime = 200)  # Interrupt Event registrieren für Pin 24, auf steigende Flanke reagieren und ISR Callback mappen
+          
+          try:
+             while True:
+                time.sleep(1)
+          except KeyboardInterrupt:
+             print('Ende wegen User Eingabe')
+          except:
+             print('Ende wegen Programmfehler: %s', sys.exc_info()[0])
+          finally:
+             GPIO.remove_event_detect(24)
+             GPIO.cleanup() 
+
+        \end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{GPIOZero Interrupt Beispiel - Button und LED}
+  \begin{lstlisting}[language=Python, gobble=8]
+        # Besipiel basierend auf https://www.ics.com/blog/control-raspberry-pi-gpio-pins-python
+        from gpiozero import LED, Button
+        import sys
+
+        led = LED(24)
+        button = Button(6)
+
+        button.when_pressed = led.on # led.on ist die Interrupt Service Routine für steigende Flanke am PIN 6
+        button.when_released = led.off # led.off ist die Interrupt Service Routine für fallende Flanke  am PIN 6
+        try:
+           while True:  # nur noch auf Interrupt Requests Warten
+              time.sleep(1)
+        except KeyboardInterrupt:
+           print('Ende wegen User Eingabe')
+        except:
+           print('Ende wegen Programmfehler: %s', sys.exc_info()[0])
+
+        \end{lstlisting}
+
+\end{frame}
 
 
  %-------------------------------------------------------------------------------
