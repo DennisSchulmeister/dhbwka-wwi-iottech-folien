@@ -1,3 +1,10 @@
+\lstdefinestyle{MethodenListe}{
+    language   = Python,
+    numbers    = none,
+    belowskip  = 0.25em,
+    basicstyle = \tt\small
+}
+
 %-------------------------------------------------------------------------------
 \section{Einführung in das Semester}
 %-------------------------------------------------------------------------------
@@ -241,7 +248,7 @@
 \scriptsize
 
 \begin{frame}{Inhalt unseres Sensorkits}
-    \begin{columns}
+    \begin{columns}[onlytextwidth]
         \column[T]{.3\textwidth}
         \textbf{Analoge Schnittstelle} \\
         KY-003: Hall Magnetfeldsensor \\
@@ -297,6 +304,13 @@
         KY-052: BMP280 Druck \\
         KY-053: Analog/Digital Konverter \\
     \end{columns}
+
+    \bigskip
+    {
+        \footnotesize
+        Online-Dokumentation: \\
+        \url{http://sensorkit.joy-it.net/index.php?title=Hauptseite}
+    }
 \end{frame}
 }
 
@@ -304,9 +318,9 @@
 \begin{frame}{Lernziele}
     \begin{block}{Wiederholung}
         \begin{itemize}
+            \item Breadboards zum Aufbau einfacher Schaltungen nutzen können
             \item Binäre Bauteile via GPIO mit dem Pi verbinden können
             \item Via GPIO angebundene Bauteile in Python nutzen können
-            \item Breadboards zum Aufbau einfacher Schaltungen nutzen können
         \end{itemize}
     \end{block}
 
@@ -325,19 +339,307 @@
 \section{Nutzung binärer Bauteile}
 %-------------------------------------------------------------------------------
 
-% PWM-Folie übernehmen / anpassen
-% Fallbeispiele wie in die Folien/Vorlesung integrieren?
-% Wie viel Quellcode in den Folien zeigen?
-% Auf jeden Fall erst die Theorie, dann die Programmierung je Kapitel
-
 %%% Folie
-\begin{frame}{Folie}
-    TODO
+{
+\small
+\setlength{\leftmargini}{1.2em}
+
+\begin{frame}[allowframebreaks]{Fallbeispiel: Hindernisdetektor}
+    \begin{columns}[onlytextwidth]
+        \column{.49\textwidth}
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/hindernisdetektor-foto2}
+
+        \column{.49\textwidth}
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/hindernisdetektor-foto1}
+    \end{columns}
+
+    \bigskip
+    Erkennung von Hindernissen mit dem KY-032 Hindernisdetektor und der KY-011
+    2-Farb LED. Wird ein Hindernis erkannt, leuchtet die LED rot, andernfalls grün.
+
+    \bigskip
+    \begin{block}{Hardwareskizze}
+        \smallskip
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/hindernisdetektor-skizze}
+    \end{block}
+
+    \framebreak
+    \begin{block}{Schaltplan}
+        \smallskip
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/hindernisdetektor-schaltplan}
+        {
+            \scriptsize
+            Pfeile nur zur Verdeutlichung der Stromkreise. Normalerweise besitzt
+            ein Schaltplan keine Pfeilenden.
+        }
+    \end{block}
+
+    \bigskip
+
+    \begin{block}{Hardwareaufbau}
+        \smallskip
+        \begin{columns}[onlytextwidth]
+            \column[T]{.49\textwidth}
+            \includegraphics[width=\textwidth]{5-hardwarenutzung/img/breadboard1_bb}
+
+            \column[T]{.49\textwidth}
+            \includegraphics[width=\textwidth]{5-hardwarenutzung/img/breadboard2_bb}
+        \end{columns}
+
+        \smallskip
+        {
+            \scriptsize
+            Die Linien auf der rechten Seite zeigen, wie die Kontakte des Breadboards
+            miteinander verbunden sind.
+        }
+    \end{block}
+
+    \framebreak
+    \begin{columns}
+        \column{.65\textwidth}
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/hindernisdetektor_bb}
+
+        \column{.35\textwidth}
+        \begin{block}{Variationen}
+            \medskip
+            Nutzung anderer Sensoren
+
+            {
+                \footnotesize
+                \begin{itemize}
+                    \item Lichtschranke
+                    \item Magnetkontakt
+                    \item Berührungssensor
+                    \item Schließkontakt
+                    \item Neigungsschalter
+                    \item \ldots
+                \end{itemize}
+            }
+
+            \medskip
+            Schalten mittlerer Lasten mit einem Transistor oder großer
+            Lasten mit einem Relais
+
+            {
+                \footnotesize
+                \begin{itemize}
+                    \item Warnlampe einschalten
+                    \item Durchgangstür öffnen
+                    \item Förderband starten
+                    \item \ldots
+                \end{itemize}
+            }
+        \end{block}
+    \end{columns}
 \end{frame}
+}
 
 %%% Folie
-\begin{frame}{Folie}
-    TODO
+{
+\small
+\setlength{\leftmargini}{1.2em}
+
+\begin{frame}{Fallbeispiel: Servomotor}
+    \begin{columns}[onlytextwidth]
+        \column{.49\textwidth}
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/servomotor-foto1}
+
+        \column{.49\textwidth}
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/servomotor-foto2}
+    \end{columns}
+
+    \bigskip
+    Steuerung eines Servomotors mit Pulsweitenmodulation. Die Länge des Lastzyklus
+    bestimmt die Position:
+
+    {
+        \footnotesize
+        \smallskip
+        \begin{itemize}
+            \item \textbf{Ganz links:} 1\,ms Puls bei 50\,Hz Frequenz
+            \item \textbf{Ganz rechts:} 2\,ms Puls bei 50\,Hz Frequenz
+            \item \textbf{Andere:} Jeder Wert dazwischen
+        \end{itemize}
+    }
+
+    \begin{columns}[onlytextwidth]
+        \column[T]{.3\textwidth}
+        \begin{block}{Hardwareskizze}
+            \smallskip
+            \includegraphics[width=\textwidth]{5-hardwarenutzung/img/servomotor-skizze}
+        \end{block}
+
+        \column[T]{.59\textwidth}
+        \begin{block}{Schaltplan}
+            \smallskip
+            \includegraphics[width=\textwidth]{5-hardwarenutzung/img/servomotor-schaltplan}
+        \end{block}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Wiederholung: Pulsweitenmodulation}
+    \parbox{\linewidth}{
+        Die für eine Arbeit zur Verfügung stehende Stromstärke kann nicht nur durch Widerstände
+        absolut reduziert werden. Sie kann durch \textbf{Pulsweitenmodulation} (schnelles Ein-
+        und Ausschalten) auch im zeitlichen Mittel reduziert werden. Für kurze Zeit fließt dann
+        zwar der volle Strom, die Länge der An- und Ausphasen reduziert jedoch die Gesamtstrommenge
+        im zeitlichen Verlauf.
+    }
+
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{5-hardwarenutzung/img/pwm}
+    \end{center}
+
+    \begin{columns}
+        \column{.5\textwidth}
+        \includegraphics[width=.9\textwidth]{5-hardwarenutzung/img/led_pwm_schaltplan}
+
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{5-hardwarenutzung/img/led_pwm_foto}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\setlength{\leftmargini}{1.2em}
+\footnotesize
+
+\begin{frame}[fragile,allowframebreaks]{Programmierung in Python}
+    \begin{block}{Initialisieren und Zurücksetzen der GPIO-Pins}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            import RPi.GPIO as GPIO
+        \end{lstlisting}
+        Raspberry Pi GPIO-Modul importieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(10, GPIO.OUT)
+        \end{lstlisting}
+        GPIO\,10 als Ausgang konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(11, GPIO.IN)
+        \end{lstlisting}
+        GPIO\,11 als Eingang konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        \end{lstlisting}
+        GPIO\,12 als Eingang mit internem Pull Down konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        \end{lstlisting}
+        GPIO\,13 als Eingang mit internem Pull Up konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.cleanup()
+        \end{lstlisting}
+        Alle GPIO-Pins auf eine sichere Standardkonfiguration zurücksetzen
+        \medskip
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{Lesen und Schreiben einzelner Pins}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            value = GPIO.input(14)
+        \end{lstlisting}
+        Aktuellen Zustands von GPIO\,14 (True oder False) lesen
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.output(15, True)
+        \end{lstlisting}
+        GPIO\,15 auf High bzw. 3,3\,V Spannung setzen
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.output(16, False)
+        \end{lstlisting}
+        GPIO\,16 auf Low bzw. 0\,V Spannung setzen
+        \medskip
+    \end{block}
+
+    \begin{block}{Reagieren auf Interrupts}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(17, GPIO.RISING, mein_cb)
+        \end{lstlisting}
+        Callback-Funktion für steigende Flanken auf GPIO\,17 registrieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(18, GPIO.FALLING, mein_cb)
+        \end{lstlisting}
+        Callback-Funktion für fallende Flanken auf GPIO\,18 registrieren
+        \medskip
+    \end{block}
+
+    \framebreak
+
+    {
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(19, GPIO.BOTH, mein_cb)
+        \end{lstlisting}
+        Callback-Funktion für jede Änderung von GPIO\,19 registrieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(20, GPIO.BOTH, mein_cb, bouncetime=50)
+        \end{lstlisting}
+        Callback-Funktion für GPIO\,20 mit einer Entprellung von 50\,ms registrieren
+        \medskip
+    }
+
+    \begin{block}{Pulsweitenmodulation}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm = GPIO.PWM(21, 100)
+        \end{lstlisting}
+        Pulsweitenmodulation von GPIO\,21 vorbereiten
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm.start(50)
+        \end{lstlisting}
+        Pulsweitenmodulation von GPIO\,21 mit 50\,\% Lastzyklus starten
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm.changeDutyCycle(75)
+        \end{lstlisting}
+        Lastzyklus der Pulsweitenmodulation von GPIO\,21 auf 75\,\% ändern
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm.stop()
+        \end{lstlisting}
+        Pulsweitenmodulation von GPIO\,21 stoppen
+        \medskip
+    \end{block}
+\end{frame}
+}
+
+%%% Folie
+\begin{frame}{Quellcodes}
+    Siehe Moodle oder \\
+    {
+        \small
+        \url{https://github.com/DennisSchulmeister/dhbwka-wwi-iottech-quellcodes}
+    }
+
+    \smallskip
+    \setlength{\fboxsep}{0em}
+    \fbox{\includegraphics[width=\textwidth]{5-hardwarenutzung/img/github-servomotor}}
 \end{frame}
 
 %-------------------------------------------------------------------------------
