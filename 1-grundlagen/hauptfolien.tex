@@ -48,8 +48,8 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{Kompetenzziele dieser Vorlesung}
-    \begin{itemize}[<+->]
+\begin{frame}{Kompetenzziele der Vorlesung}
+    \begin{itemize}
         \item \textbf{Fachkompetenz:} Die Studierenden kennen den technischen Aufbau typischer
         Devices/Embedded Systems im Kontext der Internet of Things. Sie sind in der Lage,
         entsprechende Devices für einen gegebenen Einsatzzweck auszuwählen und zu programmieren.
@@ -71,46 +71,47 @@
 \end{frame}
 
 {
-\small
+\footnotesize
 %%% Folie
 \begin{frame}{Inhalte der Vorlesung}
         \begin{columns}
             \begin{column}[T]{.5\textwidth}
-                \textbf{3. Semester}
-                \medskip
+                \begin{block}{3. Semester}
+                    \medskip
+                    \textbf{Prüfungsform:} Klausur
+                    \medskip
 
-                \begin{enumerate}
-                    \item Grundlagen IoT/Embedded
-                    \item \textcolor{gray}{Übungsstunde}
-                    \item Hardwaredesign für IoT
-                    \item \textcolor{gray}{Übungsstunde}
-                    \item \textcolor{gray}{Übungsstunde}
-                    \item Programmierung mit Node-RED
-                    \item Linux, Python, Java, JavaScript
-                    \item \textcolor{gray}{Übungsstunde}
-                    \item \textcolor{gray}{Übungsstunde}
-                \end{enumerate}
-
-                \medskip
-                \textbf{Prüfungsform:} Klausur
+                    \begin{enumerate}
+                        \item Grundlagen des Internet of Things
+                        \item Hardwaredesign für IoT-Anwendungen
+                        \item \textcolor{gray}{Übungsstunde}
+                        \item \textcolor{gray}{Übungsstunde}
+                        \item Einführung in Python
+                        \item IoT-Entwicklung mit Python
+                        \item \textcolor{gray}{Übungsstunde}
+                        \item \textcolor{gray}{Übungsstunde}
+                        \item \textcolor{gray}{Klausurvorbereitung}
+                    \end{enumerate}
+                \end{block}
             \end{column}
             \begin{column}[T]{.5\textwidth}
-                \textbf{4. Semester}
-                \medskip
+                \begin{block}{4. Semester}
+                    \medskip
+                    \textbf{Prüfungsform:} Assignment
+                    \medskip
 
-                Steht noch nicht 100\%ig fest. Grob planen wir aber
-                folgende Inhalte:
-                \medskip
-
-                \begin{enumerate}
-                    \item Vertiefung zu eingebetteten Linux-Systemen
-                    \item Netzanbindung von IoT-Devices mit MQTT und CoAP
-                    \item Programmieren von IoT-Backendservices mit MQTT und CoAP
-                    \item Funkgesteuerte Sensoren und Aktoren mit Zigbee
-                \end{enumerate}
-
-                \medskip
-                \textbf{Prüfungsform:} Assignment
+                    \begin{enumerate}
+                        \item Nutzung analoger und digitaler Bauteile
+                        \item Python-Architekturmuster für IoT-Devices
+                        \item Datenaustausch und Systemintegration
+                        \item Linux-Konfiguration und Deployment
+                        \item \textcolor{gray}{Assignment}
+                        \item \textcolor{gray}{Assignment}
+                        \item \textcolor{gray}{Assignment}
+                        \item \textcolor{gray}{Assignment}
+                        \item \textcolor{gray}{Assignment}
+                    \end{enumerate}
+                \end{block}
             \end{column}
         \end{columns}
 \end{frame}
@@ -132,8 +133,8 @@
                 \textbf{Hardware}
                 \medskip
 
-                Wird von der DHBW zur Verfügung gestellt. Rückfrage, was genau
-                angeschafft wurde, läuft gerade. \smiley{}
+                Wird von der DHBW zur Verfügung gestellt. %Rückfrage, was genau
+                %angeschafft wurde, läuft gerade. \smiley{}
                 \medskip
 
                 \begin{itemize}
@@ -524,10 +525,11 @@
     \end{columns}
 \end{frame}
 
+
+%%% Folie
 {
 \footnotesize
 
-%%% Folie
 \begin{frame}{Typischer Systemaufbau eingebetteter Systeme}
     \begin{columns}
         \column{\dimexpr\paperwidth}

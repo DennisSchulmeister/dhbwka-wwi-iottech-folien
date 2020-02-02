@@ -156,7 +156,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.1690917"
-     inkscape:cx="231.50692"
+     inkscape:cx="226.61593"
      inkscape:cy="156.19617"
      inkscape:document-units="mm"
      inkscape:current-layer="g6943"
@@ -181,7 +181,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3303,7 +3303,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.46944451px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ffdd55;fill-opacity:1;stroke:none;stroke-width:0.2328925px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
          xml:space="preserve"><tspan
            id="tspan5062-4-4-9-6-7-2-5-9-1-8"
-           style="text-align:start;text-anchor:start;fill:#ffdd55;stroke-width:0.2328925px;"
+           style="text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.2328925px"
            y="279.36868"
            x="104.84122"
            sodipodi:role="line">Bluetooth</tspan></text>
@@ -3321,7 +3321,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.46944451px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ffdd55;fill-opacity:1;stroke:none;stroke-width:0.2328925px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
          xml:space="preserve"><tspan
            id="tspan5062-4-4-9-6-7-2-5-9-1-3"
-           style="text-align:start;text-anchor:start;fill:#ffdd55;stroke-width:0.2328925px;"
+           style="text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.2328925px"
            y="279.36868"
            x="116.93372"
            sodipodi:role="line">ZigBee</tspan></text>
@@ -3609,7 +3609,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.46944451px;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#ffdd55;fill-opacity:1;stroke:none;stroke-width:0.2328925px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
          xml:space="preserve"><tspan
            id="tspan5062-4-4-9-6-7-2-5-9-8-6-1"
-           style="text-align:start;text-anchor:start;fill:#ffdd55;stroke-width:0.2328925px;"
+           style="text-align:start;text-anchor:start;fill:#ffffff;stroke-width:0.2328925px"
            y="271.30698"
            x="76.254265"
            sodipodi:role="line">JavaScript (node.js)</tspan></text>

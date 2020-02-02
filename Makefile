@@ -58,7 +58,7 @@ mkdirs:
 	if [ ! -e $(BUILDDIR)/4-python2         ]; then mkdir $(BUILDDIR)/4-python2;         fi
 	if [ ! -e $(BUILDDIR)/5-hardwarenutzung ]; then mkdir $(BUILDDIR)/5-hardwarenutzung; fi
 	if [ ! -e $(BUILDDIR)/6-python3         ]; then mkdir $(BUILDDIR)/6-python3;         fi
-	if [ ! -e $(BUILDDIR)/7-mqtt            ]; then mkdir $(BUILDDIR)/7-mqtt;            fi
+	if [ ! -e $(BUILDDIR)/7-datenaustausch  ]; then mkdir $(BUILDDIR)/7-datenaustausch;  fi
 	if [ ! -e $(BUILDDIR)/8-linux           ]; then mkdir $(BUILDDIR)/8-linux;           fi
 
 all: clean mkdirs
