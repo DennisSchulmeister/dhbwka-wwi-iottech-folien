@@ -116,17 +116,61 @@ TODO
 %-------------------------------------------------------------------------------
 
 %%% Folie
-\begin{frame}{Nebenläufig vs. Parallel Intro}
-    Definition, Zweck
+\begin{frame}{Nebenläufigkeit vs. Parallelität - Intro}
+        \begin{itemize}
+        \setlength{\itemindent}{2.0in}
+        \item [\textbf{Definition: Nebenläufig vs. Parallel}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Als \textbf{nebenläufig} definieren wir Aufgaben, die auf einem Computer um Ressourcen konkurrieren und nicht notwendigerweise gleichzeitig ausgeführt werden (können)
+        \item Als \textbf{parallel} definieren wir nebenläufige Aufgaben, die gleichzeitig ausgeführt werden (können)
+     \end{itemize}
+\end{frame}
+
+\begin{frame}{Nebenläufigkeit vs. Parallelität -Beispiele}
+        \begin{itemize}
+        \setlength{\itemindent}{2.0in}
+        \item [\textbf{Beispiele: Nebenläufig oder Parallel ?}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Abfrage der Werte verschiedener angeschlossener Sensoren $\Rightarrow$ nebenläufig
+        \item Schnelle unabhängige Sortierung von Werten $\Rightarrow$ (embarassingly) parallel
+        \item Gleichzeitige Anzeige von Dashboard Daten und Erfassung der Messwerte $\Rightarrow$ nebenläufig
+        \item Mathematische Transformationen (Filter, Computer Vision) auf Kamerabildern  $\Rightarrow$ parallel %http://files.hanser.de/Files/Article/ARTK_LPR_9783446449336_0001.pdf
+        \item Versand von Nachrichten über das Internet aus verschiedenen Modulen eines Programms  $\Rightarrow$ nebenläufig
+     \end{itemize}
+\end{frame}
+
+\begin{frame}{Raspberry PI 3 und Nebenläufigkeit}
+     \begin{itemize}
+        \setlength{\itemindent}{1.0in}
+        \item [\textbf{Raspberry PI 3b}]
+    \end{itemize}
+    \begin{itemize}
+        \item Quadcore CPU
+        \item Benchmarks für z.B. Primzahlberechnung oder Unzip  mit deutlichem Geschwindigkeitsvorteil
+     \end{itemize}
+  \begin{figure}[!htb]
+  \hspace*{-4cm}   
+        \includegraphics[scale=0.075]{6-python3/img/raspi3}  %https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Rasperry_pi_3_model_b_v1.3_bot.jpg/2560px-Rasperry_pi_3_model_b_v1.3_bot.jpg
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{Raspberry PI 3 Cluster}
+	  \begin{figure}[!htb]
+        \includegraphics[scale=0.23]{6-python3/img/raspi3cluster}  %https://www-users.cs.york.ac.uk/~mjf/pi_cluster/Images/cluster1.jpg
+    \end{figure}
+
 \end{frame}
 
 \begin{frame}{Recap: Threads vs. Prozesse}
     Definition, Zweck
 \end{frame}
 
-\begin{frame}{Raspberry PI 3 und Nebenläufigkeit}
-	Hardware, Limits, Beispiele (Zahlen)
-\end{frame}
+
 
 \begin{frame}{Python GIL}
     Definition, Zweck, Konsequenzen, andere Interpreter ohne GIL
