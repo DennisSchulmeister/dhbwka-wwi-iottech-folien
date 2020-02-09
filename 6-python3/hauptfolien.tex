@@ -275,18 +275,37 @@ TODO
 \end{frame}
 
 %%% Folie
-\begin{frame}{Locks}
-   Definition, Nutzen, with statement
+\begin{frame}{Locking Mechanismen}
+     \begin{itemize}
+        \setlength{\itemindent}{2.5in}
+        \item [\textbf{Locking Mechanismen aus threading Modul}] 
+    \end{itemize}
+    \begin{itemize}
+        \item \texttt{Lock}, \texttt{RLock}, \texttt{Semaphore} $\Rightarrow$  Sperren mit  \texttt{acquire(wait\_flag)}, Freigeben mit  \texttt{release()}
+        \item \texttt{Event} $\Rightarrow$ ein Thread T1 wartet mit \texttt{wait()}, ein weiterer T2 setzt ein Flag via \texttt{set()}  und  T2 setzt es zurück via \texttt{clear()}
+        \item \texttt{Condition} $\Rightarrow$ ein Thread T1 ruft  \texttt{acquire()} auf, wartet mit \texttt{wait()}, ein weiterer T2 ruft  \texttt{acquire()} auf,  T2 benachrichtigt via \texttt{notify()} und gibt frei mittels \texttt{release()}
+        \item \texttt{with my\_lock:} statement vereinfacht die Nutzung für Locks, Condition und Semaphore $\Rightarrow$ kapselt Sperre und Freigabe
+       \end{itemize}
+
 \end{frame}
 
 
 %%% Folie
 \begin{frame}{Queue}
-   Definition, Nutzen, with statement
+  \begin{itemize}
+        \setlength{\itemindent}{1.0in}
+        \item [\textbf{Das queue Modul}] 
+    \end{itemize}
+    \begin{itemize}
+        \item Enthält spezielle Klassen zur Koordination von Multithreading mit Datenaustausch zwischen den Threads
+        \item \texttt{Queue}, \texttt{RLock} Abstraktion, die Intern \texttt{Condition} verwendet, um Synchonisierung zu erreichen
+        \item Weitere spezialisierte Queues  \texttt{PriorityQueue}, \texttt{LifoQueue}, ...
+    \end{itemize}
+
 \end{frame}
 
 %%% Folie
-\begin{frame}{Producer $\Rightarrow$  Consumer} %https://www.agiliq.com/blog/2013/10/producer-consumer-problem-in-python/
+\begin{frame}{Queue Beispiel: Producer $\Rightarrow$  Consumer} %https://www.agiliq.com/blog/2013/10/producer-consumer-problem-in-python/
      \begin{figure}[!htb]
         \includegraphics[scale=0.31]{6-python3/img/producerconsumer} 
     \end{figure}
@@ -321,35 +340,4 @@ ELSE ? ----------------------> USE threading
 \begin{frame}{Folie}
     TODO
 \end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
 
