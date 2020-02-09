@@ -223,7 +223,8 @@ TODO
         \item [\textbf{Multiprocessing Modul}]
     \end{itemize}
     \begin{itemize}
-        \item Das Python Modul \textbf{multiprocessing} kann verwendet werden für CPU-lastige Aufgaben         
+        \item Das Python Modul \textbf{multiprocessing} kann verwendet werden für CPU-lastige Aufgaben
+        \item Aber Vorsicht: Prozess Handling ist tfür das Betriebssystem eurer wegen des komplexeren Kontextwechsels
         \item Hauptobjekt: Prozess $\Rightarrow$   \texttt{multiprocessing.Process(name='CalculationXY', target=my\_callback\_function)}
         \item Wichtiger Check zur Vermeidung von Endlosrekursion:   \texttt{if \_\_name\_\_ == '\_\_main\_\_'}
         \item Pool $\Rightarrow$ eine Prozessgruppe eine gemeinsame Aufgabe ausführen lassen durch Übergabe eines Callbacks
@@ -239,7 +240,16 @@ TODO
 
 %%% Folie
 \begin{frame}{Threads in Python}
-    Module thread (Hinweis Python2 vs Python 3), threading (detailliert)
+         \begin{itemize}
+        \setlength{\itemindent}{1.4in}
+        \item [\textbf{Thread Handling Module}]
+    \end{itemize}
+    \begin{itemize}
+        \item Das Python Modul \textbf{thread} ist das ältere Modul  mit Callbacks  $\Rightarrow$  \texttt{thread.start\_new\_thread ( cb, args[, kwargs] )}
+        \item \textbf{threading} ist das modernere Modul, welches OOP verwendet und es ist in Python 3 enthalten
+        \item Das Modul \textbf{threading} wird sehr ähnlich verwendet wie \textbf{multiprocessing}, mit Klassen \texttt{Thread} und \texttt{ThreadPoolExecutor}
+    \end{itemize}
+
 \end{frame}
 
 %%% Folie
@@ -253,7 +263,15 @@ TODO
 
 %%% Folie
 \begin{frame}{Thread Probleme}
-    Deadlock, Threads nicht starten wenn module Importiert wird etc.
+         \begin{itemize}
+        \setlength{\itemindent}{2.2in}
+        \item [\textbf{Probleme beim Umgang mit Threads}]
+    \end{itemize}
+    \begin{itemize}
+        \item Race Condition  $\Rightarrow$  Zugriff auf gemeinsame Daten führt  \quotes{random} zu unerwarteten Ergebnissen
+        \item Lost Update $\Rightarrow$  Der letzte Schreibzugriff gewinnt
+        \item Deadlock $\Rightarrow$  Jeder Thread wartet darauf, dass er die Freigabe zum laufen erhält (wurde z.B. vergessen oder ein Bug)
+    \end{itemize}
 \end{frame}
 
 %%% Folie
@@ -261,6 +279,18 @@ TODO
    Definition, Nutzen, with statement
 \end{frame}
 
+
+%%% Folie
+\begin{frame}{Queue}
+   Definition, Nutzen, with statement
+\end{frame}
+
+%%% Folie
+\begin{frame}{Producer $\Rightarrow$  Consumer} %https://www.agiliq.com/blog/2013/10/producer-consumer-problem-in-python/
+     \begin{figure}[!htb]
+        \includegraphics[scale=0.31]{6-python3/img/producerconsumer} 
+    \end{figure}
+\end{frame}
 
 %%% Folie
 \begin{frame}{asyncio, twisted, tornado}
