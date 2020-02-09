@@ -123,15 +123,15 @@ TODO
     \end{itemize}
 
     \begin{itemize}
-        \item Als \textbf{nebenläufig} definieren wir Aufgaben, die auf einem Computer um Ressourcen konkurrieren und nicht notwendigerweise gleichzeitig ausgeführt werden (können)
-        \item Als \textbf{parallel} definieren wir nebenläufige Aufgaben, die gleichzeitig ausgeführt werden (können)
+        \item Als \textbf{nebenläufig} definieren wir Aufgaben, die auf einem Computer um Ressourcen konkurrieren und nicht notwendigerweise gleichzeitig ausgeführt werden (können). Der Fokus liegt auf dem Ausführen und Organisieren mehrerer eventuell unabhängiger Aufgaben
+        \item Als \textbf{parallel} definieren wir nebenläufige Aufgaben, die gleichzeitig ausgeführt werden (können). Der Fokus liegt aber auf Leistung.
      \end{itemize}
 \end{frame}
 
-\begin{frame}{Nebenläufigkeit vs. Parallelität -Beispiele}
+\begin{frame}{Nebenläufigkeit vs. Parallelität - Beispiele}
         \begin{itemize}
-        \setlength{\itemindent}{2.0in}
-        \item [\textbf{Beispiele: Nebenläufig oder Parallel ?}]
+        \setlength{\itemindent}{2.2in}
+        \item [\textbf{Beispiele: Nebenläufig oder Parallel?}]
     \end{itemize}
 
     \begin{itemize}
@@ -167,14 +167,46 @@ TODO
 \end{frame}
 
 \begin{frame}{Recap: Threads vs. Prozesse}
-    Definition, Zweck
-\end{frame}
+    
+     \begin{itemize}
+        \setlength{\itemindent}{1.2in}
+        \item [\textbf{Definition: Prozess}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Als \textbf{Prozess} definieren wir ein Programm in Ausführung, dessen Speicher und Laufzeit durch das Betriebssystem verwaltet wird
+     \end{itemize}
+    
+  	   \vspace*{10mm}
+    
+    
+         \begin{itemize}
+        \setlength{\itemindent}{1.2in}
+        \item [\textbf{Definition: Thread}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Als \textbf{Thread} definieren wir einen nebenläufigen Teil eines Prozesses in Ausführung, dessen Speicherbereich in dem des Prozesses liegt
+     \end{itemize}
+    
+    \end{frame}
 
 
 
 \begin{frame}{Python GIL}
-    Definition, Zweck, Konsequenzen, andere Interpreter ohne GIL
-\end{frame}
+                 \begin{itemize}
+        \setlength{\itemindent}{2.0in}
+        \item [\textbf{Python Global Interpreter Lock }]
+    \end{itemize}
+    \begin{itemize}
+        \item Das GIL ist ein Sperrmechanismus (Mutex mit Variable), um den Python Interpreter stets auf einen kontrollierenden Thread zu beschränken  \cite{realpython.com/python-gil}
+        \item Grund: Speicherreferenzen werden in Python ermittelt und das geht mit dem GIL deterministisch $\Rightarrow$ viele Memory Leaks werden so verhindert, im Code muss man nicht ständig alles selbst mit Locks sperren
+        \item Konsequenz:  Jeder Thread muss sich stets erst das GIL holen und kann dann laufen, weshalb CPU-lastige Aufgaben so nicht parallelisierbar sind
+         \item Abhilfe:  Mit Prozessen arbeiten statt mit Threads - oder anderen Python Interpreter wählen, der ohne GIL arbeitet (kommt via Subinterpreter mit Python 3.9 in PEP-0554 \cite{python.org/dev/peps/pep-0554})
+
+    \end{itemize}
+    
+    \end{frame}
 
 \begin{frame}{Python Multiprocessing Lib (kurz)}
     Module multiprocessing Übersicht
@@ -206,12 +238,17 @@ TODO
 
 
 %%% Folie
-\begin{frame}{Folie}
-    TODO
+\begin{frame}{asyncio, twisted, tornado}
+
+Is it IO-BOUND ? ---------> USE asyncio, uvloop
+
+IS IT CPU-HEAVY ? -----> USE multiprocessing
+
+ELSE ? ----------------------> USE threading
 \end{frame}
 
 %%% Folie
-\begin{frame}{Folie}
+\begin{frame}{Coroutines}
     TODO
 \end{frame}
 
