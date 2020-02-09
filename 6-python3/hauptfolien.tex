@@ -193,23 +193,48 @@ TODO
 
 
 
-\begin{frame}{Python GIL}
+\begin{frame}{Python GIL 1}
                  \begin{itemize}
-        \setlength{\itemindent}{2.0in}
+        \setlength{\itemindent}{1.9in}
         \item [\textbf{Python Global Interpreter Lock }]
     \end{itemize}
     \begin{itemize}
         \item Das GIL ist ein Sperrmechanismus (Mutex mit Variable), um den Python Interpreter stets auf einen kontrollierenden Thread zu beschränken  \cite{realpython.com/python-gil}
         \item Grund: Speicherreferenzen werden in Python ermittelt und das geht mit dem GIL deterministisch $\Rightarrow$ viele Memory Leaks werden so verhindert, im Code muss man nicht ständig alles selbst mit Locks sperren
+    \end{itemize}
+    
+    \end{frame}
+    
+\begin{frame}{Python GIL 2}
+                 \begin{itemize}
+        \setlength{\itemindent}{1.0in}
+        \item [\textbf{Was heißt das? }]
+    \end{itemize}
+    \begin{itemize}
         \item Konsequenz:  Jeder Thread muss sich stets erst das GIL holen und kann dann laufen, weshalb CPU-lastige Aufgaben so nicht parallelisierbar sind
          \item Abhilfe:  Mit Prozessen arbeiten statt mit Threads - oder anderen Python Interpreter wählen, der ohne GIL arbeitet (kommt via Subinterpreter mit Python 3.9 in PEP-0554 \cite{python.org/dev/peps/pep-0554})
-
     \end{itemize}
     
     \end{frame}
 
-\begin{frame}{Python Multiprocessing Lib (kurz)}
-    Module multiprocessing Übersicht
+\begin{frame}{Python Multiprocessing}
+          \begin{itemize}
+        \setlength{\itemindent}{1.4in}
+        \item [\textbf{Multiprocessing Modul}]
+    \end{itemize}
+    \begin{itemize}
+        \item Das Python Modul \textbf{multiprocessing} kann verwendet werden für CPU-lastige Aufgaben         
+        \item Hauptobjekt: Prozess $\Rightarrow$   \texttt{multiprocessing.Process(name='CalculationXY', target=my\_callback\_function)}
+        \item Wichtiger Check zur Vermeidung von Endlosrekursion:   \texttt{if \_\_name\_\_ == '\_\_main\_\_'}
+        \item Pool $\Rightarrow$ eine Prozessgruppe eine gemeinsame Aufgabe ausführen lassen durch Übergabe eines Callbacks
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Python Multiprocessing Beispiel: Annhäherung von $\pi$} %https://gist.github.com/amitsaha/2036026
+      \begin{figure}[!htb]
+        \includegraphics[scale=0.27]{6-python3/img/multiprocessing_picalc}
+    \end{figure}
+
 \end{frame}
 
 %%% Folie
