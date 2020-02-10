@@ -312,32 +312,43 @@ TODO
 \end{frame}
 
 %%% Folie
-\begin{frame}{asyncio, twisted, tornado}
+\begin{frame}{Nebenläufigkeit für IO Tasks}
+     \begin{itemize}
+        \setlength{\itemindent}{1.2in}
+        \item [\textbf{Das asyncio Modul}] 
+    \end{itemize}
+    \begin{itemize}
+        \item Nebenläufigkeit innerhalb eines Threads $\Rightarrow$ Kein Kontextwechsel via Scheduler, sondern \textbf{Eventloop} (ähnlich zu JavaScript)
+        \item \texttt{async} Keyword macht Funktionen zu Coroutines, die unterbrechbar sind
+        \item Das Ergebnis bekommt man mit \texttt{await}
+        \item Mithilfe der Loop lassen sich \textbf{Futures} über  \texttt{loop.create\_task} erzeugen (ähnlich zu Promises in JavaScript oder Futures in Java)
+        \item Weitere Libraries bauen darauf auf, z.B. \texttt{aiohttp} für HTTP Requests
+      \end{itemize}
 
-Is it IO-BOUND ? ---------> USE asyncio, uvloop
-
-IS IT CPU-HEAVY ? -----> USE multiprocessing
-
-ELSE ? ----------------------> USE threading
 \end{frame}
+
 
 %%% Folie
-\begin{frame}{Coroutines}
-    TODO
+\begin{frame}{Beispiel Coroutines: Abfrage Wetterdaten für Städte} %https://dev.to/welldone2094/async-programming-in-python-with-asyncio-12dl
+         \begin{figure}[!htb]
+           \hspace*{-0.5cm}   
+        \includegraphics[scale=0.31]{6-python3/img/coroutine_download} 
+    \end{figure}
 \end{frame}
+
+
 
 %%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
+\begin{frame}{Zusammenfassung Nebenläufigkeit}
 
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
+  \begin{itemize}
+        \setlength{\itemindent}{2.2in}
+        \item [\textbf{Welches Konstrukt wann verwenden?}] 
+    \end{itemize}
+    \begin{itemize}
+        \item I/O-lastig? (Netzwerk, Sensorik, Dateien) $\Rightarrow$ \texttt{asyncio}, eventuell erweitert um \texttt{uvloop} 
+        \item CPU-lastig? (teure Berechnungen) $\Rightarrow$ \texttt{multiprocessing}
+        \item Alle weiteren Fälle $\Rightarrow$ \texttt{threading}
+    \end{itemize}
 
-%%% Folie
-\begin{frame}{Folie}
-    TODO
 \end{frame}
-
