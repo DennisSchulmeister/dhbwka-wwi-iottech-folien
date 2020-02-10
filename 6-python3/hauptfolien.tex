@@ -1,7 +1,7 @@
 %%% Folie
 \begin{frame}{Ausgangslage}
     Nach dem Einstieg in Python und IoT über Kapitel 3 und 4 sollen nun in diesem Kapitel fortgeschrittene Konzepte aufgezeigt werden, mit deren Hilfe die jeweilige Code-Basis geordnet wachsen kann und Abläufe mit Hilfe von Konzepten aus der nebenläufigen Programmierung gezielt optimiert werden können.
-    
+
     \end{frame}
 
 %%% Folie
@@ -29,7 +29,7 @@
     \end{itemize}
 
     \begin{itemize}
-        \item Sehr langen schwer wartbaren Source Code vermeiden, denn Python ist flexibel und kann insbesondere für Skripte verwendet werden  $\Rightarrow$  Eine saubere Struktur hilft
+        \item Sehr langen, schwer wartbaren Source Code vermeiden, denn Python ist flexibel und kann insbesondere für Skripte verwendet werden  $\Rightarrow$  Eine saubere Struktur hilft
         \item Refactoring vereinfachen  $\Rightarrow$  Besser wenige oder eine Klasse anpassen, als alles (am besten ohne Tests \smiley{} )
         \item Teamarbeit vereinfachen  $\Rightarrow$  Wenn  nicht ständig mit anderen an derselben Datei editiert werden muss, kommt es zu weniger Merges im git repository
    \end{itemize}
@@ -40,7 +40,7 @@
 %%% Folie
 \begin{frame}{Enge Kopplung}
     	  \begin{figure}[!htb]
-        \includegraphics[scale=0.5]{6-python3/img/tightcoupling}  
+        \includegraphics[scale=0.5]{6-python3/img/tightcoupling}
     \end{figure}
 \end{frame}
 
@@ -55,10 +55,10 @@
     \begin{itemize}
         \item Bindung an Abhängigkeiten wird reduziert durch Schnittstellen (Funktionen und Objekte als Parameter)
         \item Boilerplate Code an falscher Stelle wird vermieden
-        \item In viele Programmiersprachen existieren Frameworks (z.B. Spring Autowiring, Dagger oder Guice für Java) 
+        \item In viele Programmiersprachen existieren Frameworks (z.B. Spring Autowiring, Dagger oder Guice für Java)
         \item Injection Frameworks in Python aufgrund der Beschaffenheit der Sprache unüblich
    \end{itemize}
-   
+
 \end{frame}
 
 
@@ -77,7 +77,7 @@
 
 \end{frame}
 
- 
+
 %%% Folie
 \begin{frame}{Besonderheiten in Python: Ducktyping}
   \begin{itemize}
@@ -91,8 +91,8 @@
     \end{itemize}
 
   \end{frame}
-  
-  
+
+
   %%% Folie
 \begin{frame}{Besonderheiten in Python: Monkey Patching }
   \begin{itemize}
@@ -101,38 +101,38 @@
     \end{itemize}
 
     \begin{itemize}
-        \item In Python kann man wie in JavaScript zur Laufzeit Attribute oder Methoden an Objekte \quotes{patchen}  
+        \item In Python kann man wie in JavaScript zur Laufzeit Attribute oder Methoden an Objekte \quotes{patchen}
         \item Die alte Funktion/der alte Wert wird somit ersetzt
         \item Effektiv besteht somit ein \textbf{Hook} für beliebige Funktionen
         \item Es ist Vorsicht geboten mit derartigen Möglichkeiten
     \end{itemize}
 
   \end{frame}
-  
- 
+
+
    %%% Folie
 \begin{frame}{Besonderheiten in Python: Mixins}
    \begin{figure}[!htb]
         \includegraphics[scale=0.37]{6-python3/img/mixins}  %https://www.ianlewis.org/en/mixins-and-python
     \end{figure}
-   
+
   \end{frame}
-       
+
 
 %%% Folie
 \begin{frame}{Anwendungsfall: Testing mit MagicMock}
    \begin{figure}[!htb]
-        \includegraphics[scale=0.47]{6-python3/img/magicmock}  
+        \includegraphics[scale=0.47]{6-python3/img/magicmock}
     \end{figure}
-   
+
 \end{frame}
 
 %%% Folie
 \begin{frame}{Observer Pattern 1}
        \begin{figure}[!htb]
-        \includegraphics[scale=0.67]{6-python3/img/observer}  
+        \includegraphics[scale=0.67]{6-python3/img/observer}
     \end{figure}
-   
+
 \end{frame}
 
 %%% Folie
@@ -143,10 +143,10 @@
     \end{itemize}
 
     \begin{itemize}
-        \item Losere Kopplung wird erreicht durch einheitliche Interface Methode(n)  
+        \item Losere Kopplung wird erreicht durch einheitliche Interface Methode(n)
         \item Auf Objektebene kennt aber jeder Observer das Observable   $\Rightarrow$ gewisse Kopplung bleibt zur Laufzeit erhalten - in Python ist aber der Code dank Ducktyping bereits sehr \quotes{dependency-arm}
         \item Alternative Bezeichnungen: Registry, Listener
-    \end{itemize}   
+    \end{itemize}
 \end{frame}
 
 %%% Folie
@@ -157,18 +157,18 @@
     \end{itemize}
 
     \begin{itemize}
-        \item Pub/Sub ist dem Observer Pattern ähnlich, es ist aber \textbf{nicht} damit identisch  
+        \item Pub/Sub ist dem Observer Pattern ähnlich, es ist aber \textbf{nicht} damit identisch
         \item Zusätzliche Abstraktion ist eine 3. Komponente zwischen Observable und Observer: der  \textbf{Message Broker}
         \item Nachrichten werden über den kommunizierenden bekannte Topics oder definierte Events ausgetauscht
-    \end{itemize}   
+    \end{itemize}
 
 \end{frame}
 
 
 %%% Folie
-\begin{frame}{Publish-Subscribe 2} 
+\begin{frame}{Publish-Subscribe 2}
       \begin{figure}[!htb]
-        \includegraphics[scale=0.67]{6-python3/img/pubsub}  
+        \includegraphics[scale=0.67]{6-python3/img/pubsub}
     \end{figure}
 
 \end{frame}
@@ -187,7 +187,7 @@
         \item Monkey Patching:  bei Tests indirekt durch Mocks
         \item Observer:  wenn ein Zustand über viele Instanzen aktualisiert werden soll ...
         \item Pub/Sub:  Es werden komplexere Nachrichten benötigt und Nebenläufigkeit  wird benötigt
-    \end{itemize}   
+    \end{itemize}
 
 \end{frame}
 
@@ -234,7 +234,7 @@
         \item Benchmarks für z.B. Primzahlberechnung oder Unzip  mit deutlichem Geschwindigkeitsvorteil
      \end{itemize}
   \begin{figure}[!htb]
-  \hspace*{-4cm}   
+  \hspace*{-4cm}
         \includegraphics[scale=0.075]{6-python3/img/raspi3}  %https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Rasperry_pi_3_model_b_v1.3_bot.jpg/2560px-Rasperry_pi_3_model_b_v1.3_bot.jpg
     \end{figure}
 
@@ -248,7 +248,7 @@
 \end{frame}
 
 \begin{frame}{Recap: Threads vs. Prozesse}
-    
+
      \begin{itemize}
         \setlength{\itemindent}{1.2in}
         \item [\textbf{Definition: Prozess}]
@@ -257,10 +257,10 @@
     \begin{itemize}
         \item Als \textbf{Prozess} definieren wir ein Programm in Ausführung, dessen Speicher und Laufzeit durch das Betriebssystem verwaltet wird
      \end{itemize}
-    
+
   	   \vspace*{10mm}
-    
-    
+
+
          \begin{itemize}
         \setlength{\itemindent}{1.2in}
         \item [\textbf{Definition: Thread}]
@@ -269,7 +269,7 @@
     \begin{itemize}
         \item Als \textbf{Thread} definieren wir einen nebenläufigen Teil eines Prozesses in Ausführung, dessen Speicherbereich in dem des Prozesses liegt
      \end{itemize}
-    
+
     \end{frame}
 
 
@@ -283,9 +283,9 @@
         \item Das GIL ist ein Sperrmechanismus (Mutex mit Variable), um den Python Interpreter stets auf einen kontrollierenden Thread zu beschränken  \cite{realpython.com/python-gil}
         \item Grund: Speicherreferenzen werden in Python ermittelt und das geht mit dem GIL deterministisch $\Rightarrow$ viele Memory Leaks werden so verhindert, im Code muss man nicht ständig alles selbst mit Locks sperren
     \end{itemize}
-    
+
     \end{frame}
-    
+
 \begin{frame}{Python GIL 2}
                  \begin{itemize}
         \setlength{\itemindent}{1.0in}
@@ -295,7 +295,7 @@
         \item Konsequenz:  Jeder Thread muss sich stets erst das GIL holen und kann dann laufen, weshalb CPU-lastige Aufgaben so nicht parallelisierbar sind
          \item Abhilfe:  Mit Prozessen arbeiten statt mit Threads - oder anderen Python Interpreter wählen, der ohne GIL arbeitet (kommt via Subinterpreter mit Python 3.9 in PEP-0554 \cite{python.org/dev/peps/pep-0554})
     \end{itemize}
-    
+
     \end{frame}
 
 \begin{frame}{Python Multiprocessing}
@@ -305,7 +305,7 @@
     \end{itemize}
     \begin{itemize}
         \item Das Python Modul \textbf{multiprocessing} kann verwendet werden für CPU-lastige Aufgaben
-        \item Aber Vorsicht: Prozess Handling ist tfür das Betriebssystem eurer wegen des komplexeren Kontextwechsels
+        \item Aber Vorsicht: Prozess Handling ist für das Betriebssystem teurer wegen des komplexeren Kontextwechsels
         \item Hauptobjekt: Prozess $\Rightarrow$   \texttt{multiprocessing.Process(name='CalculationXY', target=my\_callback\_function)}
         \item Wichtiger Check zur Vermeidung von Endlosrekursion:   \texttt{if \_\_name\_\_ == '\_\_main\_\_'}
         \item Pool $\Rightarrow$ eine Prozessgruppe eine gemeinsame Aufgabe ausführen lassen durch Übergabe eines Callbacks
@@ -359,7 +359,7 @@
 \begin{frame}{Locking Mechanismen}
      \begin{itemize}
         \setlength{\itemindent}{2.5in}
-        \item [\textbf{Locking Mechanismen aus threading Modul}] 
+        \item [\textbf{Locking Mechanismen aus threading Modul}]
     \end{itemize}
     \begin{itemize}
         \item \texttt{Lock}, \texttt{RLock}, \texttt{Semaphore} $\Rightarrow$  Sperren mit  \texttt{acquire(wait\_flag)}, Freigeben mit  \texttt{release()}
@@ -375,7 +375,7 @@
 \begin{frame}{Queue}
   \begin{itemize}
         \setlength{\itemindent}{1.0in}
-        \item [\textbf{Das queue Modul}] 
+        \item [\textbf{Das queue Modul}]
     \end{itemize}
     \begin{itemize}
         \item Enthält spezielle Klassen zur Koordination von Multithreading mit Datenaustausch zwischen den Threads
@@ -388,7 +388,7 @@
 %%% Folie
 \begin{frame}{Queue Beispiel: Producer $\Rightarrow$  Consumer} %https://www.agiliq.com/blog/2013/10/producer-consumer-problem-in-python/
      \begin{figure}[!htb]
-        \includegraphics[scale=0.31]{6-python3/img/producerconsumer} 
+        \includegraphics[scale=0.31]{6-python3/img/producerconsumer}
     \end{figure}
 \end{frame}
 
@@ -396,7 +396,7 @@
 \begin{frame}{Nebenläufigkeit für I/O Tasks}
      \begin{itemize}
         \setlength{\itemindent}{1.2in}
-        \item [\textbf{Das asyncio Modul}] 
+        \item [\textbf{Das asyncio Modul}]
     \end{itemize}
     \begin{itemize}
         \item Nebenläufigkeit innerhalb eines Threads $\Rightarrow$ Kein Kontextwechsel via Scheduler, sondern \textbf{Eventloop} (ähnlich zu JavaScript)
@@ -412,8 +412,8 @@
 %%% Folie
 \begin{frame}{Beispiel Coroutines: Abfrage Wetterdaten für Städte} %https://dev.to/welldone2094/async-programming-in-python-with-asyncio-12dl
          \begin{figure}[!htb]
-           \hspace*{-0.5cm}   
-        \includegraphics[scale=0.31]{6-python3/img/coroutine_download} 
+           \hspace*{-0.5cm}
+        \includegraphics[scale=0.31]{6-python3/img/coroutine_download}
     \end{figure}
 \end{frame}
 
@@ -424,10 +424,10 @@
 
   \begin{itemize}
         \setlength{\itemindent}{2.2in}
-        \item [\textbf{Welches Konstrukt wann verwenden?}] 
+        \item [\textbf{Welches Konstrukt wann verwenden?}]
     \end{itemize}
     \begin{itemize}
-        \item I/O-lastig? (Netzwerk, Sensorik, Dateien) $\Rightarrow$ \texttt{asyncio}, eventuell erweitert um \texttt{uvloop} 
+        \item I/O-lastig? (Netzwerk, Sensorik, Dateien) $\Rightarrow$ \texttt{asyncio}, eventuell erweitert um \texttt{uvloop}
         \item CPU-lastig? (teure Berechnungen) $\Rightarrow$ \texttt{multiprocessing}
         \item Alle weiteren Fälle $\Rightarrow$ \texttt{threading}
     \end{itemize}
