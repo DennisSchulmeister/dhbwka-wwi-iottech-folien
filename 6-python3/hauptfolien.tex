@@ -1,23 +1,8 @@
 %%% Folie
 \begin{frame}{Ausgangslage}
-    Hier die Ausgangslage/Motivation für das Kapitel beschreiben ...
-
-    % UNGEFÄHRE AUSSAGE
-    %
-    % Die einfachen Programmbeispiele der vorangegangen Kapitel eignen sich in der
-    % Regel kaum für produktive Anwendungen, da sie einem einfachen, prozeduralen
-    % Programmierstil gehorchen, bei dem jeder Methodenaufruf den rufenden Thread
-    % so lange blockiert, bis die gewünschte Aktion durchgeführt wurde. Auf diese
-    % Weise lassen sich daher nur sehr wenige Sensoren und Aktoren verbinden und
-    % bestimmte Anwendungsfälle, wie die Bereitstellung einer deviceseitigen REST-API
-    % lassen sich auf diese Weise gar nicht realisieren. Darüber hinaus wird der
-    % Quellcode auch schnell sehr komplex und unübersichtlich, je mehr Komponenten
-    % integriert werden sollen. Dieses Kapitel soll daher die wesentlichen
-    % Architekturmuster zeigen, mit denen sich komplexe Pythonprogramme in lose
-    % gekoppelte Einheiten zerlegen lassen, die eine einfache Erweiterbarkeit und
-    % Wartbarkeit des Quellcodes (z.B. wenn eine Komponente ausgetauscht werden
-    % muss) ermöglichen.
-\end{frame}
+    Nach dem Einstieg in Python und IoT über Kapitel 3 und 4 sollen nun in diesem Kapitel fortgeschrittene Konzepte aufgezeigt werden, mit deren Hilfe die jeweilige Code-Basis geordnet wachsen kann und Abläufe mit Hilfe von Konzepten aus der nebenläufigen Programmierung gezielt optimiert werden können.
+    
+    \end{frame}
 
 %%% Folie
 \begin{frame}{Lernziele}
@@ -102,7 +87,7 @@
 
     \begin{itemize}
         \item In Python reichen gleiche Funktionsnamen als Schnittstelle aus zwischen Parameterempfänger und Funktion/Objekt im Argument
-        \item Typen spielen hier keine Roll
+        \item Typen spielen hier keine Rolle
     \end{itemize}
 
   \end{frame}
@@ -190,13 +175,20 @@
 
 
 %%% Folie
-\begin{frame}{Anwendungsfall Teil 1 - Projektstruktur}
-    TODO
-\end{frame}
+\begin{frame}{Strukturierung der Anwendung mit Patterns}
+      \begin{itemize}
+        \setlength{\itemindent}{1.5in}
+        \item [\textbf{Einsatz der Patterns}]
+    \end{itemize}
 
-%%% Folie
-\begin{frame}{Anwendungsfall Teil 2 - Code}
-    TODO
+    \begin{itemize}
+        \item Dependency Injection (Übergabe von Funktionen als Parameter): Möglichst in der Datenhaltungsschicht, um Teile austauschen zu können, z.B. File Format, DB
+        \item Mixins: Feature minimalinvasiv an bestehenden Code hinzufügen, Kompatibilität mit externen Modulen herstellen
+        \item Monkey Patching:  bei Tests indirekt durch Mocks
+        \item Observer:  wenn ein Zustand über viele Instanzen aktualisiert werden soll ...
+        \item Pub/Sub:  Es werden komplexere Nachrichten benötigt und Nebenläufigkeit  wird benötigt
+    \end{itemize}   
+
 \end{frame}
 
 
@@ -401,7 +393,7 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{Nebenläufigkeit für IO Tasks}
+\begin{frame}{Nebenläufigkeit für I/O Tasks}
      \begin{itemize}
         \setlength{\itemindent}{1.2in}
         \item [\textbf{Das asyncio Modul}] 
