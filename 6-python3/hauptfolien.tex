@@ -27,7 +27,7 @@
         \item Die Nachteile einer zu engen Kopplung von Klassen verstehen können
         \item Entwurfsmuster Observer und Message Broker anwenden können
         \item Nebenläufige Programmierung mit Threads in Python
-        %\item Nebenläufige Programmierung mit Coroutinen in Python
+        \item Nebenläufige Programmierung mit Coroutines in Python
     \end{itemize}
 \end{frame}
 
@@ -37,49 +37,157 @@
 %-------------------------------------------------------------------------------
 
 %%% Folie
-\begin{frame}{Übersicht}
-    TODO
-\end{frame}
+\begin{frame}{Design Patterns in Python}
+    \begin{itemize}
+        \setlength{\itemindent}{2.25in}
+        \item [\textbf{Motivation: Design Patterns in Python}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Sehr langen schwer wartbaren Source Code vermeiden, denn Python ist flexibel und kann insbesondere für Skripte verwendet werden  $\Rightarrow$  Eine saubere Struktur hilft
+        \item Refactoring vereinfachen  $\Rightarrow$  Besser wenige oder eine Klasse anpassen, als alles (am besten ohne Tests \smiley{} )
+        \item Teamarbeit vereinfachen  $\Rightarrow$  Wenn  nicht ständig mit anderen an derselben Datei editiert werden muss, kommt es zu weniger Merges im git repository
+   \end{itemize}
+
+  \end{frame}
+
 
 %%% Folie
-\begin{frame}{DI und IOC Intro}
-  Definition, GoF, Loose Coupling (Grafik)
+\begin{frame}{Enge Kopplung}
+    	  \begin{figure}[!htb]
+        \includegraphics[scale=0.5]{6-python3/img/tightcoupling}  %https://www-users.cs.york.ac.uk/~mjf/pi_cluster/Images/cluster1.jpg
+    \end{figure}
 \end{frame}
 
+
 %%% Folie
-\begin{frame}{DI und IOC Anwendungsfall}
-   TODO
- \end{frame}
+\begin{frame}{Dependency Injection}
+ \begin{itemize}
+        \setlength{\itemindent}{1.3in}
+        \item [\textbf{Dependency Injection}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Bindung an Abhängigkeiten wird reduziert durch Schnittstellen (Funktionen und Objekte als Parameter)
+        \item Boilerplate Code an falscher Stelle wird vermieden
+        \item In viele Programmiersprachen existieren Frameworks (z.B. Spring Autowiring, Dagger oder Guice für Java) 
+        \item Injection Frameworks in Python aufgrund der Beschaffenheit der Sprache unüblich
+   \end{itemize}
+   
+\end{frame}
+
+
+%%% Folie
+\begin{frame}{Inversion Of Control}
+\begin{itemize}
+        \setlength{\itemindent}{1.25in}
+        \item [\textbf{Inversion Of Control}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Nichtprozedurale Programmierstile werden gefördert (z.B. eventbasiert)
+        \item Programme sind modularer
+        \item Auch Frameworks sind bspw. eine Form von IOC
+   \end{itemize}
+
+\end{frame}
+
  
- %%% Folie
-\begin{frame}{DI in Python Einfach}
-TODO
+%%% Folie
+\begin{frame}{Besonderheiten in Python: Ducktyping}
+  \begin{itemize}
+        \setlength{\itemindent}{1.2in}
+        \item [\textbf{Recap: Ducktyping}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item In Python reichen gleiche Funktionsnamen als Schnittstelle aus zwischen Parameterempfänger und Funktion/Objekt im Argument
+        \item Typen spielen hier keine Roll
+    \end{itemize}
+
   \end{frame}
+  
+  
+  %%% Folie
+\begin{frame}{Besonderheiten in Python: Monkey Patching }
+  \begin{itemize}
+        \setlength{\itemindent}{1.1in}
+        \item [\textbf{Monkey Patching}]
+    \end{itemize}
 
-%%% Folie
-\begin{frame}{Container Injection}
-TODO
+    \begin{itemize}
+        \item In Python kann man wie in JavaScript zur Laufzeit Attribute oder Methoden an Objekte \quotes{patchen}  
+        \item Die alte Funktion/der alte Wert wird somit ersetzt
+        \item Effektiv besteht somit ein \textbf{Hook} für beliebige Funktionen
+        \item Es ist Vorsicht geboten mit derartigen Möglichkeiten
+    \end{itemize}
+
   \end{frame}
+  
+ 
+   %%% Folie
+\begin{frame}{Besonderheiten in Python: Mixins}
+   \begin{figure}[!htb]
+        \includegraphics[scale=0.37]{6-python3/img/mixins}  %https://www.ianlewis.org/en/mixins-and-python
+    \end{figure}
+   
+  \end{frame}
+       
 
 %%% Folie
-\begin{frame}{Python Konstrukte}
-    Monkey Patching, Mixins
+\begin{frame}{Anwendungsfall: Testing mit MagicMock}
+   \begin{figure}[!htb]
+        \includegraphics[scale=0.47]{6-python3/img/magicmock}  %https://www.ianlewis.org/en/mixins-and-python
+    \end{figure}
+   
 \end{frame}
 
 %%% Folie
-\begin{frame}{Testing mit MagicMock}
-    TODO
+\begin{frame}{Observer Pattern 1}
+       \begin{figure}[!htb]
+        \includegraphics[scale=0.67]{6-python3/img/observer}  %https://www.ianlewis.org/en/mixins-and-python
+    \end{figure}
+   
 \end{frame}
 
 %%% Folie
-\begin{frame}{Observer Pattern}
-    Definition,Grafik
+\begin{frame}{Observer Pattern 2}
+        \begin{itemize}
+        \setlength{\itemindent}{1.1in}
+        \item [\textbf{Observer Pattern}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Losere Kopplung wird erreicht durch einheitliche Interface Methode(n)  
+        \item Auf Objektebene kennt aber jeder Observer das Observable   $\Rightarrow$ gewisse Kopplung bleibt zur Laufzeit erhalten - in Python ist aber der Code dank Ducktyping bereits sehr \quotes{dependency-arm}
+        \item Alternative Bezeichnungen: Registry, Listener
+    \end{itemize}   
 \end{frame}
 
 %%% Folie
-\begin{frame}{Publish-Subscribe}
-   % https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c
+\begin{frame}{Publish-Subscribe 1} % https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c
+      \begin{itemize}
+        \setlength{\itemindent}{1.5in}
+        \item [\textbf{Publish/Subscribe Pattern}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Pub/Sub ist dem Observer Pattern ähnlich, es ist aber \textbf{nicht} damit identisch  
+        \item Zusätzliche Abstraktion ist eine 3. Komponente zwischen Observable und Observer: der  \textbf{Message Broker}
+        \item Nachrichten werden über den kommunizierenden bekannte Topics oder definierte Events ausgetauscht
+    \end{itemize}   
+
 \end{frame}
+
+
+%%% Folie
+\begin{frame}{Publish-Subscribe 2} 
+      \begin{figure}[!htb]
+        \includegraphics[scale=0.67]{6-python3/img/pubsub}  
+    \end{figure}
+
+\end{frame}
+
 
 %%% Folie
 \begin{frame}{Anwendungsfall Teil 1 - Projektstruktur}
@@ -91,25 +199,6 @@ TODO
     TODO
 \end{frame}
 
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
 
 %-------------------------------------------------------------------------------
 \section{Nebenläufigkeit in Python}
