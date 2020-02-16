@@ -64,9 +64,27 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{MQTT Protokoll}
-    TODO 
-    QoS
+\begin{frame}{MQTT Protokoll - Quality Of Servic: Definition}
+   \begin{itemize}
+        \setlength{\itemindent}{1.4in}
+        \item [\textbf{Quality of Service (QoS}]
+    \end{itemize}
+    \begin{itemize}
+        \item Parameter beim Datenversand, der sich auf Leistung (Traffic und Handling) sowie Zuverlässigkeit (Nachrichtenerhalt) auswirkt
+        \item Muss für Publisher und Subscriber gewählt werden $\Rightarrow$ Bei der Planung darauf achten, dass je Use Case bei allen die QoS Level passen!
+        \item QoS 0 $\Rightarrow$ Vielleicht ausliefern
+        \item QoS 1 $\Rightarrow$ Einmal ausliefern oder auch mehrmals
+        \item QoS 2 $\Rightarrow$ Genau einmal ausliefern
+    \end{itemize} 
+\end{frame}
+
+%%% Folie
+\begin{frame}{MQTT Protokoll - Quality Of Service: Nachrichten}
+   \vspace*{-1.5mm}
+   \begin{figure}[!htb]
+       \hspace*{5mm}
+        \includegraphics[scale=0.14]{7-datenaustausch/img/mqtt-qos} 
+    \end{figure}
 \end{frame}
 
 %%% Folie
