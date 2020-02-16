@@ -31,15 +31,75 @@
 \end{frame}
 
 
+
+
+
+%-------------------------------------------------------------------------------
+\section{MQTT und das Internet of Things}
+%-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}{MQTT Einführung}
+    TODO
+\end{frame}
+
+%%% Folie
+\begin{frame}{MQTT Eigenschaften}
+    TODO
+\end{frame}
+
+
+%%% Folie
+\begin{frame}{MQTT Architektur}
+      \begin{figure}[!htb]
+  \hspace*{5mm}
+        \includegraphics[scale=0.15]{7-datenaustausch/img/mqttarch} 
+    \end{figure}
+\end{frame}
+
+
+%%% Folie
+\begin{frame}{MQTT Topics}
+    TODO
+\end{frame}
+
+%%% Folie
+\begin{frame}{MQTT Protokoll}
+    TODO 
+    QoS
+\end{frame}
+
+%%% Folie
+\begin{frame}{MQTT Protokoll}
+    TODO 
+   Last Will, Testament, Retain
+\end{frame}
+
+
+\begin{frame}{MQTT Libraries}
+    TODO
+\end{frame}
+
+
 %-------------------------------------------------------------------------------
 \section{Adafruit IO}
 %-------------------------------------------------------------------------------
 
-%%% Folie
-\begin{frame}{Folie}
-\cite{Adafruit MQTTFx Setup}
-
+\begin{frame}{Adafruit IO Einführung}
+ \begin{itemize}
+        \setlength{\itemindent}{1.4in}
+        \item [\textbf{Adafruit IO Einführung}]
+    \end{itemize}
+    \begin{itemize}
+        \item Cloud Backend zur einfachen Anbindung von IoT Devices wie Arduino, Raspberry PI
+        \item Kann über MQTT Client und REST  API angesprochen werden  $\Rightarrow$ viele weitere Devices und Programmiersprachen werden somit unterstützt!
+        \item Einfach konfigurierbare Dashboards mit verschiedenen Widgets
+        \item \textbf{Trigger} Funktionen, um Aktionen in Drittsystemen auszulösen (E-mail senden etc.)
+        \item Integration bestehender Cloud Services wie Wetterdaten oder If-This-Than-That
+        \item Daten zwischen eigenen Projekten und Devices austauschen
+    \end{itemize}    
 \end{frame}
+
 
 \begin{frame}{Limits in der Freien Version}
 
@@ -48,6 +108,21 @@
         \includegraphics[scale=0.6]{7-datenaustausch/img/adafruit-limits} 
     \end{figure}
 \end{frame}
+
+%%% Folie
+\begin{frame}{MQTT Client Integration}
+        \begin{itemize}
+        \setlength{\itemindent}{4.1in}
+        \item [\textbf{Einrichtung eines Testclients (siehe auch:  \cite{Adafruit MQTTFx Setup}) }]
+    \end{itemize}
+      \vspace*{-5mm}
+
+  \begin{figure}[!htb]
+  \hspace*{2mm}
+        \includegraphics[scale=0.4]{7-datenaustausch/img/mqttfxsettings} 
+    \end{figure}
+\end{frame}
+
 
 %%% Folie
 \begin{frame}{Unterschiede im Topic Handling}
@@ -59,10 +134,9 @@
         \item Statt der Topic Struktur aus MQTT werden im Adafruit IO sogenannte  \textbf{Feeds} verwendet \cite{io.adafruit.com/api/docs}
         \item Feeds sind \quotes{mehr als nur Topics}: Metadaten, Nachrichten, Lizenzinformation, Sichbarkeitskontrolle (private vs. public)
         \item Feeds können auch per REST API bedient werden:  \texttt{POST/api/v2/{username}/feeds} mit Inhalt z.B. Name/Beschreibung des Feeds
-        \item In Adafruit gestalten sich Topics nach folgender Semantik: \texttt{userName/feeds/groupName.feedkey}
-    \end{itemize}
-
-    
+        \item In Adafruit gestalten sich Topics nach folgender Semantik: \texttt{userName/feeds/groupName.feedkey} \cite{Adafruit und MQTT Topics}
+        \item Achtung: \underline{weitere} Slashes in Namen von Topics werden automatisch ersetzt durch \texttt{-slash-}
+    \end{itemize}    
 \end{frame}
 
 %%% Folie
@@ -80,25 +154,16 @@
 		\caption{Pub/Sub in Adafruit}
 		\label{fig:pubsubadafruit}
 	\end{minipage}
-\end{figure}
-
-
+	\end{figure}
 \end{frame}
 
 
-
-
-%-------------------------------------------------------------------------------
-\section{MQTT und das Internet of Things}
-%-------------------------------------------------------------------------------
-
-%%% Folie
-\begin{frame}{Folie}
-    TODO
+\begin{frame}{Adafruit IO Dashboard: Live DEMO}
+      \centering
+  	\begin{Huge}
+      		\textbf{LIVE DEMO}
+	\end{Huge}
 \end{frame}
 
-%%% Folie
-\begin{frame}{Folie}
-    TODO
-\end{frame}
+
 
