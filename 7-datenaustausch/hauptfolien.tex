@@ -64,7 +64,7 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{MQTT Protokoll - Quality Of Servic: Definition}
+\begin{frame}{MQTT Protokoll - Quality Of Service: Definition}
    \begin{itemize}
         \setlength{\itemindent}{1.4in}
         \item [\textbf{Quality of Service (QoS}]
@@ -75,6 +75,7 @@
         \item QoS 0 $\Rightarrow$ Vielleicht ausliefern
         \item QoS 1 $\Rightarrow$ Einmal ausliefern oder auch mehrmals
         \item QoS 2 $\Rightarrow$ Genau einmal ausliefern
+        \item Für QoS 1 und QoS 2 sind im Allgemeinen \textbf{Persistente Sessions} nötig, um den Zustand der Kommunikation stabil wiederherstellen zu können nach z.B. Reboot oder Downtime
     \end{itemize} 
 \end{frame}
 
@@ -94,6 +95,7 @@
 \end{frame}
 
 
+%%% Folie
 \begin{frame}{MQTT Libraries}
     TODO
 \end{frame}
@@ -103,6 +105,7 @@
 \section{Adafruit IO}
 %-------------------------------------------------------------------------------
 
+%%% Folie
 \begin{frame}{Adafruit IO Einführung}
  \begin{itemize}
         \setlength{\itemindent}{1.4in}
@@ -119,8 +122,8 @@
 \end{frame}
 
 
+%%% Folie
 \begin{frame}{Limits in der Freien Version}
-
   \begin{figure}[!htb]
   \hspace*{5mm}
         \includegraphics[scale=0.6]{7-datenaustausch/img/adafruit-limits} 
@@ -139,6 +142,26 @@
   \hspace*{2mm}
         \includegraphics[scale=0.4]{7-datenaustausch/img/mqttfxsettings} 
     \end{figure}
+\end{frame}
+
+%%% Folie
+\begin{frame}{MQTT-over-WebSocket im Browser}
+      \vspace*{-1.5mm}
+    \begin{figure}
+	\centering
+	\parbox{5cm}{
+		\includegraphics[scale=0.19]{7-datenaustausch/img/websocket-mqtt-min}
+		\caption{MQTT-over-Websockets Topic Subscription}
+		\label{fig:wsmqttmin}
+		}
+	\qquad
+	\begin{minipage}{5cm}
+		\includegraphics[scale=0.27]{7-datenaustausch/img/websocket-mqtt}
+		\caption{JS und HTML Code}
+		\label{fig:wsmqtt}
+	\end{minipage}
+	\end{figure}
+
 \end{frame}
 
 
@@ -175,7 +198,12 @@
 	\end{figure}
 \end{frame}
 
+%%% Folie
+\begin{frame}{Adafruit Code Beispiel}
+     TODO. Thread mit Pub/sub
+ \end{frame}
 
+%%% Folie
 \begin{frame}{Adafruit IO Dashboard: Live DEMO}
       \centering
   	\begin{Huge}
