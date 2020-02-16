@@ -60,7 +60,18 @@
 
 %%% Folie
 \begin{frame}{MQTT Topics}
-    TODO
+     \begin{itemize}
+        \setlength{\itemindent}{1.1in}
+        \item [\textbf{MQTT Topics}]
+    \end{itemize}
+    \begin{itemize}
+        \item Kommunikationskanal von einem oder mehreren Sender zu einem oder mehreren Empfängern
+        \item Pfadartige hierarchische Struktur -  ähnlich zu Active Directory (Firma/Standort/Abteilung/Gebäude/...) oder File Explorer  (Laufwerk/Ordner/Unterordner/...) 
+        \item Kann Wildcards enthalten:  \texttt{+} $\Rightarrow$ ersetze ein Pfadelement ,  \texttt{\#}  $\Rightarrow$ ersetze alle Pfadelemente ab der Position
+        \item Empfohlene Topic Struktur:   Besitzer/Sender/Empfänger/Umgebung/Hauptthema/Unterthema/... , z.B.   \texttt{projektname/raspi01/server12/test/messdaten/lautstaerke}
+        \item Umgekehrte Richtung:   \texttt{projektname/server12/raspi01/test/konfiguration/update}
+        \item Hinweis: MQTT v5 sieht ein Antwort Topic vor
+    \end{itemize}    
 \end{frame}
 
 %%% Folie
