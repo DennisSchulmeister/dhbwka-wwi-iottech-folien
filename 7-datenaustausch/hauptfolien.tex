@@ -40,12 +40,33 @@
 
 %%% Folie
 \begin{frame}{MQTT Einführung}
-    TODO
+     \begin{itemize}
+        \setlength{\itemindent}{0.4in}
+        \item [\textbf{MQTT}]
+    \end{itemize}
+    \begin{itemize}
+        \item Steht für \textbf{Message Queue Telemetry Transport}
+        \item De-Facto-Standard im Bereich des IoT
+        \item Publish/Subscribe Messaging Protokoll für verteilte Architektur, die gut skalieren kann und viele Devices unterstützt (Fan-Out)
+        \item Version 3 (2014) und Version 5 (2019) aktuell in Verwendung $\Rightarrow$ Viele Libraries noch mit Version 3, aber wichtige Features wie \textbf{Shared Subscriptions} erst in Version 5 verfügbar
+    \end{itemize}  
 \end{frame}
 
 %%% Folie
 \begin{frame}{MQTT Eigenschaften}
-    TODO
+         \begin{itemize}
+        \setlength{\itemindent}{1.28in}
+        \item [\textbf{MQTT Eigenschaften}]
+    \end{itemize}
+    \begin{itemize}
+        \item Asynchrones Protokoll  $\Rightarrow$  kein Senden und direktes Erwarten der Antwort (wie bspw. bei HTTP-basierten Protokollen wie REST oder SOAP)
+        \item Clients müssen sich nicht kennen und reagieren nur auf Nachrichten oder senden welche    
+        \item Minimalistische Befehlsliste genügt für viele Szenarien: \texttt{CONNECT, PUBLISH, SUBSCRIBE,  DISCONNECT}
+        \item Binäres Protokoll  $\Rightarrow$  Aber viele Clients können auch mit JSON komfortabel umgehen
+        \item Erfordert ständige Verbindung von Clients zum Server, der \textbf{MQTT-Broker} genannt wird $\Rightarrow$ Keep Alive einfach zu monitoren
+        \item Beim Senden vieler kurzer Nachrichten großer Performance-Gewinn gegenüber z. B. HTTP
+        \item Verschlüsselung via TLS möglich, sowie User Credentials bei der Verbindung
+    \end{itemize}  
 \end{frame}
 
 
@@ -65,12 +86,13 @@
         \item [\textbf{MQTT Topics}]
     \end{itemize}
     \begin{itemize}
-        \item Kommunikationskanal von einem oder mehreren Sender zu einem oder mehreren Empfängern
+        \item Kommunikationskanal: 1-to-1 oder 1-to-many
         \item Pfadartige hierarchische Struktur -  ähnlich zu Active Directory (Firma/Standort/Abteilung/Gebäude/...) oder File Explorer  (Laufwerk/Ordner/Unterordner/...) 
         \item Kann Wildcards enthalten:  \texttt{+} $\Rightarrow$ ersetze ein Pfadelement ,  \texttt{\#}  $\Rightarrow$ ersetze alle Pfadelemente ab der Position
         \item Empfohlene Topic Struktur:   Besitzer/Sender/Empfänger/Umgebung/Hauptthema/Unterthema/... , z.B.   \texttt{projektname/raspi01/server12/test/messdaten/lautstaerke}
         \item Umgekehrte Richtung:   \texttt{projektname/server12/raspi01/test/konfiguration/update}
-        \item Hinweis: MQTT v5 sieht ein Antwort Topic vor
+        \item Hinweis: MQTT v5 sieht ein Antwort-Topic vor
+        \item Berechtigung über \textbf{ACL Dateien} (Access Control List) via Blacklisting/Whitelisting oder alternativ über Rollen, die bspw. über  LDAP-Gruppen gesteuert werden
     \end{itemize}    
 \end{frame}
 
