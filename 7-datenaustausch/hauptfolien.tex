@@ -61,7 +61,7 @@
 %%% Folie
 \begin{frame}{MQTT Topics}
      \begin{itemize}
-        \setlength{\itemindent}{0.75in}
+        \setlength{\itemindent}{0.85in}
         \item [\textbf{MQTT Topics}]
     \end{itemize}
     \begin{itemize}
@@ -77,7 +77,7 @@
 %%% Folie
 \begin{frame}{MQTT Protokoll - Quality Of Service: Definition}
    \begin{itemize}
-        \setlength{\itemindent}{1.4in}
+        \setlength{\itemindent}{1.45in}
         \item [\textbf{Quality of Service (QoS}]
     \end{itemize}
     \begin{itemize}
@@ -100,9 +100,30 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{MQTT Protokoll}
-    TODO 
-   Last Will, Testament, Retain
+\begin{frame}{MQTT Protokoll: Retain Flag}   
+      \begin{itemize}
+        \setlength{\itemindent}{0.75in}
+        \item [\textbf{Retain Flag}]
+    \end{itemize}
+    \begin{itemize}
+        \item Flag für Nachrichten, damit diese am Topic erhalten bleiben $\Rightarrow$  spätere Subscriber bekommen diese als \quotes{Bootstrap Nachricht}, um sich über die letzte bekannte ordnungsgemäße Nachricht zu informieren
+        \item Use Case: Status kontinuierlich überwachen
+        \item Es gibt nur eine pro Topic
+        \item Löschen über Nachricht mit leerem Content ohne Flag an das Topic
+     \end{itemize} 
+\end{frame}
+
+%%% Folie
+\begin{frame}{MQTT Protokoll: Last Will Testament}   
+         \begin{itemize}
+        \setlength{\itemindent}{1.2in}
+        \item [\textbf{Last Will Testament}]
+    \end{itemize}
+    \begin{itemize}
+        \item Nachricht, die beim Herstellen der Verbindung mitgegeben werden kann
+         \item Wird an alle Subscriber des jeweiligen Topics gesendet
+         \item Use Case: Client hat die Verbindung verloren und andere Clients müssen darauf reagieren können
+    \end{itemize} 
 \end{frame}
 
 
