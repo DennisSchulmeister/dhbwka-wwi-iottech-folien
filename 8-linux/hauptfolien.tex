@@ -18,20 +18,100 @@
 
 %%% Folie
 \begin{frame}{Lernziele}
-    \begin{itemize}
-        \item Den Bootvorgang des Raspberry PI kennen und verstehen
-        \item Die wichtigsten Verzeichnisse des Linux FSH kennen und verstehen
-        \item Eigene einfache SystemD-Servicedefinitionen schreiben können
-        \item Eigene Linux Images auf Basis von Ubuntu Core erzeugen können
-        \item Eigene Python-Programme in Snaps für Ubuntu Core verpacken können
-        %\item Erklären können, wie mit Buildroot einfache Linux Images gebaut werden
-        %\item Begründete Auswahl zwischen Buildroot und Ubuntu Core treffen können
-    \end{itemize}
+    \begin{block}{Linux auf dem Raspberry Pi}
+        \begin{itemize}
+            \item Linux im Vergleich zu anderen Betriebssystemen einordnen können
+            \item Den typischen Aufbau eines Linux-Systems beschreiben können
+            \item Den Filesystem Hierachy Standard kennen und verstehen
+            \item Den Bootvorgang des Raspberry Pi vollständig erklären können
+            \item Raspbian für eigene kleine Projekte konfigurieren können
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Erstellung eigener Linux-Systeme}
+        \begin{itemize}
+            \item Die Vorgehensweise beim Bau eigener Images kennen und verstehen
+            \item Ein geeignetes Toolkit zum Bau von Linux-Systemen auswählen können
+            \item Eigene Linux Images mit den vorgestellten Techniken erzeugen können
+            \item Eigene Programme in die selbst erstellten Images integrieren können
+        \end{itemize}
+    \end{block}
 \end{frame}
 
+%%% Folie
+\begin{frame}{Inhaltsübersicht}
+    \tikzset{
+        MyTitle/.style={
+            align=left,
+            text=blue!65!purple,    % 65% blue, 35% purple
+            anchor=north west,
+            font=\large,
+        },
+        MyNode1/.style={
+            below=2pt,
+            align=left,
+            anchor=north west,
+            font=\footnotesize
+        },
+        MyNode2/.style={
+            above=2pt,
+            align=left,
+            anchor=south west,
+            font=\footnotesize
+        },
+        MyNumber/.style={
+            text=white,
+            font=\scriptsize
+        }
+    }
+
+    % Vgl. https://tex.stackexchange.com/a/18201
+    \pgfdeclarelayer{bg}
+    \pgfsetlayers{bg, main}
+
+    \begin{columns}
+        \column{\dimexpr\paperwidth-1.4cm}
+        \begin{tikzpicture}
+            % Linux auf dem Rasbperry Pi
+            \node[MyTitle] at (0,0) {Linux auf dem Rasbperry Pi};
+            \filldraw[fill=darkred]
+                ( 0,-0.6) circle (4pt) node[MyNumber](pi-1){1}  node[MyNode1] {Anforderungen an \\ eingebettete Betriebssysteme}
+                ( 4,-0.6) circle (4pt) node[MyNumber](pi-2){2}  node[MyNode1] {Linux im Vergleich zu \\ anderen Betriebssystemen}
+                ( 8,-0.6) circle (4pt) node[MyNumber](pi-3){3}  node[MyNode1] {Typischer Aufbau \\ eines Linux-Systems};
+            \filldraw[fill=gray!50]
+                (11,-0.6) circle (4pt) node[](pi-tr){}
+                (11,-2.6) circle (4pt) node[](pi-br){};
+            \filldraw[fill=darkred]
+                ( 8,-2.6) circle (4pt) node[MyNumber](pi-4){4}  node[MyNode2] {Der Bootvorgang des \\ Raspberry Pi im Detail}
+                ( 4,-2.6) circle (4pt) node[MyNumber](pi-5){5}  node[MyNode2] {Benutzer- und Netzwerk- \\ konfiguration in Raspbian}
+                ( 0,-2.6) circle (4pt) node[MyNumber](pi-6){6}  node[MyNode2] {Konfiguration des \\ Raspbian-Startvorgangs};
+
+            % Erstellung eigener Linux-Systeme
+            \node[MyTitle] at (0,-3.4) {Erstellung eigener Linux-Systeme};
+            \filldraw[fill=darkred]
+                ( 0,-4.0) circle (4pt) node[MyNumber](mk-1){7}  node[MyNode1] {Generelles Vorgehen beim \\ Bau eines Firmare-Images}
+                ( 4,-4.0) circle (4pt) node[MyNumber](mk-2){8}  node[MyNode1] {Vergleich verschiedener \\ Baukästen für Linux}
+                ( 8,-4.0) circle (4pt) node[MyNumber](mk-3){9}  node[MyNode1] {Linux Images bauen \\ mit Rasbperry Pi Gen};
+            \filldraw[fill=gray!50]
+                (11,-4.0) circle (4pt) node[](mk-tr){}
+                (11,-6.0) circle (4pt) node[](mk-br){};
+            \filldraw[fill=darkred]
+                ( 8,-6.0) circle (4pt) node[MyNumber](mk-4){10} node[MyNode2] {Linux Images bauen \\ mit Buildroot}
+                ( 4,-6.0) circle (4pt) node[MyNumber](mk-5){11} node[MyNode2] {Linux Images bauen \\ mit Ubuntu Core}
+                ( 0,-6.0) circle (4pt) node[MyNumber](mk-6){12} node[MyNode2] {Fazit und Ausblick};
+
+            % Verbindungslinien
+            \begin{pgfonlayer}{bg}
+                \draw (pi-1) -- (pi-2) -- (pi-3) -- (pi-tr) -- (pi-br) -- (pi-4) -- (pi-5) -- (pi-6);
+                \draw[gray, densely dashed] (pi-6) -- (mk-1);
+                \draw (mk-1) -- (mk-2) -- (mk-3) -- (mk-tr) -- (mk-br) -- (mk-4) -- (mk-5) -- (mk-6);
+            \end{pgfonlayer}
+        \end{tikzpicture}
+    \end{columns}
+\end{frame}
 
 %-------------------------------------------------------------------------------
-\section{Abschnitt}
+\section{Linux auf dem Raspberry Pi}
 %-------------------------------------------------------------------------------
 
 %%% Folie
@@ -50,7 +130,7 @@
 \end{frame}
 
 %-------------------------------------------------------------------------------
-\section{Abschnitt}
+\section{Erstellung eigener Linux-Systeme}
 %-------------------------------------------------------------------------------
 
 %%% Folie
