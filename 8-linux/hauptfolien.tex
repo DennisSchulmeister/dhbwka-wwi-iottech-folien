@@ -165,6 +165,7 @@
             \item Verwaltung der Hardwareressourcen
             \item Unterstützung von Multi-Tasking
             \item Datenaustausch innerhalb des Systems
+            \item Sparsamer Ressourcenverbrauch
         \end{itemize}
 
         % IoT-Devices
@@ -173,7 +174,7 @@
             \item Datenaustausch über das Internet
             \item Zugriffsbeschränkungen, Firewalls, Sicherheit
             \item Lokale Datenhaltung
-            \item Zentrales Monitoring
+            \item Monitoring und Systemverwaltung
         \end{itemize}
 
         % Sonstige Computer
@@ -214,6 +215,23 @@
 \footnotesize
 
 \begin{frame}[allowframebreaks]{Typischer Aufbau eines Linux-Systems}
+    \begin{columns}
+        \column{.45\textwidth}
+        \begin{center}
+            \includegraphics[width=\textwidth]{8-linux/img/partition-boot}
+            \smallskip
+            Bootpartition des Raspberry Pi
+        \end{center}
+
+        \column{.45\textwidth}
+        \begin{center}
+            \includegraphics[width=\textwidth]{8-linux/img/partition-system}
+            \smallskip
+            Systempartition des Raspberry Pi
+        \end{center}
+    \end{columns}
+
+    \framebreak
     \includegraphics[width=\textwidth]{8-linux/img/linux-aufbau}
     \smallskip
 
