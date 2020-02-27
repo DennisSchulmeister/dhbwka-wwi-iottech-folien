@@ -243,7 +243,6 @@
 %%% Folie
 {
 \footnotesize
-\setlength{\leftmargini}{1.2em}
 
 \begin{frame}[allowframebreaks]{Benutzer- und Rechteverwaltung unter Linux}
     \begin{columns}[onlytextwidth]
@@ -254,18 +253,24 @@
         \parbox{\linewidth}{
             Alle Einträge im Dateisystem sind immer genau einem Benutzerkonto
             und einer Benutzergruppe zugeordnet. Zusätzlich besitzen sie ein
-            Bit-Feld mit Zugriffsrechten für den jeweiligen Benutzer, alle
-            Benutzer der jeweiligen Benutzergruppe sowie den Rest der Welt.
+            Bit-Feld mit Zugriffsrechten für
+
+            \begin{itemize}
+                \item den Benutzer,
+                \item die Benutzergruppe,
+                \item den Rest der Welt.
+            \end{itemize}
+
             Über dieses Feld wird gesteuert, ob Lese-, Schreib- oder ausführende
             Zugriffe erlaubt sind.
 
-            \bigskip
+            \medskip
 
             \glqq{}Ausführen\grqq{} bedeutet bei einer Datei, diese als Programm
             zu starten. Bei einem Verzeichnis bedeutet es, die Inhalte des
             Verzeichnisses zu sehen.
 
-            \bigskip
+            \medskip
 
             Die Berechtigungsprüfung wird immer mit dem Benutzerkonto durchgeführt,
             unter dessen Namen ein zugreifendes Programm läuft.
@@ -274,7 +279,6 @@
 
     \medskip
     \textbf{Wichtige Befehle}
-    \smallskip
 
     \begin{columns}[onlytextwidth]
         \column{.33\textwidth}
@@ -295,10 +299,10 @@
     \end{center}
 
     \parbox{\linewidth}{
-        Die Benutzerkonten und Benutzergruppen sind in den beiden Dateien
+        Die Benutzerkonten und Benutzergruppen sind in den Dateien
         \texttt{/etc/passwd} und \texttt{/etc/group} definiert. Jeder
-        Benutzer bzw. jede Benutzergruppe bekommen hier eine numerische ID
-        zugewiesen, die nach folgendem Schema vergeben wird:
+        Benutzer bzw. jede Benutzergruppe bekommt hier eine numerische ID
+        zugewiesen, die sehr oft nach folgendem Schema vergeben wird:
     }
 
     \medskip
@@ -322,22 +326,24 @@
 
     \medskip
     \textbf{Wichtige Befehle}
+    {
+        \setlength{\leftmargini}{1.2em}
+        \begin{columns}[T, onlytextwidth]
+            \column{.5\textwidth}
+            \begin{itemize}
+                \item \texttt{adduser}: Neues Benutzerkonto anlegen
+                \item \texttt{deluser}: Benutzerkonto löschen
+                \item \texttt{usermod}: Benutzerkonte bearbeiten
+            \end{itemize}
 
-    \begin{columns}[T, onlytextwidth]
-        \column{.5\textwidth}
-        \begin{itemize}
-            \item \texttt{adduser}: Neues Benutzerkonto anlegen
-            \item \texttt{deluser}: Benutzerkonto löschen
-            \item \texttt{usermod}: Benutzerkonte bearbeiten
-        \end{itemize}
-
-        \column{.5\textwidth}
-        \begin{itemize}
-            \item \texttt{passwd}: Benutzerpasswort ändern
-            \item \texttt{groupadd}: Neue Benutzergruppe anlegen
-            \item \texttt{delgroup}: Benutzergruppe löschen
-        \end{itemize}
-    \end{columns}
+            \column{.5\textwidth}
+            \begin{itemize}
+                \item \texttt{passwd}: Benutzerpasswort ändern
+                \item \texttt{groupadd}: Neue Benutzergruppe anlegen
+                \item \texttt{delgroup}: Benutzergruppe löschen
+            \end{itemize}
+        \end{columns}
+    }
 \end{frame}
 }
 
