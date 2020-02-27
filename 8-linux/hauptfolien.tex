@@ -41,13 +41,15 @@
 
 %%% Folie
 \begin{frame}{Lernziele}
-    \begin{block}{Linux auf dem Raspberry Pi}
+    \begin{block}{Bestandteile eines Linux-Systems}
         \begin{itemize}
-            \item Linux im Vergleich zu anderen Betriebssystemen einordnen können
             \item Den typischen Aufbau eines Linux-Systems beschreiben können
             \item Den Filesystem Hierarchy Standard kennen und verstehen
+            \item Die Benutzer- und Rechteverwaltung von Linux nutzen können
+            \item Das Partitionsschema des Raspberry Pi kennen und verstehen
             \item Den Bootvorgang des Raspberry Pi vollständig erklären können
-            \item Raspbian für eigene kleine Projekte konfigurieren können
+            \item Die Aufgaben und Funktionsweise des Init-Systems erklären können
+            \item Eigene Python-Programme installieren und automatisch starten
         \end{itemize}
     \end{block}
 
@@ -95,19 +97,19 @@
     \begin{columns}
         \column{\dimexpr\paperwidth-1.4cm}
         \begin{tikzpicture}
-            % Linux auf dem Rasbperry Pi
-            \node[MyTitle] at (0,0) {Linux auf dem Rasbperry Pi};
+            % Bestandteile eines Linux-Systems
+            \node[MyTitle] at (0,0) {Bestandteile eines Linux-Systems};
             \filldraw[fill=darkred]
-                ( 0,-0.6) circle(4pt) node(pi-1){} node[MyNumber]{1}  node[MyNode1]{Anforderungen an \\ das Betriebssystem}
-                ( 4,-0.6) circle(4pt) node(pi-2){} node[MyNumber]{2}  node[MyNode1]{Linux im Vergleich zu \\ anderen Betriebssystemen}
-                ( 8,-0.6) circle(4pt) node(pi-3){} node[MyNumber]{3}  node[MyNode1]{Typischer Aufbau \\ eines Linux-Systems};
+                ( 0,-0.6) circle(4pt) node(pi-1){} node[MyNumber]{1}  node[MyNode1]{TODO}   %%% TODO
+                ( 4,-0.6) circle(4pt) node(pi-2){} node[MyNumber]{2}  node[MyNode1]{TODO}
+                ( 8,-0.6) circle(4pt) node(pi-3){} node[MyNumber]{3}  node[MyNode1]{TODO};
             \filldraw[fill=gray!50]
                 (11,-0.6) circle(4pt) node(pi-tr){}
                 (11,-2.6) circle(4pt) node(pi-br){};
             \filldraw[fill=darkred]
-                ( 8,-2.6) circle(4pt) node(pi-4){} node[MyNumber]{4}  node[MyNode2]{Der Bootvorgang des \\ Raspberry Pi im Detail}
-                ( 4,-2.6) circle(4pt) node(pi-5){} node[MyNumber]{5}  node[MyNode2]{Benutzer- und Netzwerk- \\ konfiguration in Raspbian}
-                ( 0,-2.6) circle(4pt) node(pi-6){} node[MyNumber]{6}  node[MyNode2]{Konfiguration des \\ Raspbian-Startvorgangs};
+                ( 8,-2.6) circle(4pt) node(pi-4){} node[MyNumber]{4}  node[MyNode2]{TODO}
+                ( 4,-2.6) circle(4pt) node(pi-5){} node[MyNumber]{5}  node[MyNode2]{TODO}
+                ( 0,-2.6) circle(4pt) node(pi-6){} node[MyNumber]{6}  node[MyNode2]{TODO};
 
             % Erstellung eigener Linux-Systeme
             \node[MyTitle] at (0,-3.4) {Erstellung eigener Linux-Systeme};
@@ -134,169 +136,296 @@
 \end{frame}
 
 %-------------------------------------------------------------------------------
-\section{Linux auf dem Raspberry Pi}
+\section{Bestandteile eines Linux-Systems}
 %-------------------------------------------------------------------------------
 
 %%% Folie
-% TODO: Anfordderungen besser und vollständiger formulieren?
-{
-\small
-\setlength{\leftmargini}{1.2em}
+\begin{frame}{Beispiele für Linux-basierte Betriebssysteme}
+    \parbox{\linewidth}{
+        \footnotesize
+        Linux bezeichnet im engeren Sinne kein Betriebssystem sondern nur einen
+        Kernel, der die Grundlage für viele Betriebssysteme (Linux-Distributionen)
+        auf den unterschiedlichsten Computersystemen bildet. Linux kann dabei auf
+        nahezu jeder Hardware betrieben werden.
+        \medskip
+    }
 
-\begin{frame}{Anforderungen an das Betriebssystem}
-    \begin{columns}[T]
-        \column{.33\textwidth}
-        \begin{block}{Embedded Devices}
-        \end{block}
-
-        \column{.33\textwidth}
-        \begin{block}{IoT-Devices}
-        \end{block}
-
-        \column{.33\textwidth}
-        \begin{block}{Sonstige Computer}
-        \end{block}
-    \end{columns}
-
-    \begin{columns}[T]
-        % Embedded Devices
-        \column{.33\textwidth}
-        \begin{itemize}
-            \item Verwaltung der Hardwareressourcen
-            \item Unterstützung von Multi-Tasking
-            \item Datenaustausch innerhalb des Systems
-            \item Sparsamer Ressourcenverbrauch
-        \end{itemize}
-
-        % IoT-Devices
-        \column{.33\textwidth}
-        \begin{itemize}
-            \item Datenaustausch über das Internet
-            \item Zugriffsbeschränkungen, Firewalls, Sicherheit
-            \item Lokale Datenhaltung
-            \item Monitoring und Systemverwaltung
-        \end{itemize}
-
-        % Sonstige Computer
-        \column{.33\textwidth}
-        \begin{itemize}
-            \item Breite Hardwareunterstützung
-            \item Mehrbenutzerbetrieb
-            \item Flexibilität und Konfigurierbarkeit
-            \item Umfangreiche Anwendungsfunktionen
-        \end{itemize}
-    \end{columns}
-
-    \vfill
-
-    \begin{columns}[T]
-        % Embedded Devices
-        \column{.33\textwidth}
-        \includegraphics[width=\textwidth]{8-linux/img/os-embedded}
-
-        % IoT-Devices
-        \column{.33\textwidth}
-        \includegraphics[width=\textwidth]{8-linux/img/os-iot}
-
-        % Sonstige Computer
-        \column{.33\textwidth}
-        \includegraphics[width=\textwidth]{8-linux/img/os-workstation}
-    \end{columns}
-\end{frame}
-}
-
-%%% Folie
-\begin{frame}{Linux im Vergleich zu anderen Betriebssystemen}
-    TODO
+    \includegraphics[width=\textwidth]{8-linux/img/linux-beispiele}
 \end{frame}
 
 %%% Folie
 {
 \footnotesize
+\setlength{\leftmargini}{1.2em}
 
-\begin{frame}[allowframebreaks]{Typischer Aufbau eines Linux-Systems}
-    \begin{columns}
-        \column{.45\textwidth}
-        \begin{center}
-            \includegraphics[width=\textwidth]{8-linux/img/partition-boot}
-            \smallskip
-            Bootpartition des Raspberry Pi
-        \end{center}
+\begin{frame}{Kernel vs. Userland}
+    \parbox{\linewidth}{
+        Linux-basierte Betriebssysteme setzen sich immer aus dem \textbf{Kernel}
+        und dem \textbf{Userland} zusammen. Der Kernel beinhaltet dabei lediglich
+        die Grundfunktionen für Hardwarezugriffe, Multitasking, Speicherverwaltung
+        usw. Alle anderen Teile des Betriebssystems sind Bestandteil des Userlands
+        und können somit stark variieren.
+    }
 
-        \column{.45\textwidth}
-        \begin{center}
-            \includegraphics[width=\textwidth]{8-linux/img/partition-system}
-            \smallskip
-            Systempartition des Raspberry Pi
-        \end{center}
+    \vfill
+
+    {
+        \scriptsize
+
+        \begin{columns}[T,onlytextwidth]
+            \column{.49\textwidth}
+            \begin{itemize}
+                \justifying
+
+                \item \textbf{Bibliotheken:} Von den installierten Programmen
+                benötigte Quellcode-Bibliotheken mit gemeinsamen Funktionen.
+                Zum Beispiel \texttt{libc} oder \texttt{libgtk}.
+
+                \item \textbf{Systemdienste:} Hintergrundjobs und Hilfsprogramme des
+                Betriebssystems. Zum Beispiel NTP-Daemon, Druckerspooler oder die
+                Shell bzw. grafische Desktopumgebung.
+
+                \item \textbf{Anwendungen:} Nicht direkt zum Betriebssystem gehörende,
+                jedoch zur Nutzung durch die Anwender*innen vorgesehene Programme, wie
+                zum Beispiel Webbrowser oder Media Player.
+            \end{itemize}
+
+            \column{.49\textwidth}
+            \begin{itemize}
+                \justifying
+
+                \item \textbf{Variable Daten:} Während dem regulären Systembetrieb
+                anfallende Verwaltungsdaten die Systemprotokolle, temporäre Dateien
+                oder zwischengespeicherte Druckaufträge.
+
+                \item \textbf{Benutzerdaten:} In der Hoheit der Benutzer*innen stehende
+                Dateien, wie zum Beispiel Bilder oder Dokumente.
+            \end{itemize}
+        \end{columns}
+    }
+
+    \vfill
+
+    $\Rightarrow$ \textbf{GNU/Linux:} Linux-Kernel mit GNU-Userland (plus weiteren Bestandteilen)
+    \medskip
+
+    \includegraphics[width=\textwidth]{8-linux/img/linux-bestandteile}
+\end{frame}
+}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}[allowframebreaks]{Der Linux Filesystem Hierarchy Standard}
+    \begin{center}
+        \includegraphics[width=\textwidth]{8-linux/img/fhs-verzeichnisse}
+    \end{center}
+
+    \framebreak
+
+    \begin{columns}[T]
+        \column{.8\textwidth}
+        \includegraphics[width=\textwidth]{8-linux/img/fhs-beispiele}
+
+        \column{.3\textwidth}
+        \parbox{\linewidth}{
+            Aufgrund der konzeptionellen Nähe zu Unix ist unter Linux fast alles
+            eine Datei. Die Konfiguration des Systems erfolgt deshalb genau so
+            durch Editieren von Konfigurationsdateien mit einem Texteditor, wie
+            der Zugriff auf einen Hardwarebaustein nicht viel mehr als das Lesen
+            und Schreiben virtueller Dateien erfordert.
+        }
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\footnotesize
+\setlength{\leftmargini}{1.2em}
+
+\begin{frame}[allowframebreaks]{Benutzer- und Rechteverwaltung}
+    \begin{center}
+        \includegraphics[width=\textwidth]{8-linux/img/rechte-konfiguration}
+    \end{center}
+
+    \parbox{\linewidth}{
+        Ein Linux-System ist immer ein Multi-User-System. In den Dateien
+        \texttt{/etc/passwd} und \texttt{/etc/group} müssen daher mindestens ein
+        Benutzer und eine Benutzergruppe existieren, um eine Anmeldung am System
+        zu ermöglichen. Technisch gesehen werden die Benutzer und Gruppen durch
+        eine nummerische ID anstelle ihrer Klarnamen identifiziert:
+    }
+
+    \medskip
+
+    \begin{tabularx}{\textwidth}{|p{.11\textwidth}|p{.2\textwidth}|X|}
+        \hline
+        \textbf{UID} & \textbf{Bezeichnung} & \textbf{Bedeutung} \\
+        \hline
+
+        0 & Benutzer root & Administrator mit allen Berechtigungen \\
+        \hline
+
+        1 -- 999 & Systembenutzer & Technische Benutzer zur Ausführung der Systemdienste \\
+        \hline
+
+        $\geq$ 1000 & Interaktive Benutzer & Menschliche Benutzer mit Login-Shell \\
+        \hline
+    \end{tabularx}
+
+    \medskip
+    \textbf{Wichtige Befehle}
+    \begin{columns}[T, onlytextwidth]
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item \texttt{adduser}: Neues Benutzerkonto anlegen
+            \item \texttt{deluser}: Benutzerkonto löschen
+            \item \texttt{usermod}: Benutzerkonte bearbeiten
+        \end{itemize}
+
+        \column{.5\textwidth}
+        \begin{itemize}
+            \item \texttt{passwd}: Benutzerpasswort ändern
+            \item \texttt{groupadd}: Neue Benutzergruppe anlegen
+            \item \texttt{delgroup}: Benutzergruppe löschen
+        \end{itemize}
     \end{columns}
 
     \framebreak
-    \includegraphics[width=\textwidth]{8-linux/img/linux-aufbau}
+
+    \begin{columns}[onlytextwidth]
+        \column{.55\textwidth}
+        \includegraphics[width=\textwidth]{8-linux/img/rechte-dateizugriff}
+
+        \column{.4\textwidth}
+        \parbox{\linewidth}{
+            Alle Einträge im Dateisystem sind immer genau einem Benutzerkonto
+            und einer Benutzergruppe zugeordnet. Zusätzlich besitzen sie ein
+            Bit-Feld mit Zugriffsrechten für den jeweiligen Benutzer, alle
+            Benutzer der jeweiligen Benutzergruppe sowie den Rest der Welt.
+            Über dieses Feld wird gesteuert, ob Lese-, Schreib- oder ausführende
+            Zugriffe erlaubt sind.
+
+            \bigskip
+
+            \glqq{}Ausführen\grqq{} bedeutet bei einer Datei, diese als Programm
+            zu starten. Bei einem Verzeichnis bedeutet es, die Inhalte des
+            Verzeichnisses zu sehen.
+
+            \bigskip
+
+            Die Berechtigungsprüfung wird immer mit dem Benutzerkonto durchgeführt,
+            unter dessen Namen ein zugreifendes Programm läuft.
+        }
+    \end{columns}
+
+    \medskip
+    \textbf{Wichtige Befehle}
     \smallskip
 
-    \parbox{\linewidth}{
-        Linux-basierte Betriebssysteme setzen sich immer aus einem \textbf{Kernel}
-        und dem \textbf{Userland} zusammen. Wie für eingebettete Systeme typisch,
-        befinden sich beide beim Raspberry Pi in getrennten Partitionen, wobei die
-        Boot-Partition zusätzlich noch den Bootloader und Konfigurationsdateien zur
-        Initialisierung der Hardware beinhaltet.
-    }
+    \begin{columns}[onlytextwidth]
+        \column{.33\textwidth}
+        \texttt{chown}: Zugeordneten Benutzer/Gruppe ändern
 
-    {
-        \bigskip
-        \scriptsize
+        \column{.33\textwidth}
+        \texttt{chmod}: Bit-Feld mit den Zugriffsrechten ändern
 
-        \begin{columns}[T, onlytextwidth]
-            \column{.49\textwidth}
-            \parbox{\linewidth}{
-                \textbf{Systemdienste:} Systemnahe Programme, Hintergrundjobs und
-                Serverprogramme
-            }
+        \column{.33\textwidth}
+        \texttt{sudo}: Programm unter anderem Benutzer starten
+    \end{columns}
 
-            \column{.49\textwidth}
-            \parbox{\linewidth}{
-                \textbf{Anwendungen:} Zusätzliche Anwendungsprogramme, die keine
-                Systemfunktionen im engeren Sinne erfüllen
-            }
-        \end{columns}
-
-        \medskip
-
-        \begin{columns}[T, onlytextwidth]
-            \column{.49\textwidth}
-            \parbox{\linewidth}{
-                \textbf{Variable Daten:} Während der Benutzung des Systems automatisch
-                anfallende Daten
-            }
-
-            \column{.49\textwidth}
-            \parbox{\linewidth}{
-                \textbf{Benutzerdaten:} Durch den Endanwender erzeugte und verwaltete
-                Daten
-            }
-        \end{columns}
-    }
-
-    \framebreak
-    \includegraphics[width=\textwidth]{8-linux/img/fhs-verzeichnisse}
 \end{frame}
 }
+
+
+% Partitionsschema das Pi (Hinweis auf weitere Partitionen und /etc/fstab)
+% Bootvorgang Pi, pstree
+% PID 1. Beispiele
+% Fallbeispiel: Eigenes Skript starten
+
+% Ausblick: Weitere Linux-Konzepte
+
+
+%%%% Folie
+%{
+%\footnotesize
+
+%\begin{frame}[allowframebreaks]{Typischer Aufbau eines Linux-Systems}
+    %\begin{columns}
+        %\column{.45\textwidth}
+        %\begin{center}
+            %\includegraphics[width=\textwidth]{8-linux/img/partition-boot}
+            %\smallskip
+            %Bootpartition des Raspberry Pi
+        %\end{center}
+
+        %\column{.45\textwidth}
+        %\begin{center}
+            %\includegraphics[width=\textwidth]{8-linux/img/partition-system}
+            %\smallskip
+            %Systempartition des Raspberry Pi
+        %\end{center}
+    %\end{columns}
+
+    %\framebreak
+    %\includegraphics[width=\textwidth]{8-linux/img/linux-aufbau}
+    %\smallskip
+
+    %\parbox{\linewidth}{
+        %Linux-basierte Betriebssysteme setzen sich immer aus einem \textbf{Kernel}
+        %und dem \textbf{Userland} zusammen. Wie für eingebettete Systeme typisch,
+        %befinden sich beide beim Raspberry Pi in getrennten Partitionen, wobei die
+        %Boot-Partition zusätzlich noch den Bootloader und Konfigurationsdateien zur
+        %Initialisierung der Hardware beinhaltet.
+    %}
+
+    %{
+        %\bigskip
+        %\scriptsize
+
+        %\begin{columns}[T, onlytextwidth]
+            %\column{.49\textwidth}
+            %\parbox{\linewidth}{
+                %\textbf{Systemdienste:} Systemnahe Programme, Hintergrundjobs und
+                %Serverprogramme
+            %}
+
+            %\column{.49\textwidth}
+            %\parbox{\linewidth}{
+                %\textbf{Anwendungen:} Zusätzliche Anwendungsprogramme, die keine
+                %Systemfunktionen im engeren Sinne erfüllen
+            %}
+        %\end{columns}
+
+        %\medskip
+
+        %\begin{columns}[T, onlytextwidth]
+            %\column{.49\textwidth}
+            %\parbox{\linewidth}{
+                %\textbf{Variable Daten:} Während der Benutzung des Systems automatisch
+                %anfallende Daten
+            %}
+
+            %\column{.49\textwidth}
+            %\parbox{\linewidth}{
+                %\textbf{Benutzerdaten:} Durch den Endanwender erzeugte und verwaltete
+                %Daten
+            %}
+        %\end{columns}
+    %}
+
+    %\framebreak
+    %\includegraphics[width=\textwidth]{8-linux/img/fhs-verzeichnisse}
+%\end{frame}
+%}
 
 %%% Folie
 \begin{frame}{Der Bootvorgang des Raspberry Pi im Detail}
     \includegraphics[width=\textwidth]{8-linux/img/pi-bootvorgang}
 \end{frame}
 
-%%% Folie
-\begin{frame}{Benutzer- und Netzwerkkonfiguration in Raspbian}
-    TODO
-\end{frame}
-
-%%% Folie
-\begin{frame}{Konfiguration des Raspbian-Startvorgangs}
-    TODO
-\end{frame}
 
 %-------------------------------------------------------------------------------
 \section{Erstellung eigener Linux-Systeme}
