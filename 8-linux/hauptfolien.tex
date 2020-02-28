@@ -44,12 +44,12 @@
     \begin{block}{Bestandteile eines Linux-Systems}
         \begin{itemize}
             \item Den typischen Aufbau eines Linux-Systems beschreiben können
+            \item Das Partitionsschema des Raspberry Pi kennen und verstehen
             \item Den Filesystem Hierarchy Standard kennen und verstehen
             \item Die Benutzer- und Rechteverwaltung von Linux nutzen können
-            \item Das Partitionsschema des Raspberry Pi kennen und verstehen
             \item Den Bootvorgang des Raspberry Pi vollständig erklären können
             \item Die Aufgaben und Funktionsweise des Init-Systems erklären können
-            \item Eigene Python-Programme installieren und automatisch starten
+            \item Eigene Python-Programme installieren und automatisch starten können
         \end{itemize}
     \end{block}
 
@@ -57,7 +57,7 @@
         \begin{itemize}
             \item Die Vorgehensweise beim Bau eigener Images kennen und verstehen
             \item Ein geeignetes Toolkit zum Bau von Linux-Systemen auswählen können
-            \item Eigene Linux Images mit den vorgestellten Toolkits erzeugen können
+            \item Die groben Schritte zur Nutzung der Toolkits beschreiben können
             \item Eigene Programme in die selbst erstellten Images integrieren können
         \end{itemize}
     \end{block}
@@ -109,7 +109,7 @@
             \filldraw[fill=darkred]
                 ( 8,-2.6) circle(4pt) node(pi-4){} node[MyNumber]{4}  node[MyNode2]{Der Bootvorgang des \\ Raspberry Pi im Detail}
                 ( 4,-2.6) circle(4pt) node(pi-5){} node[MyNumber]{5}  node[MyNode2]{Konfiguration des \\ Linux-Startvorgangs}
-                ( 0,-2.6) circle(4pt) node(pi-6){} node[MyNumber]{6}  node[MyNode2]{Verweis auf weitere, \\ oft benötigte Konzepte};
+                ( 0,-2.6) circle(4pt) node(pi-6){} node[MyNumber]{6}  node[MyNode2]{Fallbeispiel: Automatischer \\ Start eines Pythonprogramms};
 
             % Erstellung eigener Linux-Systeme
             \node[MyTitle] at (0,-3.4) {Erstellung eigener Linux-Systeme};
@@ -212,6 +212,12 @@
     \includegraphics[width=\textwidth]{8-linux/img/linux-bestandteile}
 \end{frame}
 }
+
+
+%%% Folie
+\begin{frame}{Partitionen und Dateisysteme auf dem Raspberry Pi}
+    \includegraphics[width=\textwidth]{8-linux/img/pi-partitionen}
+\end{frame}
 
 %%% Folie
 {
@@ -347,92 +353,134 @@
 \end{frame}
 }
 
-% Partitionsschema das Pi (Hinweis auf weitere Partitionen und /etc/fstab)
-% Bootvorgang Pi, pstree
-% PID 1. Beispiele
-% Fallbeispiel: Eigenes Skript starten
-
-% Ausblick: Weitere Linux-Konzepte
-
-
-%%%% Folie
-%{
-%\footnotesize
-
-%\begin{frame}[allowframebreaks]{Typischer Aufbau eines Linux-Systems}
-    %\begin{columns}
-        %\column{.45\textwidth}
-        %\begin{center}
-            %\includegraphics[width=\textwidth]{8-linux/img/partition-boot}
-            %\smallskip
-            %Bootpartition des Raspberry Pi
-        %\end{center}
-
-        %\column{.45\textwidth}
-        %\begin{center}
-            %\includegraphics[width=\textwidth]{8-linux/img/partition-system}
-            %\smallskip
-            %Systempartition des Raspberry Pi
-        %\end{center}
-    %\end{columns}
-
-    %\framebreak
-    %\includegraphics[width=\textwidth]{8-linux/img/linux-aufbau}
-    %\smallskip
-
-    %\parbox{\linewidth}{
-        %Linux-basierte Betriebssysteme setzen sich immer aus einem \textbf{Kernel}
-        %und dem \textbf{Userland} zusammen. Wie für eingebettete Systeme typisch,
-        %befinden sich beide beim Raspberry Pi in getrennten Partitionen, wobei die
-        %Boot-Partition zusätzlich noch den Bootloader und Konfigurationsdateien zur
-        %Initialisierung der Hardware beinhaltet.
-    %}
-
-    %{
-        %\bigskip
-        %\scriptsize
-
-        %\begin{columns}[T, onlytextwidth]
-            %\column{.49\textwidth}
-            %\parbox{\linewidth}{
-                %\textbf{Systemdienste:} Systemnahe Programme, Hintergrundjobs und
-                %Serverprogramme
-            %}
-
-            %\column{.49\textwidth}
-            %\parbox{\linewidth}{
-                %\textbf{Anwendungen:} Zusätzliche Anwendungsprogramme, die keine
-                %Systemfunktionen im engeren Sinne erfüllen
-            %}
-        %\end{columns}
-
-        %\medskip
-
-        %\begin{columns}[T, onlytextwidth]
-            %\column{.49\textwidth}
-            %\parbox{\linewidth}{
-                %\textbf{Variable Daten:} Während der Benutzung des Systems automatisch
-                %anfallende Daten
-            %}
-
-            %\column{.49\textwidth}
-            %\parbox{\linewidth}{
-                %\textbf{Benutzerdaten:} Durch den Endanwender erzeugte und verwaltete
-                %Daten
-            %}
-        %\end{columns}
-    %}
-
-    %\framebreak
-    %\includegraphics[width=\textwidth]{8-linux/img/fhs-verzeichnisse}
-%\end{frame}
-%}
-
 %%% Folie
 \begin{frame}{Der Bootvorgang des Raspberry Pi im Detail}
     \includegraphics[width=\textwidth]{8-linux/img/pi-bootvorgang}
 \end{frame}
 
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}[allowframebreaks]{Automatischer Start der Systemdienste}
+    \includegraphics[width=\textwidth]{8-linux/img/pid1-pstree}
+    \medskip
+
+    \parbox{\linewidth}{
+        Nachdem der Kernel die Hardware geprüft und initialisiert hat, wird die
+        Verarbeitung zunächst an das Programm \texttt{/linuxrc} in der Initial
+        RAM Disk und von diesem an das Programm \texttt{/sbin/init} im Root
+        Filesystem übergeben. Dieses erhält die Prozess ID 1 und ist dafür
+        verantwortlich, alle anderen Systemdienste zu starten. Es handelt sich
+        dabei um das einzige Programm unter Linux, das niemals beendet werden
+        darf, da sonst das System mit einer Kernel Panic abstürzt.
+    }
+
+    %%
+    \framebreak
+
+    \begin{block}{Variante 1: Einfaches Shellskript}
+        \smallskip
+        \parbox{\linewidth}{
+            Im einfachsten Fall handelt es sich bei \texttt{/sbin/init} um ein
+            einfaches Shellscript wie das folgende. Diese Variante könnte auf
+            besonders schlanken, eingebetteten Systemen zum Einsatz kommen.
+        }
+
+        \lstinputlisting[language=bash]{8-linux/code/init.sh}
+    \end{block}
+
+    %%
+    \framebreak
+
+    \begin{block}{Variante 2: SysV Init mit \texttt{/etc/inittab}}
+        \smallskip
+        \parbox{\linewidth}{
+            Seit Unix System V verwenden werden Systemstart und Stopp in unixoiden
+            System traditionell über die Datei \texttt{/etc/inittab} gesteuert.
+            In dieser Datei werden so genannte Run Level definiert, denen die
+            zu startenden Dienste zugeordnet werden. Zum Beispiel:
+        }
+
+        \vfill
+        \begin{center}
+            \scriptsize
+            \begin{tabularx}{.8\textwidth}{X X}
+                    \textbf{Run Level 0:} Sytem herunterfahren &
+                    \textbf{Run Level 2:} Mehbenutzer-Modus \\
+
+                    \textbf{Run Level 1:} Einzelbenutzer-Modus &
+                    \textbf{Run Level 3:} Grafische Oberfläche \\
+            \end{tabularx}
+        \end{center}
+
+        \vfill
+        \parbox{\linewidth}{
+            Am häufigsten kommt dieses Verfahren heutzutage noch in eingebetteten Systemen vor.
+        }
+
+        \vfill
+        \lstinputlisting[language=bash]{8-linux/code/inittab}
+    \end{block}
+
+    %%
+    \framebreak
+
+    \begin{block}{Variante 3: SystemD als moderner Standard}
+        \smallskip
+        \parbox{\linewidth}{
+            Auf mittleren und großen Systemen hat sich inzwischen SystemD als Standard
+            durchgesetzt. Vorteile sind, dass die zu startenden Dienste in einfachen
+            Servicebeschreibungsdateien definiert werden und der gesamte Systemstart
+            hochgradig parallelisiert abläuft. Debian bzw. Raspbian nutzen deshalb
+            ebenfalls standardmäßig SystemD.
+        }
+
+        \bigskip
+        \textbf{Vereinfachtes Beispiel: \texttt{/lib/systemd/system/sshd.service}}
+        \lstinputlisting[language=Config]{8-linux/code/sshd.service}
+
+        \smallskip
+        \textbf{Befehle zum Aktivieren und Starten des Services}
+        \lstinputlisting[language=bash]{8-linux/code/systemd-befehle.sh}
+    \end{block}
+\end{frame}
+}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Fallbeispiel: Automatischer Start eines Pythonprogramms}
+    \begin{columns}[onlytextwidth]
+        \column{.58\textwidth}
+        \includegraphics[width=\textwidth]{8-linux/img/systemd-beispiel-zipfile}
+
+        \column{.4\textwidth}
+        \parbox{\linewidth}{
+            Die Lösung zur Aufgabe \glqq{}Entwicklung eines IoT-Devices\grqq{}
+            soll unter Raspbian systemweit installiert und beim Hochfahren
+            automatisch gestartet werden. Die Desktop-Umgebung soll aus
+            Performancegründen deaktiviert werden.
+        }
+    \end{columns}
+
+    \bigskip
+    \textbf{Inhalt der Datei \texttt{iotdevice.service}}
+    \lstinputlisting[language=Config]{8-linux/code/iotdevice.service}
+
+    \medskip
+    \textbf{Auszuführende Befehle}
+    \vskip -.5em
+    \begin{columns}[onlytextwidth]
+        \column{.5\textwidth}
+        \lstinputlisting[language=Config, linerange={1-8}]{8-linux/code/iotdevice.install.sh}
+
+        \column{.5\textwidth}
+        \lstinputlisting[language=Config, linerange={9-16}, firstnumber=9]{8-linux/code/iotdevice.install.sh}
+    \end{columns}
+\end{frame}
+}
 
 %-------------------------------------------------------------------------------
 \section{Erstellung eigener Linux-Systeme}

@@ -89,6 +89,17 @@
       {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
 }
 
+% Vgl. https://tex.stackexchange.com/a/266705
+\lstdefinelanguage{Config}
+{
+    morecomment=[s][\color{blue}\bfseries]{[}{]},
+    morecomment=[l]{\#},
+    morecomment=[l]{;},
+    commentstyle=\color{gray}\ttfamily,
+    morekeywords={},
+    otherkeywords={=,:},
+}
+
 % Einzelne Folien aus der Kopfnavigation ausnehmen
 % Vgl. https://tex.stackexchange.com/a/317833
 \makeatletter

@@ -1,0 +1,17 @@
+# Run Level 1: Nur Basisdienste
+:1:sysinit:/bin/mount -t proc proc /proc     # Proc Filesystem einhängen
+:1:sysinit:/bin/mount -o remount,rw /        # Schreibzugriff auf das Root-FS
+:1:sysinit:/bin/mount -a                     # Dateisysteme aus /etc/fstab einhängen
+
+:1:sysinit:/bin/hostname -F /etc/hostname    # Hostname aus /etc/hostname setzen
+:1:sysinit:/usr/bin/loadkeys de-latin1       # Deutsches Tastaturlayout setzen
+
+# Run Level 2: Mit Netzwerkzugriff
+:2:once:/sbin/ifup -a                        # Netzwerk starten
+:2:once:/usr/sbin/sshd                       # Remote Login via SSH zulassen
+:2:shutdown:/sbin/ifdown -a                  # Netzwerk stoppen
+
+# Run Level 3: Login-Konsole
+tty1:3:respawn:/sbin/getty -L tty1 0 vt100   # Login-Konsole auf /dev/tty1
+
+
