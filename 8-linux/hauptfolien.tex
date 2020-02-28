@@ -396,18 +396,18 @@
     \begin{block}{Variante 2: SysV Init mit \texttt{/etc/inittab}}
         \smallskip
         \parbox{\linewidth}{
-            Seit Unix System V verwenden werden Systemstart und Stopp in unixoiden
-            System traditionell über die Datei \texttt{/etc/inittab} gesteuert.
-            In dieser Datei werden so genannte Run Level definiert, denen die
-            zu startenden Dienste zugeordnet werden. Zum Beispiel:
+            Seit Unix System V wertet das Programm \texttt{/sbin/init} traditionell
+            die Datei \texttt{/etc/inittab} aus, um die zu startenden Dienste zu
+            ermitteln. Dort werden so genannte Run Level definiert, die das System
+            beim Hoch- und Runterfahren erreichen kann. Zum Beispiel:
         }
 
         \vfill
         \begin{center}
             \scriptsize
             \begin{tabularx}{.8\textwidth}{X X}
-                    \textbf{Run Level 0:} Sytem herunterfahren &
-                    \textbf{Run Level 2:} Mehbenutzer-Modus \\
+                    \textbf{Run Level 0:} System herunterfahren &
+                    \textbf{Run Level 2:} Mehrbenutzer-Modus \\
 
                     \textbf{Run Level 1:} Einzelbenutzer-Modus &
                     \textbf{Run Level 3:} Grafische Oberfläche \\
