@@ -116,14 +116,15 @@
             \filldraw[fill=darkred]
                 ( 0,-4.0) circle(4pt) node(mk-1){} node[MyNumber]{7}  node[MyNode1]{Generelles Vorgehen beim \\ Bau eines Firmware-Images}
                 ( 4,-4.0) circle(4pt) node(mk-2){} node[MyNumber]{8}  node[MyNode1]{Vergleich verschiedener \\ Baukästen für Linux}
-                ( 8,-4.0) circle(4pt) node(mk-3){} node[MyNumber]{9}  node[MyNode1]{Linux-Images bauen \\ mit Rasbperry Pi Gen};
+                ( 8,-4.0) circle(4pt) node(mk-3){} node[MyNumber]{9}  node[MyNode1]{Linux-Images bauen \\ mit pi-gen};
             \filldraw[fill=gray!50]
                 (11,-4.0) circle(4pt) node(mk-tr){}
                 (11,-6.0) circle(4pt) node(mk-br){};
             \filldraw[fill=darkred]
                 ( 8,-6.0) circle(4pt) node(mk-4){} node[MyNumber]{10} node[MyNode2]{Linux-Images bauen \\ mit Buildroot}
-                ( 4,-6.0) circle(4pt) node(mk-5){} node[MyNumber]{11} node[MyNode2]{Linux-Images bauen \\ mit Ubuntu Core}
-                ( 0,-6.0) circle(4pt) node(mk-6){} node[MyNumber]{12} node[MyNode2]{Fazit und Ausblick};
+                ( 4,-6.0) circle(4pt) node(mk-5){} node[MyNumber]{11} node[MyNode2]{Fazit und Ausblick};
+            \filldraw[fill=gray!50]
+                ( 0,-6.0) circle(4pt) node(mk-6){};
 
             % Verbindungslinien
             \begin{pgfonlayer}{bg}
@@ -383,7 +384,7 @@
         \smallskip
         \parbox{\linewidth}{
             Im einfachsten Fall handelt es sich bei \texttt{/sbin/init} um ein
-            einfaches Shellscript wie das folgende. Diese Variante könnte auf
+            einfaches Shellskript wie das folgende. Diese Variante könnte auf
             besonders schlanken, eingebetteten Systemen zum Einsatz kommen.
         }
 
@@ -488,31 +489,207 @@
 
 %%% Folie
 \begin{frame}{Generelles Vorgehen beim Bau eines Firmware-Images}
-    TODO
+    \parbox{\linewidth}{
+        Direkte Modifikationen im Raspbian-System bieten sich für kleine Projekte
+        an, bei denen nur ein einzelner Raspberry Pi konfiguriert werden soll.
+        Professioneller ist es jedoch, ein individuelles Linux-System auf einem
+        Entwicklungsrechner zu bauen und dieses ohne manuelle Nacharbeiten auf
+        beliebig vielen Raspberry Pis zu nutzen.
+    }
+
+    \vfill
+    \includegraphics[width=\textwidth]{8-linux/img/build-prinzip}
 \end{frame}
 
 %%% Folie
+{
+\scriptsize
+\renewcommand{\arraystretch}{1.8}
+\setlength{\tabcolsep}{0.5em}
+
 \begin{frame}{Vergleich verschiedener Baukästen für Linux}
-    TODO
+    \begin{columns}
+        \column{\dimexpr\paperwidth-28pt}
+        \parbox{\linewidth}{
+            \footnotesize
+            Die folgende Tabelle zeigt eine Übersicht häufig genutzter Baukastensysteme
+            zur Erstellung individueller Linux-Systeme für Rasbperry Pi. Nicht dargestellt
+            sind Yocto Linux, OpenWRT, Fedora CoreOS und viele weitere, in speziellen
+            Bereichen weit verbreitete Distributionen.
+        }
+
+        \medskip
+
+        \begin{tabular}{p{.21\textwidth} p{.25\textwidth} p{.25\textwidth} p{.25\textwidth}}
+            &
+            \includegraphics[width=.10\textwidth]{8-linux/img/Debian-OpenLogo1} &
+            \includegraphics[width=.08\textwidth]{8-linux/img/Buildroot-logo} &
+            \includegraphics[width=.20\textwidth]{8-linux/img/Ubuntu_logo} \\
+
+            &
+            \textbf{pi-gen} &
+            \textbf{Buildroot} &
+            \textbf{Ubuntu Core} \\
+            \hline
+
+            \textbf{Haupteinsatzgebiet} &
+            Raspbian-Entwicklung & % pi-gen
+            Eingebettete Systeme  & % Buildroot
+            Desktop, Server, IoT \\ % Ubuntu Core
+
+            \textbf{Funktionsweise} &
+            Virtuelle Installation vorkompilierter Pakete in ein Image-File & % pi-gen
+            Kompilieren aller Systembestandteile aus den Quellcodes & % Buildroot
+            Virtuelle Installation vorkompilierter Pakete in ein Image-File \\ % Ubuntu Core
+
+            \textbf{Paketformat} &
+            DPKG & % pi-gen
+            Quellcode + Makefiles & % Buildroot
+            Snap \\ % Ubuntu Core
+
+            \textbf{Anzahl Pakete} &
+            ca. 30.000 & % pi-gen
+            ca. 2.500  & % Buildroot
+            ca. 5.000 \\ % Ubuntu Core
+
+            \textbf{Customizbarkeit} &
+            Hoch & % pi-gen
+            Sehr hoch & % Buildroot
+            Gering \\ % Ubuntu Core
+
+            \textbf{OS-Upgrades} &
+            Via APT-Paketverwaltung & % pi-gen
+            Nicht direkt vorgesehen & % Buildroot
+            Via Snapcraft \\ % Ubuntu Core
+
+            \textbf{Init-System} &
+            SystemD, andere möglich & % pi-gen
+            Busybox, SysV oder SystemD & % Buildroot
+            SyetemD \\ % Ubuntu Core
+
+            \textbf{Userland} &
+            GNU plus weitere  & % pi-gen
+            Variabel, meist Busybox & % Buildroot
+            GNU plus weitere \\ % Ubuntu Core
+
+            \textbf{Anwendungsisoliation} &
+            Möglich mit Docker oder LXC & % pi-gen
+            Nicht direkt vorgesehen & % Buildroot
+            Native unterstützt von Snap \\ % Ubuntu Core
+        \end{tabular}
+    \end{columns}
 \end{frame}
+}
 
 %%% Folie
-\begin{frame}{Linux-Images bauen mit Raspberry Pi Gen}
-    TODO
+{
+\small
+
+\begin{frame}{Linux-Images bauen mit pi-gen}
+    \href{https://github.com/RPi-Distro/pi-gen/blob/master/README.md}{\beamergotobutton{README-File}}
+
+    \smallskip
+    \includegraphics[width=\textwidth]{8-linux/img/pi-gen-dateien}
+    \vskip 1em
+
+    {
+        \footnotesize
+        Konfiguration durch Anpassen und Ergänzen der Konfigurationsdateien und Shell-Skripte
+    }
+
+    \begin{columns}[T,onlytextwidth]
+        \column{.5\textwidth}
+        \begin{block}{Start des Build-Vorgangs}
+            \texttt{./build.sh}
+        \end{block}
+
+        \column{.5\textwidth}
+        \begin{block}{Durchschnittliche Laufzeit}
+            \smallskip
+            $\geq$ 30 Minuten konstant
+        \end{block}
+    \end{columns}
 \end{frame}
+}
 
 %%% Folie
+{
+\small
+
 \begin{frame}{Linux-Images bauen mit Buildroot}
-    TODO
-\end{frame}
+        \href{https://buildroot.org/downloads/manual/manual.html}{\beamergotobutton{Offizielles Handbuch}}
+        \href{https://www.wpvs.de/repo/iot-workshop/05-Werkzeuge/Erste\%20Schritte\%20mit\%20Linux,\%20Buildroot\%20und\%20Debootstrap.pdf}{\beamergotobutton{Vorlesungsskript}}
 
-%%% Folie
-\begin{frame}{Linux-Images bauen mit Ubuntu Core}
-    TODO
+        \smallskip
+        \includegraphics[width=\textwidth]{8-linux/img/buildroot-menuconfig}
+        \vskip 1em
+
+        {
+            \footnotesize
+            \setlength{\tabcolsep}{0em}
+
+            \begin{tabular}{p{.4\textwidth} p{.3\textwidth} p{.3\textwidth}}
+                1. Vorlage laden &
+                2. Konfiguration bearbeiten &
+                3. Zusatzdateien bearbeiten \\
+
+                \texttt{make raspberrypi3\_defconfig} &
+                \texttt{make menuconfig} &
+                \texttt{nano …} \\
+            \end{tabular}
+        }
+
+    \begin{columns}[T,onlytextwidth]
+        \column{.5\textwidth}
+        \begin{block}{Start des Build-Vorgangs}
+            \texttt{make BR2\_JLEVEL=4}
+        \end{block}
+
+        \column{.5\textwidth}
+        \begin{block}{Durchschnittliche Laufzeit}
+            \smallskip
+            \parbox{\linewidth}{
+                Mindestens eine Stunde beim ersten Durchlauf, wenige Minuten bei
+                jedem Folgeaufruf
+            }
+        \end{block}
+    \end{columns}
 \end{frame}
+}
+
+% Fallbeispiel mit Python auf eigener Folie???
+
+%%%% Folie
+%\begin{frame}{Linux-Images bauen mit Ubuntu Core}
+    %TODO
+%\end{frame}
 
 %%% Folie
 \begin{frame}{Fazit und Ausblick}
-    TODO
+    \begin{itemize}
+        \justifying
+
+        \item Linux eignet sich in besonderem Maße zur Entwicklung von IoT-
+        und Embedded Devices aufgrund seines großen Funktionsumfangs und der
+        enormen Flexibilität.
+
+        \item Distributionen wie Raspbian bieten dabei auch für Einsteiger
+        eine Möglichkeit, schnelle Erfolge zu erzielen.
+
+        \item Für kleine Hobbyprojekte sowie Projekte mit wenigen Endgeräten
+        reicht es häufig aus, einfach eine Standardinstallation von Rasbpian
+        direkt auf dem Gerät an die eigenen Anforderungen anzupassen.
+
+        \item In größeren Projekten ist es jedoch besser, das Betriebssystem als
+        eigenständige Softwarekomponente zu betrachten, die wie jede Software
+        mit geeigneten Werkzeugen \glqq{}entwickelt\grqq{} werden muss.
+
+        \item Hierfür stehen verschiedene Baukästen zur Verfügung, welche die
+        meisten Schritte dabei automatisieren.
+
+        \item Leider besitzen die Baukasten-Systeme anfangs eine etwas hohe
+        Einstiegshürde. Ist diese aber einmal genommen, lassen sich damit auf
+        professionelle Art und Weise individualisierte Linux-Betriebssysteme bauen.
+    \end{itemize}
 \end{frame}
 
