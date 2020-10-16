@@ -71,14 +71,14 @@
           counter = 0  # Counter definieren
           GPIO.setmode(GPIO.BCM)   # SoC als Pinreferenz
           GPIO.setup(24, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)    # Interrupt Source ist PIN 24 und  Pulldown Widerstand ist ausgewählt
-          
-          def myInterruptServiceRoutine(channel):            # Interrupt Service Routine
+
+          def my_interrupt_service_routine(channel):            # Interrupt Service Routine
              global counter    # counter im Scope zugreifbar machen
              counter = counter + 1
              print(counter)
-          
-          GPIO.add_event_detect(24, GPIO.RISING, callback = myInterruptServiceRoutine, bouncetime = 200)  # Interrupt Event registrieren für Pin 24, auf steigende Flanke reagieren und ISR Callback mappen
-          
+
+          GPIO.add_event_detect(24, GPIO.RISING, callback = my_interrupt_service_routine, bouncetime = 200)  # Interrupt Event registrieren für Pin 24, auf steigende Flanke reagieren und ISR Callback mappen
+
           try:
              while True:
                 time.sleep(1)
@@ -88,7 +88,7 @@
              print('Ende wegen Programmfehler: %s', sys.exc_info()[0])
           finally:
              GPIO.remove_event_detect(24)
-             GPIO.cleanup() 
+             GPIO.cleanup()
 
         \end{lstlisting}
 

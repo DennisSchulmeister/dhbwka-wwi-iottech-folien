@@ -446,7 +446,7 @@
 
         def led_dim(value):
             led.value = value                         # LED auf Wert setzen
-            sleep(1)                                  # 1 ms warten
+            sleep(1)                                  # 1 Sekunde warten
 
         try:
             while True:                               # Programm am Laufen halten
@@ -477,7 +477,7 @@
 
             def led_dim(self, value):
                 self.__led.value = value              # LED auf Wert setzen
-                sleep(1)                              # 1 ms warten
+                sleep(1)                              # 1 Sekunde warten
 
             def blink_led(self):
                 try:
@@ -538,7 +538,7 @@
                     # Siehe https://docs.python.org/3/tutorial/errors.html
                     self.__logger.error('Programmfehler: %s', sys.exc_info()[0])
                 finally:
-                    self.__sensor .close() # PIN Konfiguration zurücksetzen
+                    self.__sensor.close() # PIN Konfiguration zurücksetzen
 
               return distance
 
@@ -559,13 +559,13 @@
 
         if __name__ == '__main__':
             blinker = LedBlinker()
-            ultraschall_sensor =  Ultraschallsensor()
+            ultraschall_sensor = Ultraschallsensor()
 
             try:
                 while True:                           # Programm am Laufen halten
                     distance_in_cm = ultraschall_sensor.read_distance_in_cm()
 
-                    if(distance >= 15):
+                    if(distance_in_cm >= 15):
                         blinker.blink_led()  # LED
                     else:
                         logger.info('Nichts ungewoehnliches entdeckt')
