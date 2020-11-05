@@ -715,17 +715,22 @@ Stromteiler mit den Widerständen 910\,\si{\ohm}, 750\,\si{\ohm} und 3k\,\si{\oh
 
     %%
     \item \textbf{Teilströme:} Der Strom teilt sich im Verhältnis der Widerstände
-    zueinander auf.
+    zueinander auf. Am einfachsten berechnet man deshalb einfach den Strom für
+    jeden Widerstand einzeln:
 
-    $I_1 = \frac{33,18\,mA * 910\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 6,48\,mA$
+    $I_1 = \frac{U_{Gesamt}}{910\,\si{\ohm}} \approx 13,8\,mA$
 
-    $I_2 = \frac{33,18\,mA * 750\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 5,34\,mA$
+    $I_2 = \frac{U_{Gesamt}}{750\,\si{\ohm}} = 16\,mA$
 
-    $I_3 = \frac{33,18\,mA * 3000\,\si{\ohm}}{910\,\si{\ohm} \,+\, 750\,\si{\ohm} \,+\, 3000\,\si{\ohm}} \approx 21,36\,mA$
+    $I_3 = \frac{{U_Gesamt}}{3000\,\si{\ohm}} = 4\,mA$
 
-    Die Summe der Teilströme ergibt daher (ohne Rundungsfehler) 33,18\,mA:
+    Man kann aber auch mit dem Gesamtwiderstand und dem Gesamtstrom rechnen, zum Beispiel:
 
-    $6,48\,mA + 5,34\,mA + 21,36\,mA = 33,18\,mA$
+    $I_1 = \frac{R_{Gesamt}}{R_1} \times I_{Gesamt} = \frac{361,59\,\si{\ohm}}{910\,\si{\ohm}} \times 33,18 mA \approx 13,8\,mA$
+
+    Die Summe der Teilströme ergibt daher (mit Rundungsfehler) in etwa 33,18\,mA:
+
+    $13,8\,mA + 16\,mA + 4\,mA = 33,18\,mA$
 \end{enumerate}
 
 %-------------------------------------------------------------------------------
