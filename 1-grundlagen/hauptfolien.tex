@@ -39,24 +39,25 @@
 
     \begin{itemize}
         \item Dipl.-Wirtschaftsinformatiker (DH), DHBW Karlsruhe, 2005 – 2008
-        \item Produktmanager / Senior Entwickler für SAP Add-Ons, cormeta ag
+        \item Produktmanager / Senior Entwickler für SAP Add-Ons, SOA People AG
         \item Seit 2009 nebenberuflicher Dozent an der DHBW Karlsruhe
         \item Seit 1992 begeistert von Computern und deren Programmierung
         \item Keyboarder, Bassist, Sänger und Songwriter in der Freizeit
-        \item Seit 2018 am verzweifeln am Golfschwung \smiley{}
+        \item Seit August 2020 (hoffentlich) der beste Papa der Welt \smiley{}
     \end{itemize}
 \end{frame}
 
 %%% Folie
 \begin{frame}{Kompetenzziele der Vorlesung}
     \begin{itemize}
-        \item \textbf{Fachkompetenz:} Die Studierenden kennen den technischen Aufbau typischer
-        Devices/Embedded Systems im Kontext der Internet of Things. Sie sind in der Lage,
-        entsprechende Devices für einen gegebenen Einsatzzweck auszuwählen und zu programmieren.
+        \item \textbf{Fachkompetenz:} Die Studierenden kennen den
+        \textcolor{NavyBlue}{technischen Aufbau typischer Devices/Embedded Systems}
+        im Kontext des Internet of Things. Sie sind in der Lage, entsprechende Devices
+        für einen gegebenen Einsatzzweck auszuwählen und zu programmieren.
         \medskip
 
-        \item \textbf{Methodenkompetenz:} Die Studierenden sind in der Lage bei der Programmierung
-        von IoT-Geräten systematisch und methodisch vorzugehen.
+        \item \textbf{Methodenkompetenz:} Die Studierenden sind in der Lage
+        bei der Programmierung von IoT-Geräten systematisch und methodisch vorzugehen.
         \medskip
 
         \item \textbf{Personale und soziale Kompetenz:} Die Studierenden verstehen die Herausforderungen
@@ -64,8 +65,8 @@
         \medskip
 
         \item \textbf{Übergreifende Handlungskompetenz:} Die Studierenden können reale betriebliche
-        Problemstellungen im Kontext von IoT analysieren, Konzepte entwerfen und IoT-fähige Geräte
-        programmieren und im Unternehmenskontext integrieren.
+        Problemstellungen im Kontext von IoT analysieren, \textcolor{NavyBlue}{Konzepte entwerfen}
+        und \textcolor{NavyBlue}{IoT-fähige Geräte programmieren} und im Unternehmenskontext integrieren.
         \medskip
     \end{itemize}
 \end{frame}
@@ -78,26 +79,25 @@
             \begin{column}[T]{.5\textwidth}
                 \begin{block}{3. Semester}
                     \medskip
-                    \textbf{Prüfungsform:} Klausur
-                    \medskip
 
                     \begin{enumerate}
                         \item Grundlagen des Internet of Things
                         \item Hardwaredesign für IoT-Anwendungen
-                        \item \textcolor{gray}{Übungsstunde}
+                        \item \textcolor{gray}{Praktische Demonstration}
                         \item \textcolor{gray}{Übungsstunde}
                         \item Einführung in Python
                         \item IoT-Entwicklung mit Python
-                        \item \textcolor{gray}{Übungsstunde}
+                        \item \textcolor{gray}{Praktische Demonstration}
                         \item \textcolor{gray}{Übungsstunde}
                         \item \textcolor{gray}{Klausurvorbereitung}
                     \end{enumerate}
+
+                    \medskip
+                    \textbf{Prüfungsform:} Klausur
                 \end{block}
             \end{column}
             \begin{column}[T]{.5\textwidth}
                 \begin{block}{4. Semester}
-                    \medskip
-                    \textbf{Prüfungsform:} Assignment
                     \medskip
 
                     \begin{enumerate}
@@ -111,6 +111,9 @@
                         \item \textcolor{gray}{Assignment}
                         \item \textcolor{gray}{Assignment}
                     \end{enumerate}
+
+                    \medskip
+                    \textbf{Prüfungsform:} Assignment
                 \end{block}
             \end{column}
         \end{columns}
@@ -133,29 +136,36 @@
                 \textbf{Hardware}
                 \medskip
 
-                Wird von der DHBW zur Verfügung gestellt. %Rückfrage, was genau
-                %angeschafft wurde, läuft gerade. \smiley{}
+                \parbox{\linewidth}{
+                    \footnotesize
+                    Kann im WWI-Labor für die Dauer des Moduls kostenlos ausgeliehen
+                    werden. Rückgabe am Ende des vierten Semesters, da dieselbe
+                    Hardware dann direkt für das IoT-Integrationsseminar und Projekt
+                    benötigt wird.
+                }
                 \medskip
 
                 \begin{itemize}
                     \item Raspberry Pi
                     \item Diverse Sensoren und Aktoren
-                    \item \textcolor{gray}{Bildschirm, Tastatur, Maus für den Raspberry Pi}
                 \end{itemize}
             \end{column}
             \begin{column}[T]{.5\textwidth}
                 \textbf{Software}
                 \medskip
 
-                Eigentlich nicht viel. Das meiste ist unter Raspbian bereits
-                installiert oder wird von uns im Laufe der Vorlesung ergänzt.
-                Auf ihrem Laptop benötigen Sie ggf. noch folgende Programme:
+                \parbox{\linewidth}{
+                    \footnotesize
+                    Eigentlich nicht viel. Das meiste ist unter Raspbian bereits
+                    installiert oder wird von uns im Laufe der Vorlesung ergänzt.
+                    Auf Ihrem Laptop benötigen Sie ggf. noch folgende Programme:
+                }
                 \medskip
 
                 \begin{itemize}
-                    \item OpenSSH / PuTTY für SSH-Verbindungen zum Pi
-                    \item NetBeans und Maven für die Java-Programmierung
-                    \item Python und Node.js als zusätzliche Sprachen
+                    \item Visual Studio Code
+                    \item OpenSSH / PuTTY
+                    \item Optional: Python
                 \end{itemize}
             \end{column}
         \end{columns}
@@ -168,17 +178,14 @@
 
 \begin{frame}{Literaturempfehlungen}
     \begin{columns}
-        \column[b]{.25\textwidth}
+        \column[b]{.33\textwidth}
         \fbox{\includegraphics[height=3.8cm]{1-grundlagen/img/buch_raspberrypi}}
 
-        \column[b]{.25\textwidth}
+        \column[b]{.33\textwidth}
+        \fbox{\includegraphics[height=3.8cm]{1-grundlagen/img/buch_practical_electronics}}
+
+        \column[b]{.33\textwidth}
         \fbox{\includegraphics[height=3.8cm]{1-grundlagen/img/buch_embedded_hardware}}
-
-        \column[b]{.25\textwidth}
-        \fbox{\includegraphics[height=3.8cm]{1-grundlagen/img/buch_elektronik_dummies}}
-
-        \column[b]{.25\textwidth}
-        \fbox{\includegraphics[height=3.8cm]{1-grundlagen/img/buch_elektronik_fibel}}
     \end{columns}
 
     \vskip 0.6cm
@@ -188,17 +195,14 @@
         \textbf{Raspberry Pi: Das umfassende Handbuch für Maker und Tekkies} \\ Rheinwerk Verlag, 2018
 
         \column[T]{.5\textwidth}
-        \textbf{Designing Embedded Hardware} \\ O'Reilly, 2005
+        \textbf{Practical Electronics for Inventors} \\ McGraw-Hill, 2016
     \end{columns}
 
     \vskip 0.6cm
 
     \begin{columns}
-        \column[T]{.5\textwidth}
-        \textbf{Elektronik für Dummies} \\ Wiley-VCH Verlag, 2018
-
-        \column[T]{.5\textwidth}
-        \textbf{Elektronik-Fibel} \\ Patrick Schnabel, 2017
+        \column[T]{0.5\textwidth}
+        \textbf{Designing Embedded Hardware} \\ O'Reilly, 2005
     \end{columns}
 \end{frame}
 }
@@ -212,7 +216,8 @@
         \item Typische Schichten und Komponenten einer IoT-Architektur benennen
         \item Den aktuellen Stand der Technik im historischen Kontext einordnen
         \item Relevante Computerarchitekturen miteinander vergleichen
-        \item Die Anforderungen an eingebettete Hard- und Software verstehen
+        \item Die Begriffe ,,Microcontroller'' und ,,System-on-a-Chip'' erklären
+        %\item Die Anforderungen an eingebettete Hard- und Software verstehen
     \end{itemize}
 \end{frame}
 
@@ -246,7 +251,7 @@
     \bigskip
 
     \begin{itemize}
-        \item Was bedeutet der Begriff „Internet of Things“?
+        \item Was bedeutet der Begriff ,,Internet of Things''?
         \item Was macht ein Device zu einem IoT-Device?
         \item Wie unterscheidet es sich von gewöhnlichen Embedded-Devices?
         \item Welche Anwendungsfälle für IoT können Sie sich vorstellen?
@@ -442,42 +447,65 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{Minimale Grundkomponenten eines Computers}
-    \only<beamer:1|handout:0>{
-        \begin{center}
-            \includegraphics[height=0.85\textheight]{1-grundlagen/img/sbc_microprozessor1_klein}
-        \end{center}
-    }
+\begin{frame}{Die Moral der Geschichte}
+    \parbox{\linewidth}{
+        \footnotesize
 
-    \only<2>{
-        \begin{center}
-            \includegraphics[height=0.5\textheight]{1-grundlagen/img/sbc_microprozessor2_klein}
-        \end{center}
+        Der Wunsch, einen Computer zum \textbf{Messen, Steuern und Regeln}
+        physikalischer Vorgänge zu nutzen ist fast so alt wie der Computer
+        selbst. Die Miniaturisierung der ersten Computer führt bereits früh
+        zur Entwicklung eingebetteter Systeme oder der Anpassung vorhandener
+        Computersysteme an eingebettete Anwendungsfälle.
 
         \medskip
 
-        \begin{columns}
-            \begin{column}[T]{.5\textwidth}
-                \textbf{Digitale Bausteine}
-                \begin{enumerate}
-                    \item Mikroprozessor
-                    \item Programmspeicher
-                    \item Hauptspeicher
-                    \item I/O-Ports
-                \end{enumerate}
-            \end{column}
-            \begin{column}[T]{.5\textwidth}
-                \textbf{Hilfsschaltungen}
-                \begin{enumerate}
-                    \setcounter{enumi}{4}
-                    \item Taktgeber
-                    \item Resetschalter
-                    \item Stromversorgung
-                \end{enumerate}
-            \end{column}
-        \end{columns}
+        In diesem Sinne hat der Hypebegriff \textbf{\glqq{}Industrie 4.0\grqq{}}
+        zwar seine Berechtigung, ist aber nicht in allen Punkten so neuartig,
+        wie es einem Glauben gemacht werden soll. (Relativ) neu ist aber, dass
+        wir heute zwei Möglichkeiten haben, eingebettete (IoT-)Anwendungen zu
+        realisieren:
     }
+
+    \bigskip
+
+    \begin{columns}
+        \begin{column}[b]{.5\textwidth}
+            \begin{block}{Projektentwicklung}
+                \medskip
+                %\begin{center}
+                    \includegraphics[width=.4\textwidth]{1-grundlagen/img/sbc-boards}
+                %\end{center}
+
+                \medskip
+                \parbox{\linewidth}{
+                    \footnotesize
+                    \textbf{Sehr hohe Integrationstiefe:}
+                    Verwendung günstiger Single Board Computer als Komplettsystem
+                    inkl. Ökosystem für Programmiersprachen und Hardware-Erweiterungen.
+                }
+            \end{block}
+        \end{column}
+
+        \begin{column}[b]{.5\textwidth}
+            \begin{block}{Produktentwicklung}
+                \medskip
+                %\begin{center}
+                    \includegraphics[width=.4\textwidth]{1-grundlagen/img/microchip}
+                %\end{center}
+
+                \medskip
+
+                \parbox{\linewidth}{
+                \footnotesize
+                    \textbf{Mittlere Integrationstiefe}:
+                    Eigenentwicklung eingebetteter Computersysteme auf Basis diskreter
+                    Bausteine für Microcontroller, Flash-Speicher, RAM, I/O, …
+                }
+            \end{block}
+        \end{column}
+    \end{columns}
 \end{frame}
+
 
 %%% Folie
 {
@@ -486,49 +514,115 @@
     }
 
     \begin{frame}[plain]
-        \transdissolve
-
-        \only<beamer:2|handout:0>{
-            \transdissolve
-
-            \begin{tikzpicture}[remember picture,overlay]
-                \node at (5.4cm,-0.97cm){
-                    \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/bauteile}
-                };
-            \end{tikzpicture}
-        }
-    \end{frame}
-}{
-    \setbeamertemplate{background canvas}{
-        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/bauteile}
-    }
-
-    \begin{frame}<handout>[plain]
-        \transdissolve
     \end{frame}
 }
 
 %%% Folie
-\begin{frame}{Fallbeispiel: Laufschrift mit Raspberry Pi und Arduino}
-    \begin{columns}
-        \column[b]{.5\textwidth}
-        \includegraphics[width=\textwidth]{1-grundlagen/img/laufschrift_pi1}
-
-        \column[b]{.5\textwidth}
-        \includegraphics[width=\textwidth]{1-grundlagen/img/laufschrift_pi2}
-    \end{columns}
+\begin{frame}{Minimale Grundkomponenten eines Computers}
+    \begin{center}
+        \includegraphics[height=0.5\textheight]{1-grundlagen/img/sbc_microprozessor2_klein}
+    \end{center}
 
     \medskip
 
     \begin{columns}
-        \column[b]{.5\textwidth}
-        \includegraphics[width=\textwidth]{1-grundlagen/img/laufschrift_arduino1}
-
-        \column[b]{.5\textwidth}
-        \includegraphics[width=\textwidth]{1-grundlagen/img/laufschrift_arduino2}
+        \begin{column}[T]{.5\textwidth}
+            \textbf{Digitale Bausteine}
+            \begin{enumerate}
+                \item Mikroprozessor
+                \item Programmspeicher
+                \item Hauptspeicher
+                \item I/O-Ports
+            \end{enumerate}
+        \end{column}
+        \begin{column}[T]{.5\textwidth}
+            \textbf{Hilfsschaltungen}
+            \begin{enumerate}
+                \setcounter{enumi}{4}
+                \item Taktgeber
+                \item Resetschalter
+                \item Stromversorgung
+                \item Adressdekodierung
+            \end{enumerate}
+        \end{column}
     \end{columns}
 \end{frame}
 
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Mikroprozessoren für eingebettete Systeme}
+    \begin{columns}
+        \column{.2\textwidth}
+        \includegraphics[width=.9\linewidth]{1-grundlagen/img/intel486}
+
+        \column{.8\textwidth}
+        \begin{block}{Diskreter Hauptprozessor}
+            \parbox{\linewidth}{
+                \smallskip
+
+                Bildet das Herzstück eines jeden Computers bzw. stellt den Computer
+                im engeren Sinne dar, basierend auf dem Prinzip
+                \textbf{Eingabe-Verarbeitung-Ausgabe}. Kommuniziert daher über eine
+                \textbf{Speicherschnittstelle} bestehend aus Adress-, Daten- und Steuerleitungen
+                mit externen Speicher- und I/O-Bausteinen.
+            }
+
+            \smallskip
+
+            \textbf{Beispiele}: Intel 8051, MOS 6502, Motorola 68000, …
+        \end{block}
+    \end{columns}
+
+    \begin{columns}
+        \column{.2\textwidth}
+        \includegraphics[width=.9\linewidth]{1-grundlagen/img/AVR-ATmega}
+
+        \column{.8\textwidth}
+        \begin{block}{Microcontroller}
+            \parbox{\linewidth}{
+                \smallskip
+
+                Integriert eine einfache CPU (oftmals mit nur 8-bit Datenbreite)
+                sowie RAM und ROM auf einem Chip, um ein kleines Programm zur
+                Steuerung mit externer Peripherie auszuführen. Bietet meist keine
+                externe Speicherschnittstelle, dafür aber I/O-Möglichkeiten wie
+                \textbf{GPIO}, \textbf{Serielle Schnittstellen}, \textbf{A/D-Wandler}
+                uwm.
+            }
+
+            \smallskip
+
+            \textbf{Beispiele}: AVR ATtiny, AVR ATmega, PIC, ARM STM32F722, …
+        \end{block}
+    \end{columns}
+
+    \begin{columns}
+        \column{.2\textwidth}
+        \includegraphics[width=.9\linewidth]{1-grundlagen/img/ARM-Cortex}
+
+        \column{.8\textwidth}
+        \begin{block}{System-on-a-Chip}
+            \parbox{\linewidth}{
+                \smallskip
+
+                Wie ein Microcontroller nur mit einem \textbf{viel leistungsstärkeren
+                Rechenkern}, dessen Performance mit dedizierten CPUs vergleichbar ist.
+                \textbf{Externer RAM und ROM} werden wie bei einer diskreten CPU über
+                ein Speicherinterface angebunden. Darüber hinaus werden oft auch
+                \textbf{komplexe Komponenten} wie GPUs, WiFi, Bluetooth, HDMI, etc.
+                auf demselben Chip untergebracht.
+            }
+
+            \smallskip
+
+            \textbf{Beispiele}: ARM Cortex, AMD AU1000, …
+        \end{block}
+    \end{columns}
+\end{frame}
+
+}
 
 %%% Folie
 {
@@ -570,85 +664,250 @@
 }
 
 %%% Folie
-{
-    \setbeamertemplate{background canvas}{
-        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion1}
-    }
+\begin{frame}[allowframebreaks]{Fallbeispiel: Yamaha SPX90 (1985)}
+    \begin{center}
+        \includegraphics[width=\textwidth]{1-grundlagen/img/spx90-foto}
+    \end{center}
 
-    \begin{frame}[plain]
-        \transdissolve
+    \smallskip
 
-        \only<beamer:2|handout:0>{
-            \transdissolve
+    \begin{itemize}
+        \item Frühes, digitales Audio-Effektgerät für professionelle Anwendungen
+        \item Hardwareaufbau zweigeteilt in eine Analog- und eine Digitalsektion
+        \item \textbf{Analogsektion:} A/D-Wandlung und D/A-Wandlung der Audiosignale
+        \item \textbf{Digitalsektion:} Diskret aufgebautes, eingebettetes Computersystem
+    \end{itemize}
 
-            \begin{tikzpicture}[remember picture,overlay]
-                \node at (5.4cm,-0.97cm){
-                    \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion2}
-                };
-            \end{tikzpicture}
-        }
+    \smallskip
 
-        \only<beamer:3|handout:0>{
-            \transdissolve
-
-            \begin{tikzpicture}[remember picture,overlay]
-                \node at (5.4cm,-0.97cm){
-                    \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion3}
-                };
-            \end{tikzpicture}
-        }
-    \end{frame}
-}{
-    \setbeamertemplate{background canvas}{
-        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion2}
-    }
-
-    \begin{frame}<handout>[plain]
-        \transdissolve
-    \end{frame}
-}{
-    \setbeamertemplate{background canvas}{
-        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion3}
-    }
-
-    \begin{frame}<handout>[plain]
-        \transdissolve
-    \end{frame}
-}
-
-
-
-%%% Folie
-\begin{frame}{Softwareseitige Systemanforderungen}
     \begin{columns}
-        \column[T]{.5\textwidth}
-        \begin{itemize}
-            \item<1-> Sparsamer Umgang mit besonders knappen Ressourcen
-            \item<2-> Verwendung spezialisierter Hardwarekomponenten
-            \item<3-> Störungsfreier Betrieb über sehr lange Zeiträume
-            \item<4-> Firmware-Upgrade ,,over the air''
-        \end{itemize}
+        \column[b]{.5\textwidth}
+        \includegraphics[width=\textwidth]{1-grundlagen/img/spx90-schaltplan-1}
 
-        \column[T]{.5\textwidth}
-        \begin{itemize}
-            \item<5-> Vollständig deterministisches Systemverhalten
-            \item<6-> Oftmals daher nur begrenztes Multi-Tasking
-            \item<7-> Harte, weiche oder eventuelle Echtzeitanforderungen
-            \item<8-> Ausschalten des Geräts ohne ,,Herunterfahren''
-        \end{itemize}
+        \column[b]{.5\textwidth}
+        \includegraphics[width=\textwidth]{1-grundlagen/img/spx90-schaltplan-2}
     \end{columns}
 
-    \uncover<9->{
-        \parbox{\linewidth}{
-            \bigskip
-            Zur Erfüllung dieser Anforderungen kommen in der Regel angepasste und
-            besonders schlanke, eingebettete Betriebssysteme zum Einsatz, falls
-            überhaupt ein Betriebssystem vorhanden ist. Hierbei kann es sich entweder
-            um speziell für diesen Zweck entwickelte Betriebssysteme wie FreeRTOS
-            und ITRON oder um eine angepasste Variante größerer Betriebssysteme wie
-            Linux handeln. Linux bietet sich aufgrund seiner Quelloffenheit und
-            leichten Portierbarkeit besonders an und wird daher auch entsprechend
-            oft genutzt.
+    \bigskip
+
+    \includegraphics[width=\textwidth]{1-grundlagen/img/spx90-cpuboard}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Fallbeispiel: IoT-Device mit Sensoren und Aktoren}
+    \parbox{\linewidth}{
+        \footnotesize
+        Die Abbildung zeigt den prototypischen Aufbau eines IoT-Devices mit
+        verschiedenen Sensoren und Aktoren. Haupteinheit ist ein Raspberry Pi,
+        der über das Flachbandkabel am rechten Rand angeschlossen wird. Der
+        Raspberry Pi basiert dabei auf einem System-on-a-Chip, der ein komplettes
+        Computersystem in einem einzigen Microchip darstellt.
+
+        \smallskip
+
+        In der Projektentwicklung müssen wir uns meist nur insoweit mit dem
+        Hardwareaufbau beschäftigen, wie dies zur Integration der gewünschten
+        Sensoren und Aktoren notwendig ist. Eine besondere Herausforderung bleibt
+        dabei aber, wie der Prototyp in eine dauerhafte Form überführt werden kann.
+    }
+
+    \bigskip
+
+    \includegraphics[width=\textwidth]{1-grundlagen/img/einparkhilfe_bb}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Programmierung: Low Level}
+    \parbox{\linewidth}{
+        \footnotesize
+        Dass die Architektur \textbf{diskret aufgebauter, eingebetteter Systeme}
+        im Grunde genommen die gleiche wie bei \textbf{Microcontroller/SoC-basierten}
+        Systemen ist, zeigt sich auch an den Gemeinsamkeiten der hardwarenahen
+        Low-Level-Programmierung (hier am Beispiel für AVR).
+    }
+
+    \bigskip
+
+    \begin{lstlisting}[language=C, gobble=8]
+        #include <avr/io.h>
+
+        int main(void) {
+            PORTD |= (1 << PD2);                    // Pull-Up-Widerstand aktivieren
+            DDRB = 0xff;                            // Alle Ausgänge an Port B ausschalten
+
+            while (1) {
+                if (bit_is_clear(PIND, PD2)) {      // Pin 2 von Port D auf Ground gezogen?
+                    PORTB |= 0b10000000;            // Pin 1 von Port B einschalten
+                } else {
+                    PORTB &= 0b01111111;            // Pin 1 von Port B ausschalten
+                }
+            }
+
+            return 0;
         }
+    \end{lstlisting}
+
+    \bigskip
+
+    \parbox{\linewidth}{
+        \footnotesize
+        Für ARM System-on-a-Chip, wie sie im Rasbperry Pi und vielen anderen Geräten
+        genutzt werden, sieht der Code ähnlich aus. Das Geheimnis ist, den richtigen
+        Wert an die richtige Speicherstelle zu schreiben, um die Hardware zu steuern.
     }
 \end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Programmierung: High Level}
+    \parbox{\linewidth}{
+        \footnotesize
+        Aus Gründen der schnelleren und einfacheren Entwicklung sowie der besseren
+        Portabilität empfiehlt es sich, zumindest ein einfaches Betriebssystem zu
+        nutzen und auf einem höheren Abstraktionsniveu zu programmieren, wenn die
+        Systemleistung es zulässt (hier am Beispiel von Python für den Raspberry Pi).
+    }
+
+    \smallskip
+
+    \begin{lstlisting}[language=Python, gobble=8, basicstyle=\tiny\ttfamily]
+        import os, time
+        import RPi.GPIO as GPIO
+
+        GPIO_BUTTON, GPIO_LED = 22, 21
+
+        def on_button_event(button):
+            if GPIO.input(button) == GPIO.HIGH:
+                GPIO.output(GPIO_LED, True)
+            else:
+                GPIO.output(GPIO_LED, False)
+
+        if __name__ == "__main__":
+            try:
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(GPIO_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+                GPIO.setup(GPIO_LED, GPIO.OUT)
+
+                GPIO.add_event_detect(GPIO_BUTTON, GPIO.BOTH)
+                GPIO.add_event_callback(GPIO_BUTTON, on_button_event)
+
+                while True:
+                    time.sleep(10)
+            except KeyboardInterrupt:
+                pass
+
+            GPIO.cleanup()
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Was nutzen wir in der Vorlesung?}
+    \begin{center}
+        \includegraphics[width=\textwidth]{1-grundlagen/img/raspi-linux-python}
+    \end{center}
+
+    \bigskip
+
+    \parbox{\linewidth}{
+        \footnotesize
+        Wir nutzen eine Kombination aus \textbf{Raspberry Pi}, \textbf{Linux} und
+        \textbf{Python}. Sie ist leistungsstark, leicht zu lernen und in der
+        IoT-Entwicklung weit verbreitet.
+
+        \medskip
+
+        \begin{itemize}
+            \item \textbf{Rasbperry Pi:} Bietet eine vergleichbare Performance wie
+            ein älterer Desktopcomputer.
+
+            \item \textbf{Linux:} Beim mitgelieferten Raspberry Pi OS handelt es
+            sich um ein angepasstes Debian-Linux. Die meisten Besonderheiten
+            eingebetteter Systeme bleiben verborgen, so dass es fast wie ein
+            Desktopsystem nutzbar ist.
+
+            \item \textbf{Python:} Ist eine einsteigerfreundliche Programmiersprache
+            mit verschiedenen Anwendungsgebieten. Das Pi in Raspberry Pi stand
+            deshalb ursprünglich für \glqq{}Python Interpreter\grqq{}.
+        \end{itemize}
+    }
+\end{frame}
+
+
+%%%%% Folie
+%%{
+%%    \setbeamertemplate{background canvas}{
+%%        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion1}
+%%    }
+%%
+%%    \begin{frame}[plain]
+%%        \transdissolve
+%%
+%%        \only<beamer:2|handout:0>{
+%%            \transdissolve
+%%
+%%            \begin{tikzpicture}[remember picture,overlay]
+%%                \node at (5.4cm,-0.97cm){
+%%                    \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion2}
+%%                };
+%%            \end{tikzpicture}
+%%        }
+%%
+%%        \only<beamer:3|handout:0>{
+%%            \transdissolve
+%%
+%%            \begin{tikzpicture}[remember picture,overlay]
+%%                \node at (5.4cm,-0.97cm){
+%%                    \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion3}
+%%                };
+%%            \end{tikzpicture}
+%%        }
+%%    \end{frame}
+%%}{
+%%    \setbeamertemplate{background canvas}{
+%%        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion2}
+%%    }
+%%
+%%    \begin{frame}<handout>[plain]
+%%        \transdissolve
+%%    \end{frame}
+%%}{
+%%    \setbeamertemplate{background canvas}{
+%%        \includegraphics[height=\paperheight, width=\paperwidth]{1-grundlagen/img/software-abstraktion3}
+%%    }
+%%
+%%    \begin{frame}<handout>[plain]
+%%        \transdissolve
+%%    \end{frame}
+%%}
+%%
+%%%%% Folie
+%%\begin{frame}{Softwareseitige Systemanforderungen}
+%%    \begin{columns}
+%%        \column[T]{.5\textwidth}
+%%        \begin{itemize}
+%%            \item Sparsamer Umgang mit besonders knappen Ressourcen
+%%            \item Verwendung spezialisierter Hardwarekomponenten
+%%            \item Störungsfreier Betrieb über sehr lange Zeiträume
+%%            \item Firmware-Upgrade ,,over the air''
+%%        \end{itemize}
+%%
+%%        \column[T]{.5\textwidth}
+%%        \begin{itemize}
+%%            \item Vollständig deterministisches Systemverhalten
+%%            \item Oftmals daher nur begrenztes Multi-Tasking
+%%            \item Harte, weiche oder eventuelle Echtzeitanforderungen
+%%            \item Ausschalten des Geräts ohne ,,Herunterfahren''
+%%        \end{itemize}
+%%    \end{columns}
+%%
+%%    \parbox{\linewidth}{
+%%        \bigskip
+%%        Zur Erfüllung dieser Anforderungen kommen in der Regel angepasste und
+%%        besonders schlanke, eingebettete Betriebssysteme zum Einsatz, falls
+%%        überhaupt ein Betriebssystem vorhanden ist. Hierbei kann es sich entweder
+%%        um speziell für diesen Zweck entwickelte Betriebssysteme wie FreeRTOS
+%%        und ITRON oder um eine angepasste Variante größerer Betriebssysteme wie
+%%        Linux handeln. Linux bietet sich aufgrund seiner Quelloffenheit und
+%%        leichten Portierbarkeit besonders an und wird daher auch entsprechend
+%%        oft genutzt.
+%%    }
+%%\end{frame}
