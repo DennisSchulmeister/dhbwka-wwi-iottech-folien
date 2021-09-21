@@ -63,7 +63,7 @@
     \end{itemize}
 
     \begin{itemize}
-        \item Historisch steht Pi  für Python Interpreter
+        \item Historisch steht Pi für Python Interpreter
         \item Ursprünglich sollte in Python programmiert werden
         \item Python Interpreter ist üblicherweise vorinstalliert in Raspbian
      \end{itemize}
@@ -150,6 +150,44 @@
         }
         \end{lstlisting}
 \end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python - Type Hints}
+    Weitere Infos siehe \url{https://docs.python.org/3/library/typing.html}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Funktion zu Berechnung
+        def my_function(parameter: int) -> int:         # Hinweise zu Typen
+            a = 1
+            return parameter * parameter + a
+    \end{lstlisting}
+	
+	\begin{lstlisting}[language=Python, gobble=8]
+        # Funktion zur Stringprüfung
+        def my_other_function(parameter: str) -> bool:  # Hinweise zu Typen
+            return len(parameter) > 0
+    \end{lstlisting}
+   
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python - Lambda Funktion}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Funktion in Python
+        def my_function(parameter: int) -> int:
+            a = 1
+            return parameter * parameter + a
+    \end{lstlisting}
+	
+    \begin{lstlisting}[language=Python, gobble=8]
+        # lambda in Python
+        my_function = lambda x: x * x + 1 # Kurzform der Funktion als Lambda
+    \end{lstlisting}
+   
+\end{frame}
+
+lambda x: x +1
 
 %%% Folie
 \begin{frame}[fragile]{Python vs. Java vs. JavaScript - Klassen}
