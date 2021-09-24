@@ -448,9 +448,8 @@
 \begin{frame}[fragile]{Beispiel: Sensoren auslesen mit GPIO 3}
     \begin{lstlisting}[language=Python, gobble=8]
         #Inhalt: requirements.txt
-        numpy==1.17.2
-        schedule==0.6.0
-        pypubsub==4.0.3
+        RPi.GPIO==0.7.0
+        paho-mqtt==1.5.1
     \end{lstlisting}
 \end{frame}
 
@@ -462,8 +461,9 @@
     \end{itemize}
 
     \begin{itemize}
-        \item Datenblatt der Sensoren: \url{https://produktinfo.conrad.com/datenblaetter/1400000-1499999/001413759-an-01-de-SENSORKIT_X40_FUER_EINPLATINEN_COMPUTER.pdf}
+        \item Datenblatt der Sensoren: \url{https://joy-it.net/files/files/Produkte/SEN-KitX40/SENSORKIT_X40_FUER_EINPLATINEN_COMPUTER-2.pdf}
         \item API zu GPIOZero: \url{https://gpiozero.readthedocs.io/en/stable/}
+		\item API zu RPi.GPIO: \url{https://sourceforge.net/p/raspberry-gpio-python/wiki/Examples/}
      \end{itemize}
 \end{frame}
 
