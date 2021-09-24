@@ -173,12 +173,12 @@ nach oben in Richtung Endbenutzer vor.
 
 \bigskip
 \teilaufgabe
-Aus welchen minimale Grundkomponenten besteht jedes Computersystem? Erstellen
+Aus welchen minimalen Grundkomponenten besteht jedes Computersystem? Erstellen
 Sie eine Skizze und benennen Sie die Komponenten wie CPU, ROM und so weiter.
 
 \bigskip
 \teilaufgabe
-Eingebettete Systeme können auf einem \textbf{diskreten Mikroprozessor},
+Eingebettete Systeme können auf einem \textbf{Mikroprozessor},
 einem \textbf{Microcontroller} oder einem \textbf{System-on-a-Chip} aufbauen.
 Grenzen Sie die Begriffe voneinander ab und erklären Sie kurz die jeweils
 charakteristischen Besonderheiten.
@@ -407,12 +407,13 @@ In der Vorlesung wurde gesagt, dass hardwarenahe Programmierung im Grunde genomm
 bedeutet, zur richtigen Zeit den richtigen Wert an die richtige Speicherstelle zu
 schreiben. Zumindest auf Rechnerarchitekturen mit sog. \textbf{Memory Mapped I/O}
 trifft dies zu, da hier spezielle Speicherstellen nicht den RAM sondern verschiedene
-Hardwarebausteine adressieren. Aber auch für CPUs mit separatem I/O-Bus stimmt die
-Aussage im Grunde genommen. Anstatt die Werte scheinbar in den Hauptspeicher zu
-schreiben, kennen diese spezielle I/O-Befehle. Hardwarearchitektur und Programmierung
-sind davon abgesehen aber fast identisch. In dieser Aufgaben wollen wir uns daher
-damit beschäftigen, wie die Anbindung externer Hardwarebausteine innerhalb einer
-Rechnerarchitektur im Wesentlichen funktioniert.
+Hardwarebausteine adressieren. Aber auch für CPUs mit separatem I/O-Bus
+-- \textbf{Isolated I/O} genannt -- stimmt die Aussage im Grunde genommen. Anstatt
+die Werte scheinbar in den Hauptspeicher zu schreiben, kennen diese spezielle
+I/O-Befehle. Hardwarearchitektur und Programmierung sind davon abgesehen aber
+fast identisch. In dieser Aufgaben wollen wir uns daher damit beschäftigen, wie
+die Anbindung externer Hardwarebausteine innerhalb einer Rechnerarchitektur im
+Wesentlichen funktioniert.
 
 Die folgenden zwei Abbildungen zeigen hierfür das Blockdiagramm eines einfachen,
 eingebetteten Computersystems. Zum Einsatz kommt ein kleiner Mikroprozessor
@@ -429,7 +430,6 @@ die entweder ein- oder ausgeschaltet sind.
 
 \includegraphics[width=\textwidth]{1-grundlagen/img/aufgabe-rechnerarchitektur-2}
 \bigskip
-
 Beantworten Sie die folgenden Fragen über das System:
 
 \begin{enumerate}
@@ -448,11 +448,13 @@ Beantworten Sie die folgenden Fragen über das System:
     (\texttt{\$8000} -- \texttt{\$FFFF} usw.) tatsächlich stimmen.
 \end{enumerate}
 
-\textbf{Hinweis:} Besitzt ein Bausteinen einen \texttt{Chip Enable}-Eingang,
+\textbf{Hinweise:} Besitzt ein Bausteinen einen \texttt{Chip Enable}-Eingang,
 muss dieser immer aktiv sein, um den Baustein anzusprechen. Andernfalls versetzt
-der Baustein alle anderen Eingänge in einen sog. \texttt{High Impendance} Status
+der Baustein alle anderen Eingänge in einen sog. \texttt{High Impedance} Status
 (auch Tristate bzw. der dritte logische Status genannt) und entkoppelt sich somit
-vom Datenbus.
+vom Datenbus. Alle Zahlen sind in Hexadezimalschreibweise angegeben, symbolisiert
+durch das vorangestellte Dollarzeichen. Die I/O-Bausteine nutzen nur die ersten
+acht Bit des Adressbusses, da sie keinen großen Adressraum benötigen.
 
 %\clearpage
 
@@ -818,7 +820,7 @@ führendes Zeichen), hexadezimal (mit führendem Dollarzeichen) oder als Konstan
   .const      #blink_led            $8002         ; Adresse der Variable #blink_led
   .const      #led_status           $8003         ; Adresse der Variable #led_status
   .const      #blink_intervall      250           ; Blink-Intervall der LED
-  .const      #max_temperature      10            ; Temperatarugrenze
+  .const      #max_temperature      10            ; Temperaturgrenze
 
   ; Variablen initialisieren
   init_vars:
@@ -1201,7 +1203,7 @@ Load-Store-Architektur:
 .const      #blink_led            $8002         ; Adresse der Variable #blink_led
 .const      #led_status           $8003         ; Adresse der Variable #led_status
 .const      #blink_intervall      250           ; Blink-Intervall der LED
-.const      #max_temperature      10            ; Temperatarugrenze
+.const      #max_temperature      10            ; Temperaturgrenze
 
 ; Variablen initialisieren
 init_vars:
