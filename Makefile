@@ -60,6 +60,7 @@ mkdirs:
 	if [ ! -e $(BUILDDIR)/6-python3         ]; then mkdir $(BUILDDIR)/6-python3;         fi
 	if [ ! -e $(BUILDDIR)/7-datenaustausch  ]; then mkdir $(BUILDDIR)/7-datenaustausch;  fi
 	if [ ! -e $(BUILDDIR)/8-linux           ]; then mkdir $(BUILDDIR)/8-linux;           fi
+	if [ ! -e $(BUILDDIR)/99-beispiele      ]; then mkdir $(BUILDDIR)/99-beispiele;      fi
 
 all: clean mkdirs
 	export TEXINPUTS=$(TEXINPUTS); \

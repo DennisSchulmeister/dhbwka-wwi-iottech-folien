@@ -27,6 +27,9 @@
 \usepackage{courier}
 \usepackage{ragged2e}
 
+\usepackage{tabto}
+\NumTabs{32}
+
 \newcommand{\quotes}[1]{``#1''}
 \newcommand{\Href}[1]{\href{#1}{#1}}
 
@@ -37,6 +40,20 @@
 
 % Hilfsmakro für den Backslash
 \newcommand\Slash{\char`\\}
+
+% Absatz mit Blocksatz
+\newcommand{\Justified}[1]{
+    \parbox{\linewidth}{#1}
+}
+
+% Link auf Onlinesimulator
+\newcommand{\CircuitJS}[1]{
+    \href{#1}{\beamergotobutton{Online ausprobieren}}
+}
+
+\newcommand{\LinkButton}[2]{
+    \href{#1}{\beamergotobutton{#2}}
+}
 
 % Ein Bild über die gesamte Folie
 \newcommand{\FullscreenImage}[1]{
