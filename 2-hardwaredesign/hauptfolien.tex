@@ -20,6 +20,7 @@
             \item Welche Signalarten kann der Raspberry Pi verarbeiten?
             \item Wie werden Sensoren/Aktoren mit dem Raspberry Pi verbunden?
             \item Wie lassen sich Hardwareschäden dabei vermeiden?
+            \item Wie lassen sich inkompatible Logikpegel anpassen?
         \end{itemize}
     \end{block}
 
@@ -961,7 +962,7 @@
         \includegraphics[width=\textwidth]{2-hardwaredesign/img/led_direkt_circuitjs}
         \smallskip
 
-        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKAHMRCUAWCsFTjwoo8UKCwBOnDAO7dRGQqLmiq2XCzBcQi5fJB5ss-QIAmdAGYBDAK4AbAC4M7dU+DFUYkVgBlpx0S5eFTEIazsAZzoQbGhscT9CGRi8XiCU3iowq0jo2PjISX8MnSUStQ1sDCpDAWxUkGJ+EohPFiqaoxAQpoD3NoB3Rub63l7u-UKh8Z7mhGbCrQFdEtqSs0tbR2dXfo9YVmm55vT5gULE5KMqdOvQkHComLjxKSS6tFLRO4qpr5jPmsfu1qgYundxndWuIjh8qJCGoUAEacBCEECYJDcDDECho8QAD26igoeFo3HRCEM3XAAgASlYIgAHJF0CQATwAOhEAAoASxYRMo3yECGIvCM5F4zQA4jyAJIAeQYAEEbBE2FYAHZsQU0UTzNKQATzKW0kAAWUZUW5AAoZRIAPY2LWmACUeso5HqlOI8XquOlAjlStV6s1Os9kCl8wofu6CGC5pDyrVGu1upRa0wAj9BoQ5EKRNStDwSCapeUyboAFs6BEolq6HrDLjCJB0U025BA+aAMoOJ01iIOAAnEgA1nQtSwgA}
+        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKAHMRCUAWCsFTjwoo8UKCwBOnDAO7dRGQqLmiq2XCzBcQi5fJB5ss-QIAmdAGYBDAK4AbAC4M7dU+DFUYkVgBlpx0S5eFTEIazsAZzoQbGhscT9CGRi8XiCU3iowq0jo2PjISX8MnSUStQ1sDCpDAWxUkGJ+EohPFiqaoxAQpoD3NoB3Rub63l7u-UKh8Z7mhGbCrQFdEtqSs0tbR2dXfo9YVmm55vT5gULE5KMqdOvQkHComLjxKSS6tFLRO4qpr5jPmsfu1qgYundxndWuIjh8qJCGoUAEacBCEECYJDcDDECho8QAD26igoeFo81J8V4zQASlYIgAHJF0CQSACeAB0IgAFACWLCJlG+QgQxF4RnI1IEAHFuQBJADyDAAgjYImwrAA7NgCmiieZpSACeaS8ACACy9KiXIAFNKJAB7Gya0wASl1lHI9XRovi9VxUpAssVKrVGu1Hsgkopvu6CGCZqD8qVqvVWp1KLWmAExHqePIhSJqVoeCQTRLykT0roAFs6BEopq6LrDLjCJB0U025AA4mAMoOR01iIOAAnEgA1nRNSwgA}
 
         \column{0.5\textwidth}
         \includegraphics[width=\textwidth]{2-hardwaredesign/img/led_direkt_foto}
@@ -1054,7 +1055,7 @@
     \end{center}
 
     \hfill
-    \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKAHMRCUAWCsFTjwoo8UKCwBOnDAO7dRGQqLmiq2XCzBcQi5fJB5ss-QIAmdAGYBDAK4AbAC4M7dU+DFUYkVgBlpA7DxeLl5A3ioIazsAZzoQbGhscSlCGXignSV08PiNbAwqQwCM4n5s908WfMKjEBUQUuNRCEqAdwaysI6m8XbGuv1+hDLIFj6y4YEQvgFRgCNOBEJc4jqMVYQl8QAPNeWEPFpufcM68AEAJStogAc5ugkATwAdaIAFAEsWXcoNrU5IElhqteGUALLXWKvAAUAHEJAB7GwAO1MAEpvjRyIF9sQkoEQecQLC3gBJADyDAAgjZomwrMi2JjKORuMMKMRZAheKCBG8AOpg6m0+mMlgLIq5ZZgfACTbkUa7IK0PBIUoq5RE2F0AC2dGisWRdExhlWhEgy1KZsghLKAGUHIiddEHAATiQAazoyM02l05UlXTMllsjmcrgqHlgrAu-gGomm9V4SBlakSHigiWwLG4gIaIjqtRlaXknk4AH0jOXIOWtOs2dXYPBFCg8cQ2dh+AhG3AuN2ayhy4RKywgA}
+    \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKAHMRCUAWCsFTjwoo8UKCwBOnDAO7dRGQqLmiq2XCzBcQi5fJB5ss-QIAmdAGYBDAK4AbAC4M7dU+DFUYkVgBlpA7DxeLl5A3ioIazsAZzoQbGhscSlCGXignSV08PiNbAwqQwCM4n5s908WfMKjEBUQUuNRCEqAdwaysI6m8XbGuv1+hDLIFj6y4YEQvgFRgCNOBEJc4jqMVYQl8QAPNeWEPFphikM68AEAJStogAc5ugkJAE8AHWiABQBLFl3KDa1OJAksNVrwygBZa6xN4ACgA4hIAPY2AB2pgAlD8aORAvtiElAqDziA4e8AJIAeQYAEEbNE2FYUWwsZRyNxjghiLIELwwQJ3gB1cE0ukMpksBZFXLLMD4ASbcijXZBWh4JClVXKYlwugAWzo0ViKLoWMMq0IkGWpXNkCJZQAyg4kbrog4ACcSADWdBRmm0unKUq6ZkstkczlcFQ8sFYF38A1E03qvCQsrUiQ8UES2BY3CBDREdVqsrS8k8nAA+kYK5AK1p1uya7B4IoUPjiOzsPwEE24Fwe7WUBXCFWWEA}
 \end{frame}
 }
 

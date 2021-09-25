@@ -34,8 +34,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2540"
-     inkscape:window-height="1395"
+     inkscape:window-width="1900"
+     inkscape:window-height="1035"
      id="namedview175"
      showgrid="false"
      fit-margin-top="0"
@@ -43,7 +43,7 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="1.6819222"
-     inkscape:cx="44.617504"
+     inkscape:cx="160.259"
      inkscape:cy="169"
      inkscape:window-x="10"
      inkscape:window-y="35"
@@ -52,7 +52,7 @@
   <defs
      id="defs17">
     <linearGradient
-       id="EixchpFtTBhT"
+       id="kqFhZEcvWIkk"
        x1="0"
        x2="32"
        y1="0"
@@ -69,7 +69,7 @@
          id="stop4" />
     </linearGradient>
     <linearGradient
-       id="lGQJoaxfLNpO"
+       id="npvKQDGSEUPg"
        x1="0"
        x2="32"
        y1="0"
@@ -86,7 +86,7 @@
          id="stop9" />
     </linearGradient>
     <linearGradient
-       id="JJuTlEozVsWF"
+       id="xKDLPTxQUETt"
        x1="0"
        x2="32"
        y1="0"
@@ -165,7 +165,7 @@
        id="g33">
       <rect
          fill="none"
-         stroke="url(#EixchpFtTBhT)"
+         stroke="url(#kqFhZEcvWIkk)"
          x="0"
          y="-6"
          width="32"
@@ -174,7 +174,7 @@
          stroke-width="3"
          stroke-dasharray="none"
          id="rect31"
-         style="stroke:url(#EixchpFtTBhT)" />
+         style="stroke:url(#kqFhZEcvWIkk)" />
     </g>
     <text
        fill="#000000"
@@ -301,7 +301,7 @@
        id="g67">
       <rect
          fill="none"
-         stroke="url(#lGQJoaxfLNpO)"
+         stroke="url(#npvKQDGSEUPg)"
          x="0"
          y="-6"
          width="32"
@@ -310,7 +310,7 @@
          stroke-width="3"
          stroke-dasharray="none"
          id="rect65"
-         style="stroke:url(#lGQJoaxfLNpO)" />
+         style="stroke:url(#npvKQDGSEUPg)" />
     </g>
     <text
        fill="#000000"
@@ -531,7 +531,7 @@
        id="g117">
       <rect
          fill="none"
-         stroke="url(#JJuTlEozVsWF)"
+         stroke="url(#xKDLPTxQUETt)"
          x="0"
          y="-6"
          width="32"
@@ -540,7 +540,7 @@
          stroke-width="3"
          stroke-dasharray="none"
          id="rect115"
-         style="stroke:url(#JJuTlEozVsWF)" />
+         style="stroke:url(#xKDLPTxQUETt)" />
     </g>
     <text
        fill="#000000"
@@ -651,7 +651,7 @@
          y="580"
          text-anchor="start"
          dominant-baseline="alphabetic"
-         id="text137">Raspbery Pi</text>
+         id="text137">Raspberry Pi</text>
     </g>
     <g
        id="g143">
