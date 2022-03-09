@@ -45,6 +45,7 @@ TEXINPUTS = .:docclass:
 
 clean:
 	rm -rf $(BUILDDIR)
+	rm -rf $(OUTDIR)/*.pdf
 
 mkdirs:
 	if [ ! -e $(OUTDIR)                      ]; then mkdir $(OUTDIR);                      fi
@@ -57,10 +58,11 @@ mkdirs:
 	if [ ! -e $(BUILDDIR)/03-python1         ]; then mkdir $(BUILDDIR)/03-python1;         fi
 	if [ ! -e $(BUILDDIR)/04-python2         ]; then mkdir $(BUILDDIR)/04-python2;         fi
 	if [ ! -e $(BUILDDIR)/05-semesterstart   ]; then mkdir $(BUILDDIR)/05-semesterstart;   fi
-	if [ ! -e $(BUILDDIR)/06-hardwarenutzung ]; then mkdir $(BUILDDIR)/06-hardwarenutzung; fi
-	if [ ! -e $(BUILDDIR)/07-python3         ]; then mkdir $(BUILDDIR)/07-python3;         fi
-	if [ ! -e $(BUILDDIR)/08-datenaustausch  ]; then mkdir $(BUILDDIR)/08-datenaustausch;  fi
-	if [ ! -e $(BUILDDIR)/09-linux           ]; then mkdir $(BUILDDIR)/09-linux;           fi
+	if [ ! -e $(BUILDDIR)/06-architektur     ]; then mkdir $(BUILDDIR)/06-architektur;     fi
+	if [ ! -e $(BUILDDIR)/07-hardwarenutzung ]; then mkdir $(BUILDDIR)/07-hardwarenutzung; fi
+	if [ ! -e $(BUILDDIR)/08-python3         ]; then mkdir $(BUILDDIR)/08-python3;         fi
+	if [ ! -e $(BUILDDIR)/09-datenaustausch  ]; then mkdir $(BUILDDIR)/09-datenaustausch;  fi
+	if [ ! -e $(BUILDDIR)/10-linux           ]; then mkdir $(BUILDDIR)/10-linux;           fi
 	if [ ! -e $(BUILDDIR)/99-beispiele       ]; then mkdir $(BUILDDIR)/99-beispiele;       fi
 
 all: clean mkdirs
