@@ -58,7 +58,7 @@
 
             \item Die Vor- und Nachteile der vorgestellten Architektur verstehen
             \item Den Nutzen der Balena Cloud für IoT-Projekte bewerten können
-            \item Eigene Anwendungen mit Python, Balean und Docker entwickeln können
+            \item Eigene Anwendungen mit Python, Balena und Docker entwickeln können
             \item Eigene IoT-Projekte in Betrieb nehmen und überwachen können
         \end{itemize}
     \end{block}
@@ -429,12 +429,13 @@
         \bigskip
 
         \Justified{
-            Docker realisiert eine Quasi-Virtualisierung, indem den in den Container
+            Docker realisiert eine Quasi-Virtualisierung, indem den in den Containern
             laufenden Programmen vorgegaukelt wird, dass sie die einzigen Programme
             des Host-Betriebssystems seien. Dadurch entsteht im Vergleich zu richtiger
             Hardwarevirtualisierung ein kaum merkbarer Verwaltungsoverhead. Jedoch
-            belegen auch Docker Container mehr Speicher als es die Programme ohne
-            die Verwendung von Docker tun würden.
+            belegen Docker Container unter Umständen mehr Speicher als es die Programme
+            ohne Docker tun würden, jedoch weit weniger Speicher als bei der klassischen
+            Virtualisierung (da nur ein Rumpf-Betriebssystem mitgeliefert werden muss).
         }
     \end{adjustwidth}
 \end{frame}
@@ -454,7 +455,8 @@
         ,,Registry'' genannt) ein vorhandenes Image referenziert und um eigene
         Dateien erweitert. Als Basis-Image kann dann entweder ein minimales
         Betriebssystem-Image (z.B. Debian oder Alpine Linux) oder eine
-        vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … ausgewählt werden.
+        vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … (die selbst auf
+        einem der genannten Betriebssystem-Images basiert) ausgewählt werden.
     }
 
     \bigskip
@@ -592,16 +594,189 @@
 \section{Nutzung des Redis Key-Value-Store}
 %-------------------------------------------------------------------------------
 
+%%% Folie
 \begin{frame}{Was ist Redis?}
-    \begin{adjustwidth}{-4ex}{-4ex}
-        \includegraphics[width=\linewidth]{06-architektur/img/redis}
-    \end{adjustwidth}
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{06-architektur/img/redis1}
+    \end{center}
+
+    \Justified{
+        \tiny
+        Redis ist eine NoSQL-Datenbank nach dem Prinzip eines \textbf{Key-Value-Servers}.
+        Anders als die meisten Datenbanken konzentriert sich Redis nicht darauf, große
+        Mengen an mehr oder weniger strukturierten Daten zu persistieren, sondern eine
+        kleine Auswahl \textbf{flexibel einsetzbarer Datenstrukturen} im Speicher halten
+        zu können. Die Datenstrukturen entsprechen im Wesentlichen denselben Strukturtypen,
+        wie sie auch aus anderen Hochsprachen wir Python oder JavaScript bekannt sind:
+
+        \begin{itemize}
+            \setlength\itemsep{.5em}
+            \item Binärstrings
+            \item Listen
+            \item (Un)sortierte Mengen
+            \item Hashes / Dictionaries
+            \item Bit-Arrays
+            \item Streams
+        \end{itemize}
+    }
 \end{frame}
 
-\begin{frame}{Aufgabe: Redis Tutorial}
-    Bearbeiten Sie auf der Redis-Webseite das Redis Tutorial.
+%%% Folie
+\begin{frame}{Performance vs. Persistenz in Redis}
+    \begin{center}
+        \includegraphics[width=\textwidth]{06-architektur/img/redis2}
+    \end{center}
+
+    \bigskip
+
+    \Justified{
+        \scriptsize
+        Grundsätzlich hält Redis sämtliche Daten im Hauptspeicher vor (sog.
+        \textbf{In-Memory-Database}). Datenzugriffe erfolgen daher sehr schnell,
+        da die Daten niemals von langsamen Massenspeichern gelesen werden müssen.
+        Dennoch werden die Daten in konfigurierbaren Intervallen bei Vorliegen
+        von genügend vielen Änderungen oder Ablauf vorgegebener Fristen in ein
+        Journal auf Platte geschrieben, damit sie nicht verloren gehen. Beim Start
+        des Servers wird das Journal dann wieder in den Hauptspeicher geladen.
+        Zusätzlich kann die maximale Speicherbelegen limitiert werden, um somit
+        einen effizienten Ringspeicher zu realisieren.
+    }
+\end{frame}
+
+%%% Folie
+\begin{frame}{Verwendung von Redis in der Beispielarchitektur}
+    \begin{center}
+        \includegraphics[width=\textwidth]{06-architektur/img/redis3}
+    \end{center}
+
+    \bigskip
+
+    \Justified{
+        \tiny
+        Die obige Abbildung zeigt, wie der auf dem Pi installierte Redis-Server
+        von den deviceseitigen Anwendungskomponenten genutzt wird, um sich zu
+        koordinieren. Im Wesentlichen schreibt das Sensor-Programm einen Strom
+        (in Redis ,,Stream'' genannt) strukturierter Sensordaten, der vom
+        MQTT-Handler und dem Grafana-Dashboard in Echtzeit überwacht wird, um
+        diese in das Internet zu versenden bzw. einem lokal installierten
+        Web-Dashboard darzustellen. Über den MQTT-Handler könnten darüber hinaus
+        Konfigurationswerte empfangen werden, die als atomare Werte in Redis
+        abgelegt werden. Sie werden vom Sensorprogramm ausgewertet sowie vom
+        Start/Stop-Programm verändert, wenn der Anwender einen an den Pi
+        angeschlossenen Knopf zum Unterbrechen der Messungen drückt.
+    }
+\end{frame}
+
+%%% Folie
+\begin{frame}[allowframebreaks]{Aufgabe: Redis Tutorial}
+    \setlength{\fboxsep}{0em}
+    \fbox{\includegraphics[width=\linewidth]{06-architektur/img/redis-tutorial}}
+
+    Bearbeiten Sie das Redis Tutorial auf \url{https://try.redis.io/}.
+
+    \framebreak
+
+    {
+        \footnotesize
+        Beantworten Sie nun die folgenden Fragen zum Tutorial:
+    }
+    \bigskip
+    {
+    \scriptsize
+
+    \begin{enumerate}
+        \item Mit welchen Befehlen können atomare Werte geschrieben oder gelesen werden?
+        \item Mit welchem Befehl kann die Existenz eines Werts überprüft werden?
+        \item Wie können atomare Zähler in Redis realisiert werden?
+        \item Wie lösen atomare Zähler in Redis das Lost-Update-Problem?
+        \item Wie kann die Lebensdauer eines Werts begrenzt werden?
+        \item Wie kann die Lebensdauer eines Werts geprüft werden?
+        \item Wie kann die Begrenzung wieder aufgehoben werden?
+        \item Mit welchen Befehlen können Listen in Redis manipuliert werden?
+        \item Wie kann ein Wert vom Anfang oder Ende einer List entnommen werden?
+        \item Was ist der Unterschied zwischen einer Liste und einer Menge (Set)?
+        \item Überlegen Sie sich einen Anwendungsfall für Mengen in Redis.
+        \item Wie kann einer sortierte Liste in Redis definiert werden?
+        \item Nach welchen Kriterien wird die Liste sortiert?
+        \item Was ist ein Hash Field in Redis und welchem Python-Typ kommt es am nächsten?
+        \item Zeigen Sie ein Beispiel zur Verwendung von Hash Fields in Redis.
+    \end{enumerate}
+    }
 \end{frame}
 
 %-------------------------------------------------------------------------------
 \section{Datenaustausch mit MQTT}
 %-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}[fragile]{Das Problem synchroner Punkt-zu-Punkt-Verbindungen}
+    \only<beamer:1|handout:0>{
+        \begin{tikzpicture}[remember picture,overlay]
+            \node at (5.4cm,0.28cm){
+                \includegraphics[width=\linewidth]{06-architektur/img/mqtt1}
+            };
+        \end{tikzpicture}
+    }
+
+    \only<beamer:2|handout:0>{
+        \transdissolve
+
+        \begin{tikzpicture}[remember picture,overlay]
+            \node at (5.4cm,0.28cm){
+                \includegraphics[width=\linewidth]{06-architektur/img/mqtt2}
+            };
+        \end{tikzpicture}
+    }
+
+    \only<beamer:3|handout:1>{
+        \transdissolve
+
+        \begin{tikzpicture}[remember picture,overlay]
+            \node at (5.4cm,0.28cm){
+                \includegraphics[width=\linewidth]{06-architektur/img/mqtt3}
+            };
+        \end{tikzpicture}
+    }
+\end{frame}
+
+\begin{frame}{Zunehmende Komplexität bei P2P}
+    \begin{center}
+        \includegraphics[width=\linewidth]{06-architektur/img/mqtt4}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Lösung durch einen zentralen Message Broker}
+    \begin{center}
+        \includegraphics[width=\linewidth]{06-architektur/img/mqtt5}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Das Publish/Subscribe-Verfahren bei MQTT}
+    \begin{center}
+        \includegraphics[width=\linewidth]{06-architektur/img/mqtt6}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Simulation des synchronen Request/Response-Verfahrens }
+    \begin{center}
+        \includegraphics[width=\linewidth]{06-architektur/img/mqtt7}
+    \end{center}
+\end{frame}
+
+%\begin{frame}[allowframebreaks, fragile]{Das Problem synchroner Punkt-zu-Punkt-Verbindungen}
+    %\begin{center}
+        %\includegraphics[width=\textwidth]{06-architektur/img/mqtt1}
+    %\end{center}
+
+    %\framebreak
+
+    %\begin{center}
+        %\includegraphics[width=\textwidth]{06-architektur/img/mqtt2}
+    %\end{center}
+
+    %\framebreak
+
+    %\begin{center}
+        %\includegraphics[width=\textwidth]{06-architektur/img/mqtt3}
+    %\end{center}
+%\end{frame}
