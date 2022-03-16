@@ -710,7 +710,42 @@
 
 %%% Folie
 \begin{frame}[fragile]{Das Problem synchroner Punkt-zu-Punkt-Verbindungen}
-    \only<beamer:1|handout:0>{
+    \only<beamer:1|handout:1>{
+        \Justified{
+            \footnotesize
+            Halten wir uns an dieser Stelle vor Augen, dass ein IoT-Setup
+            ein verteiltes System gemäß der Definition aus der Vorlesung
+            ,,Verteilte Systeme'' ist:
+            \textcolor{MidnightBlue}{
+                ,,Ein verteiltes System ist eine Sammlung, mehrerer, voneinander
+                \textbf{unabhängiger Computer}, die über ein Netzwerk
+                \textbf{Nachrichten austauschen}, um eine \textbf{gemeinsame
+                Aufgabe} zu erledigen.''
+            }
+
+            \smallskip
+
+            Der Datenaustausch im Internet erfolgt als virtuelle
+            Punkt-zu-Punkt-Verbindung zwischen einem \textbf{Client}
+            und eine \textbf{Server}. Für eine erfolgreiche Kommunikation
+            benötigen wir daher:
+
+            \bigskip
+
+            \begin{itemize}
+                \item Ein dauerhaft laufendes Serverprogramm
+                \item Eine öffentliche IP-Adresse oder Domainname
+                \item Die Portnummer des Servers
+                \item Ein Client, der Adresse und Portnummer kennt
+                \item Ein beiden Seiten bekanntes Protokoll
+                \item Auf beiden Seiten eine stabile Internetverbindung
+            \end{itemize}
+        }
+    }
+
+    \only<beamer:2|handout:0>{
+        \transdissolve
+
         \begin{tikzpicture}[remember picture,overlay]
             \node at (5.4cm,0.28cm){
                 \includegraphics[width=\linewidth]{06-architektur/img/mqtt1}
@@ -718,7 +753,7 @@
         \end{tikzpicture}
     }
 
-    \only<beamer:2|handout:0>{
+    \only<beamer:3|handout:0>{
         \transdissolve
 
         \begin{tikzpicture}[remember picture,overlay]
@@ -728,7 +763,7 @@
         \end{tikzpicture}
     }
 
-    \only<beamer:3|handout:1>{
+    \only<beamer:4|handout:2>{
         \transdissolve
 
         \begin{tikzpicture}[remember picture,overlay]
@@ -739,44 +774,225 @@
     }
 \end{frame}
 
+%%% Folie: TODO - Bild auf IoT anpassen?
 \begin{frame}{Zunehmende Komplexität bei P2P}
-    \begin{center}
-        \includegraphics[width=\linewidth]{06-architektur/img/mqtt4}
-    \end{center}
+    \begin{columns}
+        \column{.6\textwidth}
+        \includegraphics[width=\textwidth]{06-architektur/img/mqtt4}
+
+        \column{.4\textwidth}
+        \Justified{
+            \footnotesize
+
+            \textcolor{red}{
+                \textbf{Anzahl der Verbindungen:}
+            }
+            \textbf{9}
+
+            \bigskip
+
+            Verteilte Systeme, in denen viele Komponenten sowohl als Client
+            als auch als Server auftreten, können schnell sehr komplex werden.
+            Denn im Worst-Case muss jede Komponente jede andere Komponente
+            kennen.
+
+            \bigskip
+
+            Im Zweifelsfall wären also auf \textcolor{red}{$n$ Systemen}
+            bis zu \textcolor{red}{${n^2-n}/{2}$ Verbindungsdaten} zu pflegen.
+
+            \bigskip
+
+            Würde man einem solchen IoT-Setup weitere Devices hinzufügen, müsste
+            im Zweifelsfall die Konfiguration aller anderer Devices angepasst
+            werden.
+        }
+    \end{columns}
 \end{frame}
 
+%%% Folie: TODO - Bild auf IoT anpassen?
 \begin{frame}{Lösung durch einen zentralen Message Broker}
+    \Justified{
+        \footnotesize
+
+        Ein redundant ausgelegter, \textbf{zentraler Message Server} (auch
+        \textbf{Message Broker} oder Message Oriented Middleware) löst das Problem
+        sehr elegant, da er zwar Nachrichten zwischen den Komponenten vermittelt,
+        die Komponenten aber so voneinander entkoppelt, dass sich sich gegenseitig
+        nicht kennen müssen. Jede Komponente sendet einfach ihre Nachrichten an
+        den Broker und verlässt sich darauf, dass diese an die richtigen Empfänger
+        weitergeleitet werden.
+    }
+
+    \bigskip
+
     \begin{center}
         \includegraphics[width=\linewidth]{06-architektur/img/mqtt5}
     \end{center}
 \end{frame}
 
+%%% Folie: TODO - In LaTeX schreiben?
 \begin{frame}{Das Publish/Subscribe-Verfahren bei MQTT}
     \begin{center}
         \includegraphics[width=\linewidth]{06-architektur/img/mqtt6}
     \end{center}
 \end{frame}
 
+%%% Folie: TODO - In LaTeX schreiben?
 \begin{frame}{Simulation des synchronen Request/Response-Verfahrens }
     \begin{center}
         \includegraphics[width=\linewidth]{06-architektur/img/mqtt7}
     \end{center}
 \end{frame}
 
-%\begin{frame}[allowframebreaks, fragile]{Das Problem synchroner Punkt-zu-Punkt-Verbindungen}
-    %\begin{center}
-        %\includegraphics[width=\textwidth]{06-architektur/img/mqtt1}
-    %\end{center}
+%%% Folie
+{
+\small
 
-    %\framebreak
+\begin{frame}{Verwendung von Topics im MQTT-Protokoll}
+    \Justified{
+        \small
+        Topics sind in MQTT einfach nur \textbf{Pfadnamen}, die wie die Verzeichnisse
+        unter Unix mit einem Forward-Slash getrennt werden. Genau gleich wie
+        bei Dateisystem-Verzeichnissen ergibt sich daraus eine \textbf{hierarchische
+        Struktur der Topics}. In der Beispielarchitektur handelt es sich dabei
+        um folgende Topics:
+    }
 
-    %\begin{center}
-        %\includegraphics[width=\textwidth]{06-architektur/img/mqtt2}
-    %\end{center}
+    \smallskip
 
-    %\framebreak
+    \begin{itemize}
+        \item \texttt{iot-projekt/device/broadcast/control}
+        \item \texttt{iot-projekt/device/\textcolor{red}{device\_uuid}/request}
+        \item \texttt{iot-projekt/device/\textcolor{red}{device\_uuid}/response}
+        \item \texttt{iot-projekt/device/\textcolor{red}{device\_uuid}/values}
+    \end{itemize}
 
-    %\begin{center}
-        %\includegraphics[width=\textwidth]{06-architektur/img/mqtt3}
-    %\end{center}
-%\end{frame}
+    \medskip
+
+    Die Empfänger können dann entweder den vollständigen Pfad eines Topics
+    angeben, um es zu abonnieren, oder mit \texttt{\#} ein Wildcard definieren:
+
+    \smallskip
+
+    \begin{itemize}
+        \item \texttt{iot-projekt/device/broadcast/control}
+        \item \texttt{iot-projekt/device/\textcolor{red}{device\_uuid}/request}
+        \item \texttt{iot-projekt/device/\#}
+        \item \texttt{iot-projekt/device/\#/response}
+    \end{itemize}
+\end{frame}
+}
+
+%%% Folie
+\begin{frame}{MQTT-Zustellungsgarantien}
+    \begin{columns}
+        \column{.65\textwidth}
+        \includegraphics[width=\textwidth]{06-architektur/img/mqtt-qos}
+
+        \column{.35\textwidth}
+
+    \Justified{
+        \scriptsize
+        Standardmäßig sichert MQTT die Zustellung einer Nachricht nicht zu, um
+        den Protokoll-Overhead gering zu halten.
+
+        \smallskip
+
+        Sender und Empfänger können
+        jedoch unabhängig voneinander einen QoS-Level (,,Quality of Service'')
+        vom Server anfordern, um eine Zustallgarantie zu erhalten.
+
+        \smallskip
+
+        Je Empfänger wird eine Nachricht dann mit $Min(QoS_{Sender}; QoS_{Empfänger})$
+        zugestellt.
+
+        \medskip
+
+        \textbf{QoS-Level 0:}
+        Zustellung wird nicht garantiert. Nachrichten können verloren gehen
+        oder auch mehrfach zugestellt werden.
+
+        \smallskip
+
+        \textbf{QoS-Level 1:}
+        Zustellung wird garantiert, eine Nachricht kann demselben Empfänger
+        aber auch mehrfach zugestellt werden.
+
+        \smallskip
+
+        \textbf{QoS-Level 2:}
+        Die einmalige Zustellung der Nachricht an alle zum Versandzeitpunkt
+        bekannten Empfänger wird garantiert.
+    }
+    \end{columns}
+\end{frame}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Nachrichten mit besonderer Bedeutung}
+    \begin{block}{Retained Messages}
+        \begin{itemize}
+            \item Flag für Nachrichten, damit diese am Topic erhalten bleiben.
+            Spätere Subscriber bekommen diese als \quotes{Bootstrap Nachricht},
+            um sich über die letzte bekannte ordnungsgemäße Nachricht zu informieren.
+
+            \item Anwendungsfall: Letzten Status kontinuierlich überwachen, auch
+            wenn die Empfänger erst zeitversetzt online gehen.
+
+            \item Je Topic kann es nur eine aktuelle Retained Message geben.
+
+            \item Zum Löschen der Ratained Message muss eine Nachricht mit leerem
+            Inhalt und ohne das Flag an das Topic gesendet werden.
+         \end{itemize}
+    \end{block}
+
+    \bigskip
+
+    \begin{block}{Last Will Testament}
+        \begin{itemize}
+            \item Nachricht, die beim Herstellen der Verbindung mitgegeben werden kann.
+
+            \item Wird an alle Subscriber des jeweiligen Topics gesendet, wenn der
+            Client die Verbindung verliert.
+        \end{itemize}
+    \end{block}
+\end{frame}
+}
+
+%%% Folie
+\begin{frame}{Aufgabe: MQTT im Browser ausprobieren}
+    \begin{columns}
+        \column{.5\textwidth}
+        \setlength{\fboxsep}{0em}
+        \fbox{\includegraphics[width=\linewidth]{06-architektur/img/public-mqtt-broker1}}
+
+        \column{.5\textwidth}
+        \setlength{\fboxsep}{0em}
+        \fbox{\includegraphics[width=\linewidth]{06-architektur/img/public-mqtt-broker2}}
+    \end{columns}
+
+    \smallskip
+
+    \url{https://www.hivemq.com/public-mqtt-broker/}
+
+    \bigskip
+
+    \Justified{
+        \small
+        \begin{enumerate}
+            \item Rufen Sie die oben gezeigte Webadresse auf und erkunden Sie
+            die MQTT-Sandbox von HiveMQ.
+
+            \item Probieren Sie insbesondere, mehrere Browser-Fenster mit dem
+            ,,MQTT Browser Client'' zu öffnen zwischen den Fenstern Nachrichten hin
+            und her zu schicken.
+
+            \item Probieren Sie dabei auch aus, Topics mit einem Wildcard zu
+            überwachen.
+        \end{enumerate}
+    }
+\end{frame}
