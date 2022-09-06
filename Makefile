@@ -7,7 +7,6 @@ OUTDIR = ./PDF
 BUILDDIR = ./build
 PDFLATEX = pdflatex
 PDFLATEX_OPTIONS = -halt-on-error -file-line-error -output-directory $(BUILDDIR)
-TEXINPUTS = .:docclass:
 
 .DEFAULT: all
 
@@ -17,9 +16,9 @@ TEXINPUTS = .:docclass:
 #-------------------------------------------------------------------------------
 .SUFFIXES: .pdf
 
-%.pdf: mkdirs
-	export TEXINPUTS=$(TEXINPUTS); \
-	$(PDFLATEX) $(PDFLATEX_OPTIONS) $*.tex; \
+%.pdf: builddir
+	export TEXINPUTS=`cat build/$*.dir`; \
+	$(PDFLATEX) $(PDFLATEX_OPTIONS) build/$*.tex; \
 	mv "$(BUILDDIR)/$@" $(OUTDIR)
 
 #-------------------------------------------------------------------------------
@@ -28,48 +27,50 @@ TEXINPUTS = .:docclass:
 # $ make clean
 #-------------------------------------------------------------------------------
 .PHONY: clean
-.PHONY: mkdirs
+.PHONY: builddir
 .PHONY: all
-
-#clean:
-#	shopt -s globstar; \
-#	rm -f **/**~; \
-#	rm -f **/**.aux; \
-#	rm -f **/**.dvi; \
-#	rm -f **/**.log; \
-#	rm -f **/**.out; \
-#	rm -f **/**.nav; \
-#	rm -f **/**.snm; \
-#	rm -f **/**.toc; \
-#	rm -f **/**.vrb
 
 clean:
 	rm -rf $(BUILDDIR)
 	rm -rf $(OUTDIR)/*.pdf
 
-mkdirs:
-	if [ ! -e $(OUTDIR)                      ]; then mkdir $(OUTDIR);                      fi
-	if [ ! -e $(BUILDDIR)                    ]; then mkdir $(BUILDDIR);                    fi
-	if [ ! -e $(BUILDDIR)/include            ]; then mkdir $(BUILDDIR)/include;            fi
-	if [ ! -e $(BUILDDIR)/00-kopiervorlage   ]; then mkdir $(BUILDDIR)/00-kopiervorlage;   fi
-	if [ ! -e $(BUILDDIR)/00-vorlage         ]; then mkdir $(BUILDDIR)/00-vorlage;         fi
-	if [ ! -e $(BUILDDIR)/01-grundlagen      ]; then mkdir $(BUILDDIR)/01-grundlagen;      fi
-	if [ ! -e $(BUILDDIR)/02-hardwaredesign  ]; then mkdir $(BUILDDIR)/02-hardwaredesign;  fi
-	if [ ! -e $(BUILDDIR)/03-python1         ]; then mkdir $(BUILDDIR)/03-python1;         fi
-	if [ ! -e $(BUILDDIR)/04-python2         ]; then mkdir $(BUILDDIR)/04-python2;         fi
-	if [ ! -e $(BUILDDIR)/05-semesterstart   ]; then mkdir $(BUILDDIR)/05-semesterstart;   fi
-	if [ ! -e $(BUILDDIR)/06-architektur     ]; then mkdir $(BUILDDIR)/06-architektur;     fi
-	if [ ! -e $(BUILDDIR)/07-hardwarenutzung ]; then mkdir $(BUILDDIR)/07-hardwarenutzung; fi
-	if [ ! -e $(BUILDDIR)/08-python3         ]; then mkdir $(BUILDDIR)/08-python3;         fi
-	if [ ! -e $(BUILDDIR)/09-datenaustausch  ]; then mkdir $(BUILDDIR)/09-datenaustausch;  fi
-	if [ ! -e $(BUILDDIR)/10-linux           ]; then mkdir $(BUILDDIR)/10-linux;           fi
-	if [ ! -e $(BUILDDIR)/99-beispiele       ]; then mkdir $(BUILDDIR)/99-beispiele;       fi
+builddir:
+	if [ ! -e $(OUTDIR)           ]; then mkdir $(OUTDIR);           fi
+	if [ ! -e $(BUILDDIR)         ]; then mkdir $(BUILDDIR);         fi
+	if [ ! -e $(BUILDDIR)/include ]; then mkdir $(BUILDDIR)/include; fi
 
-all: clean mkdirs
-	export TEXINPUTS=$(TEXINPUTS); \
-	for INFILE in *.tex; do \
-	$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE; \
-	$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE; \
-	$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE; \
+	for NAME in */hauptfolien.tex; do                 \
+	    NAME=$${NAME//"/hauptfolien.tex"/};           \
+	    DIR=$(BUILDDIR)/$$NAME;                       \
+	                                                  \
+	    if [ ! -e $$DIR ]; then                       \
+	        mkdir $$DIR;                              \
+	    fi;                                           \
+	                                                  \
+	    IF=xx-folien.tex;                             \
+	    OF=$(BUILDDIR)/$${IF//xx/$$NAME};             \
+	    sed s/xx/$$NAME/g $$IF > $$OF;                \
+	    echo .:$$NAME: > $${OF//.tex/.dir};            \
+	                                                  \
+	    IF=xx-handout.tex;                            \
+	    OF=$(BUILDDIR)/$${IF//xx/$$NAME};             \
+	    sed s/xx/$$NAME/g $$IF > $$OF;                \
+	    echo .:$$NAME: > $${OF//.tex/.dir};            \
+	                                                  \
+	    if [ -e $$NAME/aufgabenblatt.tex ]; then      \
+	        IF=xx-aufgaben.tex;                       \
+	        OF=$(BUILDDIR)/$${IF//xx/$$NAME};         \
+	        sed s/xx/$$NAME/g $$IF > $$OF;            \
+	        echo .:$$NAME: > $${OF//.tex/.dir};        \
+	    fi;                                           \
+	done                                              \
+
+all: clean builddir
+	for INFILE in build/*.tex; do                     \
+		export TEXINPUTS=`cat $${INFILE//.tex/.dir}`; \
+		$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE;     \
+		$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE;     \
+		$(PDFLATEX) $(PDFLATEX_OPTIONS) $$INFILE;     \
 	done
+
 	mv $(BUILDDIR)/*.pdf $(OUTDIR)

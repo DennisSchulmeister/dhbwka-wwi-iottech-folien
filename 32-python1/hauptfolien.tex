@@ -1,0 +1,611 @@
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, class, const, constructor, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, let, new, return, super, switch, this, throw, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+}
+
+%%% Folie
+\begin{frame}{Lernziele}
+    \begin{itemize}
+        \item Kennenlernen von Python und  Einsatzmöglichkeiten
+        \item Programmiercode strukturieren und Module verwenden
+        \item Messwerte auf dem Raspberry Pi auslesen
+        \item Grundlegender Umgang mit Visual Studio Code
+        \item Umgang mit Problemstellungen beim Programmieren für IoT Devices
+        \item Wichtige Programmierbausteine kennenlernen
+    \end{itemize}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\section{Allgemeines zu Python}
+%-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}{Warum Python?}
+    \begin{figure}[!htb]
+        \includegraphics[scale=0.25]{img/240px-Python-logo-notext}
+    \end{figure}
+
+    \begin{itemize}
+        \item Plattformunabhängig  $\rightarrow$ interpretierte Sprache
+        \item Arm an Boiler-Plate Code
+        \item Knapp gehaltene Syntax
+        \item Open Source
+        \item Unterstützt verschiedene Paradigmen
+        \item Viele Software-Bibliotheken vorhanden
+    \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Wo wird Python eingesetzt?}
+    \begin{itemize}
+        \setlength{\itemindent}{3.0in}
+        \item [\textbf{ Laut Python Package Index (siehe \url{https://pypi.org})}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Rapid Prototyping
+        \item Administratives Scripting
+        \item Wissenschaftliche Software/Data Science
+        \item Machine Learning und Big Data
+        \item ...
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Python und Raspberry Pi}
+    \begin{itemize}
+        \setlength{\itemindent}{.3in}
+        \item [\textbf{ Fakten}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Historisch steht Pi für Python Interpreter
+        \item Ursprünglich sollte in Python programmiert werden
+        \item Python Interpreter ist üblicherweise vorinstalliert in Raspbian
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Python 2 vs. Python 3}
+    \begin{itemize}
+        \setlength{\itemindent}{1.0in}
+        \item [\textbf{ Warum wichtig ?}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Viele Beispiele und Libraries verwenden noch Version 2
+        \item Version 2 wird ab 2020 nicht mehr offiziell von den Entwicklern unterstützt
+        \item Die größeren bekannten und wichtigsten Projekte setzen auf Python 3
+        \item Siehe \url{https://python3statement.org}
+        \item Zum Aufrufen des Interpreters sollte man daher python3 nutzen
+        \item Vergleich und Tipps: \url{https://devopedia.org/python-2-vs-3}
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Entwicklung}
+    \begin{itemize}
+        \setlength{\itemindent}{2.1in}
+        \item [\textbf{ Entwicklung mit Visual Studio Code }]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Leichtgewichtiger Editor mit vielen Plugins
+        \item Python Plugin für Interpreter
+        \item Installation auf dem Pi möglich,  siehe: \url{https://developer-blog.net/visual-studio-code-auf-dem-raspberry-pi/}
+        \item Auf eigenen Notebook möglich:, Versionen für Windows/Linux/Mac, siehe: \url{https://code.visualstudio.com/Download}
+        \item Remote arbeiten vom eigenen Notebook auf dem Pi möglich, siehe: \url{https://www.hanselman.com/blog/VisualStudioCodeRemoteDevelopmentOverSSHToARaspberryPiIsButter.aspx}
+     \end{itemize}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------
+\section{Python anhand einfacher Beispiele}
+%-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}[fragile]{Python vs. Java vs. JavaScript - Hello World}
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Hello World in Python
+        print('Hello World!')
+    \end{lstlisting}
+    \begin{lstlisting}[language=JavaScript, gobble=8]
+        // Hello World in Java Script (Backend Version)
+        console.log('Hello World!')
+    \end{lstlisting}
+    \begin{lstlisting}[language=Java, gobble=8]
+        /* Hello World in Java */
+        public class HelloWorld {
+            public static void main(String[] args) {
+                System.out.println("Hello World");
+            }
+        }
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python vs. Java vs. JavaScript - Funktionen}
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Funktion in Python
+        def my_function(parameter):                 # keine Typeninformation
+            a = 1
+            return parameter * parameter + a
+    \end{lstlisting}
+    \begin{lstlisting}[language=JavaScript, gobble=8]
+        // Funktion in Java Script
+        function myFunction(parameter){             // keine Typeninformation
+            let a = 1;
+            return parameter * parameter + a;
+        }
+    \end{lstlisting}
+    \begin{lstlisting}[language=Java, gobble=8]
+        /* Methode in Java */
+        public int myFunction (int parameter){      // Typeninformation
+            int a = 1;
+            return parameter * parameter + a;
+        }
+        \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python - Type Hints}
+    Weitere Infos siehe \url{https://docs.python.org/3/library/typing.html}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Funktion zu Berechnung
+        def my_function(parameter: int) -> int:         # Hinweise zu Typen
+            a = 1
+            return parameter * parameter + a
+    \end{lstlisting}
+
+	\begin{lstlisting}[language=Python, gobble=8]
+        # Funktion zur Stringprüfung
+        def my_other_function(parameter: str) -> bool:  # Hinweise zu Typen
+            return len(parameter) > 0
+    \end{lstlisting}
+
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python - Lambda Funktion}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        # Funktion in Python
+        def my_function(parameter: int) -> int:
+            a = 1
+            return parameter * parameter + a
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        # lambda in Python
+        my_function = lambda x: x * x + 1 # Kurzform der Funktion als Lambda
+    \end{lstlisting}
+
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python vs. Java vs. JavaScript - Klassen}
+    \begin{lstlisting}[language=Python, gobble=8]
+        class MyClass(Superklasse):                     # Python
+            __init__(self, value):
+                super().__init__(value)
+                self.value = value;
+
+            def my_method(self):
+                return self.value
+    \end{lstlisting}
+    \begin{lstlisting}[language=JavaScript, gobble=8]
+        class MyClass extends Superklasse{              // JavaScript
+            constructor() {
+                super(value);
+                this.value = value;
+            }
+            myMethod() {
+                return this.value;
+            }
+        }
+    \end{lstlisting}
+    \begin{lstlisting}[language=Java, gobble=8]
+        public class MyClass extends Superklasse{       // Java
+            private int value;
+
+            MyClass(int value) {
+                super(value);
+                this.value = value;
+            }
+            public int myMethod () {
+                return this.value;
+            }
+        }
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Duck Typing 1}
+    Beispiel basierend auf \url{https://hackernoon.com/python-duck-typing-or-automatic-interfaces-73988ec9037f}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        """
+        Intention: ein Vogel gibt Laut, Ergebnis: Ein Betrüger geht als Vogel
+        durch, denn er kann ja quack machen und nimmt das Geld mit.
+        """
+
+        class Ente:
+            def quack(self):
+                print('Quack!')
+
+        class Gans:
+            def quack(self):
+                print('Quaaaack')
+
+        class Quacksalber:
+            def quack(self):
+                print('Quack')
+                print('Ich nehme dann mal dein Geld!')
+
+        list = [Ente(), Gans(), Quacksalber()]
+
+        for item in list:
+            item.quack()
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Duck Typing 2}
+    \begin{lstlisting}[language=Python, gobble=8]
+        """
+        Intention: Verschiedene Sensoren sollen über gemeinsame Schnittstelle
+        die Distanz zurückliefern
+        """
+
+        class UltraschallSensor:
+            def get_distance(self):
+                # ... über Bibliothek Auslesen, bspw. 200 cm
+                return input() # zum Test: User Eingabe über Keyboard
+
+        class InfrarotSensor:
+            def get_distance(self):
+                return  input()
+
+        def print_distance(sensor):
+            print(sensor.get_distance())
+
+        print_distance(UltraschallSensor())
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Datenstrukuren 1}
+    \begin{lstlisting}[language=Python, gobble=8]
+        """
+        Intention: Dictionary mit vordefinierten und erweiterbaren Schlüsseln,
+        Format ähnlich zu Java Script Object Literals
+        """
+
+        # Meet the Dictionary
+        switcher = {
+            15: 'Ganz nah',     # Schlüssel : Wert
+            30: 'Nah',
+            70: 'Weit weg'
+        }
+        switcher[99] = 'Gerade noch messbar'
+
+        ergebnis = switcher.get(15, 'UNGUELTIG')
+
+        # Ähnlich wie in JavaScript kann das Dictionary (hier switcher genannt)
+        # auch Funktionsobjekte beinhalten. Dies wird auf folgender Seite erklärt:
+        # https://jaxenter.com/implement-switch-case-statement-python-138315.html
+
+        # Analog in if-else:
+        if(eingabe_schuessel == 15):
+            # tue etwas
+            pass
+        elif(eingabe_schuessel == 30):
+            # tue etwas anderes
+            pass
+        else:
+            # z.B. ungueltig ausgeben
+            pass
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Datenstrukuren 2}
+    \begin{lstlisting}[language=Python, gobble=8]
+        """
+        Intention: Eine Liste mit mehreren Zahlen, welche die Helligkeit einer
+        Leuchtdiode darstellen sollen
+        """
+
+        # Meet the List
+        intensities = [0, 0.5, 1]
+
+        print(intensities[2])
+
+        for value in intensities:
+            print(value)
+
+        intensities.append(1.5)
+        intensities.remove(0)
+        intensities.pop(0)
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Datenstrukuren 3}
+    \begin{lstlisting}[language=Python, gobble=8]
+        """
+        Intention: Zusammengehörige Werte im Code zusammenhalten
+        """
+
+        # Meet the Tuple
+        sensor_messung = (0.3, '2019-10-07-15:00:01.996')
+
+        print('Der Messwert um ', sensor_messung[1], ' war: ', sensor_messung[0])
+    \end{lstlisting}
+
+    \bigskip
+    \bigskip
+
+    \parbox{\linewidth}{
+        \textbf{Anmerkung:} Anders als eine Liste kann ein Tuple nachträglich nicht mehr
+        verändert werden. Es können daher keinen neuen Werte einfügt oder alte
+        Werte entfernt werden. Auch können die enthaltenen Werte nicht überschrieben
+        werden. Man sagt, ein Tupel ist „unveränderlich” (immutable).
+    }
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Sauberes Programmieren: Coding Conventions}
+    \begin{itemize}
+    \setlength{\itemindent}{.5in}
+     \item [\textbf{ Richtlinien}]
+    \end{itemize}
+    \begin{itemize}
+        \item Python Enhancement Proposals enthalten u.a. Guidelines für lesbaren Code
+        \item Siehe: \url{https://pep8.org/#naming-conventions}
+        \item Autopep hilfreich für die Entwicklungsumgebung, siehe:  \url{https://pypi.org/project/autopep8/}
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Sauberes Programmieren: Zen of Python}
+    \url{https://www.python.org/dev/peps/pep-0020/#the-zen-of-python}
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        """
+        Zen: japanische Richtung des Buddhismus, die durch Meditation die Erfahrung der
+        Einheit allen Seins und damit tätige Lebenskraft und größte Selbstbeherrschung
+        zu erreichen sucht.
+        """
+
+        # Python Easter Egg:
+        import this
+    \end{lstlisting}
+
+    \begin{Verbatim}[fontsize=\scriptsize, gobble=8]
+        Beautiful is better than ugly.
+        Explicit is better than implicit.
+        Simple is better than complex.
+        Complex is better than complicated.
+        Flat is better than nested.
+        Sparse is better than dense.
+        Readability counts.
+        Special cases aren't special enough to break the rules.
+        Although practicality beats purity.
+        Errors should never pass silently.
+        Unless explicitly silenced.
+        In the face of ambiguity, refuse the temptation to guess.
+        There should be one-- and preferably only one --obvious way to do it.
+        Although that way may not be obvious at first unless you're Dutch.
+        Now is better than never.
+        Although never is often better than *right* now.
+        If the implementation is hard to explain, it's a bad idea.
+        If the implementation is easy to explain, it may be a good idea.
+        Namespaces are one honking great idea -- let's do more of those!
+    \end{Verbatim}
+\end{frame}
+
+
+%-------------------------------------------------------------------------------
+\section{Python auf dem Raspberry Pi}
+%-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}{Beispiel: Sensoren auslesen mit GPIO 1}
+    \begin{itemize}
+    \setlength{\itemindent}{.4in}
+     \item [\textbf{ Ziele}]
+    \end{itemize}
+    \begin{itemize}
+        \item  LED mittels PWM ansteuern
+        \item  Abstandsmessung einbinden
+        \item  Abstandsmessung und LED verbinden
+        \item  Code modular aufbauen
+        \item  Module zusammensetzen
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Beispiel: Sensoren auslesen mit GPIO 2}
+    \begin{itemize}
+    \setlength{\itemindent}{1in}
+     \item [\textbf{ Wo anfangen?}]
+    \end{itemize}
+    \begin{itemize}
+        \item  Python verwendet Bibliotheken, die man als Module einbindet
+        \item  GPIO bzw. GPIOZero (Umstellung siehe: \url{https://gpiozero.readthedocs.io/en/stable/migrating_from_rpigpio.html}
+        \item  Die Module werden installiert über:  pip3 install -r requirements.txt
+        \item  requirements.txt: Auflistung der Libraries, aehnlich zu package.json in nodeJS oder build.gradle oder pom.xml in Java
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Beispiel: Sensoren auslesen mit GPIO 3}
+    \begin{lstlisting}[language=Python, gobble=8]
+        #Inhalt: requirements.txt
+        RPi.GPIO==0.7.0
+        paho-mqtt==1.5.1
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Beispiel: Sensoren auslesen mit GPIO 4}
+    \begin{itemize}
+    \setlength{\itemindent}{1.0in}
+     \item [\textbf{ Dokumentation}]
+    \end{itemize}
+
+    \begin{itemize}
+        \item Datenblatt der Sensoren: \url{https://joy-it.net/files/files/Produkte/SEN-KitX40/SENSORKIT_X40_FUER_EINPLATINEN_COMPUTER-2.pdf}
+        \item API zu GPIOZero: \url{https://gpiozero.readthedocs.io/en/stable/}
+		\item API zu RPi.GPIO: \url{https://sourceforge.net/p/raspberry-gpio-python/wiki/Examples/}
+     \end{itemize}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Sourcecode Struktur: Hauptprogramm}
+    \begin{lstlisting}[language=Python, gobble=8]
+        """ Basiert auf:  https://gpiozero.readthedocs.io/en/stable/recipes.html """
+        import sys                                    # Systemfunktionen
+        import logging                                # Ausgabe von Nachrichten
+
+        from gpiozero import PWMLED                   # Bibliothek für PWM-Ansteuerung
+        from time import sleep                        # Funktion zum Pausieren
+
+        logger = logging.getLogger(__name__)          # Log-Ausgabe nicht mit print()
+        led = PWMLED(17)                              # LED Kontrolle für GPIO PIN 17
+
+        def led_dim(value):
+            led.value = value                         # LED auf Wert setzen
+            sleep(1)                                  # 1 Sekunde warten
+
+        try:
+            while True:                               # Programm am Laufen halten
+                led_dim(0)                            # LED aus
+                led_dim(0.5)                          # LED 50% Helligkeit
+                led_dim(1)                            # LED 100% Helligkeit
+        except KeyboardInterrupt:
+            logger.info('Ende wegen User Eingabe')
+        except:
+            logger.error('Ende wegen Programmfehler: %s', sys.exc_info()[0])
+        finally:
+            led.close()                               # GPIOs zurücksetzen
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Sourcecode Struktur: Modul 1}
+    \begin{lstlisting}[language=Python, gobble=8]
+        import sys                                    # Systemfunktionen
+        import logging                                # Ausgabe von Nachrichten
+
+        from gpiozero import PWMLED                   # Bibliothek für PWM-Ansteuerung
+        from time import sleep                        # Funktion zum Pausieren
+
+        class LedBlinker:
+            __led = PWMLED(17)                        # LED Kontrolle für GPIO PIN 17
+            __logger = logging.getLogger(__name__)    # Log-Ausgabe nicht mit print()
+
+            def led_dim(self, value):
+                self.__led.value = value              # LED auf Wert setzen
+                sleep(1)                              # 1 Sekunde warten
+
+            def blink_led(self):
+                try:
+                    for duration in [0, 0.5,1, 0.5]:  # aus, 50%, 100%, 50%
+                        self.led_dim(duration)        # LED dimmen
+                except KeyboardInterrupt:
+                    __logger.info('Ende wegen User Eingabe')
+                except:
+                    # Siehe https://docs.python.org/3/tutorial/errors.html
+                    __logger.error('Programmfehler: %s', sys.exc_info()[0])
+                finally:
+                    self.__led.close()                # GPIOs zurücksetzen
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Sourcecode Struktur: Modul 1 einbinden}
+    \begin{lstlisting}[language=Python, gobble=8]
+        import logging                                # Ausgabe von Nachrichten
+        from led_util import LedBlinker               # Klasse LedBlinker
+
+        logger = logging.getLogger(__name__)          # Log-Ausgabe nicht mit print()
+
+        if __name__ == '__main__':
+            blinker = LedBlinker()
+
+            try:
+                while True:                           # Programm am Laufen halten
+                    blinker.blink_led()               # LED blinken lassen
+            except KeyboardInterrupt:
+                logger.info('Ende wegen User Eingabe')
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Sourcecode Struktur: Modul 2}
+    \begin{lstlisting}[language=Python, gobble=8]
+        import sys                                    # Systemfunktionen
+        import logging                                # Ausgabe von Nachrichten+
+        from gpiozero import DistanceSensor           # Bibliothek für Ultraschallsensor
+
+        class Ultraschallsensor:
+            #  Sensor über GPIO 17 und 18 ansteuern
+            __sensor = DistanceSensor(echo=18, trigger=17, threshold_distance = 0.1, max_distance=1)
+            __logger = logging.getLogger(__name__)    # Log-Ausgabe nicht mit print()
+
+            def __init__(self):
+                pass
+
+            def read_distance_ic_cm(self):
+                distance = -1
+
+                try:
+                    distance = self.__sensor.distance * 100
+                except KeyboardInterrupt:
+                    self.__logger.info('Ende wegen User Eingabe')
+                except:
+                    # Siehe https://docs.python.org/3/tutorial/errors.html
+                    self.__logger.error('Programmfehler: %s', sys.exc_info()[0])
+                finally:
+                    self.__sensor.close() # PIN Konfiguration zurücksetzen
+
+              return distance
+
+            # __sensor.when_out_of_range = handle_out_of_range
+            # Funktion, die z.B. loggt
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Python Sourcecode Struktur: Modul 1  und 2 einbinden}
+    \begin{lstlisting}[language=Python, gobble=8]
+        import logging                                # Ausgabe von Nachrichten
+
+        from led_util import LedBlinker               # LedBlinker-Klasse
+        from distance_util import Ultraschallsensor   # Ultraschallsensor-Klasse
+
+        __logger = logging.getLogger(__name__)        # Log-Ausgabe nicht mit print()
+
+        if __name__ == '__main__':
+            blinker = LedBlinker()
+            ultraschall_sensor = Ultraschallsensor()
+
+            try:
+                while True:                           # Programm am Laufen halten
+                    distance_in_cm = ultraschall_sensor.read_distance_in_cm()
+
+                    if(distance_in_cm >= 15):
+                        blinker.blink_led()  # LED
+                    else:
+                        logger.info('Nichts ungewoehnliches entdeckt')
+            except KeyboardInterrupt:
+                logger.info('Ende wegen User Eingabe')
+    \end{lstlisting}
+\end{frame}
