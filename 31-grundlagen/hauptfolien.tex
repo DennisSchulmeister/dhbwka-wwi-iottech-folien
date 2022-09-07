@@ -82,12 +82,12 @@
 
                     \begin{enumerate}
                         \item Grundlagen des Internet of Things
-                        \item Hardwaredesign für IoT-Anwendungen
-                        \item \textcolor{gray}{Praktische Demonstration}
-                        \item \textcolor{gray}{Übungsstunde}
                         \item Einführung in Python
                         \item IoT-Entwicklung mit Python
-                        \item \textcolor{gray}{Praktische Demonstration}
+                        \item \textcolor{gray}{Übungsstunde}
+                        \item Elektronik für eingebettete Systeme
+                        \item Analoge und digitale Schnittstellen
+                        \item Hardwaredesign und Prototyping
                         \item \textcolor{gray}{Übungsstunde}
                         \item \textcolor{gray}{Klausurvorbereitung}
                     \end{enumerate}
@@ -101,10 +101,10 @@
                     \medskip
 
                     \begin{enumerate}
-                        \item Nutzung analoger und digitaler Bauteile
+                        \item Wiederholung und Ausblick
                         \item Python-Architekturmuster für IoT-Devices
-                        \item Datenaustausch und Systemintegration
                         \item Linux-Konfiguration und Deployment
+                        \item Vorstellung der Balena IoT Cloud
                         \item \textcolor{gray}{Assignment}
                         \item \textcolor{gray}{Assignment}
                         \item \textcolor{gray}{Assignment}
@@ -165,10 +165,24 @@
                 \begin{itemize}
                     \item Visual Studio Code
                     \item OpenSSH / PuTTY
-                    \item Optional: Python
+                    \item Python (optional)
+                    \item KiCAD (optional)
                 \end{itemize}
             \end{column}
         \end{columns}
+
+        \bigskip
+
+        \parbox{\linewidth}{
+            \scriptsize
+            \textcolor{gray}{
+                Python werden wir verwenden, um den Raspberry Pi zu programmieren. Zum Einstieg
+                in die Sprache kann es ganz sinnvoll sein, den Python-Interpreter zusätzlich auf
+                dem eigenen Laptop zu installieren. KiCAD benötigen Sie nur, wenn Sie im Kapitel
+                über Hardwaredesign das Fallbeispiel zum Entwurf eigener Schaltungen nachvollziehen
+                wollen.
+            }
+        }
 \end{frame}
 
 %%% Folie
@@ -210,12 +224,13 @@
 %%% Folie
 \begin{frame}{Lernziele für heute}
     \begin{itemize}
+        \item ,,Internet of Things'' und ,,eingebettete Systeme'' voneinander abgrenzen
         \item Die Bedeutung des Internet der Dinge in der heutigen Zeit verstehen
         \item Aktuelle IoT-Anwendungsfälle und Geschäftsprozesse erkennen
-        \item ,,Internet of Things'' und ,,eingebettete Systeme'' voneinander abgrenzen
         \item Typische Schichten und Komponenten einer IoT-Architektur benennen
         \item Den aktuellen Stand der Technik im historischen Kontext einordnen
         \item Relevante Computerarchitekturen miteinander vergleichen
+        \item Die Vielfalt angebotener Single Board Computer einschätzen können
         \item Die Begriffe ,,Microcontroller'' und ,,System-on-a-Chip'' erklären
         %\item Die Anforderungen an eingebettete Hard- und Software verstehen
     \end{itemize}
@@ -226,24 +241,16 @@
 %-------------------------------------------------------------------------------
 
 %%% Folie
-\begin{frame}{Embedded- und IoT-Devices im Alltag}
-    \begin{columns}
-        \column{\dimexpr\paperwidth-28pt}
-        \includegraphics[width=\textwidth]{img/embedded_devices}
-    \end{columns}
-\end{frame}
-
-%%% Folie
-\begin{frame}{Embedded/IoT-Devices im Alltag}
+\begin{frame}{Ein paar Fragen zum Einstieg}
     \begin{columns}
         \begin{column}[b]{.5\textwidth}
             \begin{center}
-                \includegraphics[width=\textwidth]{img/android_tv}
+                \includegraphics[width=\textwidth]{img/iot-hardware}
             \end{center}
         \end{column}
         \begin{column}[b]{.5\textwidth}
             \begin{center}
-                \includegraphics[width=\textwidth]{img/smart-home-3779361_1280}
+                \includegraphics[width=\textwidth]{img/iot-backend}
             \end{center}
         \end{column}
     \end{columns}
@@ -251,40 +258,16 @@
     \bigskip
 
     \begin{itemize}
+        \item Was ist ein eingebettetes System?
         \item Was bedeutet der Begriff ,,Internet of Things''?
-        \item Was macht ein Device zu einem IoT-Device?
-        \item Wie unterscheidet es sich von gewöhnlichen Embedded-Devices?
-        \item Welche Anwendungsfälle für IoT können Sie sich vorstellen?
+        \item Welche Anwendungsfälle können Sie sich vorstellen?
     \end{itemize}
 \end{frame}
 
 %%% Folie
-\begin{frame}{Industrielle IoT-Anwendungsfälle}
-    \textbf{Smight -- Smart City Light}
-    \hfill
-    \Href{https://smight.com/}
-    \medskip
-    \includegraphics[width=0.49\textwidth]{img/smight1}
-    \hfill
-    \includegraphics[width=0.49\textwidth]{img/smight2}
-
-    \bigskip
-
-    \textbf{Testfeld autonomes Fahren Baden-Württemberg}
-    \hfill
-    \Href{https://taf-bw.de/}
-    \medskip
-    \includegraphics[width=\textwidth]{img/karlsruhe}
-\end{frame}
-
-%-------------------------------------------------------------------------------
-\section{Technische Grundlagen}
-%-------------------------------------------------------------------------------
-
 {
 \small
 
-%%% Folie
 \begin{frame}{Definition ,,Eingebettetes Computersystem''}
     \begin{block}{Definition}
         \parbox{\linewidth}{
@@ -324,8 +307,12 @@
         \end{columns}
     \end{block}
 \end{frame}
+}
 
 %%% Folie
+{
+\small
+
 \begin{frame}{Definition ,,Internet of Things''}
     \begin{block}{Definition}
         \parbox{\linewidth}{
@@ -362,6 +349,66 @@
     \end{block}
 \end{frame}
 }
+
+%%% Folie
+\begin{frame}{Eingebettete Systeme im Alltag}
+    \begin{columns}
+        \column{\dimexpr\paperwidth-28pt}
+        \includegraphics[width=\textwidth]{img/embedded_devices}
+    \end{columns}
+\end{frame}
+
+%%% Folie
+\begin{frame}{IoT-Devices im Alltag}
+    \begin{columns}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/android_tv}
+            \end{center}
+        \end{column}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/smart-home-3779361_1280}
+            \end{center}
+        \end{column}
+    \end{columns}
+
+    \begin{columns}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/saugroboter}
+            \end{center}
+        \end{column}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/drone}
+            \end{center}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Industrielle IoT-Anwendungsfälle}
+    \textbf{Smight -- Smart City Light}
+    \hfill
+    \Href{https://smight.com/}
+    \medskip
+    \includegraphics[width=0.49\textwidth]{img/smight1}
+    \hfill
+    \includegraphics[width=0.49\textwidth]{img/smight2}
+
+    \bigskip
+
+    \textbf{Testfeld autonomes Fahren Baden-Württemberg}
+    \hfill
+    \Href{https://taf-bw.de/}
+    \medskip
+    \includegraphics[width=\textwidth]{img/karlsruhe}
+\end{frame}
+
+%-------------------------------------------------------------------------------
+\section{Technische Grundlagen}
+%-------------------------------------------------------------------------------
 
 %%% Folie
 {
@@ -418,10 +465,6 @@
         \includegraphics[width=\textwidth]{img/architektur_beispiel}
     \end{columns}
 \end{frame}
-
-%-------------------------------------------------------------------------------
-\section{Eingebettete Rechnerarchitekturen}
-%-------------------------------------------------------------------------------
 
 %%% Folie
 \begin{frame}[allowframebreaks]{Eine kleine Computer-Geschichte}
@@ -517,8 +560,79 @@
     \end{frame}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%
+
 %%% Folie
-\begin{frame}{Minimale Grundkomponenten eines Computers}
+{
+\scriptsize
+
+\begin{frame}{Beispiele für typische Single Board Computer}
+    \begin{columns}
+        \begin{column}[b]{.5\textwidth}
+            \textbf{Arduino Nano} \\
+            \smallskip
+            \includegraphics[width=.5\textwidth]{img/sbc-arduino_nano}
+
+            \begin{itemize}
+                \setlength{\itemindent}{-1em}
+                \setlength\itemsep{0em}
+                \item 16 MHz ATmega328 CPU
+                \item 32 KiB Flash EEPROM, 2 KiB SRAM
+                \item 22 $\times$ Digital-, 8 $\times$ Analog-, 6 $\times$ PWM-Ausgang
+            \end{itemize}
+        \end{column}
+
+        \begin{column}[b]{.5\textwidth}
+            \textbf{PyBoard} \\
+            \smallskip
+            \includegraphics[width=.5\textwidth]{img/sbc-pyboard}
+
+            \begin{itemize}
+                \setlength{\itemindent}{-1em}
+                \setlength\itemsep{0em}
+                \item 168 MHz ARM Cortex M4 CPU
+                \item 1024 KiB Flash ROM, 192 KiB RAM
+                \item 29 GPIO, 3 $\times$ 12-bit ADC, 2 $\times$ 12-bit DAC
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+    \bigskip
+
+    \begin{columns}
+        \begin{column}[b]{.5\textwidth}
+            \textbf{ESP32} \\
+            \smallskip
+            \includegraphics[width=.5\textwidth]{img/sbc-esp32}
+
+            \begin{itemize}
+                \setlength{\itemindent}{-1em}
+                \setlength\itemsep{0em}
+                \item 160 -- 240 MHz Xtensa LX6 Dual-Core CPU
+                \item 2 $\times$ 160 KiB RAM (statisch/dynamisch)
+                \item GPIO, WLAN, Bluetooth, ...
+            \end{itemize}
+        \end{column}
+
+        \begin{column}[b]{.5\textwidth}
+            \textbf{Raspberry Pi 4} \\
+            \smallskip
+            \includegraphics[width=.5\textwidth]{img/sbc-raspberrypi.png}
+
+            \begin{itemize}
+                \setlength{\itemindent}{-1em}
+                \setlength\itemsep{0em}
+                \item BCM2711 ARM v8 CPU, Quad Core
+                \item 4 oder 8 GiB RAM
+                \item GPIO, WLAN, Bluetooth, USB, HDMI, ...
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+\begin{frame}{Zum Vergleich: Diskret aufgebauter Computer}
     \begin{center}
         \includegraphics[height=0.5\textheight]{img/sbc_microprozessor2_klein}
     \end{center}
@@ -661,7 +775,29 @@
         \end{column}
     \end{columns}
 \end{frame}
+
 }
+
+%%% Folie
+\begin{frame}{Fallbeispiel: LED-Laufschrift}
+    \begin{columns}
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{img/laufschrift_arduino1}
+
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{img/laufschrift_arduino2}
+    \end{columns}
+
+    \bigskip
+
+    \begin{columns}
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{img/laufschrift_pi1}
+
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{img/laufschrift_pi2}
+    \end{columns}
+\end{frame}
 
 %%% Folie
 \begin{frame}[allowframebreaks]{Fallbeispiel: Yamaha SPX90 (1985)}
