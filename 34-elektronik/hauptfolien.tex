@@ -162,7 +162,7 @@
         indem die freien Elektronen durch \textbf{magnetische} oder
         \textbf{chemische Einwirkung} in Bewegung versetzt werden.
         Allerdings darf man das nicht nicht so vorstellen, dass ein Elektron
-        geradlinig durch das Material hindurch wandert. Vier mehr nimmt es einen
+        geradlinig durch das Material hindurch wandert. Viel mehr nimmt es einen
         zufälligen Weg und schiebt dabei alle anderen Elektronen aus dem Weg,
         da sich Elementarteilchen mit gleicher Ladung immer abstoßen.
     }
@@ -431,8 +431,8 @@
         Energie (beispielsweise durch Abwärme) oder die zur Ausführung von Arbeiten
         verfügbare Energie bezeichnet. Ihre elektrische Definition lautet $P = U \times I$,
         so dass ein Watt der Leistung entspricht, die benötigt wird, um an einem
-        ohmschen Widerstand von einem Ohm eine Spannung von einem Volt (und damit
-        eine Stromstärke von einem Ampere) während einer Sekunde zu erhalten. Daraus
+        \textbf{ohmschen Widerstand von einem Ohm eine Spannung von einem Volt} (und damit
+        eine Stromstärke von einem Ampere) \textbf{während einer Sekunde} zu erhalten. Daraus
         folgt, dass sich die Leistung aus dem Produkt der beiden anderen Werte
         \textit{Spannung} und \textit{Stromstärke} bildet.
         \smallskip
@@ -934,7 +934,7 @@
 {
 \scriptsize
 
-\begin{frame}{Binärsignal ausgeben am Beispiel einer LED}
+\begin{frame}[fragile, allowframebreaks]{Binärsignal ausgeben am Beispiel einer LED}
     \Justified{
         Jeder \textbf{GPIO-Pin} kann softwaregesteuert als \textbf{Eingang oder Ausgang} konfiguriert
         werden. Ausgangspins stellen eine Spannung von \textbf{ca. 3,3\,V} zur Verfügung, um eine
@@ -967,6 +967,39 @@
         \column{0.5\textwidth}
         \includegraphics[width=\textwidth]{img/led_direkt_foto}
     \end{columns}
+
+    \framebreak
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        import RPi.GPIO as GPIO, time
+
+        GPIO_LED = 21
+        DELAY_S = 0.5
+
+        if __name__ == "__main__":
+            try:
+                # GPIO-Pin initialisieren
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(GPIO_LED, GPIO.OUT)
+
+                # LED alle halbe Sekunde ein bzw. ausschalten
+                led_status = False
+
+                while True:
+                    led_status = not led_status
+                    GPIO.output(GPIO_LED, led_status)
+
+                    print("LED ist an" if led_status else "LED ist aus")
+
+                    time.sleep(DELAY_S)
+            except KeyboardInterrupt:
+                pass
+
+            GPIO.cleanup()
+    \end{lstlisting}
+
+    \hfill
+    \LinkButton{https://sourceforge.net/p/raspberry-gpio-python/wiki/Examples/}{Dokumentation zu RPi.GPIO}
 \end{frame}
 }
 
@@ -1039,7 +1072,7 @@
 {
 \scriptsize
 
-\begin{frame}{Gemittelte Leistung durch Pulsweitenmodulation regulieren}
+\begin{frame}[fragile, allowframebreaks]{Gemittelte Leistung durch Pulsweitenmodulation regulieren}
     \parbox{\linewidth}{
         Die zur Verfügung stehende Stromstärke kann nicht nur durch einen Vorwiderstand reduziert werden.
         Je nach Bauteil kann (oder muss) sie durch \textbf{Pulsweitenmodulation}, was einem schnellen
@@ -1056,6 +1089,35 @@
 
     \hfill
     \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKAHMRCUAWCsFTjwoo8UKCwBOnDAO7dRGQqLmiq2XCzBcQi5fJB5ss-QIAmdAGYBDAK4AbAC4M7dU+DFUYkVgBlpA7DxeLl5A3ioIazsAZzoQbGhscSlCGXignSV08PiNbAwqQwCM4n5s908WfMKjEBUQUuNRCEqAdwaysI6m8XbGuv1+hDLIFj6y4YEQvgFRgCNOBEJc4jqMVYQl8QAPNeWEPFphikM68AEAJStogAc5ugkJAE8AHWiABQBLFl3KDa1OJAksNVrwygBZa6xN4ACgA4hIAPY2AB2pgAlD8aORAvtiElAqDziA4e8AJIAeQYAEEbNE2FYUWwsZRyNxjghiLIELwwQJ3gB1cE0ukMpksBZFXLLMD4ASbcijXZBWh4JClVXKYlwugAWzo0ViKLoWMMq0IkGWpXNkCJZQAyg4kbrog4ACcSADWdBRmm0unKUq6ZkstkczlcFQ8sFYF38A1E03qvCQsrUiQ8UES2BY3CBDREdVqsrS8k8nAA+kYK5AK1p1uya7B4IoUPjiOzsPwEE24Fwe7WUBXCFWWEA}
+
+    \framebreak
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        import RPi.GPIO as GPIO, time
+
+        GPIO_LED   = 12
+        FREQUENCY  = 100    # 100 Hz
+        DUTY_CYCLE = 50     # 50%
+
+        if __name__ == "__main__":
+            try:
+                # GPIO-Pin initialisieren
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(GPIO_LED, GPIO.OUT)
+
+                # Pulsweitenmodulation einstellen
+                led_pwm = GPIO.PWM(GPIO_LED, FREQUENCY)
+                led_pwm.start(DUTY_CYCLE)
+
+                # Endlosschleife, damit das Programm nicht beendet wird
+                while True:
+                    time.sleep(10)
+
+            except KeyboardInterrupt:
+                pass
+
+            GPIO.cleanup()
+    \end{lstlisting}
 \end{frame}
 }
 
@@ -1107,7 +1169,7 @@
 {
 \scriptsize
 
-\begin{frame}{Digitaleingang mit Active-High-Logik (z.B. Taster)}
+\begin{frame}[fragile, allowframebreaks]{Digitaleingang mit Active-High-Logik (z.B. Taster)}
     \Justified{
         Viele Sensoren stellen lediglich einen \textbf{Kontakt zwischen zwei Pins} her, wenn ein bestimmtes
         Ereignis eintritt, zum Beispiel wenn ein Schalter gedrückt, eine Berührung mit einem Hindernis
@@ -1133,6 +1195,39 @@
         \column{0.4\textwidth}
         \includegraphics[width=\textwidth]{img/button_pulldown_foto}
     \end{columns}
+
+    \framebreak
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        import RPi.GPIO as GPIO, time
+
+        GPIO_BUTTON = 22
+
+        def on_button_event(button):
+            """Button-Callback. Läuft in einem eigenen Thread!"""
+
+            if GPIO.input(button) == GPIO.HIGH:
+                print("Der Button WIRD GEDRÜCKT")
+            else:
+                print("Der Button WURDE LOSGELASSEN")
+
+        if __name__ == "__main__":
+            try:
+                # GPIO-Pins initialisieren
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(GPIO_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+                GPIO.add_event_detect(GPIO_BUTTON, GPIO.BOTH)   # GPIO.RISING, GPIO.FALLING
+                GPIO.add_event_callback(GPIO_BUTTON, on_button_event)
+
+                # Endlosschleife, damit das Hauptprogramm weiterläuft
+                while True:
+                    time.sleep(10)
+            except KeyboardInterrupt:
+                pass
+
+            GPIO.cleanup()
+    \end{lstlisting}
 \end{frame}
 }
 
@@ -1140,17 +1235,12 @@
 {
 \scriptsize
 
-\begin{frame}{Digitaleingang mit Active-Low-Logik (z.B. Lichtschranke)}
+\begin{frame}[fragile, allowframebreaks]{Digitaleingang mit Active-Low-Logik (z.B. Lichtschranke)}
     \Justified{
-        Einige Sensoren \textbf{unterbrechen einen Kontakt}, wenn die festzustellende
-        Bedingung eintritt. Dies trifft zum Beispiel auf Lichtschranken zu, die an ihrem
-        Ausgang so lange einen Strom liefern, bis sie unterbrochen werden. Da man in der
-        Regel aber genau die Unterbrechungen zählen will, würde dies eine entsprechende
-        \textbf{Sonderbehandlung zur Invertierung der Messwerte in der Software} erforderlich
-        machen. Einfacher und sicherer ist stattdessen, das Sensorsignal mit einer
-        \textbf{Active-Low-Logik} bereits im Hardwareaufbau zu negieren.
-        \smallskip
-
+        Einige Sensoren \textbf{unterbrechen einen Kontakt}, wenn die festzustellende Bedingung eintritt.
+        Dies trifft zum Beispiel auf Lichtschranken zu, die an ihrem Ausgang so lange einen Strom liefern,
+        bis sie unterbrochen werden. Am einfachsten lassen sich solche Sensoren wie hier gezeigt mit einer
+        \textbf{Active-Low-Logik} verbinden.
         Indem der interne Pull-Up-Widerstand des Raspberry Pi aktiviert wird, wird der GPIO-Eingang bei
         einer Unterbrechung des Eingangssignals auf eine logische Eins hochgezogen. Die meiste Zeit kann
         der Strom jedoch über den Sensor nach Masse abfließen, so dass der Raspberry Pi stattdessen eine
@@ -1169,6 +1259,39 @@
         \column{0.4\textwidth}
         \includegraphics[width=\textwidth]{img/button_pullup_foto}
     \end{columns}
+
+    \framebreak
+
+    \begin{lstlisting}[language=Python, gobble=8]
+        import RPi.GPIO as GPIO, time
+
+        GPIO_BUTTON = 22
+
+        def on_button_event(button):
+            """Button-Callback. Läuft in einem eigenen Thread!"""
+
+            if GPIO.input(button) == GPIO.HIGH:
+                print("Die Lichtschranke WURDE UNTERBROCHEN")
+            else:
+                print("Die Lichtschranke WIRD NICHT MEHR UNTERBROCHEN")
+
+        if __name__ == "__main__":
+            try:
+                # GPIO-Pins initialisieren
+                GPIO.setmode(GPIO.BCM)
+                GPIO.setup(GPIO_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_UP)   # <-- Hier!
+
+                GPIO.add_event_detect(GPIO_BUTTON, GPIO.BOTH)
+                GPIO.add_event_callback(GPIO_BUTTON, on_button_event)
+
+                # Endlosschleife, damit das Hauptprogramm weiterläuft
+                while True:
+                    time.sleep(10)
+            except KeyboardInterrupt:
+                pass
+
+            GPIO.cleanup()
+    \end{lstlisting}
 \end{frame}
 }
 
