@@ -1369,27 +1369,33 @@
         benötigen. Bei mittleren Lastströmen kann ein Transistor hier Abhilfe schaffen.
         \smallskip
 
-        Der hier gezeigte ,,npn-Transistor'' funktioniert wie ein \textbf{spannungsgesteuerter
-        Schalter}. Liegt am mittleren Pin (der ,,Basis'') eine ausreichend hohe
-        Spannung an, wird diese zusammen mit der am oberen Pin (dem ,,Collector'')
-        anliegenden Spannung auf den unteren Pin (den ,,Emitter'') durchgelassen.
+        Der hier gezeigte ,,NPN-Transistor'' funktioniert im einfachste Fall wie ein
+        \textbf{spannungsgesteuerter Schalter}. Ein kleiner Strom an der Basis steuert,
+        in wiefern ein viel größerer am Collector anliegender Strom durchgelassen wird.
+        Die Summe beider Ströme (in Ampére) fließt durch den Emitter nach Ground.
         \smallskip
 
-        \textcolor{red}{
-            Anstelle der 5\,V Versorgungsspannung des Raspberry Pi kann auch eine externe
-            Spannungsquelle verwendet werden, wenn eine andere Spannung oder eine höhere
-            Stromstärke, als der Raspberry Pi liefern kann, gefordert sind.
-        }
+        Die Spannung zwischen Basis und Emitter muss meist mindestens 0,7V betragen,
+        damit der Transistor schalten kann. Die Stärke des hierfür benötigten
+        Steuer- bzw. Basisstroms kann mit der durchzuschaltenden Stromstärke, dem
+        $\beta$-Faktor des Transistors, (auch \texttt{hfe} abgekürzt) und dem Ohmschen
+        Gesetz leicht berechnet werden:
+        \bigskip
+
+        \hfill $I_b = I_c / \beta$ \hfill
+        \hfill \textit{Benötigter Basisstrom = Zu schaltender Strom / $\beta$} \hfill
+        \smallskip
     }
 
     \bigskip
 
     \begin{columns}
-        \column{0.6\textwidth}
+        \column{0.5\textwidth}
         \includegraphics[width=\textwidth]{img/led_transistor_circuitjs}
         \smallskip
 
         \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDxc8fAVHAgAZgEMANgGc6IbNGxQWAcyEi+xQcNEIwKCZBYB3cCapd9O0XcHmASpx4rsB3di9m+tP4wCCwATu68-IJgkAiCURIxcCwALshxYtE2mYlQ0IRgxGCU3Hh4xJAouLwwhIR2cAII2GQIzbxJIAAmdLIArnIpltZofNimzKNOGuHcvL7RsYILEr7mVjEZK5NUK+YARkJ4u5C8GKcUXOrmAB4g56ZtxPdYFISmHaYuMgoADvt0UKhACeAB0FAAFACWLDuGBQpmw-HuCFESMi4FMEIA9hZAbD7lNRsd4lU+JiQABxCEASQA8gwAIJ9BSaGQAO00BIwhRoVDwYHUlHUnxAAFkfkpwQAKSmhbF9dldACULAEE2y22yXDgIFMPX6gwYcjoXUkVAtsFYQA}
+        \LinkButton{https://www.electronics-tutorials.ws/de/transistoren/der-npn-transistoren.html}{NPN-Transistoren im Detail}
 
         \column{0.42\textwidth}
         \includegraphics[width=\textwidth]{img/led_transistor_foto}
