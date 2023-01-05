@@ -191,9 +191,9 @@
 \begin{frame}[fragile]{Python vs. Java vs. JavaScript - Klassen}
     \begin{lstlisting}[language=Python, gobble=8]
         class MyClass(Superklasse):                     # Python
-            __init__(self, value):
+            def __init__(self, value):
                 super().__init__(value)
-                self.value = value;
+                self.value = value
 
             def my_method(self):
                 return self.value

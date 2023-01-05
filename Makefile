@@ -50,18 +50,18 @@ builddir:
 	    IF=xx-folien.tex;                             \
 	    OF=$(BUILDDIR)/$${IF//xx/$$NAME};             \
 	    sed s/xx/$$NAME/g $$IF > $$OF;                \
-	    echo .:$$NAME: > $${OF//.tex/.dir};            \
+	    echo .:$$NAME: > $${OF//.tex/.dir};           \
 	                                                  \
 	    IF=xx-handout.tex;                            \
 	    OF=$(BUILDDIR)/$${IF//xx/$$NAME};             \
 	    sed s/xx/$$NAME/g $$IF > $$OF;                \
-	    echo .:$$NAME: > $${OF//.tex/.dir};            \
+	    echo .:$$NAME: > $${OF//.tex/.dir};           \
 	                                                  \
 	    if [ -e $$NAME/aufgabenblatt.tex ]; then      \
 	        IF=xx-aufgaben.tex;                       \
 	        OF=$(BUILDDIR)/$${IF//xx/$$NAME};         \
 	        sed s/xx/$$NAME/g $$IF > $$OF;            \
-	        echo .:$$NAME: > $${OF//.tex/.dir};        \
+	        echo .:$$NAME: > $${OF//.tex/.dir};       \
 	    fi;                                           \
 	done                                              \
 

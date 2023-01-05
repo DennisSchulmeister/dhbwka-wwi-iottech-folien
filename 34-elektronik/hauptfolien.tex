@@ -1,3 +1,17 @@
+\lstdefinestyle{MethodenListe}{
+    language   = Python,
+    numbers    = none,
+    belowskip  = 0.25em,
+    basicstyle = \tt\small
+}
+
+\lstdefinestyle{MethodenListeKlein}{
+    language   = Python,
+    numbers    = none,
+    belowskip  = 0.25em,
+    basicstyle = \tt\footnotesize
+}
+
 %%% Folie
 \begin{frame}{Leitfragen des heutigen Kapitels}
     \begin{block}{Den Raspberry Pi mit Strom versorgen}
@@ -1297,65 +1311,136 @@
 
 %%% Folie
 {
-\scriptsize
+\setlength{\leftmargini}{1.2em}
+\footnotesize
 
-\begin{frame}{Serielle Datenübertragung am Beispiel des DHT11}
-    \parbox{\linewidth}{
-        Der DHT11-Sensor misst alle zwei Sekunden Temperatur und relative Luftfeuchtigkeit.
-        Die Werte werden über das serielle 1-wire-Protokoll als \textbf{digitaler Datenstrom} übertragen.
-        1-wire ist dabei ein serielles Protokoll, das mit nur einer Datenleitung auskommt, da es
-        nur einen Sender und einen Empfänger gibt und die \textbf{Synchronisation über das Datensignal}
-        erfolgen kann.
+\begin{frame}[fragile,allowframebreaks]{Zusammenfassung zur Programmierung in Python}
+    \begin{block}{Initialisieren und Zurücksetzen der GPIO-Pins}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            import RPi.GPIO as GPIO
+        \end{lstlisting}
+        Raspberry Pi GPIO-Modul importieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(10, GPIO.OUT)
+        \end{lstlisting}
+        GPIO\,10 als Ausgang konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(11, GPIO.IN)
+        \end{lstlisting}
+        GPIO\,11 als Eingang konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        \end{lstlisting}
+        GPIO\,12 als Eingang mit internem Pull Down konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        \end{lstlisting}
+        GPIO\,13 als Eingang mit internem Pull Up konfigurieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.cleanup()
+        \end{lstlisting}
+        Alle GPIO-Pins auf eine sichere Standardkonfiguration zurücksetzen
+        \medskip
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{Lesen und Schreiben einzelner Pins}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            value = GPIO.input(14)
+        \end{lstlisting}
+        Aktuellen Zustands von GPIO\,14 (True oder False) lesen
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.output(15, True)
+        \end{lstlisting}
+        GPIO\,15 auf High bzw. 3,3\,V Spannung setzen
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.output(16, False)
+        \end{lstlisting}
+        GPIO\,16 auf Low bzw. 0\,V Spannung setzen
+        \medskip
+    \end{block}
+
+    \begin{block}{Reagieren auf Interrupts}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(17, GPIO.RISING, mein_cb)
+        \end{lstlisting}
+        Callback-Funktion für steigende Flanken auf GPIO\,17 registrieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(18, GPIO.FALLING, mein_cb)
+        \end{lstlisting}
+        Callback-Funktion für fallende Flanken auf GPIO\,18 registrieren
+        \medskip
+    \end{block}
+
+    \framebreak
+
+    {
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(19, GPIO.BOTH, mein_cb)
+        \end{lstlisting}
+        Callback-Funktion für jede Änderung von GPIO\,19 registrieren
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            GPIO.add_event_detect(20, GPIO.BOTH, mein_cb, bouncetime=50)
+        \end{lstlisting}
+        Callback-Funktion für GPIO\,20 mit einer Entprellung von 50\,ms registrieren
+        \medskip
     }
-    \bigskip
 
-    \begin{columns}
-        \column[b]{0.7\textwidth}
-        \includegraphics[width=\textwidth]{img/dht11_schaltplan}
+    \begin{block}{Pulsweitenmodulation}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm = GPIO.PWM(21, 100)
+        \end{lstlisting}
+        Pulsweitenmodulation von GPIO\,21 vorbereiten
+        \medskip
 
-        \column[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/dht11_foto1}
-        \includegraphics[width=\textwidth]{img/dht11_foto2}
-    \end{columns}
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm.start(50)
+        \end{lstlisting}
+        Pulsweitenmodulation von GPIO\,21 mit 50\,\% Lastzyklus starten
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm.changeDutyCycle(75)
+        \end{lstlisting}
+        Lastzyklus der Pulsweitenmodulation von GPIO\,21 auf 75\,\% ändern
+        \medskip
+
+        \begin{lstlisting}[style=MethodenListe, gobble=12]
+            pwm.stop()
+        \end{lstlisting}
+        Pulsweitenmodulation von GPIO\,21 stoppen
+        \medskip
+    \end{block}
 \end{frame}
 }
-
-{
-\scriptsize
 
 %%% Folie
-\begin{frame}{Analogsignale messen mit einem A/D-Konverter}
-    \begin{columns}[onlytextwidth]
-        \column{.49\textwidth}
-        \includegraphics[width=\textwidth]{img/lautstaerke-foto1}
+\begin{frame}{Quellcodes zur Vorlesung}
+    \LinkButton{https://github.com/DennisSchulmeister/dhbwka-wwi-iottech-quellcodes}{Quellcodes auf GitHub}
 
-        \column{.49\textwidth}
-        \includegraphics[width=\textwidth]{img/lautstaerke-foto2}
-    \end{columns}
-    \medskip
-
-    \Justified{
-        Der Raspberry Pi kann Analogsignale weder erzeugen noch messen. Mit Hilfe eines
-        externen \textbf{Analog/Digitalwandlers} (A/D-Konverters) lassen sich analoge
-        Spannungsverläufe jedoch leicht messen und als \textbf{serieller Datenstrom}
-        übertragen. Zur Erzeugung analoger Signale kann entweder ein D/A-Wandler als
-        externer Baustein genutzt oder mit einer Handvoll Widerständen nachgebaut
-        werden (sog. \textbf{R2R-Leiter}).
-    }
-    \medskip
-
-    \includegraphics[width=\textwidth]{img/lautstaerke-schaltplan}
     \smallskip
-
-    \LinkButton{%
-        https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDwC+IqlQBmAQwA2AZzohs0bFHacefYoOGCu2qIenzFy1ZHXdeCDDpE3B4kMYVKVajlZCEEdwT8cjWVczNQAnDV5+QTBIX1FAlDQLCK99GLi9AyokuBZUzQdkeKKc5PzI73jY+IDDXJTi-2rMiltDZjyImsEinq1Azsb+9KaEjtiLAHMhEQw0WcEcQIsAd0WQeaowFC48TYWLAAdwXf26nb2D7cM1sYuzqscKkZF+7GxE8pndJU+N7AIFC3FjrX4fDLxCFqABG4DAQO8XG22AWtn2FjhXlwvGYzE2hAxLDheDwVBx3mwxAJRIAHkjVBg8IywPsmXpTiAAEpSORHGF0MJhACeAB05AAFACWLHpxAQvHZyBQbLw1NxwIAIgB6ACCDAA6lIAHYAExkgtl8IQSCZGpQtrw5A1IAA4nQALZ0OQKY10K3MBVCSDAnYYCBkpAu3UAVzkUxNUx9RxNxpjxqmVsIhFU2GRmxsSi4qhdAFleQpxQAKV1hAD26dNAEos4RgfNFfF5s7OeWfXRq7WG2aW-Ts1EwNSmVGknxOa6JQBJADyDFj8cTAC5xQAhKUAF3FFjHOa0U7w1hDc52bqXq-XCYz27ke8PcmP3lPNlV1mE1+BC4rmucaPlMz6vkeraqD4568NmwIuoB94gVuu4HpBdbgNBvBUMixAYtAbZIDAEDbCwQA
-    }{R2R-Leiter online ausprobieren}
+    \setlength{\fboxsep}{0em}
+    \fbox{\includegraphics[width=\textwidth]{img/github-servomotor}}
 \end{frame}
-}
-
-%-------------------------------------------------------------------------------
-\section{Starke Lasten schalten}
-%-------------------------------------------------------------------------------
 
 %%% Folie
 {
@@ -1369,10 +1454,11 @@
         benötigen. Bei mittleren Lastströmen kann ein Transistor hier Abhilfe schaffen.
         \smallskip
 
-        Der hier gezeigte ,,NPN-Transistor'' funktioniert im einfachste Fall wie ein
-        \textbf{spannungsgesteuerter Schalter}. Ein kleiner Strom an der Basis steuert,
-        in wiefern ein viel größerer am Collector anliegender Strom durchgelassen wird.
-        Die Summe beider Ströme (in Ampére) fließt durch den Emitter nach Ground.
+        Der hier gezeigte ,,NPN-Transistor'' funktioniert im einfachsten Fall wie ein
+        \textbf{stromgesteuerter Schalter}. \textcolor{RoyalPurple}{Ein kleiner Strom
+        an der Basis steuert, in wiefern ein viel größerer am Collector anliegender Strom
+        durchgelassen wird. Die Summe beider Ströme (in Ampére) fließt durch den Emitter
+        nach Ground.}
         \smallskip
 
         Die Spannung zwischen Basis und Emitter muss meist mindestens 0,7V betragen,
@@ -1389,12 +1475,12 @@
 
     \bigskip
 
-    \begin{columns}
+    \begin{columns}[T]
         \column{0.5\textwidth}
         \includegraphics[width=\textwidth]{img/led_transistor_circuitjs}
         \smallskip
 
-        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDxc8fAVHAgAZgEMANgGc6IbNGxQWAcyEi+xQcNEIwKCZBYB3cCapd9O0XcHmASpx4rsB3di9m+tP4wCCwATu68-IJgkAiCURIxcCwALshxYtE2mYlQ0IRgxGCU3Hh4xJAouLwwhIR2cAII2GQIzbxJIAAmdLIArnIpltZofNimzKNOGuHcvL7RsYILEr7mVjEZK5NUK+YARkJ4u5C8GKcUXOrmAB4g56ZtxPdYFISmHaYuMgoADvt0UKhACeAB0FAAFACWLDuGBQpmw-HuCFESMi4FMEIA9hZAbD7lNRsd4lU+JiQABxCEASQA8gwAIJ9BSaGQAO00BIwhRoVDwYHUlHUnxAAFkfkpwQAKSmhbF9dldACULAEE2y22yXDgIFMPX6gwYcjoXUkVAtsFYQA}
+        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDxc8fAVHAgAZgEMANgGc6IbNGxQWAcyEi+xQcNEIwKCZBYB3cCapd9O0XcHmASpx4rsB3di9m+tP4wCCwATu68-IJgkAiCURIxcCwALshxYtE2mYlQ0IRgxGCU3Hh4xJAouLwwhIR2cAII2GQIzbxJIAAmdLIArnIpltZofNimzKNOGuHcvL7RsYILEr7mVjEZK5NUK+YARkJ4u5C8GKcUXOrmAB4g56ZtxPdYFISmHaYuMgoADvt0UKhACeAB0FAAFACWLDuGBQpmw-HuCFESMi4FMEIA9hZAbD7lNRsd4lU+JiQABxCEASQA8gwAIJ9BSaGQAO00BIwhRoVDwYHUlHUnxAAFkfkpwQAKSmhbF9dldACULAEE2y22yXDgIFMPX6gwYcjoXUkVAtsFYdxidQCohiZDEEFFACEflCFATJs8dVRmAQAiKKQBhbFyE0AYxS2NC3pMvt81hwY3iFIAogBbKEpFL4oA}
         \LinkButton{https://www.electronics-tutorials.ws/de/transistoren/der-npn-transistoren.html}{NPN-Transistoren im Detail}
 
         \column{0.42\textwidth}
@@ -1411,7 +1497,7 @@
     \Justified{
         Große Lasten können aus Sicherheitsgründen nur mechanisch geschaltet werden.
         Der Hardwareaufbau gliedert sich dann ein einen \textbf{Steuerstromkreis} und
-        einen \textbf{Arbeitsstromkreis}, die komplett \textbf{galvanisch Entkoppelt}
+        einen \textbf{Arbeitsstromkreis}, die komplett \textbf{galvanisch entkoppelt}
         sind und deshalb jeweils eigene Stromquellen besitzen.
         Ein \textbf{Relais} dient als ferngesteuerter Schalter, der den Arbeitsstromkreis
         unterbrechen und schließen kann. Im Inneren besteht es aus einem durch den
@@ -1441,24 +1527,27 @@
 \begin{frame}{Inkompatible Logikpegel anpassen} % mit Transistor
     \Justified{
         Nicht alle digitalen Geräte arbeiten mit einem Logikpegel von 3,3\,V. Insbesondere
-        ältere Geräte nutzen 5\,V, während heutzutage auch wesentlich kleinere Spannungen
+        ältere Geräte nutzen 5\,V, während heutzutage auch 1,8\,V oder kleinere Spannungen
         üblich sind. Passt der Logiklevel eines Bauteils nicht zum Raspberry Pi, kann es
         daher entweder zu Beschädigungen oder einem unzuverlässigen Datenaustausch kommen.
-        Auf folgende Weise können die Spannungen dann angepasst werden:
+        Auf folgende Weise kann der Potentialunterschied dann ausgeglichen werden:
     }
 
     \begin{itemize}
-        \item Mit zwei Widerständen
-        \item Mit einem Transistor
-        \item Mit einem Baustein wie dem 74HC04050
+        \item Mit zwei Widerständen als Spannungsteiler
+        \item Mit in Reihe geschalteten Dioden zum Absenken einer Spannung
+        \item Mit einem Transistor als stromgesteuerter Schalter
+        \item Mit einem integrierten Baustein wie dem 74HC04050
     \end{itemize}
     \medskip
 
     \Justified{
         Mit zwei Widerständen kann zum Beispiel ein \textbf{Spannungsteiler} aufgebaut werden,
-        um eine zu hohe Spannung zu reduzieren. Ein \textbf{Transistor} kann hingegen beliege
-        Pegel konvertieren, so lange eine Stromversorgung in Höhe des Zielpegels zur Verfügung
-        steht. Ähnlich verhält es sich mit dem 74x4050, der etwas einfacher in der Handhabung ist.
+        um eine zu hohe Spannung zu reduzieren. In Reihe geschaltete Dioden senken die Spannung
+        ebenfalls ab, wobei dann ggf. mehrere Dioden hintereinander geschaltet werden müssen.
+        Ein \textbf{Transistor} kann hingegen beliege Pegel konvertieren, so lange eine Stromversorgung
+        in Höhe des Zielpegels zur Verfügung steht. Ähnlich verhält es sich mit dem 74x4050, der etwas
+        einfacher in der Handhabung ist.
     }
 
     \bigskip
@@ -1475,7 +1564,7 @@
     \begin{columns}
         \column{.5\textwidth}
         \LinkButton{%
-            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSURs1kAWKryoiQg6qJgIWAZ06EhfLjz5UIAMwCGAGxl0WAJ04o8KqnkL8zUCgsMgLV4SAx4nq5HBYB3B5ZAo4o7WkCwAsi5uAeIYfIGi2D5+VvGRKeKhAOYufM6xQtiENqG+ru5U+SEsAEYuCNxopgqmheShtRiEpo2c2E6EbUnECtbEJlW1xPwp+Mh4QgNQLAAeIIRgQnhIXUjYeKZWYNxsmjIADtV0BgYAngA6MgAKAJYrLiQ8W35Fewfg3ABlM6aAB2IIAriDMjIAC50Z7aK5vKa7L4bKK-MT-EAAuggmQAewMDwAts8YQ8EAA1BgAQXBMkyoMyb3WRUC3BI3X4SEO3AA4o8AJIAeQYAFFnlDmaywO5sC5ZrwinyQGFTnoHgAKfkGAmQgAmAEoWEA
+            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSURs1kAWKryoiQg6qJgIWAZ06EhfLjz6iAZgEMANjLosATpxR4VVPIX6moFBQZDnLwkBjyPVyOCwDu9iyBTiDlaQLACyzq7+4hh8AaLY3r6WcRHJ4iEA5s58TjFC2ITWIT4ublR5wSwARs4I3GgmCiYF5CE1GIQmDZzYjoSticQKVsTGlTXE-Mn4yHhC-VAsAB4ghGBCeEidSNh4JpZg3GwaMgAOVXT6+gCeADoyAAoAlsvOJDybvoW7++DcAMqnDQAO2BAFdgRkZAAXOhPLSXV6THafdaRH5iP4gf50YEyAD2+nuAFsntD7ggAGoMACCYJkGRBGVea0KAW4JC6-CQB24AHEHgBJADyDAAok9IUyWWA3NhnDNeIVeSBQiddPcABR8-T4iEAEwAlCwCiYgk5zQUiiwgA
         }{
             Spannungsteiler online ausprobieren
         }
@@ -1483,7 +1572,7 @@
         \column{.5\textwidth}
         \hfill
         \LinkButton{%
-            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSUQU89kALFV78qVIdTFRoCFgGdOhYX07FuIqOBAAzAIYAbOXRYAjEHjg98IJfwFgkkU+bCEr-YtgEh7jlgHdFZQ8wdRUnM2IBbzR+MHxxBygWAA8beJ9sbBs8JAFsN29QkDZdOQAHEzoAJ2qATwAdOQAFAEtUl3J87M9s-MLwbgAVat0AOzlWuQAXAHtquQBjAAsDaYBXMYBzDqi8rOQ8b36fQZAAZToJ+aaAW1bppoQANQYAQXW5LfGdjjxXHgINwYSAxIGacRUbDQbJSGCyNKEFAQFAIYg2BDkIjcIrcZqzfw1FjTTjFDR8YKaCAMaGQYihNQYAQYXgoeluVD4QhMkEObDxJTYJDxKgAEzoenW+mmAXMFh4LLlwnBTmqLjcqLcFMBHJo8Fl2uwaCVIFw3icAFkQBgENwjVQWVDjcIZB1CGB0UbuLzTajTsUAOLNACSAHkGABRVrbH4sLbW22mwj8G12o4Qlhq1O+h2JgqiPVwWXZ+0m0tOIA
+            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSUQU89kALFV78qVIdTFRoCFgGdOhYX07FuIqJoBmAQwA2cuiwBGIPHB74QS-gLBJIJs2EKX+xbAJB2HLAO6Kyu5g6iqOpsQCXmj8YPji9lAsAB7Wcd7Y2NZ4SALYrl4hIGw6cgAOxnQATlUAngA6cgAKAJYpzuR5WR5ZeQXg3AAqVToAdnItcgAuAPZVcgDGABb6UwCuowDm7ZG5mch4Xn3eAyAAynTjc40Ati1TjQgAagwAgmtym2PbHHzCCK4MJBogDNOIqNhoFkpDBZKlCCgICgEMRrAhyERuIVuE0Zn5qiwppwiho-jwwuBwNAgfBaXTINwwNASGQBERPCQUAICOQ4lQACZ0XRrPRTfxmcw8DDcMnI1yOKrOVzYNASiGq2i08VklVUHXApIAWRAGAQ3F1JtVFuEMnahDAqJV3CBEBVuVOAHEmgBJADyDAAoi0tt8WJsTWaQPl+KbzYcwSxFbGo6rk9HNJR4OK06q8C4U2IWOmdbnJZl5UkgA
         }{
             Transistorschaltung online ausprobieren
         }
@@ -1547,141 +1636,402 @@
 \end{frame}
 }
 
-%%-------------------------------------------------------------------------------
-%\section{Integration komplexerer Bauteile}
-%%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+\section{Serielle Kommunikation}
+%-------------------------------------------------------------------------------
+
+%%% Folie
+\begin{frame}{Einsatzgebiete serieller Schnittstellen}
+    \begin{columns}
+        \column{\dimexpr\paperwidth-28pt}
+        \begin{itemize}
+            \item Kommunikation zwischen den Komponenten eines eingebetteten Systems
+            \item Datenaustausch zwischen getrennten Subsystemen und anderen Computern
+            \item Anbindung von Sensoren und Aktoren an Eingebettete/IoT-Devices
+        \end{itemize}
+    \end{columns}
+
+    \bigskip
+    \bigskip
+    \bigskip
+
+    \begin{columns}
+        \column{.33\textwidth}
+        \includegraphics[width=\textwidth]{img/seriell_einsatz1}
+
+        \column{.33\textwidth}
+        \includegraphics[width=\textwidth]{img/seriell_einsatz2}
+
+        \column{.33\textwidth}
+        \includegraphics[width=\textwidth]{img/seriell_einsatz3}
+    \end{columns}
+\end{frame}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Funktionsweise der seriellen Datenübertragung}
+    \begin{columns}
+        \column{\dimexpr\paperwidth-28pt}
+        \parbox{\textwidth}{
+            Serielle Schnittstellen übertragen digitale Daten durch schnelles Umschalten
+            der Logikpegel einer einzigen Datenleitung. Die Schnittstellenart gibt dabei
+            vor, wie die Logikpegel in elektrische Signale umgewandelt werden, welche
+            Geschwindigkeiten zulässig sind und wie sich Sender und Empfänger synchronisieren.
+
+            \medskip
+            \begin{itemize}
+                \item \textbf{Synchron:}
+                Synchronisation über ein zusätzliches Taktsignal (Serial Clock)
+
+                \item \textbf{Asynchron:}
+                Synchronisation über Synchronisationsbits im Datensignal
+            \end{itemize}
+        }
+
+        \medskip
+        \includegraphics[width=\textwidth]{img/seriell_arten}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Serielle Datenübertragung am Beispiel des DHT11}
+    \parbox{\linewidth}{
+        Der DHT11-Sensor misst alle zwei Sekunden Temperatur und relative Luftfeuchtigkeit.
+        Die Werte werden über das serielle 1-wire-Protokoll als \textbf{digitaler Datenstrom} übertragen.
+        1-wire ist dabei ein serielles Protokoll, das mit nur einer Datenleitung auskommt, da es
+        nur einen Sender und einen Empfänger gibt und die \textbf{Synchronisation über das Datensignal}
+        erfolgen kann.
+    }
+    \bigskip
+
+    \begin{columns}
+        \column[b]{0.7\textwidth}
+        \includegraphics[width=\textwidth]{img/dht11_schaltplan}
+
+        \column[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/dht11_foto1}
+        \includegraphics[width=\textwidth]{img/dht11_foto2}
+    \end{columns}
+\end{frame}
+}
+
+{
+\scriptsize
+
+%%% Folie
+\begin{frame}{Analogsignale messen mit einem A/D-Konverter}
+    \begin{columns}[onlytextwidth]
+        \column{.49\textwidth}
+        \includegraphics[width=\textwidth]{img/lautstaerke-foto1}
+
+        \column{.49\textwidth}
+        \includegraphics[width=\textwidth]{img/lautstaerke-foto2}
+    \end{columns}
+    \medskip
+
+    \Justified{
+        Der Raspberry Pi kann Analogsignale weder erzeugen noch messen. Mit Hilfe eines
+        externen \textbf{Analog/Digitalwandlers} (A/D-Konverters) lassen sich analoge
+        Spannungsverläufe jedoch leicht messen und als \textbf{serieller Datenstrom}
+        übertragen. Zur Erzeugung analoger Signale kann entweder ein D/A-Wandler als
+        externer Baustein genutzt oder mit einer Handvoll Widerständen nachgebaut
+        werden (sog. \textbf{R2R-Leiter}).
+    }
+    \medskip
+
+    \includegraphics[width=\textwidth]{img/lautstaerke-schaltplan}
+    \smallskip
+
+    \LinkButton{%
+        https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDwC+IqlQBmAQwA2AZzohs0bFHacefYoOGCu2qIenzFy1ZHXdeCDDpE3B4kMYVKVajlZCEEdwT8cjWVczNQAnDV5+QTBIX1FAlDQLCK99GLi9AyokuBZUzQdkeKKc5PzI73jY+IDDXJTi-2rMiltDZjyImsEinq1Azsb+9KaEjtiLAHMhEQw0WcEcQIsAd0WQeaowFC48TYWLAAdwXf26nb2D7cM1sYuzqscKkZF+7GxE8pndJU+N7AIFC3FjrX4fDLxCFqABG4DAQO8XG22AWtn2FjhXlwvGYzE2hAxLDheDwVBx3mwxAJRIAHkjVBg8IywPsmXpTiAAEpSORHGF0MJhACeAB05AAFACWLHpxAQvHZyBQbLw1NxwIAIgB6ACCDAA6lIAHYAExkgtl8IQSCZGpQtrw5A1IAA4nQALZ0OQKY10K3MBVCSDAnYYCBkpAu3UAVzkUxNUx9RxNxpjxqmVsIhFU2GRmxsSi4qhdAFleQpxQAKV1hAD26dNAEos4RgfNFfF5s7OeWfXRq7WG2aW-Ts1EwNSmVGknxOa6JQBJADyDFj8cTAC5xQAhKUAF3FFjHOa0U7w1hDc52bqXq-XCYz27ke8PcmP3lPNlV1mE1+BC4rmucaPlMz6vkeraqD4568NmwIuoB94gVuu4HpBdbgNBvBUMixAYtAbZIDAEDbCwQA
+    }{R2R-Leiter online ausprobieren}
+\end{frame}
+}
+
+%%% Folie
+{
+\small
+
+\begin{frame}{Weitere serielle Schnittstellen}
+    \begin{columns}
+        \column[T]{.5\textwidth}
+        \textbf{Universal Asynchronous Receiver Transmitter (UART)} \\
+        \smallskip
+        \includegraphics[width=\textwidth]{img/seriell_uart_schaltplan}
+
+        \column[T]{.5\textwidth}
+        \textbf{Serial Peripheriel Interface (SPI)} \\
+        \smallskip
+        \includegraphics[width=0.8\textwidth]{img/seriell_spi_schaltplan}
+    \end{columns}
+
+    \medskip
+
+    \textbf{Inter-Integrated Circuit (I²C)} \\
+    \smallskip
+    \includegraphics[width=\textwidth]{img/seriell_i2c_schaltplan}
+\end{frame}
+}
+
+%%% Folie
+{
+\setlength{\leftmargini}{1.2em}
+\footnotesize
+
+\begin{frame}[fragile, allowframebreaks]{Programmierung in Python}
+    \begin{block}{Serielle Kommunikation via I²C}
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            import board, busio
+            from adafruit_bus_device.i2c_device import I2CDevice
+        \end{lstlisting}
+        Benötigte Module importieren
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            i2c_bus = busio.I2C(board.SCL, board.SDA)
+            device = I2CDevice(i2c_bus, 0x70)
+            device.open()
+        \end{lstlisting}
+        I²C-Bus und Device mit der Id \texttt{0x70} öffnen
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            bytes_read = bytearray(4)
+            device.readinto(bytes_red)
+        \end{lstlisting}
+        Vier Bytes vom eben geöffneten Device empfangen
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            device.write("Hallo, Welt".encode("latin-1"))
+        \end{lstlisting}
+        Einen String an das eben geöffnete Device senden
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            device.close()
+            i2c_bus.close()
+        \end{lstlisting}
+        Device und I²C-Bus wieder schließen
+        \smallskip
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{Serielle Kommunikation via SPI}
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            import board, busio, digitalio
+            from adafruit_bus_device.spi_device import SPIDevice
+        \end{lstlisting}
+        Benötigte Module importieren
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            spi_bus = busio.SPI(board.SCK, board.MOSI, board.MISO)
+            cs = digitalio.DigitalInOut(board.D10)
+            device = SPIDevice(spi_bus, cs)
+            device.open()
+        \end{lstlisting}
+        SPI-Bus und Device mit GPIO 10 als Slave Select Leitng öffnen
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            bytes_read = bytearray(4)
+            device.readinto(bytes_red)
+        \end{lstlisting}
+        Vier Bytes vom eben geöffneten Device empfangen
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            device.write("Hallo, Welt".encode("latin-1"))
+        \end{lstlisting}
+        Einen String an das eben geöffnete Device senden
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            device.close()
+            spi_bus.close()
+        \end{lstlisting}
+        Device und SPI-Bus wieder schließen
+        \smallskip
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{Serielle Kommunikation via UART}
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            import board, busio
+        \end{lstlisting}
+        Benötigte Module importieren
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            uart = busio.UART(board.TX, board.RX, baudrate=9600)
+        \end{lstlisting}
+        UART-Device mit den Standard-Pins zum Senden und Empfangen und einer Baudrate von 9.600 Bit/s öffnen.
+        Ggf. müssen noch weitere Parameter mitgegeben werden, um das richtige Übertragungsformat auszuwählen.
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            data = uart.read(32)
+        \end{lstlisting}
+        Bis zu 32 Byte empfangen
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            line = uart.readline()
+        \end{lstlisting}
+        Daten bis zum nächsten Zeilenende empfangen
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            uart.write("Hallo, Welt".encode("latin-1"))
+        \end{lstlisting}
+        Einen String senden
+        \smallskip
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            uart.deinit()
+        \end{lstlisting}
+        UART-Device wieder schließen
+        \smallskip
+    \end{block}
+
+    \framebreak
+
+    \begin{alertblock}{Wichtiger Hinweis}
+        \smallskip
+        \parbox{\textwidth}{
+            Für viele Sensoren und Aktoren gibt es spezielle Python-Module, welche die
+            Low Level Details der seriellen Kommunikation weg abstrahieren. Bevor man
+            also ein Device via I²C oder SPI direkt anspricht, sollte man erst die
+            Dokumentation und das Internet konsultieren, ob es nicht eine einfachere
+            Möglichkeit der Programmierung gibt.
+        }
+
+        \bigskip
+        \textbf{Beispiel: Nutzung des A/D-Konverters}
+
+        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            import time, busio
+            import adafruit_ads1x15.ads1115 as ADC
+            from adafruit_ads1x15.analog_in import AnalogIn
+
+            # A/D-Konverter initialisieren, GPIO 3 = Clock, GPIO 2 = Data
+            i2c_bus = busio.I2C(3, 2)
+            ad_converter = ADC.ADS1115(i2c_bus)
+            adc_channel0 = AnalogIn(ad_converter, ADC.P0)
+
+            # Wert messen
+            voltage = adc_channel0.voltage
+            value = adc_channel0.value
+
+            # Device schließen
+            i2c_bus.deinit()
+        \end{lstlisting}
+    \end{alertblock}
+\end{frame}
+}
+
+
+
+
+%%%% Folie
 %{
-%\scriptsize
+%\footnotesize
 
-%\begin{frame}{Module mit analoger Schnittstelle}
-    %\begin{columns}
-        %\column{.6\textwidth}
-        %\includegraphics[width=\textwidth]{img/sensorkit_analog}
+%\begin{frame}{Fallbeispiel: Inkompatible Logiklevel anpassen}
+    %\parbox{\textwidth}{
+        %\textbf{Problemstellung:} Die Eingangspins des Raspberry Pi dürfen nur mit
+        %3,3\,V beschaltet werden, viele Sensoren erzeugen jedoch 5\,V.
+    %}
 
-        %\column{.4\textwidth}
-        %KY-003: Hall Magnetfeldsensor \\
-        %KY-006: Passiver Piezo-Buzzer \\
-        %KY-009: RGB-LED (Surface-Mount) \\
-        %KY-011: 2-Farben (Rot und Grün) LED \\
-        %KY-012: Aktiver Piezo-Buzzer \\
-        %KY-013: Temperatursensor \\
-        %KY-016: RGB-LED (Through-Hole) \\
-        %KY-018: Fotowiderstand \\
-        %KY-023: XY-Joystick \\
-        %KY-024: Linear Magnetic Hall-Sensor \\
-        %KY-025: Reedkontakt \\
-        %KY-026: Flammensensor \\
-        %KY-028: Temperatursensor (Thermistor) \\
-        %KY-029: 2-Farben (Rot und Grün) LED \\
-        %KY-034: 7-Farben LED \\
-        %KY-035: Bihor Magnetsensor \\
-        %KY-036: Metall-Touchsensor \\
-        %KY-037: Mikrofon Soundsensor \\
-        %KY-038: Mikrofon Soundsensor \\
-        %KY-039: Herzschlagsensor \\
-        %KY-040: Kodierter Drehschalter \\
-        %KY-050: Ultraschallabstandssensor \\
-    %\end{columns}
-%\end{frame}
+    %\smallskip
 
-%\begin{frame}{Module mit digitaler An/Aus-Schnittstelle}
-    %\begin{columns}
-        %\column{.6\textwidth}
-        %\includegraphics[width=\textwidth]{img/sensorkit_digital}
+    %\parbox{\textwidth}{
+        %a) Angenommen, wir haben gerade keinen 74HC4050-Baustein (der hierfür sehr
+        %viel besser geeignet wäre) zur Hand. Wie müssen die beiden Widerstände
+        %$R_1$ und $R_2$ dimensioniert werden, um die Spannung mit einem einfachen
+        %Spannungsteiler anzupassen?
+    %}
 
-        %\column{.4\textwidth}
-        %KY-002: Erschütterungsschalter \\
-        %KY-003: Hall Magnetfeldsensor \\
-        %KY-004: Taster \\
-        %KY-010: Lichtschranke \\
-        %KY-012: Aktiver Piezo-Buzzer \\
-        %KY-017: Neigungsschalter \\
-        %KY-019: 5V Relais \\
-        %KY-020: Neigungsschalter \\
-        %KY-021: Mini Magnet-Reedkontakt \\
-        %KY-024: Linear Magnetic Hall-Sensor \\
-        %KY-025: Reedkontakt \\
-        %KY-026: Flammensensor \\
-        %KY-027: Magic Light Cup \\
-        %KY-028: Temperatursensor (Thermistor) \\
-        %KY-031: Klopfsensor \\
-        %KY-032: Hindernisdetektor \\
-        %KY-033: Trackingsensor \\
-        %KY-036: Metall-Touchsensor \\
-        %KY-037: Mikrofon Soundsensor \\
-        %KY-038: Mikrofon Soundsensor \\
-    %\end{columns}
-%\end{frame}
+    %\smallskip
 
-%\begin{frame}{Module mit serieller Schnittstelle}
-    %\begin{columns}
-        %\column{.6\textwidth}
-        %\includegraphics[width=\textwidth]{img/sensorkit_seriell}
+    %\parbox{\textwidth}{
+        %b) Wie verändern sich die Spannungswerte, wenn der interne Pulldown-Widerstand von
+        %50k\,\si{\ohm} des Pi aktiv ist?
+    %}
 
-        %\column{.4\textwidth}
-        %KY-001: Temperatursensor (DS18B20) \\
-        %KY-015: Temperatur, Feuchtigkeit (DHT11) \\
-        %KY-052: Drucksensor (BMP280) \\
-        %KY-053: Analog/Digital Converter \\
-    %\end{columns}
+    %\begin{center}
+        %\includegraphics[width=.7\textwidth]{img/spannungsteiler_beispiel}
+    %\end{center}
+
+    %%\smallskip
+
+    %\uncover<2->{
+        %\parbox{\textwidth}{
+            %\tiny
+            %\textbf{Anmerkung:} Es ist wirklich schwer, für uns relevante Beispiele für belastete
+            %Spannungsteiler zu finden. Als Faustregel können wir uns daher einfach merken, dass es
+            %genügt, wenn der (ggf. variable) Lastwiderstand $R_L$ mindestens drei bis zehnmal größer
+            %als der Spannungsteiler ist. In diesem Fall kann mit einem Spannungsteiler relativ einfach
+            %eine einigermaßen stabile Spannung hergestellt werden.
+        %}
+    %}
 %\end{frame}
 %}
 
 
-%%%% Folie
+%%%% Alte Folie
 %{
 %\small
 
-%\begin{frame}{Weitere serielle Schnittstellen}
+%\begin{frame}{Parallel geschaltete Widerstände: Stromteiler}
     %\begin{columns}
-        %\column[T]{.5\textwidth}
-        %\textbf{Universal Asynchronous Receiver Transmitter (UART)} \\
-        %\smallskip
-        %\includegraphics[width=\textwidth]{img/seriell_uart_schaltplan}
+        %\column{0.7\textwidth}
+        %\includegraphics[width=.9\textwidth]{img/stromteiler}
 
-        %\column[T]{.5\textwidth}
-        %\textbf{Serial Peripheriel Interface (SPI)} \\
+        %\column{0.3\textwidth}
+        %An parallel geschalteten Widerständen teilt sich der Strom in
+        %Teilströme gleicher Spannung auf.
+
+        %\bigskip
+
+        %$1/R_{Gesamt} = 1/R_1 + 1/R_2$ \\
         %\smallskip
-        %\includegraphics[width=0.8\textwidth]{img/seriell_spi_schaltplan}
+        %$U_{Gesamt} = U_1 = U_2$ \\
+        %\smallskip
+        %$I_1 / I_2 = R_2 / R_1$ \\
+        %\smallskip
+        %$I_{Gesamt} = I_1 + I_2$ \\
+
+        %\bigskip
+
+        %\textbf{R}: Widerstand in Ohm \\
+        %\smallskip
+        %\textbf{U}: Spannung in Volt \\
+        %\smallskip
+        %\textbf{I}: Stromstärke in Ampere \\
     %\end{columns}
 
-    %\medskip
+    %\bigskip
 
-    %\textbf{Inter-Integrated Circuit (I²C)} \\
-    %\smallskip
-    %\includegraphics[width=\textwidth]{img/seriell_i2c_schaltplan}
+    %\parbox{\linewidth}{
+        %\footnotesize
+        %Mit reinen Stromteilern haben wir es in der Praxis selten zu tun, da in der
+        %Digitaltechnik meistens Spannungsquellen mit variablem Ausgangsstrom (sog.
+        %Festspannungsquellen) anstelle von Stromquellen mit variabler Ausgangsspannung
+        %genutzt werden. Jedoch benötigen wir die hier gezeigten Formeln, um die Werte
+        %für einen belasteten Spannungsteiler berechnen zu können.
+    %}
 %\end{frame}
 %}
-
-%%%% Folie
-%\begin{frame}{Einsatzgebiete serieller Schnittstellen}
-    %\begin{columns}
-        %\column{\dimexpr\paperwidth-28pt}
-        %\begin{itemize}
-            %\item Kommunikation zwischen den Komponenten eines eingebetteten Systems
-            %\item Datenaustausch zwischen getrennten Subsystemen und anderen Computern
-            %\item Anbindung von Sensoren und Aktoren an Eingebettete/IoT-Devices
-        %\end{itemize}
-    %\end{columns}
-
-    %\bigskip
-    %\bigskip
-    %\bigskip
-
-    %\begin{columns}
-        %\column{.33\textwidth}
-        %\includegraphics[width=\textwidth]{img/seriell_einsatz1}
-
-        %\column{.33\textwidth}
-        %\includegraphics[width=\textwidth]{img/seriell_einsatz2}
-
-        %\column{.33\textwidth}
-        %\includegraphics[width=\textwidth]{img/seriell_einsatz3}
-    %\end{columns}
-%\end{frame}
-
-
-
 
 %%%% Folie
 %{
@@ -1731,127 +2081,3 @@
     %}
 %\end{frame}
 %}
-
-%%%% Folie
-%{
-%\footnotesize
-
-%\begin{frame}{Fallbeispiel: Inkompatible Logiklevel anpassen}
-    %\parbox{\textwidth}{
-        %\textbf{Problemstellung:} Die Eingangspins des Raspberry Pi dürfen nur mit
-        %3,3\,V beschaltet werden, viele Sensoren erzeugen jedoch 5\,V.
-    %}
-
-    %\smallskip
-
-    %\parbox{\textwidth}{
-        %a) Angenommen, wir haben gerade keinen 74HC4050-Baustein (der hierfür sehr
-        %viel besser geeignet wäre) zur Hand. Wie müssen die beiden Widerstände
-        %$R_1$ und $R_2$ dimensioniert werden, um die Spannung mit einem einfachen
-        %Spannungsteiler anzupassen?
-    %}
-
-    %\smallskip
-
-    %\parbox{\textwidth}{
-        %b) Wie verändern sich die Spannungswerte, wenn der interne Pulldown-Widerstand von
-        %50k\,\si{\ohm} des Pi aktiv ist?
-    %}
-
-    %\begin{center}
-        %\includegraphics[width=.7\textwidth]{img/spannungsteiler_beispiel}
-    %\end{center}
-
-    %%\smallskip
-
-    %\uncover<2->{
-        %\parbox{\textwidth}{
-            %\tiny
-            %\textbf{Anmerkung:} Es ist wirklich schwer, für uns relevante Beispiele für belastete
-            %Spannungsteiler zu finden. Als Faustregel können wir uns daher einfach merken, dass es
-            %genügt, wenn der (ggf. variable) Lastwiderstand $R_L$ mindestens drei bis zehnmal größer
-            %als der Spannungsteiler ist. In diesem Fall kann mit einem Spannungsteiler relativ einfach
-            %eine einigermaßen stabile Spannung hergestellt werden.
-        %}
-    %}
-%\end{frame}
-%}
-
-%%%% Alte Folie
-%{
-%\small
-
-%\begin{frame}{Parallel geschaltete Widerstände: Stromteiler}
-    %\begin{columns}
-        %\column{0.7\textwidth}
-        %\includegraphics[width=.9\textwidth]{img/stromteiler}
-
-        %\column{0.3\textwidth}
-        %An parallel geschalteten Widerständen teilt sich der Strom in
-        %Teilströme gleicher Spannung auf.
-
-        %\bigskip
-
-        %$1/R_{Gesamt} = 1/R_1 + 1/R_2$ \\
-        %\smallskip
-        %$U_{Gesamt} = U_1 = U_2$ \\
-        %\smallskip
-        %$I_1 / I_2 = R_2 / R_1$ \\
-        %\smallskip
-        %$I_{Gesamt} = I_1 + I_2$ \\
-
-        %\bigskip
-
-        %\textbf{R}: Widerstand in Ohm \\
-        %\smallskip
-        %\textbf{U}: Spannung in Volt \\
-        %\smallskip
-        %\textbf{I}: Stromstärke in Ampere \\
-    %\end{columns}
-
-    %\bigskip
-
-    %\parbox{\linewidth}{
-        %\footnotesize
-        %Mit reinen Stromteilern haben wir es in der Praxis selten zu tun, da in der
-        %Digitaltechnik meistens Spannungsquellen mit variablem Ausgangsstrom (sog.
-        %Festspannungsquellen) anstelle von Stromquellen mit variabler Ausgangsspannung
-        %genutzt werden. Jedoch benötigen wir die hier gezeigten Formeln, um die Werte
-        %für einen belasteten Spannungsteiler berechnen zu können.
-    %}
-%\end{frame}
-%}
-
-%%% Alte Folie
-
-%%%% Folie
-%\begin{frame}[allowframebreaks]{Vorgehen bei der Entwicklung einer neuen Schaltung}
-    %\begin{enumerate}
-        %\item Definition der zu erfüllenden Anforderungen
-        %\item Anfertigen einer groben Hardwareskizze
-        %\item Passende Bauelemente suchen und beschaffen
-        %\item Datenblätter studieren, studieren, studieren, ...
-        %\item Schaltplan Schritt für Schritt ausarbeiten
-        %\item Firmware entwickeln
-        %\item Schaltung auf Breadboard/Lochrasterplatine testen
-        %\item Leiterplatte entwerfen und fertigen (lassen)
-    %\end{enumerate}
-
-    %\begin{columns}
-        %\column{0.5\textwidth}
-        %\includegraphics[width=\textwidth]{img/vorgehen_skizze}
-
-        %\column{0.5\textwidth}
-        %\includegraphics[width=\textwidth]{img/vorgehen_schaltplan}
-    %\end{columns}
-
-    %\bigskip
-
-    %\begin{columns}
-        %\column{0.5\textwidth}
-        %\includegraphics[width=\textwidth]{img/vorgehen_breadboard}
-
-        %\column{0.5\textwidth}
-        %\includegraphics[width=\textwidth]{img/vorgehen_lochrasterplatine}
-    %\end{columns}
-%\end{frame}
