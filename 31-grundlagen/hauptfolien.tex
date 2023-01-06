@@ -3,51 +3,6 @@
 %-------------------------------------------------------------------------------
 
 %%% Folie
-\begin{frame}{Vorstellung: Martin Kutscher}
-    \begin{columns}
-        \begin{column}{.2\textwidth}
-            \begin{center}
-                \includegraphics[width=\textwidth]{img/dozent_kutscher}
-            \end{center}
-        \end{column}
-        \begin{column}{.8\textwidth}
-            \begin{itemize}
-                \item \textbf{2012:} Diplom ,,Angewandte Informatik''  an der Uni Duisburg-Essen
-                mit Vertiefung ,,Verteilte Systeme und Embedded Systems''
-
-                \item \textbf{2011 -- 2012:} Android-Entwicklung im SKIMS Projekt
-                (\Href{https://skims.realmv6.org/})
-
-                \item \textbf{2012 -- aktuell:} IT-Consultant bei EXXETA, Schwerpunkte vor allem
-                Web-Entwicklung (Full Stack Development), JavaEE Backend, Angular sowie Integration
-                von Backendsystemen wie SAP etc.
-
-                \item \textbf{2016 -- aktuell:} IoT-Projekt SMIGHT (\Href{https://demo.smight-mgt.de}),
-                Entwicklung von Microservices mit Node.js und SpringBoot in TypeScript, Java und
-                Kotlin, Java OSGI Clients für den Raspberry PI
-
-                \item \textbf{Seit 2018:} Dozent an der DHBW Karlsruhe für
-                IoT-Integrationsseminar und Projekt, Verteilte Systeme, Hardwarenahe Programmierung
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-%%% Folie
-\begin{frame}{Vorstellung: Dennis Schulmeister-Zimolong}
-    \includegraphics[width=\textwidth]{img/dozent_schulmeister}
-
-    \begin{itemize}
-        \item Dipl.-Wirtschaftsinformatiker (DH), DHBW Karlsruhe, 2005 – 2008
-        \item Produktmanager / Senior Entwickler für SAP Add-Ons, SOA People AG
-        \item Seit 2009 nebenberuflicher Dozent an der DHBW Karlsruhe
-        \item Seit 1992 begeistert von Computern und deren Programmierung
-        \item Keyboarder, Bassist, Sänger und Songwriter in der Freizeit
-        \item Seit August 2020 (hoffentlich) der beste Papa der Welt \smiley{}
-    \end{itemize}
-\end{frame}
-
-%%% Folie
 \begin{frame}{Kompetenzziele der Vorlesung}
     \begin{itemize}
         \item \textbf{Fachkompetenz:} Die Studierenden kennen den
@@ -85,9 +40,9 @@
                         \item Einführung in Python
                         \item IoT-Entwicklung mit Python
                         \item \textcolor{gray}{Übungsstunde}
-                        \item Elektronik für eingebettete Systeme
+                        \item Elektronik für eingebettete Systeme I
+                        \item Elektronik für eingebettete Systeme II
                         \item Analoge und digitale Schnittstellen
-                        \item Hardwaredesign und Prototyping
                         \item \textcolor{gray}{Übungsstunde}
                         \item \textcolor{gray}{Klausurvorbereitung}
                     \end{enumerate}
@@ -103,9 +58,9 @@
                     \begin{enumerate}
                         \item Wiederholung und Ausblick
                         \item Python-Architekturmuster für IoT-Devices
-                        \item Linux-Konfiguration und Deployment
-                        \item Vorstellung der Balena IoT Cloud
-                        \item \textcolor{gray}{Assignment}
+                        \item Vorstellung der Referenzarchitektur I
+                        \item Vorstellung der Referenzarchitektur II
+                        \item Hardwaredesign und Prototyping
                         \item \textcolor{gray}{Assignment}
                         \item \textcolor{gray}{Assignment}
                         \item \textcolor{gray}{Assignment}
@@ -136,7 +91,7 @@
                 \textbf{Hardware}
                 \medskip
 
-                \parbox{\linewidth}{
+                \Justified{
                     \footnotesize
                     Kann im WWI-Labor für die Dauer des Moduls kostenlos ausgeliehen
                     werden. Rückgabe am Ende des vierten Semesters, da dieselbe
@@ -154,18 +109,19 @@
                 \textbf{Software}
                 \medskip
 
-                \parbox{\linewidth}{
+                \Justified{
                     \footnotesize
-                    Eigentlich nicht viel. Das meiste ist unter Raspbian bereits
-                    installiert oder wird von uns im Laufe der Vorlesung ergänzt.
-                    Auf Ihrem Laptop benötigen Sie ggf. noch folgende Programme:
+                    Lediglich ein paar Entwicklungswerkzeuge für die Programmierung mit
+                    Python sowie die Remote-Entwicklung werden benötigt. Einige Beispiele
+                    können auch lokal ohne Raspberry Pi ausgeführt werden, wofür auf Ihrem
+                    Laptop ebenfalls Python benötigt wird.
                 }
                 \medskip
 
                 \begin{itemize}
                     \item Visual Studio Code
-                    \item OpenSSH / PuTTY
-                    \item Python (optional)
+                    \item OpenSSH
+                    \item Python
                     \item KiCAD (optional)
                 \end{itemize}
             \end{column}
@@ -173,7 +129,7 @@
 
         \bigskip
 
-        \parbox{\linewidth}{
+        \Justified{
             \scriptsize
             \textcolor{gray}{
                 Python werden wir verwenden, um den Raspberry Pi zu programmieren. Zum Einstieg
@@ -187,34 +143,34 @@
 
 %%% Folie
 {
-\small
+\footnotesize
 \setlength{\fboxsep}{0pt}
 
 \begin{frame}{Literaturempfehlungen}
-    \begin{columns}
-        \column[b]{.33\textwidth}
-        \fbox{\includegraphics[height=3.8cm]{img/buch_raspberrypi}}
-
-        \column[b]{.33\textwidth}
-        \fbox{\includegraphics[height=3.8cm]{img/buch_practical_electronics}}
-
-        \column[b]{.33\textwidth}
-        \fbox{\includegraphics[height=3.8cm]{img/buch_embedded_hardware}}
-    \end{columns}
+    \fbox{\includegraphics[height=3.3cm]{img/buch_raspberrypi}}
+    \hfill
+    \fbox{\includegraphics[height=3.3cm]{img/buch_python3_handbuch}}
+    \hfill
+    \fbox{\includegraphics[height=3.3cm]{img/buch_practical_electronics}}
+    \hfill
+    \fbox{\includegraphics[height=3.3cm]{img/buch_embedded_hardware}}
 
     \vskip 0.6cm
 
     \begin{columns}
         \column[T]{.5\textwidth}
-        \textbf{Raspberry Pi: Das umfassende Handbuch für Maker und Tekkies} \\ Rheinwerk Verlag, 2018
+        \textbf{Raspberry Pi: Das umfassende Handbuch} \\ Rheinwerk Verlag, 2018
 
+        \column[T]{.5\textwidth}
+        \textbf{Python 3: Das umfassende Handbuch} \\ Rheinwerk Verlag, 2023
+    \end{columns}
+
+    \vskip 0.6cm
+
+    \begin{columns}
         \column[T]{.5\textwidth}
         \textbf{Practical Electronics for Inventors} \\ McGraw-Hill, 2016
-    \end{columns}
 
-    \vskip 0.6cm
-
-    \begin{columns}
         \column[T]{0.5\textwidth}
         \textbf{Designing Embedded Hardware} \\ O'Reilly, 2005
     \end{columns}
@@ -229,10 +185,11 @@
         \item Aktuelle IoT-Anwendungsfälle und Geschäftsprozesse erkennen
         \item Typische Schichten und Komponenten einer IoT-Architektur benennen
         \item Den aktuellen Stand der Technik im historischen Kontext einordnen
-        \item Relevante Computerarchitekturen miteinander vergleichen
+        %\item Relevante Computerarchitekturen miteinander vergleichen
         \item Die Vielfalt angebotener Single Board Computer einschätzen können
         \item Die Begriffe ,,Microcontroller'' und ,,System-on-a-Chip'' erklären
         %\item Die Anforderungen an eingebettete Hard- und Software verstehen
+        \item Die Grundprinzipien der hardwarenahen Programmierung kennen
     \end{itemize}
 \end{frame}
 
@@ -250,7 +207,7 @@
         \end{column}
         \begin{column}[b]{.5\textwidth}
             \begin{center}
-                \includegraphics[width=\textwidth]{img/iot-backend}
+                \includegraphics[width=\textwidth]{img/iot-mechatronik}
             \end{center}
         \end{column}
     \end{columns}
@@ -258,7 +215,7 @@
     \bigskip
 
     \begin{itemize}
-        \item Was ist ein eingebettetes System?
+        \item Was bedeutet der Begriff ,,Eingebettetes System''?
         \item Was bedeutet der Begriff ,,Internet of Things''?
         \item Welche Anwendungsfälle können Sie sich vorstellen?
     \end{itemize}
@@ -266,23 +223,23 @@
 
 %%% Folie
 {
-\small
+\footnotesize
 
 \begin{frame}{Definition ,,Eingebettetes Computersystem''}
     \begin{block}{Definition}
-        \parbox{\linewidth}{
+        \Justified{
             \smallskip
 
             Eingebettete Systeme sind kleine Mikrocomputer, die innerhalb eines größeren Geräts
-            meist unsichtbar verbaut sind, um seine Funktionen zu steuern und überwachen. In vielen
-            Fällen geben sie einem Gerät überhaupt erst seine Funktion, ohne dass dies für den
-            Anwender offensichtlich ist.
+            meist unsichtbar verbaut sind, um seine Funktionen zu steuern und zu überwachen.
             \smallskip
 
             Ihre grundsätzliche Architektur ist dieselbe wie bei konventionellen Computern,
             jedoch verfügen sie über weitaus weniger, genau auf den Anwendungsfall zugeschnittene
             Ressourcen bei minimalen Kosten, Platzbedarf und Energieverbrauch. Der Leitgedanke
             hierbei lautet ,,so viel wie gerade nötig, so wenig wie absolut möglich''.
+            \smallskip
+
             Eingebettete Systeme sind meist in sich geschlossene Systeme mit deterministischem
             Systemverhalten, die rund um die Uhr laufen und exakt eine Aufgabe erfüllen.
         }
@@ -311,22 +268,24 @@
 
 %%% Folie
 {
-\small
+\footnotesize
 
 \begin{frame}{Definition ,,Internet of Things''}
     \begin{block}{Definition}
-        \parbox{\linewidth}{
+        \Justified{
             \smallskip
 
-            IoT-Devices sind eine Teilmenge eingebetteter Systeme größerer Leistungsklasse mit
-            permanenter Internetverbindung. Die ursprüngliche Definition aus dem Jahr 1999
-            sah die eindeutige, maschinenlesbare Identifikation physischer Objekte anhand von
-            RFID-Tags vor. Heute versteht man darunter an einem physischen Objekt angebrachte,
-            direkt mit dem Internet verbundene und über ihre IP-Adresse identifizierte Kleinstcomputer,
-            da diese inzwischen auf wenigen Quadratzentimetern Platz finden.
+            IoT-Devices sind eingebettete Systeme größerer Leistungsklasse mit quasi-permanenter
+            Internetverbindung.
             \smallskip
 
-            Im erweiterten Sinne zählen zum ,,Internet of Things'' heute auch Infrastruktur, Cloud-
+            Die ursprüngliche Definition aus dem Jahr 1999 sah die maschinenlesbare Identifikation
+            physischer Objekte anhand von RFID-Tags vor. Heute versteht man darunter elektronische
+            Geräte mit eingebetteten, mit dem Internet verbundenen Computermodulen, die über eine
+            IP-Adresse weltweit eindeutig adressiert werden können.
+            \smallskip
+
+            Im erweiterten Sinne zählen zum ,,Internet of Things'' auch Infrastruktur, Cloudplattformen
             und Backendservices, über welche die Devices miteinander verbunden, verwaltet, gesteuert
             und überwacht werden können.
         }
@@ -353,8 +312,8 @@
 %%% Folie
 \begin{frame}{Eingebettete Systeme im Alltag}
     \begin{columns}
-        \column{\dimexpr\paperwidth-28pt}
-        \includegraphics[width=\textwidth]{img/embedded_devices}
+        \column{\dimexpr\paperwidth}
+        \includegraphics[width=\textwidth, height=\textheight-3em]{img/embedded_devices}
     \end{columns}
 \end{frame}
 
@@ -388,11 +347,40 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{Industrielle IoT-Anwendungsfälle}
+\begin{frame}[allowframebreaks]{Industrielle IoT-Anwendungsfälle}
+    \begin{columns}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/iiot-fertigung}
+            \end{center}
+        \end{column}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/iiot-autonomes-fahren}
+            \end{center}
+        \end{column}
+    \end{columns}
+
+    \begin{columns}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/iiot-energie}
+            \end{center}
+        \end{column}
+        \begin{column}[b]{.45\textwidth}
+            \begin{center}
+                \includegraphics[width=\textwidth]{img/iiot-smartmeter}
+            \end{center}
+        \end{column}
+    \end{columns}
+
+    \framebreak
+
     \textbf{Smight -- Smart City Light}
     \hfill
     \Href{https://smight.com/}
-    \medskip
+    %~ \medskip
+
     \includegraphics[width=0.49\textwidth]{img/smight1}
     \hfill
     \includegraphics[width=0.49\textwidth]{img/smight2}
@@ -402,7 +390,8 @@
     \textbf{Testfeld autonomes Fahren Baden-Württemberg}
     \hfill
     \Href{https://taf-bw.de/}
-    \medskip
+    %~ \medskip
+
     \includegraphics[width=\textwidth]{img/karlsruhe}
 \end{frame}
 
@@ -421,7 +410,7 @@
         \transdissolve
 
         \begin{tikzpicture}[remember picture,overlay]
-            \node at (5.4cm,0.28cm){
+            \node at (5.4cm,0.2cm){
                 \includegraphics[height=\paperheight, width=\paperwidth]{img/themengebiete2}
             };
         \end{tikzpicture}
@@ -431,7 +420,7 @@
         \transdissolve
 
         \begin{tikzpicture}[remember picture,overlay]
-            \node at (5.4cm,0.28cm){
+            \node at (5.4cm,0.2cm){
                 \includegraphics[height=\paperheight, width=\paperwidth]{img/themengebiete3}
             };
         \end{tikzpicture}
@@ -441,7 +430,7 @@
         \transdissolve
 
         \begin{tikzpicture}[remember picture,overlay]
-            \node at (5.4cm,0.28cm){
+            \node at (5.4cm,0.2cm){
                 \includegraphics[height=\paperheight, width=\paperwidth]{img/themengebiete4}
             };
         \end{tikzpicture}
@@ -491,7 +480,7 @@
 
 %%% Folie
 \begin{frame}{Die Moral der Geschichte}
-    \parbox{\linewidth}{
+    \Justified{
         \footnotesize
 
         Der Wunsch, einen Computer zum \textbf{Messen, Steuern und Regeln}
@@ -520,7 +509,7 @@
                 %\end{center}
 
                 \medskip
-                \parbox{\linewidth}{
+                \Justified{
                     \footnotesize
                     \textbf{Sehr hohe Integrationstiefe:}
                     Verwendung günstiger Single Board Computer als Komplettsystem
@@ -538,7 +527,7 @@
 
                 \medskip
 
-                \parbox{\linewidth}{
+                \Justified{
                 \footnotesize
                     \textbf{Mittlere Integrationstiefe}:
                     Eigenentwicklung eingebetteter Computersysteme auf Basis diskreter
@@ -549,18 +538,15 @@
     \end{columns}
 \end{frame}
 
-
 %%% Folie
 {
-    \setbeamertemplate{background canvas}{
-        \includegraphics[height=\paperheight, width=\paperwidth]{img/sbc_auswahl}
-    }
-
-    \begin{frame}[plain]
-    \end{frame}
+\setbeamertemplate{background canvas}{
+    \includegraphics[height=\paperheight, width=\paperwidth]{img/sbc_auswahl}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+\end{frame}
+}
 
 %%% Folie
 {
@@ -617,7 +603,7 @@
         \begin{column}[b]{.5\textwidth}
             \textbf{Raspberry Pi 4} \\
             \smallskip
-            \includegraphics[width=.5\textwidth]{img/sbc-raspberrypi.png}
+            \includegraphics[width=.5\textwidth]{img/sbc-raspberrypi}
 
             \begin{itemize}
                 \setlength{\itemindent}{-1em}
@@ -625,6 +611,45 @@
                 \item BCM2711 ARM v8 CPU, Quad Core
                 \item 4 oder 8 GiB RAM
                 \item GPIO, WLAN, Bluetooth, USB, HDMI, ...
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\footnotesize
+
+\begin{frame}{Typischer Systemaufbau eingebetteter Systeme}
+    \begin{columns}
+        \column{\dimexpr\paperwidth}
+        \includegraphics[width=\paperwidth]{img/mc_aufbau}
+    \end{columns}
+
+    \bigskip
+
+    \begin{columns}
+        \begin{column}[T]{.5\textwidth}
+            \textbf{Durchschnittlicher Microcontroller}
+            \begin{itemize}
+                \item 16 MHz Taktgeschwindigkeit
+                \item 8 Bit Wortbreite
+                \item 32 kB Programmspeicher
+                \item 2 kB Hauptspeicher
+                \item 14 General Purpose I/Os
+                \item Kein Betriebssystem
+            \end{itemize}
+        \end{column}
+        \begin{column}[T]{.5\textwidth}
+            \textbf{Durchschnittlicher System-on-a-Chip}
+            \begin{itemize}
+                \item $\geq$ 200 MHz Taktgeschwindigkeit
+                \item $\geq$ 32 Bit Wortbreite
+                \item $\geq$ 512 MB Flash ROM
+                \item $\geq$ 16 MB Hauptspeicher
+                \item $\geq$ 30 General Purpose I/Os
+                \item Mit oder ohne Betriebssystem
             \end{itemize}
         \end{column}
     \end{columns}
@@ -673,7 +698,7 @@
 
         \column{.8\textwidth}
         \begin{block}{Diskreter Hauptprozessor}
-            \parbox{\linewidth}{
+            \Justified{
                 \smallskip
 
                 Bildet das Herzstück eines jeden Computers bzw. stellt den Computer
@@ -695,7 +720,7 @@
 
         \column{.8\textwidth}
         \begin{block}{Microcontroller}
-            \parbox{\linewidth}{
+            \Justified{
                 \smallskip
 
                 Integriert eine einfache CPU (oftmals mit nur 8-bit Datenbreite)
@@ -718,7 +743,7 @@
 
         \column{.8\textwidth}
         \begin{block}{System-on-a-Chip}
-            \parbox{\linewidth}{
+            \Justified{
                 \smallskip
 
                 Wie ein Microcontroller nur mit einem \textbf{viel leistungsstärkeren
@@ -740,64 +765,32 @@
 
 %%% Folie
 {
-\footnotesize
+\scriptsize
 
-\begin{frame}{Typischer Systemaufbau eingebetteter Systeme}
+\begin{frame}{Fallbeispiel: LED-Laufschrift $\times$ 4}
     \begin{columns}
-        \column{\dimexpr\paperwidth}
-        \includegraphics[width=\paperwidth]{img/mc_aufbau}
+        \column{.5\textwidth}
+        \textbf{Arduino Board}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_arduino1}
+
+        \column{.5\textwidth}
+        \textbf{Atmega Microcontroller}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_arduino2}
     \end{columns}
 
     \bigskip
 
     \begin{columns}
-        \begin{column}[T]{.5\textwidth}
-            \textbf{Durchschnittlicher Microcontroller}
-            \begin{itemize}
-                \item 16 MHz Taktgeschwindigkeit
-                \item 8 Bit Wortbreite
-                \item 32 kB Programmspeicher
-                \item 2 kB Hauptspeicher
-                \item 14 General Purpose I/Os
-                \item Kein Betriebssystem
-            \end{itemize}
-        \end{column}
-        \begin{column}[T]{.5\textwidth}
-            \textbf{Durchschnittlicher System-on-a-Chip}
-            \begin{itemize}
-                \item $\geq$ 200 MHz Taktgeschwindigkeit
-                \item $\geq$ 32 Bit Wortbreite
-                \item $\geq$ 512 MB Flash ROM
-                \item $\geq$ 16 MB Hauptspeicher
-                \item $\geq$ 30 General Purpose I/Os
-                \item Mit oder ohne Betriebssystem
-            \end{itemize}
-        \end{column}
+        \column{.5\textwidth}
+        \textbf{Raspberry Pi auf Breadboard}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_pi1}
+
+        \column{.5\textwidth}
+        \textbf{Raspberry Pi auf Lochrasterplatine}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_pi2}
     \end{columns}
 \end{frame}
-
 }
-
-%%% Folie
-\begin{frame}{Fallbeispiel: LED-Laufschrift}
-    \begin{columns}
-        \column{.5\textwidth}
-        \includegraphics[width=\textwidth]{img/laufschrift_arduino1}
-
-        \column{.5\textwidth}
-        \includegraphics[width=\textwidth]{img/laufschrift_arduino2}
-    \end{columns}
-
-    \bigskip
-
-    \begin{columns}
-        \column{.5\textwidth}
-        \includegraphics[width=\textwidth]{img/laufschrift_pi1}
-
-        \column{.5\textwidth}
-        \includegraphics[width=\textwidth]{img/laufschrift_pi2}
-    \end{columns}
-\end{frame}
 
 %%% Folie
 \begin{frame}[allowframebreaks]{Fallbeispiel: Yamaha SPX90 (1985)}
@@ -826,12 +819,42 @@
 
     \bigskip
 
-    \includegraphics[width=\textwidth]{img/spx90-cpuboard}
+    \begin{columns}
+        \column{\dimexpr\paperwidth}
+        \vskip -.35em
+        \includegraphics[width=\textwidth]{img/spx90-cpuboard}
+    \end{columns}
+
 \end{frame}
 
 %%% Folie
+{
+\scriptsize
+
+\begin{frame}{Fallbeispiel: Die erste Mondlandung}
+    \begin{columns}
+        \column{\dimexpr\paperwidth}
+        \vskip -.8em
+        \includegraphics[width=\textwidth]{img/apollo}
+    \end{columns}
+
+    \vskip .5em
+
+    \begin{columns}
+        \column{\dimexpr\paperwidth-2em}
+        \Justified{
+            \textbf{21. Juli 1969}: Apollo 11 bringt die ersten Menschen zum Mond und
+            wieder zur Erde zurück. Möglich wird dies unter Anderem durch den ,,Launch
+            Vehicle Digital Computer'' der Saturn\,V Rakete und den ,,Apollo Guidance
+            Computer'' in der Kommandokapsel.
+        }
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
 \begin{frame}{Fallbeispiel: IoT-Device mit Sensoren und Aktoren}
-    \parbox{\linewidth}{
+    \Justified{
         \footnotesize
         Die Abbildung zeigt den prototypischen Aufbau eines IoT-Devices mit
         verschiedenen Sensoren und Aktoren. Haupteinheit ist ein Raspberry Pi,
@@ -852,9 +875,13 @@
     \includegraphics[width=\textwidth]{img/einparkhilfe_bb}
 \end{frame}
 
+%-------------------------------------------------------------------------------
+\section{Programmierung}
+%-------------------------------------------------------------------------------
+
 %%% Folie
 \begin{frame}[fragile]{Programmierung: Low Level}
-    \parbox{\linewidth}{
+    \Justified{
         \footnotesize
         Dass die Architektur \textbf{diskret aufgebauter, eingebetteter Systeme}
         im Grunde genommen die gleiche wie bei \textbf{Microcontroller/SoC-basierten}
@@ -885,7 +912,7 @@
 
     \bigskip
 
-    \parbox{\linewidth}{
+    \Justified{
         \footnotesize
         Für ARM System-on-a-Chip, wie sie im Rasbperry Pi und vielen anderen Geräten
         genutzt werden, sieht der Code ähnlich aus. Das Geheimnis ist, den richtigen
@@ -895,7 +922,7 @@
 
 %%% Folie
 \begin{frame}[fragile]{Programmierung: High Level}
-    \parbox{\linewidth}{
+    \Justified{
         \footnotesize
         Aus Gründen der schnelleren und einfacheren Entwicklung sowie der besseren
         Portabilität empfiehlt es sich, zumindest ein einfaches Betriebssystem zu
@@ -943,7 +970,7 @@
 
     \bigskip
 
-    \parbox{\linewidth}{
+    \Justified{
         \footnotesize
         Wir nutzen eine Kombination aus \textbf{Raspberry Pi}, \textbf{Linux} und
         \textbf{Python}. Sie ist leistungsstark, leicht zu lernen und in der
@@ -952,21 +979,28 @@
         \medskip
 
         \begin{itemize}
-            \item \textbf{Rasbperry Pi:} Bietet eine vergleichbare Performance wie
-            ein älterer Desktopcomputer.
+            \justifying
 
-            \item \textbf{Linux:} Beim mitgelieferten Raspberry Pi OS handelt es
-            sich um ein angepasstes Debian-Linux. Die meisten Besonderheiten
-            eingebetteter Systeme bleiben verborgen, so dass es fast wie ein
-            Desktopsystem nutzbar ist.
+            \item \textbf{Rasbperry Pi:} Bietet eine vergleichbare Performance wie ein
+            älterer Desktopcomputer.
 
-            \item \textbf{Python:} Ist eine einsteigerfreundliche Programmiersprache
-            mit verschiedenen Anwendungsgebieten. Das Pi in Raspberry Pi stand
-            deshalb ursprünglich für \glqq{}Python Interpreter\grqq{}.
+            \item \textbf{Linux:} Beim mitgelieferten Raspberry Pi OS handelt es sich
+            um ein angepasstes Debian-Linux. Die meisten Besonderheiten eingebetteter
+            Systeme bleiben verborgen, so dass es fast wie ein Desktopsystem nutzbar ist.
+
+            \item \textbf{Python:} Ist eine einsteigerfreundliche Programmiersprache mit
+            verschiedenen Anwendungsgebieten. Das Pi in Raspberry Pi stand deshalb ursprünglich
+            für ,,Python Interpreter''.
         \end{itemize}
     }
 \end{frame}
 
+%%%%%%%
+% TODO:
+%  - Folie zum Einrichten eines minimalen Raspbian Systems mit Balena Etcher
+%  - Folie zu "Find my Device"
+%  - Folien zur Remote-Entwicklung mit VS Code
+%%%%%%%
 
 %%%%% Folie
 %%{
@@ -1035,7 +1069,7 @@
 %%        \end{itemize}
 %%    \end{columns}
 %%
-%%    \parbox{\linewidth}{
+%%    \Justified{
 %%        \bigskip
 %%        Zur Erfüllung dieser Anforderungen kommen in der Regel angepasste und
 %%        besonders schlanke, eingebettete Betriebssysteme zum Einsatz, falls
