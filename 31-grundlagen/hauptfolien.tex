@@ -657,7 +657,120 @@
 }
 
 %%% Folie
-\begin{frame}{Zum Vergleich: Diskret aufgebauter Computer}
+{
+\scriptsize
+
+\begin{frame}{Mikroprozessoren für eingebettete Systeme}
+    \begin{columns}
+        \column{.2\textwidth}
+        \includegraphics[width=.9\linewidth]{img/chip-intel-486}
+
+        \column{.8\textwidth}
+        \begin{block}{Diskreter Hauptprozessor}
+            \Justified{
+                \smallskip
+
+                Bildet das Herzstück eines jeden Computers bzw. stellt den Computer
+                im engeren Sinne dar, basierend auf dem Prinzip
+                \textbf{Eingabe-Verarbeitung-Ausgabe}. Kommuniziert daher über eine
+                \textbf{Speicherschnittstelle} bestehend aus Adress-, Daten- und Steuerleitungen
+                mit externen Speicher- und I/O-Bausteinen.
+            }
+
+            \smallskip
+
+            \textbf{Beispiele}: Intel 8051, MOS 6502, Motorola 68000, …
+        \end{block}
+    \end{columns}
+
+    \begin{columns}
+        \column{.2\textwidth}
+        \includegraphics[width=.9\linewidth]{img/chip-avr-atmega}
+
+        \column{.8\textwidth}
+        \begin{block}{Microcontroller}
+            \Justified{
+                \smallskip
+
+                Integriert eine einfache CPU (oftmals mit nur 8-bit Datenbreite)
+                sowie RAM und ROM auf einem Chip, um ein kleines Programm zur
+                Steuerung mit externer Peripherie auszuführen. Bietet meist keine
+                externe Speicherschnittstelle, dafür aber I/O-Möglichkeiten wie
+                \textbf{GPIO}, \textbf{Serielle Schnittstellen}, \textbf{A/D-Wandler}
+                uwm.
+            }
+
+            \smallskip
+
+            \textbf{Beispiele}: AVR ATtiny, AVR ATmega, PIC, ARM STM32F722, …
+        \end{block}
+    \end{columns}
+
+    \begin{columns}
+        \column{.2\textwidth}
+        \includegraphics[width=.9\linewidth]{img/chip-arm-cortex}
+
+        \column{.8\textwidth}
+        \begin{block}{System-on-a-Chip}
+            \Justified{
+                \smallskip
+
+                Wie ein Microcontroller nur mit einem \textbf{viel leistungsstärkeren
+                Rechenkern}, dessen Performance mit dedizierten CPUs vergleichbar ist.
+                \textbf{Externer RAM und ROM} werden wie bei einer diskreten CPU über
+                ein Speicherinterface angebunden. Darüber hinaus werden oft auch
+                \textbf{komplexe Komponenten} wie GPUs, WiFi, Bluetooth, HDMI, etc.
+                auf demselben Chip untergebracht.
+            }
+
+            \smallskip
+
+            \textbf{Beispiele}: ARM Cortex, AMD AU1000, …
+        \end{block}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Fallbeispiel: Die erste Mondlandung}
+    \begin{columns}
+        \column{\dimexpr\paperwidth}
+        \vskip -.8em
+        \includegraphics[width=\textwidth]{img/apollo}
+    \end{columns}
+
+    \vskip .5em
+
+    \begin{columns}
+        \column{\dimexpr\paperwidth-2em}
+        \Justified{
+            \textbf{21. Juli 1969}: Apollo 11 bringt die ersten Menschen zum Mond und
+            wieder zur Erde zurück. Möglich wird dies unter Anderem durch den ,,Launch
+            Vehicle Digital Computer'' der Saturn\,V Rakete und den ,,Apollo Guidance
+            Computer'' in der Kommandokapsel.
+        }
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+\begin{frame}[allowframebreaks]{Fallbeispiel: Diskret aufgebaute Rechnerarchitektur}
+    \includegraphics[width=\textwidth]{img/fallbeispiel-rechnerarchitektur}
+    \bigskip
+
+    \Justified{
+        \footnotesize
+        Vor der breiten Verfügbarkeit von Microcontrollern wurden selbst eingebettete
+        Systeme mit diskreten Einzelbausteinen aufgebaut. In der Schemaskizze befinden
+        sich daher integrierte Bausteine für den Hauptprozessor, Speicher, Ein- und
+        Ausgabe sowie die Adresskodierung.
+    }
+
+    \framebreak
+
     \begin{center}
         \includegraphics[height=0.5\textheight]{img/sbc_microprozessor2_klein}
     \end{center}
@@ -686,111 +799,6 @@
         \end{column}
     \end{columns}
 \end{frame}
-
-%%% Folie
-{
-\footnotesize
-
-\begin{frame}{Mikroprozessoren für eingebettete Systeme}
-    \begin{columns}
-        \column{.2\textwidth}
-        \includegraphics[width=.9\linewidth]{img/intel486}
-
-        \column{.8\textwidth}
-        \begin{block}{Diskreter Hauptprozessor}
-            \Justified{
-                \smallskip
-
-                Bildet das Herzstück eines jeden Computers bzw. stellt den Computer
-                im engeren Sinne dar, basierend auf dem Prinzip
-                \textbf{Eingabe-Verarbeitung-Ausgabe}. Kommuniziert daher über eine
-                \textbf{Speicherschnittstelle} bestehend aus Adress-, Daten- und Steuerleitungen
-                mit externen Speicher- und I/O-Bausteinen.
-            }
-
-            \smallskip
-
-            \textbf{Beispiele}: Intel 8051, MOS 6502, Motorola 68000, …
-        \end{block}
-    \end{columns}
-
-    \begin{columns}
-        \column{.2\textwidth}
-        \includegraphics[width=.9\linewidth]{img/AVR-ATmega}
-
-        \column{.8\textwidth}
-        \begin{block}{Microcontroller}
-            \Justified{
-                \smallskip
-
-                Integriert eine einfache CPU (oftmals mit nur 8-bit Datenbreite)
-                sowie RAM und ROM auf einem Chip, um ein kleines Programm zur
-                Steuerung mit externer Peripherie auszuführen. Bietet meist keine
-                externe Speicherschnittstelle, dafür aber I/O-Möglichkeiten wie
-                \textbf{GPIO}, \textbf{Serielle Schnittstellen}, \textbf{A/D-Wandler}
-                uwm.
-            }
-
-            \smallskip
-
-            \textbf{Beispiele}: AVR ATtiny, AVR ATmega, PIC, ARM STM32F722, …
-        \end{block}
-    \end{columns}
-
-    \begin{columns}
-        \column{.2\textwidth}
-        \includegraphics[width=.9\linewidth]{img/ARM-Cortex}
-
-        \column{.8\textwidth}
-        \begin{block}{System-on-a-Chip}
-            \Justified{
-                \smallskip
-
-                Wie ein Microcontroller nur mit einem \textbf{viel leistungsstärkeren
-                Rechenkern}, dessen Performance mit dedizierten CPUs vergleichbar ist.
-                \textbf{Externer RAM und ROM} werden wie bei einer diskreten CPU über
-                ein Speicherinterface angebunden. Darüber hinaus werden oft auch
-                \textbf{komplexe Komponenten} wie GPUs, WiFi, Bluetooth, HDMI, etc.
-                auf demselben Chip untergebracht.
-            }
-
-            \smallskip
-
-            \textbf{Beispiele}: ARM Cortex, AMD AU1000, …
-        \end{block}
-    \end{columns}
-\end{frame}
-
-}
-
-%%% Folie
-{
-\scriptsize
-
-\begin{frame}{Fallbeispiel: LED-Laufschrift $\times$ 4}
-    \begin{columns}
-        \column{.5\textwidth}
-        \textbf{Arduino Board}
-        \includegraphics[width=.9\textwidth]{img/laufschrift_arduino1}
-
-        \column{.5\textwidth}
-        \textbf{Atmega Microcontroller}
-        \includegraphics[width=.9\textwidth]{img/laufschrift_arduino2}
-    \end{columns}
-
-    \bigskip
-
-    \begin{columns}
-        \column{.5\textwidth}
-        \textbf{Raspberry Pi auf Breadboard}
-        \includegraphics[width=.9\textwidth]{img/laufschrift_pi1}
-
-        \column{.5\textwidth}
-        \textbf{Raspberry Pi auf Lochrasterplatine}
-        \includegraphics[width=.9\textwidth]{img/laufschrift_pi2}
-    \end{columns}
-\end{frame}
-}
 
 %%% Folie
 \begin{frame}[allowframebreaks]{Fallbeispiel: Yamaha SPX90 (1985)}
@@ -831,23 +839,27 @@
 {
 \scriptsize
 
-\begin{frame}{Fallbeispiel: Die erste Mondlandung}
+\begin{frame}{Fallbeispiel: LED-Laufschrift $\times$ 4}
     \begin{columns}
-        \column{\dimexpr\paperwidth}
-        \vskip -.8em
-        \includegraphics[width=\textwidth]{img/apollo}
+        \column{.5\textwidth}
+        \textbf{Arduino Board}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_arduino1}
+
+        \column{.5\textwidth}
+        \textbf{Atmega Microcontroller}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_arduino2}
     \end{columns}
 
-    \vskip .5em
+    \bigskip
 
     \begin{columns}
-        \column{\dimexpr\paperwidth-2em}
-        \Justified{
-            \textbf{21. Juli 1969}: Apollo 11 bringt die ersten Menschen zum Mond und
-            wieder zur Erde zurück. Möglich wird dies unter Anderem durch den ,,Launch
-            Vehicle Digital Computer'' der Saturn\,V Rakete und den ,,Apollo Guidance
-            Computer'' in der Kommandokapsel.
-        }
+        \column{.5\textwidth}
+        \textbf{Raspberry Pi auf Breadboard}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_pi1}
+
+        \column{.5\textwidth}
+        \textbf{Raspberry Pi auf Lochrasterplatine}
+        \includegraphics[width=.9\textwidth]{img/laufschrift_pi2}
     \end{columns}
 \end{frame}
 }
