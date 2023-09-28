@@ -14,12 +14,13 @@
 
 %%% Folie
 \begin{frame}{Leitfragen des heutigen Kapitels}
-    \begin{block}{Den Raspberry Pi mit Strom versorgen}
+    \begin{block}{Hardwareschaltungen mit Strom versorgen}
         \begin{itemize}
             \footnotesize
             \setlength\itemsep{.5em}
 
-            \item Wie viel Strom benötigt der Raspberry Pi?
+            \item Was ist Strom und welche Begriffe muss ich kennen?
+            \item Wie viel Strom benötigt mein Microcontroller-Board?
             \item Wie lange hält die Batterie bzw. der Akku?
             \item Was kostet der jährliche Stromverbrauch?
         \end{itemize}
@@ -31,8 +32,8 @@
             \setlength\itemsep{.5em}
 
             \item Welche Arten der Signalübertragung gibt es?
-            \item Welche Signalarten kann der Raspberry Pi verarbeiten?
-            \item Wie werden Sensoren/Aktoren mit dem Raspberry Pi verbunden?
+            \item Welche Signalarten kann mein Microcontroller verarbeiten?
+            \item Wie werden Sensoren/Aktoren mit dem Microcontroller verbunden?
             \item Wie lassen sich Hardwareschäden dabei vermeiden?
             \item Wie lassen sich inkompatible Logikpegel anpassen?
         \end{itemize}
@@ -43,7 +44,7 @@
             \footnotesize
             \setlength\itemsep{.5em}
 
-            \item Wie viel Strom kann der Raspberry Pi bereitstellen?
+            \item Wie viel Strom kann mein Microcontroller-Board bereitstellen?
             \item Wie können stärkere Lastströme geschaltet werden?
         \end{itemize}
     \end{block}
@@ -63,13 +64,13 @@
         \end{itemize}
     \end{block}
 
-    \begin{block}{Stromversorgung für den Pi}
+    \begin{block}{Stromversorgung für eingebettete Systeme}
         \begin{itemize}
             \footnotesize
             \setlength\itemsep{.5em}
 
-            \item Die Anforderungen des Raspberry Pi an die Stromversorgung kennen
-            \item Die Funktionsweise eines typischen USB-Netzteils verstehen
+            \item Die Anforderungen typischer Microcontroller an die Stromversorgung kennen
+            \item Die Funktionsweise eines einfachen USB-Trafonetzteils verstehen
             \item Die Lebensdauer einer Batterie/Akku abschätzen können
             \item Den Verbrauch und die erwarteten Stromkosten berechnen können
         \end{itemize}
@@ -80,10 +81,10 @@
             \footnotesize
             \setlength\itemsep{.5em}
 
-            \item Die am Raspberry Pi nutzbaren Signalarten erklären können
-            \item Die Hardwareschnittstellen des Raspberry Pi nutzen können
+            \item Die gängigen Schnittstellen eingebetteter Systeme erklären können
+            \item Die Hardwareschnittstellen zumindest grundlegend programmieren können
             \item Analoge und digitale Sensoren und Aktoren verbinden können
-            \item Stromstärken und Spannungen an den Raspberry Pi anpassen
+            \item Stromstärken und Spannungen für den Microcontroller anpassen
         \end{itemize}
     \end{block}
 \end{frame}
@@ -132,9 +133,9 @@
     \parbox{\linewidth}{
         \scriptsize
         Am einfachsten lässt sich die Wirkungsweise des elektrischen Stroms verstehen,
-        wenn man das alte, Bohrsche Atommodell betrachtet, bei dem jedes Atom in Analogie
-        an unser Sonnensystem als ein Kern mit Protonen und Neutronen sowie diesen auf
-        festen Bahnen umkreisenden Elektronen beschrieben wird.
+        wenn man das alte Bohrsche Atommodell betrachtet, bei dem jedes Atom in Analogie
+        an unser Sonnensystem als ein Kern mit Protonen und Neutronen mit diese umkreisenden
+        Elektronen beschrieben wird.
         \smallskip
 
         Damit Strom in einem Material fließen kann, muss ein Teil der darin enthaltenen
@@ -172,13 +173,13 @@
         \smallskip
 
         \textbf{Elektrischer Strom} entspricht somit der \textbf{Bewegung freier
-        Elektronen} innerhalb eines leitfähigen Materials. Strom entsteht daher,
-        indem die freien Elektronen durch \textbf{magnetische} oder
-        \textbf{chemische Einwirkung} in Bewegung versetzt werden.
-        Allerdings darf man das nicht nicht so vorstellen, dass ein Elektron
-        geradlinig durch das Material hindurch wandert. Viel mehr nimmt es einen
-        zufälligen Weg und schiebt dabei alle anderen Elektronen aus dem Weg,
-        da sich Elementarteilchen mit gleicher Ladung immer abstoßen.
+        Elektronen} innerhalb eines leitfähigen Materials. Strom entsteht, indem
+        die freien Elektronen \textbf{durch magnetische oder chemische Einwirkung}
+        in Bewegung versetzt werden. Allerdings darf man das nicht nicht so vorstellen,
+        dass ein Elektron geradlinig durch das Material hindurch wandert. Viel mehr
+        nimmt es einen zufälligen Weg und schiebt dabei wie eine Billardkugel die
+        umliegenden Elektronen aus dem Weg, da sich Elementarteilchen mit gleicher
+        Ladung immer abstoßen.
     }
 
     %%% Folie
@@ -196,11 +197,11 @@
 
             Die Spannung wird immer \textbf{zwischen zwei Punkten} gemessen und beschreibt
             wie viele Elektronen auf der einen Seite zu viel oder auf der anderen Seite zu
-            wenig sind. Sie beschreibt somit die \textbf{Ladungsdifferenz} zwischen den beiden
-            Punkten und wird in der Einheit \textbf{Volt} gemessen. Sie liefert die Kraft,
-            die auf die Elektronen ausgeübt wird, um sie in Bewegung zu setzen und ist
-            (sofern die beiden Punkte über ein elektrisch leitendes Material verbunden sind)
-            die \textbf{Ursache für den Stromfluss}.
+            wenig sind. Sie beschreibt somit die \textbf{Ladungsdifferenz} (Potentialunterschied)
+            zwischen den beiden Punkten und wird in der Einheit \textbf{Volt} gemessen.
+            Sie liefert die Kraft, die auf die Elektronen ausgeübt wird, um sie in Bewegung
+            zu setzen und ist, sofern die beiden Punkte über ein elektrisch leitendes Material
+            verbunden sind, die \textbf{Ursache für den Stromfluss}.
         }
     \end{block}
 
@@ -209,11 +210,10 @@
         \parbox{\linewidth}{
             \scriptsize
 
-            Beschreibt in einem Stromkreis den gemeinsamen Bezugspunkt, vom dem aus alle andere
-            Spannungen gemessen werden. Entspricht bei einer Batterie meistens dem Minuspol oder
+            Beschreibt in einem Stromkreis den gemeinsamen Bezugspunkt, vom dem aus die meisten
+            anderen Spannungen gemessen werden. Entspricht bei einer Batterie dem Minuspol oder
             beim Hausstrom dem Neutralleiter. In einem Stromkreis fließt der Strom gedanklich
-            immer vom Pluspol der Stromquelle zur Masse, die meist dem Minuspol der Stromquelle
-            entspricht.
+            immer zur Masse.
         }
     \end{block}
 
@@ -240,7 +240,7 @@
             oder Strahlung} umgewandelt wird. Ein Widerstand reduziert somit die Stromstärke
             und wird in der Einheit \textbf{Ohm} gemessen. Man kann ihn sich wie einen Knick
             in einem Wasserschlauch vorstellen, durch den nur noch wenig Wasser gelangt,
-            obwohl das Wasser mit hohem Druck hinein geschossen wird.
+            obwohl das Wasser mit starker Kraft hinein gedrückt wird.
         }
     \end{block}
 \end{frame}
@@ -288,6 +288,7 @@
     }
 \end{frame}
 
+%%% Folie
 \begin{frame}{Schaltpläne zur Dokumentation von Stromkreisen}
     \begin{center}
         \includegraphics[width=\textwidth]{img/mini-stromkreis}
@@ -302,16 +303,16 @@
 
         Elektrische Schaltungen werden immer als \textbf{Stromkreis} entworfen
         und in einem \textbf{Schaltplan} dokumentiert. Gedanklich fließt der
-        Strom in diesem vom Pluspol zum Minuspol (linke, eher seltene Darstellung)
-        bzw. vom Pluspol der Spannungsquelle zur Masse (rechte Darstellung).
-        Tatsächlich beruht diese Annahme aber auf einem Irrtum, weil es die
-        negativ geladenen Elektronen sind, die sich vom Minus- zum Pluspol bewegen.
-        Da sich dadurch aber nur das Vorzeichen in den Berechnungen ändert, wurde
-        die Konvention unter dem Namen \textbf{technische Stromrichtung} in Abgrenzung
-        zur \textbf{tatsächlichen Stromrichtung} beibehalten.
+        Strom in diesem vom Pluspol zum Minuspol (linke, meist in Schulbüchern
+        anzutreffende Darstellung) bzw. vom Pluspol der Spannungsquelle zur Masse
+        (rechte Darstellung). Tatsächlich beruht diese Annahme aber auf einem Irrtum,
+        weil es die negativ geladenen Elektronen sind, die sich vom Minus- zum
+        Pluspol bewegen. Da sich dadurch aber nur das Vorzeichen in den Berechnungen
+        ändert, wurde die Konvention unter dem Namen \textbf{technische Stromrichtung}
+        in Abgrenzung zur \textbf{tatsächlichen Stromrichtung} beibehalten.
         \smallskip
 
-        Die Symbole im Schaltplan haben folgende Bedeutung:
+        Die Symbole in den obigen Schaltplänen haben folgende Bedeutung:
         \smallskip
 
         \begin{center}
@@ -358,14 +359,14 @@
         \smallskip
 
         Für uns ist dies besonders wichtig, um die maximale Stromstärke zu begrenzen,
-        die der Raspberry Pi an ein angeschlossenes Bauteil abgibt, um sowohl den
-        Rasbperry Pi als auch das Bauteil vor Beschädigungen zu schützen. Beispiele
+        die der Microcontroller an ein angeschlossenes Bauteil abgibt, um sowohl den
+        Microcontroller als auch das Bauteil vor Beschädigungen zu schützen. Beispiele
         für typische Fragestellungen sind:
 
         \begin{itemize}
             \item Welche Stromstärke fließt durch eine Schaltung (wie viel Strom ,,zieht`` die Schaltung)?
             \item Welcher Widerstand wird benötigt, um eine bestimmte Stromstärke zu erhalten?
-            \item Liegt die Stromstärke innerhalb der erlaubten Grenzen für den Raspberry Pi und das Bauteil?
+            \item Liegt die Stromstärke innerhalb der erlaubten Grenzen für den Microcontroller und das Bauteil?
         \end{itemize}
     }
 
@@ -373,7 +374,7 @@
 
     \textcolor{gray}{
         \tiny
-        \textbf{Kennlinie:} Stromstärke in Abhängigkeit zur Spannung, der Widerstand entspricht der Tangentensteigung
+        \textbf{Kennlinie:} Stromstärke (Y-Achse) in Abhängigkeit zur Spannung (X-Achse), der Widerstand entspricht der Tangentensteigung
     }
     {
         \footnotesize
@@ -401,7 +402,7 @@
     \bigskip
 
     \Justified{
-        \scriptsize
+        \tiny
 
         Das Ohmsche Gesetz gilt nur für \textbf{ideale Widerstände}, die deshalb auch
         \textbf{ohmsche Widerstände} genannt werden. Genau genommen besagt es, dass
@@ -415,24 +416,33 @@
         so dass die durchfließende Stromstärke nicht linear von der Spannung abhängt. Der Widerstand
         dieser Bauteile ergibt sich ebenfalls aus Spannung und Stromstärke, besitzt aber keinen konstanten
         Wert. In Anlehnung an das Ohmsche Gesetz kann er näherungsweise als \textbf{differentieller
-        Widerstand} $r = \Delta U / \Delta I$ berechnet werden (sog. Kleinsignalverhalten).
+        Widerstand} $r = \Delta U / \Delta I$ am gewählten Arbeitspunkt berechnet werden (sog. Kleinsignalverhalten).
     }
 \end{frame}
 
 %%% Folie
 \begin{frame}{Berechnung der Leistung}
     \begin{columns}
-        \column{.4\textwidth}
+        \column{.2\textwidth}
         \begin{center}
-            \includegraphics[width=.4\textwidth]{img/formel_pui}
+            \includegraphics[width=.9\textwidth]{img/formel_pui}
         \end{center}
 
-        \column{.6\textwidth}
+        \column{.4\textwidth}
+        \hfill%
         \begin{tabular}{ccll}
             $P$ & = & $U \times I$ & {\scriptsize Leistung in Watt} \\
             $U$ & = & $P / I$ & {\scriptsize Spannung in Volt} \\
             $I$ & = & $P / U$ & {\scriptsize Stromstärke in Ampere}\\
         \end{tabular}
+        \hfill%
+
+        \column{.4\textwidth}
+        {
+            \scriptsize
+            \hfill%
+            $Leistung = \frac{Energie\:innerhalb\:Zeit}{Zeit}$
+        }
     \end{columns}
 
     \vskip 1cm
@@ -441,13 +451,18 @@
         \scriptsize
         Ein weiterer, gelegentlich anzutreffender Begriff ist die in \textbf{Watt}
         gemessene \textbf{Leistung}, welche die innerhalb einer Zeitspanne umgesetzte
-        Energie (beispielsweise durch Abwärme) oder die zur Ausführung von Arbeiten
-        verfügbare Energie bezeichnet. Ihre elektrische Definition lautet $P = U \times I$,
-        so dass ein Watt der Leistung entspricht, die benötigt wird, um an einem
-        \textbf{ohmschen Widerstand von einem Ohm eine Spannung von einem Volt} (und damit
-        eine Stromstärke von einem Ampere) \textbf{während einer Sekunde} zu erhalten. Daraus
-        folgt, dass sich die Leistung aus dem Produkt der beiden anderen Werte
-        \textit{Spannung} und \textit{Stromstärke} bildet.
+        Energie geteilt durch die Zeitspanne beschreibt. Die Überlegung ist analog
+        zur Geschwindigkeit (Weg durch Zeit), nur das keine Wegstrecke überbrückt,
+        sondern Energie übertragen wird.
+        \smallskip
+
+        Ihre elektrische Definition lautet $P = U \times I$, so dass ein Watt der Leistung
+        entspricht, die benötigt wird, um an einem \textbf{ohmschen Widerstand von einem
+        Ohm eine Spannung von einem Volt} (und damit eine Stromstärke von einem Ampere)
+        \textbf{während einer Sekunde} zu erhalten. Daraus folgt, dass sich die Leistung
+        aus dem Produkt der beiden anderen Werte \textit{Spannung} und \textit{Stromstärke}
+        bildet, da die Stromstärke bereits stark vereinfacht als ,,Anzahl Elektronen je Sekunde''
+        definiert ist.
         \smallskip
 
         Meist kommen wir damit nur in Berührung, wenn es um die \textbf{Nennleistung
@@ -466,7 +481,7 @@
 \end{frame}
 
 %-------------------------------------------------------------------------------
-\section{Stromversorgung für den Pi}
+\section{Stromversorgung}
 %-------------------------------------------------------------------------------
 
 %%% Folie
@@ -478,8 +493,8 @@
         \smallskip
         \parbox{\linewidth}{
             \footnotesize
-            Besitzt eine feste Spannung und damit auch feste Polung. \\
-            \textbf{Beispiel:} Stromversorgung eines Computers
+            Besitzt eine zeitlich konstante Spannung \\
+            \textbf{Beispiel:} Interne Stromversorgung eines Computers
         }
     \end{block}
 
@@ -487,9 +502,8 @@
         \smallskip
         \parbox{\linewidth}{
             \footnotesize
-            Die Spannung und damit die auch Polung pendeln gleichmäßig um das
-            Massepotential. \\
-            \textbf{Beispiel:} Netzstrom aus der Steckdose, analoge Audiosignale
+            Die Spannung ist variabel und ändert regelmäßig die Richtung \\
+            \textbf{Beispiel:} Netzstrom, bipolares Analogsignal, Audiosignale
         }
     \end{block}
 
@@ -497,8 +511,8 @@
         \smallskip
         \parbox{\linewidth}{
             \footnotesize
-            Setzt sich aus einem Gleichstrom- und einem Wechselstromanteil zusammen. \\
-            \textbf{Beispiel:} Analoge Sensorsignale
+            Ist mathematisch eine Überlagerung von Gleich- und Wechselströmen \\
+            \textbf{Beispiel:} Analoge Sensorsignale, unipolares Analogsignal
         }
     \end{block}
 
@@ -520,7 +534,7 @@
 {
 \scriptsize
 
-\begin{frame}{Anforderungen des Raspberry Pi}
+\begin{frame}{Stromversorgung für eingebettete Systeme}
     \begin{columns}
         \column{.5\textwidth}
         \includegraphics[width=\textwidth]{img/raspi-stromarten}
@@ -532,6 +546,10 @@
             \parbox{\linewidth}{
                 Das Stromnetz liefert Wechselstrom mit 230\,V und 16\,A.
                 Der Raspberry Pi benötigt aber \textbf{5\,V Gleichstrom und $\pm$ 3\,A}.
+                Ein Arduino Uno benötigt zum Vergleich \textbf{6-20\,V Gleichstrom}
+                (wird intern auf 5\,V geregelt) und \textbf{$\geq$ 250\,mA}).
+                \smallskip
+
                 Das Netzteil muss daher den die Spannung reduzieren und den Strom gleichrichten.
                 Eine mobile Stromversorgung muss mindestens genauso viel Strom liefern.
                 \smallskip
@@ -810,6 +828,16 @@
 }
 
 %%% Folie
+{
+    \setbeamertemplate{background canvas}{
+        \includegraphics[height=\paperheight, width=\paperwidth]{img/fallbeispiel_fahrzeug}
+    }
+
+    \begin{frame}[plain]
+    \end{frame}
+}
+
+%%% Folie
 \begin{frame}{Häufig vorkommende Signalarten}
         \begin{columns}
         \column[b]{.5\textwidth}
@@ -828,6 +856,16 @@
         \column[b]{.5\textwidth}
         \includegraphics[width=\textwidth]{img/strom-serial} \\
     \end{columns}
+\end{frame}
+
+%%% Folie
+\begin{frame}{Anschlüsse am Arduino Uno}
+        \begin{center}
+            \includegraphics[height=.8\textheight]{img/arduino-uno-pinout}
+
+            \smallskip
+            \LinkButton{https://docs.arduino.cc/hardware/uno-rev3}{Arduino Uno R3 Spezifikationen}
+        \end{center}
 \end{frame}
 
 %%% Folie
@@ -902,37 +940,25 @@
 
 \begin{frame}{Bevor es losgehen kann: Maximale Grenzwerte}
     \parbox{\linewidth}{
-        Um eine Beschädigung des Raspberry Pi zu vermeiden, müssen folgende Grenzwerte unbedingt
-        eingehalten werden. Ggf. müssen daher nach dem Ohmschen Gesetz berechnete Widerstände in
-        Serie zu einem Bauteil angeschlossen werden, um die Stromstärke zu begrenzen. Ebenso muss
-        die Summe aller zugeführten und entnommenen Ströme betrachtet werden.
+        \scriptsize
+        Um eine Beschädigung am Microcontroller-Board zu vermeiden, müssen folgende Grenzwerte
+        unbedingt eingehalten werden. Ggf. müssen daher nach dem Ohmschen Gesetz berechnete
+        Widerstände in Serie zu einem Bauteil angeschlossen werden, um die Stromstärke zu begrenzen.
+        Ebenso muss die Summe aller zugeführten und entnommenen Ströme berechnet und ebenfalls
+        begrenzt werden.
     }
 
     \bigskip
     \renewcommand{\arraystretch}{1.2}
 
-    \begin{tabularx}{\textwidth}{|p{18em}|X|X|}
+    \begin{tabularx}{\textwidth}{|p{11em}|X|X|}
         \hline
-        \textbf{Parameter} & \textbf{Mindestwert} & \textbf{Maximalwert} \\
-        \hline
-
-        Betriebsspannung des Pi & 5\,V & 5\,V \\
-        \hline
-
-        Stromverbrauch des Pi & 800\,mA (eher mehr) & -- \\
-        \hline
-
-        Stromentnahme an den 3.3\,V-Pins & -- & 50\,mA gesamt \\
-        \hline
-
-        Stromentnahme an den 5\,V-Pins & -- & 50\,mA gesamt \\
-        \hline
-
-        Stromentnahme an einem GPIO-Pin & -- & 16\,mA \\
-        \hline
-
-        Stromentnahme an allen GPIO-Pins & -- & 50\,mA gesamt \\
-        \hline
+        \textbf{Parameter}    &  \textbf{Arduino Uno}         &  \textbf{Rasbperry Pi}         \\  \hline
+        Stromversorgung       &  6-20\,V, $\geq$ 250\,mA      &  5\,V, $\pm$ 3\,A (eher mehr)  \\  \hline
+        Logikpegel            &  5\,V                         &  3,3\,V                        \\  \hline
+        Stromentnahme 3.3\,V  &  Max. 50\,mA gesamt           &  Max. 50\,mA gesamt            \\  \hline
+        Stromentnahme 5\,V    &  Max. 50\,mA gesamt           &  Max. 50\,mA gesamt            \\  \hline
+        GPIO-Stromentnahme    &  Max. 20\,mA (40\,mA gesamt)  &  Max. 16\,mA (50\,mA gesamt)   \\  \hline
     \end{tabularx}
 
     \bigskip
@@ -945,14 +971,14 @@
 
 %%% Folie
 {
-\scriptsize
+\tiny
 
-\begin{frame}[fragile, allowframebreaks]{Binärsignal ausgeben am Beispiel einer LED}
+\begin{frame}{Binärsignal ausgeben am Beispiel einer LED}
     \Justified{
-        Jeder \textbf{GPIO-Pin} kann softwaregesteuert als \textbf{Eingang oder Ausgang} konfiguriert
-        werden. Ausgangspins stellen eine Spannung von \textbf{ca. 3,3\,V} zur Verfügung, um eine
-        logische Eins zu signalisieren, sowie \textbf{0\,V} (entspricht einer Verbindung gegen Masse)
-        für eine logische Null.
+        Jeder \textbf{GPIO-Pin} kann softwaregesteuert als \textbf{Eingang oder Ausgang} konfiguriert werden.
+        Ausgangspins stellen eine Spannung von \textbf{ca. 3,3\,V} (Rasbperry Pi) bzw. \textbf{ca. 5\,V}
+        (Arduino Uno) zur Verfügung, um eine logische Eins zu signalisieren, sowie \textbf{0\,V} (entspricht
+        einer Verbindung gegen Masse) für eine logische Null.
         \smallskip
 
         Der entnommene Strom muss in der Regel durch einen \textbf{Widerstand} begrenzt werden.
@@ -964,7 +990,11 @@
         \smallskip
 
         \textcolor{red}{
-            Die entnommenen Ströme dürfen nicht größer als 16\,mA und ihre Summe nicht größer als 50\,mA sein.
+            \textbf{Raspberry Pi:} Die entnommenen Ströme dürfen nicht größer als 16\,mA und ihre Summe nicht größer als 50\,mA sein.
+        }
+
+        \textcolor{red}{
+            \textbf{Arduino Uno}: Die entnommenen Ströme dürfen nicht größer als 20\,mA und ihre Summe nicht größer als 40\,mA sein.
         }
     }
 
@@ -980,9 +1010,50 @@
         \column{0.5\textwidth}
         \includegraphics[width=\textwidth]{img/led_direkt_foto}
     \end{columns}
+\end{frame}
+}
 
-    \framebreak
+%%% Folie
+{
+\tiny
 
+\begin{frame}[fragile]{Binärsignale ausgeben mit Arduino}
+    \begin{lstlisting}[language=C++, gobble=8]
+        // Konstanten und globale Variablen
+        const int MIN_PIN = 0;
+        const int MAX_PIN = 19;
+        bool output       = false;
+
+        /**
+         * Initialisierung der Hardware nach dem Einschalten
+         */
+        void setup() {
+            // Alle GPIO-Pins als digitale Ausgänge konfigurieren
+            for (int i = MIN_PIN; i <= MAX_PIN; i++) {
+                pinMode(i, OUTPUT);
+            }
+        }
+
+        /**
+         * Unendlich oft ausgeführte Hauptprogrammlogik
+         */
+        void loop() {
+            for (int i = MIN_PIN; i <= MAX_PIN; i++) {
+                digitalWrite(i, output);
+            }
+
+            output = !output;
+            delay(1000);
+        }
+    \end{lstlisting}
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Binärsignale ausgeben mit Python auf dem Raspberry Pi}
     \begin{lstlisting}[language=Python, gobble=8]
         import RPi.GPIO as GPIO, time
 
@@ -1085,7 +1156,85 @@
 {
 \scriptsize
 
-\begin{frame}[fragile, allowframebreaks]{Gemittelte Leistung durch Pulsweitenmodulation regulieren}
+\begin{frame}{Exkurs: Mittlere Lasten über Transistor schalten}
+    \Justified{
+        Der vom Raspberry Pi abgegebene Strom ist in der Regel zu schwach, um damit mehr
+        als digitale Sensoren oder Aktoren anzusteuern. Insbesondere mechanische Arbeiten
+        können damit nicht verrichtet werden, da die jeweiligen Motoren deutlich mehr Strom
+        benötigen. Bei mittleren Lastströmen kann ein Transistor hier Abhilfe schaffen.
+        \smallskip
+
+        Der hier gezeigte ,,NPN-Transistor'' funktioniert im einfachsten Fall wie ein
+        \textbf{stromgesteuerter Schalter}. \textcolor{RoyalPurple}{Ein kleiner Strom
+        an der Basis steuert, in wiefern ein viel größerer am Collector anliegender Strom
+        durchgelassen wird. Die Summe beider Ströme (in Ampére) fließt durch den Emitter
+        nach Ground.}
+        \smallskip
+
+        Die Spannung zwischen Basis und Emitter muss meist mindestens 0,7V betragen,
+        damit der Transistor schalten kann. Die Stärke des hierfür benötigten
+        Steuer- bzw. Basisstroms kann mit der durchzuschaltenden Stromstärke, dem
+        $\beta$-Faktor des Transistors, (auch \texttt{hfe} abgekürzt) und dem Ohmschen
+        Gesetz leicht berechnet werden:
+        \bigskip
+
+        \hfill $I_b = I_c / \beta$ \hfill
+        \hfill \textit{Benötigter Basisstrom = Zu schaltender Strom / $\beta$} \hfill
+        \smallskip
+    }
+
+    \bigskip
+
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \includegraphics[width=\textwidth]{img/led_transistor_circuitjs}
+        \smallskip
+
+        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDxc8fAVHAgAZgEMANgGc6IbNGxQWAcyEi+xQcNEIwKCZBYB3cCapd9O0XcHmASpx4rsB3di9m+tP4wCCwATu68-IJgkAiCURIxcCwALshxYtE2mYlQ0IRgxGCU3Hh4xJAouLwwhIR2cAII2GQIzbxJIAAmdLIArnIpltZofNimzKNOGuHcvL7RsYILEr7mVjEZK5NUK+YARkJ4u5C8GKcUXOrmAB4g56ZtxPdYFISmHaYuMgoADvt0UKhACeAB0FAAFACWLDuGBQpmw-HuCFESMi4FMEIA9hZAbD7lNRsd4lU+JiQABxCEASQA8gwAIJ9BSaGQAO00BIwhRoVDwYHUlHUnxAAFkfkpwQAKSmhbF9dldACULAEE2y22yXDgIFMPX6gwYcjoXUkVAtsFYdxidQCohiZDEEFFACEflCFATJs8dVRmAQAiKKQBhbFyE0AYxS2NC3pMvt81hwY3iFIAogBbKEpFL4oA}
+        \LinkButton{https://www.electronics-tutorials.ws/de/transistoren/der-npn-transistoren.html}{NPN-Transistoren im Detail}
+
+        \column{0.42\textwidth}
+        \includegraphics[width=\textwidth]{img/led_transistor_foto}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Exkurs: Große Lasten über Relais schalten}
+    \Justified{
+        Große Lasten können aus Sicherheitsgründen nur mechanisch geschaltet werden.
+        Der Hardwareaufbau gliedert sich dann ein einen \textbf{Steuerstromkreis} und
+        einen \textbf{Arbeitsstromkreis}, die komplett \textbf{galvanisch entkoppelt}
+        sind und deshalb jeweils eigene Stromquellen besitzen.
+        Ein \textbf{Relais} dient als ferngesteuerter Schalter, der den Arbeitsstromkreis
+        unterbrechen und schließen kann. Im Inneren besteht es aus einem durch den
+        Steuerstromkreis gespeisten Elektromagneten und einem magnetischen Kippschalter.
+        Beim Umschalten entsteht das charakteristische Klickgeräusch.
+    }
+
+    \medskip
+
+    \begin{columns}
+        \column{0.6\textwidth}
+        \includegraphics[width=.9\textwidth]{img/led_relais_circuitjs}
+        \smallskip
+
+        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkQ9jCQAWMHnl54+AqOBAAzAIYAbAM50Q2aNigsA5p2F9u2kQjApxkFgCdOe-jzI9r4zKYBGnPFWxCQGSLwq81pgAeXpDGCAjEXlgUhMa+RiAAStLyAA5OdGZmAJ4AOvIACgCWLMEYaHwVbnYoavHGAOIFAJIA8gwAggCu8hrSAHYapV5gkZRUeGBqlHXgxgCyKYr5ABQNZgD2Xf0AJgCULGAYIrbKnmD4Ih6+PBCoULDM2BjE2BfYvMKYvITkMJBIC7wOAPSAQCr-HyggHgFgAd3ARio9mYFV4elMCNRyL0QhE6J4QWQFUMtyMYVGfDmIAAygAXOhdTLyOmbAC2AGszHQivJDpNLDwUAhbqFfMLCeBiCheLAhIZuJQpngeJRqf9fBr4YiKhKdciQZjkHh8SDsXxDdrzSjLqJCcMLmARDK1Ki1DK7NSOmYMkU6fIWeyuTy+Vo8cooeHsBD1Aio1DTrhNdrEwmMDxrupEoKQHrw3qqAb1SZoAgrWLcyL9ZX7S4TVQ0CJvGoPsmypBXcQRHgEOQ0BB6iAAKKBBlmfp0fL09kAN2ZGzMGm2QyAA}
+
+        \column{0.4\textwidth}
+        \includegraphics[width=\textwidth]{img/led_relais_foto}
+    \end{columns}
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Gemittelte Leistung durch Pulsweitenmodulation regulieren}
     \parbox{\linewidth}{
         Die zur Verfügung stehende Stromstärke kann nicht nur durch einen Vorwiderstand reduziert werden.
         Je nach Bauteil kann (oder muss) sie durch \textbf{Pulsweitenmodulation}, was einem schnellen
@@ -1102,9 +1251,52 @@
 
     \hfill
     \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKAHMRCUAWCsFTjwoo8UKCwBOnDAO7dRGQqLmiq2XCzBcQi5fJB5ss-QIAmdAGYBDAK4AbAC4M7dU+DFUYkVgBlpA7DxeLl5A3ioIazsAZzoQbGhscSlCGXignSV08PiNbAwqQwCM4n5s908WfMKjEBUQUuNRCEqAdwaysI6m8XbGuv1+hDLIFj6y4YEQvgFRgCNOBEJc4jqMVYQl8QAPNeWEPFphikM68AEAJStogAc5ugkJAE8AHWiABQBLFl3KDa1OJAksNVrwygBZa6xN4ACgA4hIAPY2AB2pgAlD8aORAvtiElAqDziA4e8AJIAeQYAEEbNE2FYUWwsZRyNxjghiLIELwwQJ3gB1cE0ukMpksBZFXLLMD4ASbcijXZBWh4JClVXKYlwugAWzo0ViKLoWMMq0IkGWpXNkCJZQAyg4kbrog4ACcSADWdBRmm0unKUq6ZkstkczlcFQ8sFYF38A1E03qvCQsrUiQ8UES2BY3CBDREdVqsrS8k8nAA+kYK5AK1p1uya7B4IoUPjiOzsPwEE24Fwe7WUBXCFWWEA}
+\end{frame}
+}
 
-    \framebreak
+%%% Folie
+{
+\scriptsize
 
+\begin{frame}[fragile]{Pulsweitenmodulation mit Arduino}
+    \begin{lstlisting}[language=C++, gobble=8]
+        // Konstanten und globale Variablen
+        const int PIN_OUTPUT = 13;
+
+        /**
+         * Initialisierung der Hardware nach dem Einschalten
+         */
+        void setup() {
+            pinMode(PIN_SIN, OUTPUT);
+        }
+
+        /**
+         * Unendlich oft ausgeführte Hauptprogrammlogik
+         */
+        void loop() {
+            for (int pulse_width = 0; pulse_width < 255; pulse_width++) {
+                analogWrite(PIN_OUTPUT, pulse_width);
+                delay(100);
+            }
+        }
+    \end{lstlisting}
+
+    \bigskip
+
+    \Justified{
+        \texttt{analogWrite()} erzeugt auf den meisten Arduino-Boards ein PWM-Signal
+        mit fester Frequenz um diee 500\,Hz. Lediglich der Tastgrad kann als 8-Bit
+        Integer verändert werden. Für eine genauere Steuerung müsste das PWM-Signal
+        entweder per Bit-Banging manuell generiert oder eine Library verwendet werden.
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+
+\begin{frame}[fragile]{Pulsweitenmodulation ausgeben mit Raspberry Pi}
     \begin{lstlisting}[language=Python, gobble=8]
         import RPi.GPIO as GPIO, time
 
@@ -1182,7 +1374,7 @@
 {
 \scriptsize
 
-\begin{frame}[fragile, allowframebreaks]{Digitaleingang mit Active-High-Logik (z.B. Taster)}
+\begin{frame}{Digitaleingang mit Active-High-Logik (z.B. Taster)}
     \Justified{
         Viele Sensoren stellen lediglich einen \textbf{Kontakt zwischen zwei Pins} her, wenn ein bestimmtes
         Ereignis eintritt, zum Beispiel wenn ein Schalter gedrückt, eine Berührung mit einem Hindernis
@@ -1208,9 +1400,59 @@
         \column{0.4\textwidth}
         \includegraphics[width=\textwidth]{img/button_pulldown_foto}
     \end{columns}
+\end{frame}
+}
 
-    \framebreak
+%%% Folie
+{
+\scriptsize
 
+\begin{frame}[fragile]{Active-High-Eingang mit Arduino}
+    \begin{lstlisting}[language=C++, gobble=8]
+        // Konstanten und globale Variablen
+        const int PIN_BUTTON = 2;
+        const int PIN_LED = 13;
+
+        /**
+         * Initialisierung der Hardware nach dem Einschalten
+         */
+        void setup() {
+            pinMode(PIN_BUTTON, INPUT);
+            pinMode(PIN_LED, OUTPUT);
+        }
+
+        /**
+         * Unendlich oft ausgeführte Hauptprogrammlogik
+         */
+        void loop() {
+            bool button_pressed = digitalRead(PIN_BUTTON);
+            digitalWrite(PIN_LED, button_pressed);
+        }
+    \end{lstlisting}
+
+    \bigskip
+
+    \Justified{
+        Digital Eingänge, die in mit \texttt{pinMode()} als \texttt{INPUT} deklariert
+        werden, werden immer mit Active-High-Logik abgefragt. Eingänge, die als
+        \texttt{INPUT\_PULLUP} konfiguriert werden mit Active-Low-Logik, da der
+        interne Pull-Up-Widerstand den Eingang dauerhaft auf 5\,V hochzieht und
+        dieser durch den angeschlossenen Sensor nur nach gegen Masse kurzgeschlossen
+        werden kann, um eine Änderung zu signalisieren.
+        \smallskip
+
+        Darüber hinaus muss auf dem Arduino nichts beachtet werden. Bis auf die
+        Konstante bei \texttt{pinMode()} erfordert die Programmierung keinerlei
+        Sonderlogik zur Unterscheidung von Active-High- und Active-Low-Komponenten.
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}[fragile]{Active-High-Eingang mit Raspberry Pi}
     \begin{lstlisting}[language=Python, gobble=8]
         import RPi.GPIO as GPIO, time
 
@@ -1248,7 +1490,7 @@
 {
 \scriptsize
 
-\begin{frame}[fragile, allowframebreaks]{Digitaleingang mit Active-Low-Logik (z.B. Lichtschranke)}
+\begin{frame}{Digitaleingang mit Active-Low-Logik (z.B. Lichtschranke)}
     \Justified{
         Einige Sensoren \textbf{unterbrechen einen Kontakt}, wenn die festzustellende Bedingung eintritt.
         Dies trifft zum Beispiel auf Lichtschranken zu, die an ihrem Ausgang so lange einen Strom liefern,
@@ -1272,9 +1514,59 @@
         \column{0.4\textwidth}
         \includegraphics[width=\textwidth]{img/button_pullup_foto}
     \end{columns}
+\end{frame}
+}
 
-    \framebreak
+%%% Folie
+{
+\scriptsize
 
+\begin{frame}[fragile]{Active-Low-Eingang mit Arduino}
+    \begin{lstlisting}[language=C++, gobble=8]
+        // Konstanten und globale Variablen
+        const int PIN_BUTTON = 2;
+        const int PIN_LED = 13;
+
+        /**
+         * Initialisierung der Hardware nach dem Einschalten
+         */
+        void setup() {
+            pinMode(PIN_BUTTON, INPUT_PULLUP);      // Einzige Änderung zu davor
+            pinMode(PIN_LED, OUTPUT);
+        }
+
+        /**
+         * Unendlich oft ausgeführte Hauptprogrammlogik
+         */
+        void loop() {
+            bool button_pressed = digitalRead(PIN_BUTTON);
+            digitalWrite(PIN_LED, button_pressed);
+        }
+    \end{lstlisting}
+
+    \bigskip
+
+    \Justified{
+        Digital Eingänge, die in mit \texttt{pinMode()} als \texttt{INPUT} deklariert
+        werden, werden immer mit Active-High-Logik abgefragt. Eingänge, die als
+        \texttt{INPUT\_PULLUP} konfiguriert werden mit Active-Low-Logik, da der
+        interne Pull-Up-Widerstand den Eingang dauerhaft auf 5\,V hochzieht und
+        dieser durch den angeschlossenen Sensor nur nach gegen Masse kurzgeschlossen
+        werden kann, um eine Änderung zu signalisieren.
+        \smallskip
+
+        Darüber hinaus muss auf dem Arduino nichts beachtet werden. Bis auf die
+        Konstante bei \texttt{pinMode()} erfordert die Programmierung keinerlei
+        Sonderlogik zur Unterscheidung von Active-High- und Active-Low-Komponenten.
+    }
+\end{frame}
+}
+
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}[fragile]{Active-Low-Eingang mit Raspberry Pi}
     \begin{lstlisting}[language=Python, gobble=8]
         import RPi.GPIO as GPIO, time
 
@@ -1309,331 +1601,137 @@
 }
 
 %%% Folie
-{
-\setlength{\leftmargini}{1.2em}
-\footnotesize
+%{
+%\setlength{\leftmargini}{1.2em}
+%\footnotesize
 
-\begin{frame}[fragile,allowframebreaks]{Zusammenfassung zur Programmierung in Python}
-    \begin{block}{Initialisieren und Zurücksetzen der GPIO-Pins}
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            import RPi.GPIO as GPIO
-        \end{lstlisting}
-        Raspberry Pi GPIO-Modul importieren
-        \medskip
+%\begin{frame}[fragile,allowframebreaks]{Zusammenfassung zur Programmierung in Python}
+    %\begin{block}{Initialisieren und Zurücksetzen der GPIO-Pins}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %import RPi.GPIO as GPIO
+        %\end{lstlisting}
+        %Raspberry Pi GPIO-Modul importieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.setup(10, GPIO.OUT)
-        \end{lstlisting}
-        GPIO\,10 als Ausgang konfigurieren
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.setup(10, GPIO.OUT)
+        %\end{lstlisting}
+        %GPIO\,10 als Ausgang konfigurieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.setup(11, GPIO.IN)
-        \end{lstlisting}
-        GPIO\,11 als Eingang konfigurieren
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.setup(11, GPIO.IN)
+        %\end{lstlisting}
+        %GPIO\,11 als Eingang konfigurieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        \end{lstlisting}
-        GPIO\,12 als Eingang mit internem Pull Down konfigurieren
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        %\end{lstlisting}
+        %GPIO\,12 als Eingang mit internem Pull Down konfigurieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        \end{lstlisting}
-        GPIO\,13 als Eingang mit internem Pull Up konfigurieren
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        %\end{lstlisting}
+        %GPIO\,13 als Eingang mit internem Pull Up konfigurieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.cleanup()
-        \end{lstlisting}
-        Alle GPIO-Pins auf eine sichere Standardkonfiguration zurücksetzen
-        \medskip
-    \end{block}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.cleanup()
+        %\end{lstlisting}
+        %Alle GPIO-Pins auf eine sichere Standardkonfiguration zurücksetzen
+        %\medskip
+    %\end{block}
 
-    \framebreak
+    %\framebreak
 
-    \begin{block}{Lesen und Schreiben einzelner Pins}
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            value = GPIO.input(14)
-        \end{lstlisting}
-        Aktuellen Zustands von GPIO\,14 (True oder False) lesen
-        \medskip
+    %\begin{block}{Lesen und Schreiben einzelner Pins}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %value = GPIO.input(14)
+        %\end{lstlisting}
+        %Aktuellen Zustands von GPIO\,14 (True oder False) lesen
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.output(15, True)
-        \end{lstlisting}
-        GPIO\,15 auf High bzw. 3,3\,V Spannung setzen
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.output(15, True)
+        %\end{lstlisting}
+        %GPIO\,15 auf High bzw. 3,3\,V Spannung setzen
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.output(16, False)
-        \end{lstlisting}
-        GPIO\,16 auf Low bzw. 0\,V Spannung setzen
-        \medskip
-    \end{block}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.output(16, False)
+        %\end{lstlisting}
+        %GPIO\,16 auf Low bzw. 0\,V Spannung setzen
+        %\medskip
+    %\end{block}
 
-    \begin{block}{Reagieren auf Interrupts}
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.add_event_detect(17, GPIO.RISING, mein_cb)
-        \end{lstlisting}
-        Callback-Funktion für steigende Flanken auf GPIO\,17 registrieren
-        \medskip
+    %\begin{block}{Reagieren auf Interrupts}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.add_event_detect(17, GPIO.RISING, mein_cb)
+        %\end{lstlisting}
+        %Callback-Funktion für steigende Flanken auf GPIO\,17 registrieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.add_event_detect(18, GPIO.FALLING, mein_cb)
-        \end{lstlisting}
-        Callback-Funktion für fallende Flanken auf GPIO\,18 registrieren
-        \medskip
-    \end{block}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.add_event_detect(18, GPIO.FALLING, mein_cb)
+        %\end{lstlisting}
+        %Callback-Funktion für fallende Flanken auf GPIO\,18 registrieren
+        %\medskip
+    %\end{block}
 
-    \framebreak
+    %\framebreak
 
-    {
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.add_event_detect(19, GPIO.BOTH, mein_cb)
-        \end{lstlisting}
-        Callback-Funktion für jede Änderung von GPIO\,19 registrieren
-        \medskip
+    %{
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.add_event_detect(19, GPIO.BOTH, mein_cb)
+        %\end{lstlisting}
+        %Callback-Funktion für jede Änderung von GPIO\,19 registrieren
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            GPIO.add_event_detect(20, GPIO.BOTH, mein_cb, bouncetime=50)
-        \end{lstlisting}
-        Callback-Funktion für GPIO\,20 mit einer Entprellung von 50\,ms registrieren
-        \medskip
-    }
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %GPIO.add_event_detect(20, GPIO.BOTH, mein_cb, bouncetime=50)
+        %\end{lstlisting}
+        %Callback-Funktion für GPIO\,20 mit einer Entprellung von 50\,ms registrieren
+        %\medskip
+    %}
 
-    \begin{block}{Pulsweitenmodulation}
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            pwm = GPIO.PWM(21, 100)
-        \end{lstlisting}
-        Pulsweitenmodulation von GPIO\,21 vorbereiten
-        \medskip
+    %\begin{block}{Pulsweitenmodulation}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %pwm = GPIO.PWM(21, 100)
+        %\end{lstlisting}
+        %Pulsweitenmodulation von GPIO\,21 vorbereiten
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            pwm.start(50)
-        \end{lstlisting}
-        Pulsweitenmodulation von GPIO\,21 mit 50\,\% Lastzyklus starten
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %pwm.start(50)
+        %\end{lstlisting}
+        %Pulsweitenmodulation von GPIO\,21 mit 50\,\% Lastzyklus starten
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            pwm.changeDutyCycle(75)
-        \end{lstlisting}
-        Lastzyklus der Pulsweitenmodulation von GPIO\,21 auf 75\,\% ändern
-        \medskip
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %pwm.changeDutyCycle(75)
+        %\end{lstlisting}
+        %Lastzyklus der Pulsweitenmodulation von GPIO\,21 auf 75\,\% ändern
+        %\medskip
 
-        \begin{lstlisting}[style=MethodenListe, gobble=12]
-            pwm.stop()
-        \end{lstlisting}
-        Pulsweitenmodulation von GPIO\,21 stoppen
-        \medskip
-    \end{block}
-\end{frame}
-}
-
-%%% Folie
-\begin{frame}{Quellcodes zur Vorlesung}
-    \LinkButton{https://github.com/DennisSchulmeister/dhbwka-wwi-iottech-quellcodes}{Quellcodes auf GitHub}
-
-    \smallskip
-    \setlength{\fboxsep}{0em}
-    \fbox{\includegraphics[width=\textwidth]{img/github-servomotor}}
-\end{frame}
+        %\begin{lstlisting}[style=MethodenListe, gobble=12]
+            %pwm.stop()
+        %\end{lstlisting}
+        %Pulsweitenmodulation von GPIO\,21 stoppen
+        %\medskip
+    %\end{block}
+%\end{frame}
+%}
 
 %%% Folie
-{
-\scriptsize
+%\begin{frame}{Quellcodes zur Vorlesung}
+    %\LinkButton{https://github.com/DennisSchulmeister/dhbwka-wwi-iottech-quellcodes}{Quellcodes auf GitHub}
 
-\begin{frame}{Mittlere Lasten über Transistor schalten}
-    \Justified{
-        Der vom Raspberry Pi abgegebene Strom ist in der Regel zu schwach, um damit mehr
-        als digitale Sensoren oder Aktoren anzusteuern. Insbesondere mechanische Arbeiten
-        können damit nicht verrichtet werden, da die jeweiligen Motoren deutlich mehr Strom
-        benötigen. Bei mittleren Lastströmen kann ein Transistor hier Abhilfe schaffen.
-        \smallskip
-
-        Der hier gezeigte ,,NPN-Transistor'' funktioniert im einfachsten Fall wie ein
-        \textbf{stromgesteuerter Schalter}. \textcolor{RoyalPurple}{Ein kleiner Strom
-        an der Basis steuert, in wiefern ein viel größerer am Collector anliegender Strom
-        durchgelassen wird. Die Summe beider Ströme (in Ampére) fließt durch den Emitter
-        nach Ground.}
-        \smallskip
-
-        Die Spannung zwischen Basis und Emitter muss meist mindestens 0,7V betragen,
-        damit der Transistor schalten kann. Die Stärke des hierfür benötigten
-        Steuer- bzw. Basisstroms kann mit der durchzuschaltenden Stromstärke, dem
-        $\beta$-Faktor des Transistors, (auch \texttt{hfe} abgekürzt) und dem Ohmschen
-        Gesetz leicht berechnet werden:
-        \bigskip
-
-        \hfill $I_b = I_c / \beta$ \hfill
-        \hfill \textit{Benötigter Basisstrom = Zu schaltender Strom / $\beta$} \hfill
-        \smallskip
-    }
-
-    \bigskip
-
-    \begin{columns}[T]
-        \column{0.5\textwidth}
-        \includegraphics[width=\textwidth]{img/led_transistor_circuitjs}
-        \smallskip
-
-        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDxc8fAVHAgAZgEMANgGc6IbNGxQWAcyEi+xQcNEIwKCZBYB3cCapd9O0XcHmASpx4rsB3di9m+tP4wCCwATu68-IJgkAiCURIxcCwALshxYtE2mYlQ0IRgxGCU3Hh4xJAouLwwhIR2cAII2GQIzbxJIAAmdLIArnIpltZofNimzKNOGuHcvL7RsYILEr7mVjEZK5NUK+YARkJ4u5C8GKcUXOrmAB4g56ZtxPdYFISmHaYuMgoADvt0UKhACeAB0FAAFACWLDuGBQpmw-HuCFESMi4FMEIA9hZAbD7lNRsd4lU+JiQABxCEASQA8gwAIJ9BSaGQAO00BIwhRoVDwYHUlHUnxAAFkfkpwQAKSmhbF9dldACULAEE2y22yXDgIFMPX6gwYcjoXUkVAtsFYdxidQCohiZDEEFFACEflCFATJs8dVRmAQAiKKQBhbFyE0AYxS2NC3pMvt81hwY3iFIAogBbKEpFL4oA}
-        \LinkButton{https://www.electronics-tutorials.ws/de/transistoren/der-npn-transistoren.html}{NPN-Transistoren im Detail}
-
-        \column{0.42\textwidth}
-        \includegraphics[width=\textwidth]{img/led_transistor_foto}
-    \end{columns}
-\end{frame}
-}
-
-%%% Folie
-{
-\scriptsize
-
-\begin{frame}{Große Lasten über Relais schalten}
-    \Justified{
-        Große Lasten können aus Sicherheitsgründen nur mechanisch geschaltet werden.
-        Der Hardwareaufbau gliedert sich dann ein einen \textbf{Steuerstromkreis} und
-        einen \textbf{Arbeitsstromkreis}, die komplett \textbf{galvanisch entkoppelt}
-        sind und deshalb jeweils eigene Stromquellen besitzen.
-        Ein \textbf{Relais} dient als ferngesteuerter Schalter, der den Arbeitsstromkreis
-        unterbrechen und schließen kann. Im Inneren besteht es aus einem durch den
-        Steuerstromkreis gespeisten Elektromagneten und einem magnetischen Kippschalter.
-        Beim Umschalten entsteht das charakteristische Klickgeräusch.
-    }
-
-    \medskip
-
-    \begin{columns}
-        \column{0.6\textwidth}
-        \includegraphics[width=.9\textwidth]{img/led_relais_circuitjs}
-        \smallskip
-
-        \CircuitJS{https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkQ9jCQAWMHnl54+AqOBAAzAIYAbAM50Q2aNigsA5p2F9u2kQjApxkFgCdOe-jzI9r4zKYBGnPFWxCQGSLwq81pgAeXpDGCAjEXlgUhMa+RiAAStLyAA5OdGZmAJ4AOvIACgCWLMEYaHwVbnYoavHGAOIFAJIA8gwAggCu8hrSAHYapV5gkZRUeGBqlHXgxgCyKYr5ABQNZgD2Xf0AJgCULGAYIrbKnmD4Ih6+PBCoULDM2BjE2BfYvMKYvITkMJBIC7wOAPSAQCr-HyggHgFgAd3ARio9mYFV4elMCNRyL0QhE6J4QWQFUMtyMYVGfDmIAAygAXOhdTLyOmbAC2AGszHQivJDpNLDwUAhbqFfMLCeBiCheLAhIZuJQpngeJRqf9fBr4YiKhKdciQZjkHh8SDsXxDdrzSjLqJCcMLmARDK1Ki1DK7NSOmYMkU6fIWeyuTy+Vo8cooeHsBD1Aio1DTrhNdrEwmMDxrupEoKQHrw3qqAb1SZoAgrWLcyL9ZX7S4TVQ0CJvGoPsmypBXcQRHgEOQ0BB6iAAKKBBlmfp0fL09kAN2ZGzMGm2QyAA}
-
-        \column{0.4\textwidth}
-        \includegraphics[width=\textwidth]{img/led_relais_foto}
-    \end{columns}
-\end{frame}
-}
-
-%%% Folie
-{
-\scriptsize
-
-\begin{frame}{Inkompatible Logikpegel anpassen} % mit Transistor
-    \Justified{
-        Nicht alle digitalen Geräte arbeiten mit einem Logikpegel von 3,3\,V. Insbesondere
-        ältere Geräte nutzen 5\,V, während heutzutage auch 1,8\,V oder kleinere Spannungen
-        üblich sind. Passt der Logiklevel eines Bauteils nicht zum Raspberry Pi, kann es
-        daher entweder zu Beschädigungen oder einem unzuverlässigen Datenaustausch kommen.
-        Auf folgende Weise kann der Potentialunterschied dann ausgeglichen werden:
-    }
-
-    \begin{itemize}
-        \item Mit zwei Widerständen als Spannungsteiler
-        \item Mit in Reihe geschalteten Dioden zum Absenken einer Spannung
-        \item Mit einem Transistor als stromgesteuerter Schalter
-        \item Mit einem integrierten Baustein wie dem 74HC04050
-    \end{itemize}
-    \medskip
-
-    \Justified{
-        Mit zwei Widerständen kann zum Beispiel ein \textbf{Spannungsteiler} aufgebaut werden,
-        um eine zu hohe Spannung zu reduzieren. In Reihe geschaltete Dioden senken die Spannung
-        ebenfalls ab, wobei dann ggf. mehrere Dioden hintereinander geschaltet werden müssen.
-        Ein \textbf{Transistor} kann hingegen beliege Pegel konvertieren, so lange eine Stromversorgung
-        in Höhe des Zielpegels zur Verfügung steht. Ähnlich verhält es sich mit dem 74x4050, der etwas
-        einfacher in der Handhabung ist.
-    }
-
-    \bigskip
-
-    \begin{columns}
-        \column{.5\textwidth}
-        \includegraphics[width=\textwidth]{img/logiklevel_spannungsteiler}
-
-        \column{.5\textwidth}
-        \includegraphics[width=\textwidth]{img/logiklevel_transistor}
-    \end{columns}
-    \medskip
-
-    \begin{columns}
-        \column{.5\textwidth}
-        \LinkButton{%
-            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSURs1kAWKryoiQg6qJgIWAZ06EhfLjz6iAZgEMANjLosATpxR4VVPIX6moFBQZDnLwkBjyPVyOCwDu9iyBTiDlaQLACyzq7+4hh8AaLY3r6WcRHJ4iEA5s58TjFC2ITWIT4ublR5wSwARs4I3GgmCiYF5CE1GIQmDZzYjoSticQKVsTGlTXE-Mn4yHhC-VAsAB4ghGBCeEidSNh4JpZg3GwaMgAOVXT6+gCeADoyAAoAlsvOJDybvoW7++DcAMqnDQAO2BAFdgRkZAAXOhPLSXV6THafdaRH5iP4gf50YEyAD2+nuAFsntD7ggAGoMACCYJkGRBGVea0KAW4JC6-CQB24AHEHgBJADyDAAok9IUyWWA3NhnDNeIVeSBQiddPcABR8-T4iEAEwAlCwCiYgk5zQUiiwgA
-        }{
-            Spannungsteiler online ausprobieren
-        }
-
-        \column{.5\textwidth}
-        \hfill
-        \LinkButton{%
-            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSUQU89kALFV78qVIdTFRoCFgGdOhYX07FuIqJoBmAQwA2cuiwBGIPHB74QS-gLBJIJs2EKX+xbAJB2HLAO6Kyu5g6iqOpsQCXmj8YPji9lAsAB7Wcd7Y2NZ4SALYrl4hIGw6cgAOxnQATlUAngA6cgAKAJYpzuR5WR5ZeQXg3AAqVToAdnItcgAuAPZVcgDGABb6UwCuowDm7ZG5mch4Xn3eAyAAynTjc40Ati1TjQgAagwAgmtym2PbHHzCCK4MJBogDNOIqNhoFkpDBZKlCCgICgEMRrAhyERuIVuE0Zn5qiwppwiho-jwwuBwNAgfBaXTINwwNASGQBERPCQUAICOQ4lQACZ0XRrPRTfxmcw8DDcMnI1yOKrOVzYNASiGq2i08VklVUHXApIAWRAGAQ3F1JtVFuEMnahDAqJV3CBEBVuVOAHEmgBJADyDAAoi0tt8WJsTWaQPl+KbzYcwSxFbGo6rk9HNJR4OK06q8C4U2IWOmdbnJZl5UkgA
-        }{
-            Transistorschaltung online ausprobieren
-        }
-    \end{columns}
-\end{frame}
-}
-
-%%% Folie
-{
-\scriptsize
-
-\begin{frame}{Exkurs: Spannungsteiler}
-    \begin{columns}
-        \column{0.7\textwidth}
-        \includegraphics[width=.85\textwidth]{img/spannungsteiler}
-
-        \column{0.3\textwidth}
-        \Justified{
-            In Reihe geschaltete Widerstände teilen die Spannung
-            im Teilungsverhältnis der Widerstände.
-        }
-
-        \bigskip
-
-        $R_{Gesamt} = R_1 + R_2$ \\
-        \smallskip
-        $U_{Gesamt} = U_1 + U_2$ \\
-        \smallskip
-        $U_1 / U_2 = R_1 / R_2$ \\
-        \smallskip
-        $I_{Gesamt} = I_1 = I_2$ \\
-
-        \bigskip
-
-        \textbf{R}: Widerstand in Ohm \\
-        \smallskip
-        \textbf{U}: Spannung in Volt \\
-        \smallskip
-        \textbf{I}: Stromstärke in Ampere \\
-    \end{columns}
-
-    \medskip
-
-    \Justified{
-        Mehrere \textbf{in Reihe geschaltete Widerstände} ergeben einen
-        \textbf{Spannungsteiler}. Jeder Widerstand reduziert die zur Verfügung
-        stehende Spannung (\textbf{Spannungsabfall} genannt) entsprechend seines
-        Verhältnisses zum Gesamtwiderstand. Dies lässt sich anhand des Ohmschen
-        Gesetzes wie folgt herleiten:
-        \smallskip
-    }
-
-    \begin{enumerate}
-        \item Anhand des Gesamtwiderstands der Schaltung ergibt sich ihre Stromstärke:
-        $I = U_{Gesamt} / R_{Gesamt}$
-
-        \item Anhand der Stromstärke und der Einzelwiderstände ergibt sich die jeweilige
-        Teilspannung: \\
-        $U_1 = R_1 \times I$ \quad $U_2 = R_2 \times I$ \quad und so weiter \ldots
-    \end{enumerate}
-\end{frame}
-}
+    %\smallskip
+    %\setlength{\fboxsep}{0em}
+    %\fbox{\includegraphics[width=\textwidth]{img/github-servomotor}}
+%\end{frame}
 
 %-------------------------------------------------------------------------------
 \section{Serielle Kommunikation}
@@ -1779,165 +1877,310 @@
 }
 
 %%% Folie
+%{
+%\setlength{\leftmargini}{1.2em}
+%\footnotesize
+
+%\begin{frame}[fragile, allowframebreaks]{Programmierung in Python}
+    %\begin{block}{Serielle Kommunikation via I²C}
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %import board, busio
+            %from adafruit_bus_device.i2c_device import I2CDevice
+        %\end{lstlisting}
+        %Benötigte Module importieren
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %i2c_bus = busio.I2C(board.SCL, board.SDA)
+            %device = I2CDevice(i2c_bus, 0x70)
+            %device.open()
+        %\end{lstlisting}
+        %I²C-Bus und Device mit der Id \texttt{0x70} öffnen
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %bytes_read = bytearray(4)
+            %device.readinto(bytes_red)
+        %\end{lstlisting}
+        %Vier Bytes vom eben geöffneten Device empfangen
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %device.write("Hallo, Welt".encode("latin-1"))
+        %\end{lstlisting}
+        %Einen String an das eben geöffnete Device senden
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %device.close()
+            %i2c_bus.close()
+        %\end{lstlisting}
+        %Device und I²C-Bus wieder schließen
+        %\smallskip
+    %\end{block}
+
+    %\framebreak
+
+    %\begin{block}{Serielle Kommunikation via SPI}
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %import board, busio, digitalio
+            %from adafruit_bus_device.spi_device import SPIDevice
+        %\end{lstlisting}
+        %Benötigte Module importieren
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %spi_bus = busio.SPI(board.SCK, board.MOSI, board.MISO)
+            %cs = digitalio.DigitalInOut(board.D10)
+            %device = SPIDevice(spi_bus, cs)
+            %device.open()
+        %\end{lstlisting}
+        %SPI-Bus und Device mit GPIO 10 als Slave Select Leitng öffnen
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %bytes_read = bytearray(4)
+            %device.readinto(bytes_red)
+        %\end{lstlisting}
+        %Vier Bytes vom eben geöffneten Device empfangen
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %device.write("Hallo, Welt".encode("latin-1"))
+        %\end{lstlisting}
+        %Einen String an das eben geöffnete Device senden
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %device.close()
+            %spi_bus.close()
+        %\end{lstlisting}
+        %Device und SPI-Bus wieder schließen
+        %\smallskip
+    %\end{block}
+
+    %\framebreak
+
+    %\begin{block}{Serielle Kommunikation via UART}
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %import board, busio
+        %\end{lstlisting}
+        %Benötigte Module importieren
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %uart = busio.UART(board.TX, board.RX, baudrate=9600)
+        %\end{lstlisting}
+        %UART-Device mit den Standard-Pins zum Senden und Empfangen und einer Baudrate von 9.600 Bit/s öffnen.
+        %Ggf. müssen noch weitere Parameter mitgegeben werden, um das richtige Übertragungsformat auszuwählen.
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %data = uart.read(32)
+        %\end{lstlisting}
+        %Bis zu 32 Byte empfangen
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %line = uart.readline()
+        %\end{lstlisting}
+        %Daten bis zum nächsten Zeilenende empfangen
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %uart.write("Hallo, Welt".encode("latin-1"))
+        %\end{lstlisting}
+        %Einen String senden
+        %\smallskip
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %uart.deinit()
+        %\end{lstlisting}
+        %UART-Device wieder schließen
+        %\smallskip
+    %\end{block}
+
+    %\framebreak
+
+    %\begin{alertblock}{Wichtiger Hinweis}
+        %\smallskip
+        %\parbox{\textwidth}{
+            %Für viele Sensoren und Aktoren gibt es spezielle Python-Module, welche die
+            %Low Level Details der seriellen Kommunikation weg abstrahieren. Bevor man
+            %also ein Device via I²C oder SPI direkt anspricht, sollte man erst die
+            %Dokumentation und das Internet konsultieren, ob es nicht eine einfachere
+            %Möglichkeit der Programmierung gibt.
+        %}
+
+        %\bigskip
+        %\textbf{Beispiel: Nutzung des A/D-Konverters}
+
+        %\begin{lstlisting}[style=MethodenListeKlein, gobble=12]
+            %import time, busio
+            %import adafruit_ads1x15.ads1115 as ADC
+            %from adafruit_ads1x15.analog_in import AnalogIn
+
+            %# A/D-Konverter initialisieren, GPIO 3 = Clock, GPIO 2 = Data
+            %i2c_bus = busio.I2C(3, 2)
+            %ad_converter = ADC.ADS1115(i2c_bus)
+            %adc_channel0 = AnalogIn(ad_converter, ADC.P0)
+
+            %# Wert messen
+            %voltage = adc_channel0.voltage
+            %value = adc_channel0.value
+
+            %# Device schließen
+            %i2c_bus.deinit()
+        %\end{lstlisting}
+    %\end{alertblock}
+%\end{frame}
+%}
+
+%-------------------------------------------------------------------------------
+\section{Vertiefungen}
+%-------------------------------------------------------------------------------
+
+%%% Folie
 {
-\setlength{\leftmargini}{1.2em}
-\footnotesize
+\scriptsize
 
-\begin{frame}[fragile, allowframebreaks]{Programmierung in Python}
-    \begin{block}{Serielle Kommunikation via I²C}
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            import board, busio
-            from adafruit_bus_device.i2c_device import I2CDevice
-        \end{lstlisting}
-        Benötigte Module importieren
-        \smallskip
+\begin{frame}{Inkompatible Logikpegel anpassen} % mit Transistor
+    \Justified{
+        Nicht alle digitalen Geräte arbeiten mit einem Logikpegel von 3,3\,V. Insbesondere
+        ältere Geräte nutzen 5\,V, während heutzutage auch 1,8\,V oder kleinere Spannungen
+        üblich sind. Passt der Logiklevel eines Bauteils nicht zum Raspberry Pi, kann es
+        daher entweder zu Beschädigungen oder einem unzuverlässigen Datenaustausch kommen.
+        Auf folgende Weise kann der Potentialunterschied dann ausgeglichen werden:
+    }
 
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            i2c_bus = busio.I2C(board.SCL, board.SDA)
-            device = I2CDevice(i2c_bus, 0x70)
-            device.open()
-        \end{lstlisting}
-        I²C-Bus und Device mit der Id \texttt{0x70} öffnen
-        \smallskip
+    \begin{itemize}
+        \item Mit zwei Widerständen als Spannungsteiler
+        \item Mit in Reihe geschalteten Dioden zum Absenken einer Spannung
+        \item Mit einem Transistor als stromgesteuerter Schalter
+        \item Mit einem integrierten Baustein wie dem 74HC04050
+    \end{itemize}
+    \medskip
 
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            bytes_read = bytearray(4)
-            device.readinto(bytes_red)
-        \end{lstlisting}
-        Vier Bytes vom eben geöffneten Device empfangen
-        \smallskip
+    \Justified{
+        Mit zwei Widerständen kann zum Beispiel ein \textbf{Spannungsteiler} aufgebaut werden,
+        um eine zu hohe Spannung zu reduzieren. In Reihe geschaltete Dioden senken die Spannung
+        ebenfalls ab, wobei dann ggf. mehrere Dioden hintereinander geschaltet werden müssen.
+        Ein \textbf{Transistor} kann hingegen beliege Pegel konvertieren, so lange eine Stromversorgung
+        in Höhe des Zielpegels zur Verfügung steht. Ähnlich verhält es sich mit dem 74x4050, der etwas
+        einfacher in der Handhabung ist.
+    }
 
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            device.write("Hallo, Welt".encode("latin-1"))
-        \end{lstlisting}
-        Einen String an das eben geöffnete Device senden
-        \smallskip
+    \bigskip
 
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            device.close()
-            i2c_bus.close()
-        \end{lstlisting}
-        Device und I²C-Bus wieder schließen
-        \smallskip
-    \end{block}
+    \begin{columns}
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{img/logiklevel_spannungsteiler}
 
-    \framebreak
+        \column{.5\textwidth}
+        \includegraphics[width=\textwidth]{img/logiklevel_transistor}
+    \end{columns}
+    \medskip
 
-    \begin{block}{Serielle Kommunikation via SPI}
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            import board, busio, digitalio
-            from adafruit_bus_device.spi_device import SPIDevice
-        \end{lstlisting}
-        Benötigte Module importieren
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            spi_bus = busio.SPI(board.SCK, board.MOSI, board.MISO)
-            cs = digitalio.DigitalInOut(board.D10)
-            device = SPIDevice(spi_bus, cs)
-            device.open()
-        \end{lstlisting}
-        SPI-Bus und Device mit GPIO 10 als Slave Select Leitng öffnen
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            bytes_read = bytearray(4)
-            device.readinto(bytes_red)
-        \end{lstlisting}
-        Vier Bytes vom eben geöffneten Device empfangen
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            device.write("Hallo, Welt".encode("latin-1"))
-        \end{lstlisting}
-        Einen String an das eben geöffnete Device senden
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            device.close()
-            spi_bus.close()
-        \end{lstlisting}
-        Device und SPI-Bus wieder schließen
-        \smallskip
-    \end{block}
-
-    \framebreak
-
-    \begin{block}{Serielle Kommunikation via UART}
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            import board, busio
-        \end{lstlisting}
-        Benötigte Module importieren
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            uart = busio.UART(board.TX, board.RX, baudrate=9600)
-        \end{lstlisting}
-        UART-Device mit den Standard-Pins zum Senden und Empfangen und einer Baudrate von 9.600 Bit/s öffnen.
-        Ggf. müssen noch weitere Parameter mitgegeben werden, um das richtige Übertragungsformat auszuwählen.
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            data = uart.read(32)
-        \end{lstlisting}
-        Bis zu 32 Byte empfangen
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            line = uart.readline()
-        \end{lstlisting}
-        Daten bis zum nächsten Zeilenende empfangen
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            uart.write("Hallo, Welt".encode("latin-1"))
-        \end{lstlisting}
-        Einen String senden
-        \smallskip
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            uart.deinit()
-        \end{lstlisting}
-        UART-Device wieder schließen
-        \smallskip
-    \end{block}
-
-    \framebreak
-
-    \begin{alertblock}{Wichtiger Hinweis}
-        \smallskip
-        \parbox{\textwidth}{
-            Für viele Sensoren und Aktoren gibt es spezielle Python-Module, welche die
-            Low Level Details der seriellen Kommunikation weg abstrahieren. Bevor man
-            also ein Device via I²C oder SPI direkt anspricht, sollte man erst die
-            Dokumentation und das Internet konsultieren, ob es nicht eine einfachere
-            Möglichkeit der Programmierung gibt.
+    \begin{columns}
+        \column{.5\textwidth}
+        \LinkButton{%
+            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSURs1kAWKryoiQg6qJgIWAZ06EhfLjz6iAZgEMANjLosATpxR4VVPIX6moFBQZDnLwkBjyPVyOCwDu9iyBTiDlaQLACyzq7+4hh8AaLY3r6WcRHJ4iEA5s58TjFC2ITWIT4ublR5wSwARs4I3GgmCiYF5CE1GIQmDZzYjoSticQKVsTGlTXE-Mn4yHhC-VAsAB4ghGBCeEidSNh4JpZg3GwaMgAOVXT6+gCeADoyAAoAlsvOJDybvoW7++DcAMqnDQAO2BAFdgRkZAAXOhPLSXV6THafdaRH5iP4gf50YEyAD2+nuAFsntD7ggAGoMACCYJkGRBGVea0KAW4JC6-CQB24AHEHgBJADyDAAok9IUyWWA3NhnDNeIVeSBQiddPcABR8-T4iEAEwAlCwCiYgk5zQUiiwgA
+        }{
+            Spannungsteiler online ausprobieren
         }
 
-        \bigskip
-        \textbf{Beispiel: Nutzung des A/D-Konverters}
-
-        \begin{lstlisting}[style=MethodenListeKlein, gobble=12]
-            import time, busio
-            import adafruit_ads1x15.ads1115 as ADC
-            from adafruit_ads1x15.analog_in import AnalogIn
-
-            # A/D-Konverter initialisieren, GPIO 3 = Clock, GPIO 2 = Data
-            i2c_bus = busio.I2C(3, 2)
-            ad_converter = ADC.ADS1115(i2c_bus)
-            adc_channel0 = AnalogIn(ad_converter, ADC.P0)
-
-            # Wert messen
-            voltage = adc_channel0.voltage
-            value = adc_channel0.value
-
-            # Device schließen
-            i2c_bus.deinit()
-        \end{lstlisting}
-    \end{alertblock}
+        \column{.5\textwidth}
+        \hfill
+        \LinkButton{%
+            https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKACURSUQU89kALFV78qVIdTFRoCFgGdOhYX07FuIqJoBmAQwA2cuiwBGIPHB74QS-gLBJIJs2EKX+xbAJB2HLAO6Kyu5g6iqOpsQCXmj8YPji9lAsAB7Wcd7Y2NZ4SALYrl4hIGw6cgAOxnQATlUAngA6cgAKAJYpzuR5WR5ZeQXg3AAqVToAdnItcgAuAPZVcgDGABb6UwCuowDm7ZG5mch4Xn3eAyAAynTjc40Ati1TjQgAagwAgmtym2PbHHzCCK4MJBogDNOIqNhoFkpDBZKlCCgICgEMRrAhyERuIVuE0Zn5qiwppwiho-jwwuBwNAgfBaXTINwwNASGQBERPCQUAICOQ4lQACZ0XRrPRTfxmcw8DDcMnI1yOKrOVzYNASiGq2i08VklVUHXApIAWRAGAQ3F1JtVFuEMnahDAqJV3CBEBVuVOAHEmgBJADyDAAoi0tt8WJsTWaQPl+KbzYcwSxFbGo6rk9HNJR4OK06q8C4U2IWOmdbnJZl5UkgA
+        }{
+            Transistorschaltung online ausprobieren
+        }
+    \end{columns}
 \end{frame}
 }
 
+%%% Folie
+{
+\scriptsize
+
+\begin{frame}{Kurzdefinition: Spannungsteiler}
+    \begin{columns}
+        \column{0.7\textwidth}
+        \includegraphics[width=.85\textwidth]{img/spannungsteiler}
+
+        \column{0.3\textwidth}
+        \Justified{
+            In Reihe geschaltete Widerstände teilen die Spannung
+            im Teilungsverhältnis der Widerstände.
+        }
+
+        \bigskip
+
+        $R_{Gesamt} = R_1 + R_2$ \\
+        \smallskip
+        $U_{Gesamt} = U_1 + U_2$ \\
+        \smallskip
+        $U_1 / U_2 = R_1 / R_2$ \\
+        \smallskip
+        $I_{Gesamt} = I_1 = I_2$ \\
+
+        \bigskip
+
+        \textbf{R}: Widerstand in Ohm \\
+        \smallskip
+        \textbf{U}: Spannung in Volt \\
+        \smallskip
+        \textbf{I}: Stromstärke in Ampere \\
+    \end{columns}
+
+    \medskip
+
+    \Justified{
+        Mehrere \textbf{in Reihe geschaltete Widerstände} ergeben einen
+        \textbf{Spannungsteiler}. Jeder Widerstand reduziert die zur Verfügung
+        stehende Spannung (\textbf{Spannungsabfall} genannt) entsprechend seines
+        Verhältnisses zum Gesamtwiderstand. Dies lässt sich anhand des Ohmschen
+        Gesetzes wie folgt herleiten:
+        \smallskip
+    }
+
+    \begin{enumerate}
+        \item Anhand des Gesamtwiderstands der Schaltung ergibt sich ihre Stromstärke:
+        $I = U_{Gesamt} / R_{Gesamt}$
+
+        \item Anhand der Stromstärke und der Einzelwiderstände ergibt sich die jeweilige
+        Teilspannung: \\
+        $U_1 = R_1 \times I$ \quad $U_2 = R_2 \times I$ \quad und so weiter \ldots
+    \end{enumerate}
+\end{frame}
+}
+
+%%% Folie
+{
+\tiny
+\setlength{\fboxsep}{0pt}
+
+\begin{frame}{Analogsignale erzeugen ohne D/A-Wandler}
+    \Justified{
+        In der Regel würde man zur Erzeugung eines Analogsignals wie im Vorherigen Beispiel
+        über die serielle Schnittstelle einen D/A-Wandler anbinden. Wenn man aber noch ein
+        paar GPIO-Ausgänge frei hat und das Ausgangssignal nicht sehr präzise sein muss,
+        kann man einen einfachen D/A-Wandler mit ein paar Widerständen als sog. \textbf{R2R-Leiter}
+        diskret aufbauen.
+    }
+    \smallskip
+
+    \begin{center}
+        \fbox{\includegraphics[width=.9\textwidth]{img/r2r-leiter}}
+    \end{center}
+    \smallskip
+
+    \LinkButton{%
+        https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgoqoQFMBaMMAKABkRiAWLkLsQiDwC+IqlQBmAQwA2AZzohs0bFHacefYoOGCu2qIenzFy1ZHXdeCDDpE3B4kMYVKVajlZCEEdwT8cjWVczNQAnDV5+QTBIX1FAlDQLCK99GLi9AyokuBZUzQdkeKKc5PzI73jY+IDDXJTi-2rMiltDZjyImsEinq1Azsb+9KaEjtiLAHMhEQw0WcEcQIsAd0WQeaowFC48TYWLAAdwXf26nb2D7cM1sYuzqscKkZF+7GxE8pndJU+N7AIFC3FjrX4fDLxCFqABG4DAQO8XG22AWtn2FjhXlwvGYzE2hAxLDheDwVBx3mwxAJRIAHkjVBg8IywPsmXpTiAAEpSORHGF0MJhACeAB05AAFACWLHpxAQvHZyBQbLw1NxwIAIgB6ACCDAA6lIAHYAExkgtl8IQSCZGpQtrw5A1IAA4nQALZ0OQKY10K3MBVCSDAnYYCBkpAu3UAVzkUxNUx9RxNxpjxqmVsIhFU2GRmxsSi4qhdAFleQpxQAKV1hAD26dNAEos4RgfNFfF5s7OeWfXRq7WG2aW-Ts1EwNSmVGknxOa6JQBJADyDFj8cTAC5xQAhKUAF3FFjHOa0U7w1hDc52bqXq-XCYz27ke8PcmP3lPNlV1mE1+BC4rmucaPlMz6vkeraqD4568NmwIuoB94gVuu4HpBdbgNBvBUMixAYtAbZIDAEDbCwQA
+    }{R2R-Leiter online ausprobieren}
+\end{frame}
+}
 
 
 

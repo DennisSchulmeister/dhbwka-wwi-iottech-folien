@@ -1,183 +1,8 @@
 %-------------------------------------------------------------------------------
-\section{Einführung in die Vorlesung}
+\section{IoT-Anwendungsfälle}
 %-------------------------------------------------------------------------------
 
-%%% Folie
-\begin{frame}{Kompetenzziele der Vorlesung}
-    \begin{itemize}
-        \item \textbf{Fachkompetenz:} Die Studierenden kennen den
-        \textcolor{NavyBlue}{technischen Aufbau typischer Devices/Embedded Systems}
-        im Kontext des Internet of Things. Sie sind in der Lage, entsprechende Devices
-        für einen gegebenen Einsatzzweck auszuwählen und zu programmieren.
-        \medskip
-
-        \item \textbf{Methodenkompetenz:} Die Studierenden sind in der Lage
-        bei der Programmierung von IoT-Geräten systematisch und methodisch vorzugehen.
-        \medskip
-
-        \item \textbf{Personale und soziale Kompetenz:} Die Studierenden verstehen die Herausforderungen
-        des IoT für Unternehmen, Politik und Gesellschaft und sind in der Lage, diese kompetent zu diskutieren.
-        \medskip
-
-        \item \textbf{Übergreifende Handlungskompetenz:} Die Studierenden können reale betriebliche
-        Problemstellungen im Kontext von IoT analysieren, \textcolor{NavyBlue}{Konzepte entwerfen}
-        und \textcolor{NavyBlue}{IoT-fähige Geräte programmieren} und im Unternehmenskontext integrieren.
-        \medskip
-    \end{itemize}
-\end{frame}
-
-{
-\footnotesize
-%%% Folie
-\begin{frame}{Inhalte der Vorlesung}
-        \begin{columns}
-            \begin{column}[T]{.5\textwidth}
-                \begin{block}{3. Semester}
-                    \medskip
-
-                    \begin{enumerate}
-                        \item Grundlagen des Internet of Things
-                        \item Einführung in Python
-                        \item IoT-Entwicklung mit Python
-                        \item \textcolor{gray}{Übungsstunde}
-                        \item Elektronik für eingebettete Systeme I
-                        \item Elektronik für eingebettete Systeme II
-                        \item Analoge und digitale Schnittstellen
-                        \item \textcolor{gray}{Übungsstunde}
-                        \item \textcolor{gray}{Klausurvorbereitung}
-                    \end{enumerate}
-
-                    \medskip
-                    \textbf{Prüfungsform:} Klausur
-                \end{block}
-            \end{column}
-            \begin{column}[T]{.5\textwidth}
-                \begin{block}{4. Semester}
-                    \medskip
-
-                    \begin{enumerate}
-                        \item Wiederholung und Ausblick
-                        \item Python-Architekturmuster für IoT-Devices
-                        \item Vorstellung der Referenzarchitektur I
-                        \item Vorstellung der Referenzarchitektur II
-                        \item Hardwaredesign und Prototyping
-                        \item \textcolor{gray}{Assignment}
-                        \item \textcolor{gray}{Assignment}
-                        \item \textcolor{gray}{Assignment}
-                        \item \textcolor{gray}{Assignment}
-                    \end{enumerate}
-
-                    \medskip
-                    \textbf{Prüfungsform:} Assignment
-                \end{block}
-            \end{column}
-        \end{columns}
-\end{frame}
-}
-
-%%% Folie
-\begin{frame}{Vorausgesetztes Wissen}
-    \begin{columns}
-        \column{\dimexpr\paperwidth-10pt}
-        \includegraphics[width=\textwidth]{img/vorausgesetztes_wissen}
-    \end{columns}
-\end{frame}
-
-
-%%% Folie
-\begin{frame}{Benötigte Hard- und Software}
-        \begin{columns}
-            \begin{column}[T]{.5\textwidth}
-                \textbf{Hardware}
-                \medskip
-
-                \Justified{
-                    \footnotesize
-                    Kann im WWI-Labor für die Dauer des Moduls kostenlos ausgeliehen
-                    werden. Rückgabe am Ende des vierten Semesters, da dieselbe
-                    Hardware dann direkt für das IoT-Integrationsseminar und Projekt
-                    benötigt wird.
-                }
-                \medskip
-
-                \begin{itemize}
-                    \item Raspberry Pi
-                    \item Diverse Sensoren und Aktoren
-                \end{itemize}
-            \end{column}
-            \begin{column}[T]{.5\textwidth}
-                \textbf{Software}
-                \medskip
-
-                \Justified{
-                    \footnotesize
-                    Lediglich ein paar Entwicklungswerkzeuge für die Programmierung mit
-                    Python sowie die Remote-Entwicklung werden benötigt. Einige Beispiele
-                    können auch lokal ohne Raspberry Pi ausgeführt werden, wofür auf Ihrem
-                    Laptop ebenfalls Python benötigt wird.
-                }
-                \medskip
-
-                \begin{itemize}
-                    \item Visual Studio Code
-                    \item OpenSSH
-                    \item Python
-                    \item KiCAD (optional)
-                \end{itemize}
-            \end{column}
-        \end{columns}
-
-        \bigskip
-
-        \Justified{
-            \scriptsize
-            \textcolor{gray}{
-                Python werden wir verwenden, um den Raspberry Pi zu programmieren. Zum Einstieg
-                in die Sprache kann es ganz sinnvoll sein, den Python-Interpreter zusätzlich auf
-                dem eigenen Laptop zu installieren. KiCAD benötigen Sie nur, wenn Sie im Kapitel
-                über Hardwaredesign das Fallbeispiel zum Entwurf eigener Schaltungen nachvollziehen
-                wollen.
-            }
-        }
-\end{frame}
-
-%%% Folie
-{
-\footnotesize
-\setlength{\fboxsep}{0pt}
-
-\begin{frame}{Literaturempfehlungen}
-    \fbox{\includegraphics[height=3.3cm]{img/buch_raspberrypi}}
-    \hfill
-    \fbox{\includegraphics[height=3.3cm]{img/buch_python3_handbuch}}
-    \hfill
-    \fbox{\includegraphics[height=3.3cm]{img/buch_practical_electronics}}
-    \hfill
-    \fbox{\includegraphics[height=3.3cm]{img/buch_embedded_hardware}}
-
-    \vskip 0.6cm
-
-    \begin{columns}
-        \column[T]{.5\textwidth}
-        \textbf{Raspberry Pi: Das umfassende Handbuch} \\ Rheinwerk Verlag, 2018
-
-        \column[T]{.5\textwidth}
-        \textbf{Python 3: Das umfassende Handbuch} \\ Rheinwerk Verlag, 2023
-    \end{columns}
-
-    \vskip 0.6cm
-
-    \begin{columns}
-        \column[T]{.5\textwidth}
-        \textbf{Practical Electronics for Inventors} \\ McGraw-Hill, 2016
-
-        \column[T]{0.5\textwidth}
-        \textbf{Designing Embedded Hardware} \\ O'Reilly, 2005
-    \end{columns}
-\end{frame}
-}
-
-%%% Folie
+% Folie
 \begin{frame}{Lernziele für heute}
     \begin{itemize}
         \item ,,Internet of Things'' und ,,eingebettete Systeme'' voneinander abgrenzen
@@ -192,10 +17,6 @@
         \item Die Grundprinzipien der hardwarenahen Programmierung kennen
     \end{itemize}
 \end{frame}
-
-%-------------------------------------------------------------------------------
-\section{IoT-Anwendungsfälle}
-%-------------------------------------------------------------------------------
 
 %%% Folie
 \begin{frame}{Ein paar Fragen zum Einstieg}
@@ -412,26 +233,6 @@
         \begin{tikzpicture}[remember picture,overlay]
             \node at (5.4cm,0.2cm){
                 \includegraphics[height=\paperheight, width=\paperwidth]{img/themengebiete2}
-            };
-        \end{tikzpicture}
-    }
-
-    \only<beamer:3|handout:0>{
-        \transdissolve
-
-        \begin{tikzpicture}[remember picture,overlay]
-            \node at (5.4cm,0.2cm){
-                \includegraphics[height=\paperheight, width=\paperwidth]{img/themengebiete3}
-            };
-        \end{tikzpicture}
-    }
-
-    \only<beamer:4|handout:0>{
-        \transdissolve
-
-        \begin{tikzpicture}[remember picture,overlay]
-            \node at (5.4cm,0.2cm){
-                \includegraphics[height=\paperheight, width=\paperwidth]{img/themengebiete4}
             };
         \end{tikzpicture}
     }
@@ -892,7 +693,7 @@
 %-------------------------------------------------------------------------------
 
 %%% Folie
-\begin{frame}[fragile]{Programmierung: Low Level}
+\begin{frame}[fragile]{Programmierung: Low Level (AVR)}
     \Justified{
         \footnotesize
         Dass die Architektur \textbf{diskret aufgebauter, eingebetteter Systeme}
@@ -933,13 +734,48 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}[fragile]{Programmierung: High Level}
+\begin{frame}[fragile]{Programmierung: Mid Level (Arduino)}
     \Justified{
         \footnotesize
-        Aus Gründen der schnelleren und einfacheren Entwicklung sowie der besseren
-        Portabilität empfiehlt es sich, zumindest ein einfaches Betriebssystem zu
-        nutzen und auf einem höheren Abstraktionsniveu zu programmieren, wenn die
-        Systemleistung es zulässt (hier am Beispiel von Python für den Raspberry Pi).
+        Wesentlicher Grund für den Erfolg der Arduino-Plattform ist eigentlich nicht
+        die Hardware, sondern dass sie die Programmierung deutlich vereinfacht. Und
+        da es inzwischen Arduinos mit ganz unterschiedlichen CPU-Architekturen gibt,
+        und auch andere Anbieter die Arduino-Funktionsbibliothek unterstützen, ist
+        der Code ganz nebenbei sogar auf andere Hardware-Architekturen übertragbar.
+    }
+
+    \smallskip
+
+    \begin{lstlisting}[language=C++, gobble=8, basicstyle=\tiny\ttfamily]
+        const int BUTTON = 2;
+
+        /**
+         * Initialisierung der Hardware nach dem Einschalten
+         */
+        void setup() {
+            pinMode(BUTTON, OUTPUT);
+            pinMode(LED_BUILTIN, OUTPUT);
+        }
+
+        /**
+         * Unendlich oft ausgeführte Hauptprogrammlogik
+         */
+        void loop() {
+            auto value = digitalRead(BUTTON);
+            digitalWrite(LED_BUILTIN, value);
+        }
+    \end{lstlisting}
+\end{frame}
+
+%%% Folie
+\begin{frame}[fragile]{Programmierung: Mid Level (Raspberry Pi)}
+    \Justified{
+        \footnotesize
+        Wenn mehr Rechenleistung als die eines typischen Microcontrollers benötigt
+        wird (die Spannweite ist aber auch hier bereits sehr groß), kann auf leistungsfähige
+        Hardware wie den Raspberry Pi ausgewichen werden. Diese ermöglicht es uns sogar,
+        in einer noch höheren Programmiersprache wie Python auf einem noch höheren
+        Abstraktionsniveau zu programmieren.
     }
 
     \smallskip
@@ -975,121 +811,36 @@
 \end{frame}
 
 %%% Folie
-\begin{frame}{Was nutzen wir in der Vorlesung?}
-    \begin{center}
-        \includegraphics[width=\textwidth]{img/raspi-linux-python}
-    \end{center}
-
-    \bigskip
-
+\begin{frame}[fragile]{Programmierung: High Level (Raspberry Pi)}
     \Justified{
         \footnotesize
-        Wir nutzen eine Kombination aus \textbf{Raspberry Pi}, \textbf{Linux} und
-        \textbf{Python}. Sie ist leistungsstark, leicht zu lernen und in der
-        IoT-Entwicklung weit verbreitet.
-
-        \medskip
-
-        \begin{itemize}
-            \justifying
-
-            \item \textbf{Rasbperry Pi:} Bietet eine vergleichbare Performance wie ein
-            älterer Desktopcomputer.
-
-            \item \textbf{Linux:} Beim mitgelieferten Raspberry Pi OS handelt es sich
-            um ein angepasstes Debian-Linux. Die meisten Besonderheiten eingebetteter
-            Systeme bleiben verborgen, so dass es fast wie ein Desktopsystem nutzbar ist.
-
-            \item \textbf{Python:} Ist eine einsteigerfreundliche Programmiersprache mit
-            verschiedenen Anwendungsgebieten. Das Pi in Raspberry Pi stand deshalb ursprünglich
-            für ,,Python Interpreter''.
-        \end{itemize}
+        Die Verwendung einer Allzweckprogrammiersprache wie Python unter einem
+        Allzweckbetriebssystem wie Linux bringt eine hohe Portierbarkeit der
+        eigenen Anwendung mit sich. Im vorherigen Beispiel wird jedoch eine nur
+        auf den Raspberry Pi zugeschnittene Bibliothek verwendet, die darüber
+        hinaus immer noch relativ low-level aufgebaut ist. Hier sehen wir zum
+        Vergleich eine für viele Hardware-Plattformen funktionierende Bibliothek
+        mit höherer Abstraktion.
     }
+
+    \smallskip
+
+    \begin{lstlisting}[language=Python, gobble=8, basicstyle=\tiny\ttfamily]
+        import signal
+        from gpiozero import Button, LED
+
+        if __name__ == "__main__":
+            button = Button(2, pull_up=True, bounce_time=0.1)
+            led    = LED(17)
+
+            button.when_pressed  = led.on
+            button.when_released = led.off
+
+            print("Drücken Sie Strg+C zum Beenden")
+
+            try:
+                signal.pause()
+            except KeyboardInterrupt:
+                pass
+    \end{lstlisting}
 \end{frame}
-
-%%%%%%%
-% TODO:
-%  - Folie zum Einrichten eines minimalen Raspbian Systems mit Balena Etcher
-%  - Folie zu "Find my Device"
-%  - Folien zur Remote-Entwicklung mit VS Code
-%%%%%%%
-
-%%%%% Folie
-%%{
-%%    \setbeamertemplate{background canvas}{
-%%        \includegraphics[height=\paperheight, width=\paperwidth]{img/software-abstraktion1}
-%%    }
-%%
-%%    \begin{frame}[plain]
-%%        \transdissolve
-%%
-%%        \only<beamer:2|handout:0>{
-%%            \transdissolve
-%%
-%%            \begin{tikzpicture}[remember picture,overlay]
-%%                \node at (5.4cm,-0.97cm){
-%%                    \includegraphics[height=\paperheight, width=\paperwidth]{img/software-abstraktion2}
-%%                };
-%%            \end{tikzpicture}
-%%        }
-%%
-%%        \only<beamer:3|handout:0>{
-%%            \transdissolve
-%%
-%%            \begin{tikzpicture}[remember picture,overlay]
-%%                \node at (5.4cm,-0.97cm){
-%%                    \includegraphics[height=\paperheight, width=\paperwidth]{img/software-abstraktion3}
-%%                };
-%%            \end{tikzpicture}
-%%        }
-%%    \end{frame}
-%%}{
-%%    \setbeamertemplate{background canvas}{
-%%        \includegraphics[height=\paperheight, width=\paperwidth]{img/software-abstraktion2}
-%%    }
-%%
-%%    \begin{frame}<handout>[plain]
-%%        \transdissolve
-%%    \end{frame}
-%%}{
-%%    \setbeamertemplate{background canvas}{
-%%        \includegraphics[height=\paperheight, width=\paperwidth]{img/software-abstraktion3}
-%%    }
-%%
-%%    \begin{frame}<handout>[plain]
-%%        \transdissolve
-%%    \end{frame}
-%%}
-%%
-%%%%% Folie
-%%\begin{frame}{Softwareseitige Systemanforderungen}
-%%    \begin{columns}
-%%        \column[T]{.5\textwidth}
-%%        \begin{itemize}
-%%            \item Sparsamer Umgang mit besonders knappen Ressourcen
-%%            \item Verwendung spezialisierter Hardwarekomponenten
-%%            \item Störungsfreier Betrieb über sehr lange Zeiträume
-%%            \item Firmware-Upgrade ,,over the air''
-%%        \end{itemize}
-%%
-%%        \column[T]{.5\textwidth}
-%%        \begin{itemize}
-%%            \item Vollständig deterministisches Systemverhalten
-%%            \item Oftmals daher nur begrenztes Multi-Tasking
-%%            \item Harte, weiche oder eventuelle Echtzeitanforderungen
-%%            \item Ausschalten des Geräts ohne ,,Herunterfahren''
-%%        \end{itemize}
-%%    \end{columns}
-%%
-%%    \Justified{
-%%        \bigskip
-%%        Zur Erfüllung dieser Anforderungen kommen in der Regel angepasste und
-%%        besonders schlanke, eingebettete Betriebssysteme zum Einsatz, falls
-%%        überhaupt ein Betriebssystem vorhanden ist. Hierbei kann es sich entweder
-%%        um speziell für diesen Zweck entwickelte Betriebssysteme wie FreeRTOS
-%%        und ITRON oder um eine angepasste Variante größerer Betriebssysteme wie
-%%        Linux handeln. Linux bietet sich aufgrund seiner Quelloffenheit und
-%%        leichten Portierbarkeit besonders an und wird daher auch entsprechend
-%%        oft genutzt.
-%%    }
-%%\end{frame}
